@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Troisi Galassia
  * Description: Verifica Google Search Console, temi/parole chiave in dati strutturati, avviso immediato ai motori (IndexNow) e sitemap con data di modifica, dati strutturati coerenti (Troisi Ricerche / Andrea Troisi), tag Open Graph, Google Analytics 4 (solo dopo il consenso Iubenda), robots.txt aperto ai crawler IA, llms.txt, canonical sugli archivi, gestione dei vecchi indirizzi (301/410), pulsanti Condividi e Stampa sotto ogni articolo e aggiornamento automatico, per tutti i siti della galassia Troisi Ricerche. Non duplica ciò che il tema già stampa.
- * Version: 1.6.1
+ * Version: 1.6.2
  * Author: Troisi Ricerche
  * Update URI: https://github.com/troisiricerche-srl/troisi-galassia
  * Requires at least: 5.5
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TG_VERSION', '1.6.1' );
+define( 'TG_VERSION', '1.6.2' );
 define( 'TG_BING_CODE', '4931BB11CCDED6E9008DF80C2CA47D36' ); // Bing Webmaster Tools, account troisiricerche@gmail.com (codice unico per account)
 define( 'TG_GA4_ID', 'G-S8N55XBJHV' ); // GA4, proprietà «Galassia Troisi Ricerche» (account andreatroisi), stream unico per tutti i siti
 define( 'TG_ORG_ID', 'https://troisiricerche.net/#organization' );
@@ -191,6 +191,10 @@ function tg_filter_html( $html ) {
 	}
 	// Banner cookie Iubenda per i siti che non ne hanno uno proprio (va in testa a <head>).
 	$html = tg_iubenda_banner( $html );
+	// Il dato è tratto esce ogni due settimane: corregge il vecchio slogan «mensile» (titolo, og:title).
+	if ( 'ildatoetratto.it' === tg_host() ) {
+		$html = str_replace( 'La newsletter mensile di Troisi Ricerche', 'La newsletter di Troisi Ricerche, ogni due settimane', $html );
+	}
 	$add = "\n<!-- Troisi Galassia " . TG_VERSION . " -->\n";
 
 	// Verifica Google Search Console.

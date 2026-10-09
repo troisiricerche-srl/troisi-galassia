@@ -1,7 +1,7 @@
 {
-  "version": "1.6.1",
+  "version": "1.6.2",
   "download_url": "https://raw.githubusercontent.com/troisiricerche-srl/troisi-galassia/main/dist/troisi-galassia.zip",
   "requires": "5.5",
   "tested": "6.8",
-  "changelog": "<p><b>1.6.1</b> – Versione di prova dell'aggiornamento automatico (nessuna modifica funzionale).</p><p><b>1.6.0</b> – Aggiornamento automatico da GitHub. Pulsanti Condividi e Stampa sotto ogni articolo (dalla 1.5.0).</p>"
+  "changelog": "<p><b>1.6.2</b> – Il dato è tratto: titolo «ogni due settimane» al posto di «mensile».</p><p><b>1.6.1</b> – Versione di prova dell'aggiornamento automatico (nessuna modifica funzionale).</p><p><b>1.6.0</b> – Aggiornamento automatico da GitHub. Pulsanti Condividi e Stampa sotto ogni articolo (dalla 1.5.0).</p>"
 }
