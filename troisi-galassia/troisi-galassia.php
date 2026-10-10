@@ -1217,6 +1217,36 @@ bar.querySelector('.tg-sb-print').addEventListener('click',function(){eager();
 }, 99 );
 
 /* ------------------------------------------------------------------
+ * 14. Il dato è tratto™ su tutti i siti della galassia
+ *     Striscia discreta in fondo a ogni pagina (tranne ildatoetratto.it)
+ *     con il link alla testata e al canale WhatsApp.
+ * ------------------------------------------------------------------ */
+add_action( 'wp_footer', function () {
+	if ( is_admin() || is_feed() || 'ildatoetratto.it' === tg_host() || ! apply_filters( 'tg_idet_strip', true ) ) {
+		return;
+	}
+	$src  = rawurlencode( tg_host() );
+	$site = 'https://www.ildatoetratto.it/?utm_source=' . $src . '&utm_medium=galassia&utm_campaign=striscia-idet';
+	$wa   = apply_filters( 'tg_whatsapp_channel', 'https://whatsapp.com/channel/0029VbE9Kx9DeONGCBFx5v42' );
+	?>
+<div class="tg-idet" role="complementary" aria-label="Il dato è tratto">
+<a class="tg-idet-main" href="<?php echo esc_url( $site ); ?>"><strong>Il dato è tratto™</strong><span> · i numeri che contano, su dati ufficiali. Ogni martedì.</span></a>
+<?php if ( $wa ) : ?><a class="tg-idet-wa" href="<?php echo esc_url( $wa ); ?>" target="_blank" rel="noopener"><?php echo tg_icon( 'whatsapp' ); ?><span>Segui su WhatsApp</span></a><?php endif; ?>
+</div>
+<style id="tg-idet-css">
+.tg-idet{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 18px;padding:12px 16px;background:#1B2430;color:#fff;font:14px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;clear:both}
+.tg-idet a{color:#fff!important;text-decoration:none!important}
+.tg-idet-main strong{color:#F2C230}
+.tg-idet-main:hover span{text-decoration:underline}
+.tg-idet-wa{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid rgba(255,255,255,.45);border-radius:999px;font-size:13px}
+.tg-idet-wa svg{color:#25D366}
+.tg-idet-wa:hover{background:rgba(255,255,255,.08)}
+@media print{.tg-idet{display:none!important}}
+</style>
+	<?php
+}, 100 );
+
+/* ------------------------------------------------------------------
  * 13. Aggiornamento automatico (dalla 1.6.0)
  *     Il plugin controlla due volte al giorno il file update.json nel
  *     repository pubblico github.com/troisiricerche-srl/troisi-galassia
