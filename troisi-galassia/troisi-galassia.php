@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Troisi Galassia
  * Description: Verifica Google Search Console, temi/parole chiave in dati strutturati, avviso immediato ai motori (IndexNow) e sitemap con data di modifica, dati strutturati coerenti (Troisi Ricerche / Andrea Troisi), tag Open Graph, Google Analytics 4 (solo dopo il consenso Iubenda), robots.txt aperto ai crawler IA, llms.txt, canonical sugli archivi, gestione dei vecchi indirizzi (301/410), pulsanti Condividi e Stampa sotto ogni articolo e aggiornamento automatico, per tutti i siti della galassia Troisi Ricerche. Non duplica ciò che il tema già stampa.
- * Version: 1.6.2
+ * Version: 1.6.3
  * Author: Troisi Ricerche
  * Update URI: https://github.com/troisiricerche-srl/troisi-galassia
  * Requires at least: 5.5
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TG_VERSION', '1.6.2' );
+define( 'TG_VERSION', '1.6.3' );
 define( 'TG_BING_CODE', '4931BB11CCDED6E9008DF80C2CA47D36' ); // Bing Webmaster Tools, account troisiricerche@gmail.com (codice unico per account)
 define( 'TG_GA4_ID', 'G-S8N55XBJHV' ); // GA4, proprietà «Galassia Troisi Ricerche» (account andreatroisi), stream unico per tutti i siti
 define( 'TG_ORG_ID', 'https://troisiricerche.net/#organization' );
@@ -1090,6 +1090,10 @@ add_filter( 'the_content', function ( $content ) {
 	$b .= '<button type="button" class="tg-sb tg-sb-copy" data-url="' . esc_url( tg_utm( $url, 'copia-link' ) ) . '">' . tg_icon( 'link' ) . '<span>Copia link</span></button>';
 	$b .= '<button type="button" class="tg-sb tg-sb-native" hidden data-url="' . esc_url( tg_utm( $url, 'telefono' ) ) . '" data-title="' . esc_attr( $title ) . '">' . tg_icon( 'share' ) . '<span>Condividi…</span></button>';
 	$b .= '</span><button type="button" class="tg-sb tg-sb-print">' . tg_icon( 'print' ) . '<span>Stampa / PDF</span></button>';
+	$wa = apply_filters( 'tg_whatsapp_channel', 'https://whatsapp.com/channel/0029VbE9Kx9DeONGCBFx5v42' );
+	if ( $wa ) {
+		$b .= '<a class="tg-follow" href="' . esc_url( $wa ) . '" target="_blank" rel="noopener">' . tg_icon( 'whatsapp' ) . '<span>Segui <strong>Il dato è tratto™</strong> su WhatsApp: i numeri della settimana, ogni martedì</span></a>';
+	}
 	$b .= '</div>';
 	return $content . $b;
 }, 99 );
@@ -1140,6 +1144,7 @@ add_action( 'wp_footer', function () {
 .tg-share .tg-sb-linkedin svg{color:#0A66C2}.tg-share .tg-sb-whatsapp svg{color:#25D366}.tg-share .tg-sb-facebook svg{color:#1877F2}.tg-share .tg-sb-telegram svg{color:#26A5E4}
 .tg-share .tg-sb-print{order:1;font-weight:600;border-color:currentColor}
 .tg-share .tg-sb[hidden]{display:none}
+.tg-share .tg-follow{order:3;flex:1 1 100%;display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:inherit;text-decoration:none!important;opacity:.9}.tg-share .tg-follow svg{color:#25D366;flex:none}.tg-share .tg-follow:hover span{text-decoration:underline}
 @media (max-width:640px){.tg-share .tg-sb span{display:none}.tg-share .tg-sb{padding:9px}.tg-share .tg-sb-print span,.tg-share .tg-sb-native span{display:inline}}
 #tg-ph,#tg-pf{display:none}
 @media print{
