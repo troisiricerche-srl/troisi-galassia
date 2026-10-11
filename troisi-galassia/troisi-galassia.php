@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Troisi Galassia
  * Description: Verifica Google Search Console, temi/parole chiave in dati strutturati, avviso immediato ai motori (IndexNow) e sitemap con data di modifica, dati strutturati coerenti (Troisi Ricerche / Andrea Troisi), tag Open Graph, Google Analytics 4 (solo dopo il consenso Iubenda), robots.txt aperto ai crawler IA, llms.txt, canonical sugli archivi, gestione dei vecchi indirizzi (301/410), pulsanti Condividi e Stampa sotto ogni articolo e aggiornamento automatico, per tutti i siti della galassia Troisi Ricerche. Non duplica ciò che il tema già stampa.
- * Version: 1.6.5
+ * Version: 1.6.6
  * Author: Troisi Ricerche
  * Update URI: https://github.com/troisiricerche-srl/troisi-galassia
  * Requires at least: 5.5
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TG_VERSION', '1.6.5' );
+define( 'TG_VERSION', '1.6.6' );
 define( 'TG_BING_CODE', '4931BB11CCDED6E9008DF80C2CA47D36' ); // Bing Webmaster Tools, account troisiricerche@gmail.com (codice unico per account)
 define( 'TG_GA4_ID', 'G-S8N55XBJHV' ); // GA4, proprietà «Galassia Troisi Ricerche» (account andreatroisi), stream unico per tutti i siti
 define( 'TG_ORG_ID', 'https://troisiricerche.net/#organization' );
@@ -206,6 +206,61 @@ function tg_trademark_customerpa( $html ) {
 	return $head . implode( '', $parts );
 }
 
+/**
+ * Hub troisiricerche.net, pagina /notizie/: il tema elenca a mano 8 siti nella griglia «tr-netgrid».
+ * Per ogni sito di troisi_network_sites() (funzione del tema) che non ha ancora un riquadro,
+ * aggiunge un riquadro identico agli altri con gli ultimi 2 articoli (stessa cache del tema).
+ */
+function tg_hub_network_boxes( $html ) {
+	if ( ! function_exists( 'troisi_network_sites' ) || ! function_exists( 'troisi_network_latest' ) ) {
+		return $html;
+	}
+	$start = strpos( $html, 'tr-netgrid' );
+	$end   = strpos( $html, '<!-- ARTICOLI ORIGINALI TROISI RICERCHE -->', $start );
+	if ( false === $end ) {
+		return $html;
+	}
+	// Fine della griglia: le ultime due chiusure </div> prima del commento successivo (griglia + contenitore).
+	$grid_close = strrpos( substr( $html, 0, $end ), '</div>' );
+	$grid_close = ( false !== $grid_close ) ? strrpos( substr( $html, 0, $grid_close ), '</div>' ) : false;
+	if ( false === $grid_close || $grid_close < $start ) {
+		return $html;
+	}
+	$grid  = substr( $html, $start, $grid_close - $start );
+	$boxes = '';
+	foreach ( troisi_network_sites() as $key => $site ) {
+		$dom = preg_replace( '/^www\./', '', (string) wp_parse_url( $site['url'], PHP_URL_HOST ) );
+		if ( '' === $dom || false !== strpos( $grid, $dom . ' →' ) ) {
+			continue;
+		}
+		$items = troisi_network_latest( $key, 2 );
+		$b  = "\n      <!-- " . esc_html( $site['nome'] ) . " (Troisi Galassia) -->\n";
+		$b .= '      <div style="background:#fff;border:0.5px solid var(--bo);border-radius:var(--r);overflow:hidden">';
+		$b .= '<div style="background:var(--dp);padding:14px 18px;display:flex;align-items:center;gap:8px">';
+		$b .= '<div style="width:9px;height:9px;border-radius:50%;background:' . esc_attr( $site['colore'] ) . '"></div>';
+		$b .= '<span style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.85)">' . esc_html( $site['nome'] ) . '</span>';
+		$b .= '<span style="font-size:10px;font-weight:700;color:#fff;background:var(--blu);padding:2px 7px;border-radius:2px;margin-left:auto">LIVE</span></div>';
+		$b .= '<div style="padding:18px">';
+		if ( $items ) {
+			foreach ( $items as $it ) {
+				$b .= '<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--bo)">';
+				$b .= '<div style="font-size:13px;color:#6b7280;margin-bottom:5px">' . esc_html( wp_strip_all_tags( (string) ( $it['date'] ?? '' ) ) ) . '</div>';
+				$b .= '<div style="font-size:17px;font-weight:700;color:var(--dp);line-height:1.35;margin-bottom:8px">' . esc_html( wp_strip_all_tags( html_entity_decode( (string) ( $it['title'] ?? '' ), ENT_QUOTES, 'UTF-8' ) ) ) . '</div>';
+				$b .= '<a href="' . esc_url( $it['link'] ?? $site['url'] ) . '" target="_blank" style="font-size:14.5px;color:var(--blu);font-weight:600;text-decoration:none">Leggi →</a></div>';
+			}
+		} else {
+			$b .= '<div style="font-size:15px;color:var(--g);padding:8px 0">Analisi in arrivo</div>';
+		}
+		$b .= '<a href="' . esc_url( $site['url'] ) . '" target="_blank" style="font-size:14.5px;color:var(--blu);font-weight:700">' . esc_html( $dom ) . ' →</a>';
+		$b .= "</div></div>\n";
+		$boxes .= $b;
+	}
+	if ( '' === $boxes ) {
+		return $html;
+	}
+	return substr( $html, 0, $grid_close ) . $boxes . substr( $html, $grid_close );
+}
+
 function tg_filter_html( $html ) {
 	if ( ! is_string( $html ) || false === stripos( $html, '</head>' ) || false === stripos( $html, '<html' ) ) {
 		return $html;
@@ -223,6 +278,11 @@ function tg_filter_html( $html ) {
 	}
 	// TR-Index è stato rinominato «Indice di Performance Territoriale» (25/9/2026): corregge le voci di menu dei temi.
 	$html = preg_replace( '/>(\s*)TR-Index(\s*)</', '>$1Indice di Performance Territoriale$2<', $html );
+	// Hub, pagina Notizie: il riquadro «Dal network» del tema ha solo 8 siti; aggiunge quelli mancanti
+	// (Governance Finanziaria, Consulenza Internazionalizzazione) leggendo l'elenco dal tema stesso.
+	if ( tg_is_hub() && false !== strpos( $html, 'tr-netgrid' ) ) {
+		$html = tg_hub_network_boxes( $html );
+	}
 	// Marchio depositato (ottobre 2026): «CustomerPA» diventa «CustomerPA™» nel testo visibile della pagina.
 	$html = tg_trademark_customerpa( $html );
 	$add ="\n<!-- Troisi Galassia " . TG_VERSION . " -->\n";
