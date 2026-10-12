@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Troisi Galassia
  * Description: Verifica Google Search Console, temi/parole chiave in dati strutturati, avviso immediato ai motori (IndexNow) e sitemap con data di modifica, dati strutturati coerenti (Troisi Ricerche / Andrea Troisi), tag Open Graph, Google Analytics 4 (solo dopo il consenso Iubenda), robots.txt aperto ai crawler IA, llms.txt, canonical sugli archivi, gestione dei vecchi indirizzi (301/410), pulsanti Condividi e Stampa sotto ogni articolo e aggiornamento automatico, per tutti i siti della galassia Troisi Ricerche. Non duplica ciò che il tema già stampa.
- * Version: 1.6.6
+ * Version: 1.6.7
  * Author: Troisi Ricerche
  * Update URI: https://github.com/troisiricerche-srl/troisi-galassia
  * Requires at least: 5.5
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TG_VERSION', '1.6.6' );
+define( 'TG_VERSION', '1.6.7' );
 define( 'TG_BING_CODE', '4931BB11CCDED6E9008DF80C2CA47D36' ); // Bing Webmaster Tools, account troisiricerche@gmail.com (codice unico per account)
 define( 'TG_GA4_ID', 'G-S8N55XBJHV' ); // GA4, proprietà «Galassia Troisi Ricerche» (account andreatroisi), stream unico per tutti i siti
 define( 'TG_ORG_ID', 'https://troisiricerche.net/#organization' );
@@ -283,6 +283,13 @@ function tg_filter_html( $html ) {
 	if ( tg_is_hub() && false !== strpos( $html, 'tr-netgrid' ) ) {
 		$html = tg_hub_network_boxes( $html );
 	}
+	// Affermazione non dimostrabile (12/10/2026): «il principale istituto italiano» diventa «un istituto italiano»
+	// in meta description, dati strutturati e testo (temi scritti a mano).
+	$html = preg_replace_callback( '/\b([Ii])l principale istituto italiano\b/u', function ( $m ) {
+		return ( 'I' === $m[1] ? 'Un' : 'un' ) . ' istituto italiano';
+	}, $html );
+	// Indirizzo della sede nei dati strutturati del tema: via e numero civico al posto di una dicitura generica.
+	$html = preg_replace( '/("streetAddress"\s*:\s*")Bari — sede principale(")/u', '$1Via De Rossi 57$2', $html );
 	// Marchio depositato (ottobre 2026): «CustomerPA» diventa «CustomerPA™» nel testo visibile della pagina.
 	$html = tg_trademark_customerpa( $html );
 	$add ="\n<!-- Troisi Galassia " . TG_VERSION . " -->\n";
@@ -338,6 +345,11 @@ function tg_filter_html( $html ) {
 			'@type'   => 'ResearchOrganization',
 			'@id'     => TG_ORG_ID,
 			'name'    => 'Troisi Ricerche',
+			'legalName' => 'Troisi Ricerche S.r.l. Unipersonale',
+			'vatID'   => 'IT07216100722',
+			'taxID'   => '07216100722',
+			'foundingDate' => '2006',
+			'address' => array( '@type' => 'PostalAddress', 'streetAddress' => 'Via De Rossi 57', 'addressLocality' => 'Bari', 'addressRegion' => 'BA', 'addressCountry' => 'IT' ),
 			'url'     => 'https://www.troisiricerche.net/',
 			'founder' => array( '@id' => TG_PERSON_ID ),
 			'knowsAbout' => tg_org_knows_about(),
@@ -350,6 +362,9 @@ function tg_filter_html( $html ) {
 		// Il tema descrive già l'istituto: aggiungiamo solo le competenze (stesso @id, i nodi si fondono).
 		$graph[] = array(
 			'@id'        => TG_ORG_ID,
+			'legalName'  => 'Troisi Ricerche S.r.l. Unipersonale',
+			'vatID'      => 'IT07216100722',
+			'taxID'      => '07216100722',
 			'knowsAbout' => tg_org_knows_about(),
 		);
 	}
