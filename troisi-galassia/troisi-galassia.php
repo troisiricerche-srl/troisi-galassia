@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Troisi Galassia
  * Description: Verifica Google Search Console, temi/parole chiave in dati strutturati, avviso immediato ai motori (IndexNow) e sitemap con data di modifica, dati strutturati coerenti (Troisi Ricerche / Andrea Troisi), tag Open Graph, Google Analytics 4 (solo dopo il consenso Iubenda), robots.txt aperto ai crawler IA, llms.txt, canonical sugli archivi, gestione dei vecchi indirizzi (301/410), pulsanti Condividi e Stampa sotto ogni articolo e aggiornamento automatico, per tutti i siti della galassia Troisi Ricerche. Non duplica ciò che il tema già stampa.
- * Version: 1.6.7
+ * Version: 1.6.8
  * Author: Troisi Ricerche
  * Update URI: https://github.com/troisiricerche-srl/troisi-galassia
  * Requires at least: 5.5
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TG_VERSION', '1.6.7' );
+define( 'TG_VERSION', '1.6.8' );
 define( 'TG_BING_CODE', '4931BB11CCDED6E9008DF80C2CA47D36' ); // Bing Webmaster Tools, account troisiricerche@gmail.com (codice unico per account)
 define( 'TG_GA4_ID', 'G-S8N55XBJHV' ); // GA4, proprietà «Galassia Troisi Ricerche» (account andreatroisi), stream unico per tutti i siti
 define( 'TG_ORG_ID', 'https://troisiricerche.net/#organization' );
@@ -1449,3 +1449,71 @@ add_filter( 'upgrader_source_selection', function ( $source, $remote_source, $up
 add_action( 'upgrader_process_complete', function () {
 	delete_site_transient( 'tg_remote_info' );
 } );
+
+/* ------------------------------------------------------------------
+ * 14. Aggiornamento automatico dei temi (dalla 1.6.8)
+ *     update.json può contenere una voce «temi»:
+ *       { "temi": { "<cartella-tema>": { "version": "x.y.z", "download_url": "https://..." } } }
+ *     Se sul sito è installato un tema con quella cartella e la versione
+ *     remota è più nuova, WordPress lo aggiorna da solo, come il plugin.
+ *     Lo ZIP deve contenere la cartella del tema con lo stesso nome.
+ * ------------------------------------------------------------------ */
+function tg_temi_remoti() {
+	$info = tg_remote_info();
+	$out  = array();
+	if ( empty( $info['temi'] ) || ! is_array( $info['temi'] ) ) {
+		return $out;
+	}
+	foreach ( $info['temi'] as $slug => $t ) {
+		if ( is_array( $t ) && ! empty( $t['version'] ) && ! empty( $t['download_url'] ) && 0 === strpos( $t['download_url'], 'https://' ) ) {
+			$out[ sanitize_key( $slug ) ] = $t;
+		}
+	}
+	return $out;
+}
+
+add_filter( 'pre_set_site_transient_update_themes', function ( $t ) {
+	if ( ! is_object( $t ) ) {
+		return $t;
+	}
+	foreach ( tg_temi_remoti() as $slug => $r ) {
+		$tema = wp_get_theme( $slug );
+		if ( ! $tema->exists() ) {
+			continue;
+		}
+		$item = array(
+			'theme'       => $slug,
+			'new_version' => $r['version'],
+			'url'         => 'https://github.com/troisiricerche-srl/troisi-galassia',
+			'package'     => $r['download_url'],
+		);
+		if ( version_compare( $r['version'], $tema->get( 'Version' ), '>' ) ) {
+			$t->response[ $slug ] = $item;
+		} else {
+			unset( $t->response[ $slug ] );
+			$t->no_update[ $slug ] = $item;
+		}
+	}
+	return $t;
+} );
+
+add_filter( 'auto_update_theme', function ( $update, $item ) {
+	if ( isset( $item->theme ) && array_key_exists( $item->theme, tg_temi_remoti() ) ) {
+		return true;
+	}
+	return $update;
+} , 10, 2 );
+
+// Alla prima esecuzione di una nuova versione del plugin si forza subito il controllo
+// degli aggiornamenti (temi compresi), senza aspettare il giro di WordPress delle 12 ore.
+add_action( 'init', function () {
+	if ( get_option( 'tg_versione_vista' ) === TG_VERSION ) {
+		return;
+	}
+	update_option( 'tg_versione_vista', TG_VERSION, false );
+	delete_site_transient( 'tg_remote_info' );
+	delete_site_transient( 'update_themes' );
+	if ( ! wp_next_scheduled( 'wp_maybe_auto_update' ) || wp_next_scheduled( 'wp_maybe_auto_update' ) > time() + 300 ) {
+		wp_schedule_single_event( time() + 60, 'wp_maybe_auto_update' );
+	}
+}, 20 );

@@ -1,7 +1,17 @@
 {
-  "version": "1.6.7",
+  "version": "1.6.8",
   "download_url": "https://raw.githubusercontent.com/troisiricerche-srl/troisi-galassia/main/dist/troisi-galassia.zip",
   "requires": "5.5",
   "tested": "6.8",
-  "changelog": "<p><b>1.6.7</b> – Dati dell'istituto: «il principale istituto italiano» diventa «un istituto italiano» (affermazione non dimostrabile); nei dati strutturati ragione sociale, partita IVA e indirizzo Via De Rossi 57.</p><p><b>1.6.6</b> – Hub troisiricerche.net, pagina Notizie: aggiunti i riquadri di Governance Finanziaria e Consulenza Internazionalizzazione (e di ogni sito del network che il tema non elenca), con gli ultimi due articoli.</p><p><b>1.6.5</b> – Marchio depositato: «CustomerPA» diventa «CustomerPA™» nel testo visibile delle pagine (non in link, indirizzi e codice).</p><p><b>1.6.4</b> – Striscia «Il dato è tratto™» con link al sito e al canale WhatsApp in fondo a ogni pagina della galassia; «TR-Index» diventa «Indice di Performance Territoriale» nei menu.</p><p><b>1.6.3</b> – Sotto i pulsanti di condivisione di ogni articolo, invito a seguire il canale WhatsApp «Il dato è tratto™».</p><p><b>1.6.2</b> – Il dato è tratto: titolo «ogni due settimane» al posto di «mensile».</p><p><b>1.6.1</b> – Versione di prova dell'aggiornamento automatico (nessuna modifica funzionale).</p><p><b>1.6.0</b> – Aggiornamento automatico da GitHub. Pulsanti Condividi e Stampa sotto ogni articolo (dalla 1.5.0).</p>"
+  "changelog": "<p><b>1.6.8</b> – Aggiornamento automatico anche dei temi del network (andreatroisi.it, troisiricerche.net) da GitHub, come il plugin. Prima uscita: rassegna stampa del convegno Smart City al Politecnico di Bari (3 ottobre 2025).</p><p><b>1.6.7</b> – Dati dell'istituto: «il principale istituto italiano» diventa «un istituto italiano» (affermazione non dimostrabile); nei dati strutturati ragione sociale, partita IVA e indirizzo Via De Rossi 57.</p><p><b>1.6.6</b> – Hub troisiricerche.net, pagina Notizie: aggiunti i riquadri di Governance Finanziaria e Consulenza Internazionalizzazione (e di ogni sito del network che il tema non elenca), con gli ultimi due articoli.</p><p><b>1.6.5</b> – Marchio depositato: «CustomerPA» diventa «CustomerPA™» nel testo visibile delle pagine (non in link, indirizzi e codice).</p><p><b>1.6.4</b> – Striscia «Il dato è tratto™» con link al sito e al canale WhatsApp in fondo a ogni pagina della galassia; «TR-Index» diventa «Indice di Performance Territoriale» nei menu.</p><p><b>1.6.3</b> – Sotto i pulsanti di condivisione di ogni articolo, invito a seguire il canale WhatsApp «Il dato è tratto™».</p><p><b>1.6.2</b> – Il dato è tratto: titolo «ogni due settimane» al posto di «mensile».</p><p><b>1.6.1</b> – Versione di prova dell'aggiornamento automatico (nessuna modifica funzionale).</p><p><b>1.6.0</b> – Aggiornamento automatico da GitHub. Pulsanti Condividi e Stampa sotto ogni articolo (dalla 1.5.0).</p>",
+  "temi": {
+    "andreatroisi-theme": {
+      "version": "1.10.11",
+      "download_url": "https://raw.githubusercontent.com/troisiricerche-srl/troisi-galassia/main/dist/temi/andreatroisi-theme.zip"
+    },
+    "troisiricerche-v9": {
+      "version": "10.2.5",
+      "download_url": "https://raw.githubusercontent.com/troisiricerche-srl/troisi-galassia/main/dist/temi/troisiricerche-v9.zip"
+    }
+  }
 }
