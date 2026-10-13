@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Troisi Galassia
  * Description: Verifica Google Search Console, temi/parole chiave in dati strutturati, avviso immediato ai motori (IndexNow) e sitemap con data di modifica, dati strutturati coerenti (Troisi Ricerche / Andrea Troisi), tag Open Graph, Google Analytics 4 (solo dopo il consenso Iubenda), robots.txt aperto ai crawler IA, llms.txt, canonical sugli archivi, gestione dei vecchi indirizzi (301/410), pulsanti Condividi e Stampa sotto ogni articolo e aggiornamento automatico, per tutti i siti della galassia Troisi Ricerche. Non duplica ciò che il tema già stampa.
- * Version: 1.6.9
+ * Version: 1.7.0
  * Author: Troisi Ricerche
  * Update URI: https://github.com/troisiricerche-srl/troisi-galassia
  * Requires at least: 5.5
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TG_VERSION', '1.6.9' );
+define( 'TG_VERSION', '1.7.0' );
 define( 'TG_BING_CODE', '4931BB11CCDED6E9008DF80C2CA47D36' ); // Bing Webmaster Tools, account troisiricerche@gmail.com (codice unico per account)
 define( 'TG_GA4_ID', 'G-S8N55XBJHV' ); // GA4, proprietà «Galassia Troisi Ricerche» (account andreatroisi), stream unico per tutti i siti
 define( 'TG_ORG_ID', 'https://troisiricerche.net/#organization' );
@@ -1360,6 +1360,52 @@ add_action( 'wp_footer', function () {
 </style>
 	<?php
 }, 100 );
+
+/* ------------------------------------------------------------------
+ * 15. Certificazioni e associazioni di Troisi Ricerche (dalla 1.7.0)
+ *     Fascia in fondo a ogni pagina di tutti i siti della galassia,
+ *     sotto la striscia «Il dato è tratto™»: loghi monocromatici su
+ *     fondo trasparente (file in loghi/, bianchi con trasparenza).
+ * ------------------------------------------------------------------ */
+function tg_loghi_cert() {
+	return apply_filters( 'tg_loghi_cert', array(
+		array( 'tuv', 'TÜV SÜD · Sistema di gestione qualità certificato ISO 9001:2015' ),
+		array( 'miur', 'MIUR · Ente accreditato' ),
+		array( 'sis', 'SIS · Società Italiana di Statistica' ),
+		array( 'isi', 'ISI · International Statistical Institute' ),
+		array( 'ams', 'AMS · American Mathematical Society' ),
+		array( 'confindustria', 'Confindustria Bari e BAT' ),
+		array( 'google', 'Google Advanced Data Analytics Professional' ),
+		array( 'hubspot', 'HubSpot Academy' ),
+	) );
+}
+
+add_action( 'wp_footer', function () {
+	if ( is_admin() || is_feed() || ! apply_filters( 'tg_cert_strip', true ) ) {
+		return;
+	}
+	?>
+<div class="tg-cert" role="complementary" aria-label="Certificazioni e associazioni di Troisi Ricerche">
+<p class="tg-cert-t">Troisi Ricerche · certificazioni e associazioni</p>
+<ul class="tg-cert-l">
+<?php foreach ( tg_loghi_cert() as $l ) : ?>
+<li><img src="<?php echo esc_url( plugins_url( 'loghi/' . $l[0] . '.png', __FILE__ ) ); ?>" alt="<?php echo esc_attr( $l[1] ); ?>" title="<?php echo esc_attr( $l[1] ); ?>" loading="lazy" decoding="async" height="38"></li>
+<?php endforeach; ?>
+</ul>
+</div>
+<style id="tg-cert-css">
+.tg-cert{background:#141B25;color:#9AA6B6;padding:22px 16px 26px;border-top:1px solid rgba(255,255,255,.07);text-align:center;font:12px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;clear:both}
+.tg-cert-t{margin:0 0 16px!important;padding:0!important;font-size:11px!important;letter-spacing:.14em;text-transform:uppercase;color:#9AA6B6!important}
+.tg-cert-l{list-style:none!important;margin:0 auto!important;padding:0!important;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:20px 40px;max-width:1180px}
+.tg-cert-l li{margin:0!important;padding:0!important;list-style:none!important;line-height:0}
+.tg-cert-l li::before{content:none!important}
+.tg-cert-l img{display:block;height:38px!important;width:auto!important;max-width:none!important;opacity:.68;transition:opacity .2s;box-shadow:none!important;border:0!important;border-radius:0!important;background:none!important}
+.tg-cert-l img:hover{opacity:1}
+@media (max-width:640px){.tg-cert-l{gap:16px 26px}.tg-cert-l img{height:28px!important}}
+@media print{.tg-cert{display:none!important}}
+</style>
+	<?php
+}, 101 );
 
 /* ------------------------------------------------------------------
  * 13. Aggiornamento automatico (dalla 1.6.0)
