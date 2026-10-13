@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Troisi Galassia
  * Description: Verifica Google Search Console, temi/parole chiave in dati strutturati, avviso immediato ai motori (IndexNow) e sitemap con data di modifica, dati strutturati coerenti (Troisi Ricerche / Andrea Troisi), tag Open Graph, Google Analytics 4 (solo dopo il consenso Iubenda), robots.txt aperto ai crawler IA, llms.txt, canonical sugli archivi, gestione dei vecchi indirizzi (301/410), pulsanti Condividi e Stampa sotto ogni articolo e aggiornamento automatico, per tutti i siti della galassia Troisi Ricerche. Non duplica ciò che il tema già stampa.
- * Version: 1.6.8
+ * Version: 1.6.9
  * Author: Troisi Ricerche
  * Update URI: https://github.com/troisiricerche-srl/troisi-galassia
  * Requires at least: 5.5
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TG_VERSION', '1.6.8' );
+define( 'TG_VERSION', '1.6.9' );
 define( 'TG_BING_CODE', '4931BB11CCDED6E9008DF80C2CA47D36' ); // Bing Webmaster Tools, account troisiricerche@gmail.com (codice unico per account)
 define( 'TG_GA4_ID', 'G-S8N55XBJHV' ); // GA4, proprietà «Galassia Troisi Ricerche» (account andreatroisi), stream unico per tutti i siti
 define( 'TG_ORG_ID', 'https://troisiricerche.net/#organization' );
@@ -356,6 +356,8 @@ function tg_filter_html( $html ) {
 			'sameAs'  => array(
 				'https://www.linkedin.com/company/troisi-ricerche',
 				'https://www.youtube.com/@Troisiricerche',
+				'https://www.instagram.com/troisiricerche/',
+				'https://www.facebook.com/troisiricerche',
 			),
 		);
 	} else {
@@ -1142,6 +1144,7 @@ function tg_share_icons() {
 		'link'  => '!M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1',
 		'print' => '!M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z',
 		'share' => '!M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M12 3v12M7 8l5-5 5 5',
+		'instagram' => '!M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM17.5 6.5h.01',
 	);
 }
 
@@ -1199,6 +1202,10 @@ add_filter( 'the_content', function ( $content ) {
 	if ( $wa ) {
 		$b .= '<a class="tg-follow" href="' . esc_url( $wa ) . '" target="_blank" rel="noopener">' . tg_icon( 'whatsapp' ) . '<span>Segui <strong>Il dato è tratto™</strong> su WhatsApp: i numeri della settimana, ogni martedì</span></a>';
 	}
+	$ig = apply_filters( 'tg_instagram', 'https://www.instagram.com/troisiricerche/' );
+	if ( $ig ) {
+		$b .= '<a class="tg-follow tg-follow-ig" href="' . esc_url( $ig ) . '" target="_blank" rel="noopener">' . tg_icon( 'instagram' ) . '<span>Seguici su Instagram: <strong>@troisiricerche</strong></span></a>';
+	}
 	$b .= '</div>';
 	return $content . $b;
 }, 99 );
@@ -1249,7 +1256,7 @@ add_action( 'wp_footer', function () {
 .tg-share .tg-sb-linkedin svg{color:#0A66C2}.tg-share .tg-sb-whatsapp svg{color:#25D366}.tg-share .tg-sb-facebook svg{color:#1877F2}.tg-share .tg-sb-telegram svg{color:#26A5E4}
 .tg-share .tg-sb-print{order:1;font-weight:600;border-color:currentColor}
 .tg-share .tg-sb[hidden]{display:none}
-.tg-share .tg-follow{order:3;flex:1 1 100%;display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:inherit;text-decoration:none!important;opacity:.9}.tg-share .tg-follow svg{color:#25D366;flex:none}.tg-share .tg-follow:hover span{text-decoration:underline}
+.tg-share .tg-follow{order:3;flex:1 1 100%;display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:inherit;text-decoration:none!important;opacity:.9}.tg-share .tg-follow svg{color:#25D366;flex:none}.tg-share .tg-follow-ig svg{color:#E1306C}.tg-share .tg-follow:hover span{text-decoration:underline}
 @media (max-width:640px){.tg-share .tg-sb span{display:none}.tg-share .tg-sb{padding:9px}.tg-share .tg-sb-print span,.tg-share .tg-sb-native span{display:inline}}
 #tg-ph,#tg-pf{display:none}
 @media print{
@@ -1333,10 +1340,12 @@ add_action( 'wp_footer', function () {
 	$src  = rawurlencode( tg_host() );
 	$site = 'https://www.ildatoetratto.it/?utm_source=' . $src . '&utm_medium=galassia&utm_campaign=striscia-idet';
 	$wa   = apply_filters( 'tg_whatsapp_channel', 'https://whatsapp.com/channel/0029VbE9Kx9DeONGCBFx5v42' );
+	$ig   = apply_filters( 'tg_instagram', 'https://www.instagram.com/troisiricerche/' );
 	?>
 <div class="tg-idet" role="complementary" aria-label="Il dato è tratto">
 <a class="tg-idet-main" href="<?php echo esc_url( $site ); ?>"><strong>Il dato è tratto™</strong><span> · i numeri che contano, su dati ufficiali. Ogni martedì.</span></a>
 <?php if ( $wa ) : ?><a class="tg-idet-wa" href="<?php echo esc_url( $wa ); ?>" target="_blank" rel="noopener"><?php echo tg_icon( 'whatsapp' ); ?><span>Segui su WhatsApp</span></a><?php endif; ?>
+<?php if ( $ig ) : ?><a class="tg-idet-wa tg-idet-ig" href="<?php echo esc_url( $ig ); ?>" target="_blank" rel="noopener"><?php echo tg_icon( 'instagram' ); ?><span>Instagram</span></a><?php endif; ?>
 </div>
 <style id="tg-idet-css">
 .tg-idet{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 18px;padding:12px 16px;background:#1B2430;color:#fff;font:14px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;clear:both}
@@ -1345,6 +1354,7 @@ add_action( 'wp_footer', function () {
 .tg-idet-main:hover span{text-decoration:underline}
 .tg-idet-wa{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid rgba(255,255,255,.45);border-radius:999px;font-size:13px}
 .tg-idet-wa svg{color:#25D366}
+.tg-idet-ig svg{color:#F77737}
 .tg-idet-wa:hover{background:rgba(255,255,255,.08)}
 @media print{.tg-idet{display:none!important}}
 </style>
