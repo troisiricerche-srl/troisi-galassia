@@ -134,18 +134,15 @@ function frame(f){
     ctx.restore();
     slam('AL CANALE',bt(49),t,W/2,1790,900,110,NAVY);
     if(t>bt(52)-.017){var e2=snap((t-bt(52)+.017)/.15);ctx.fillStyle=hexA('#25D366',.94);ctx.fillRect(0,H*(1-e2),W,H*e2);}
-    slam('FATTO.',bt(52),t,W/2,H/2-80,900,260,BIANCO);
+    slam('IL DATO È TRATTO™',bt(52),t,W/2,H/2-80,940,170,BIANCO);
     slam('UN DATO AL GIORNO, CON LA FONTE',bt(53),t,W/2,H/2+140,900,60,NAVY,{peso:800,da:1.4});
-  } else { // ── chiusura sul colpo finale
-    piena('#F4F7FB');righe(NAVY,.03,t);
-    var e=snap((t-bt(54)+.017)/.2);
-    ctx.save();ctx.translate(W/2,0);ctx.scale(1+.5*(1-e),1+.5*(1-e));ctx.translate(-W/2,0);ctx.globalAlpha=cl(e*1.5);
-    ctx.fillStyle=NAVY;rrect(60,560,W-120,330,40);ctx.fill();pillola(99,0,725,.78);
-    ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.font='400 50px Newsreader';ctx.fillStyle='#54627A';ctx.fillText('Ogni giorno un numero sull\'Italia, con la fonte.',W/2,1010);
-    logo(W/2,1180,120,false);
-    ctx.font='800 46px Archivo';ctx.fillStyle=NAVY;ctx.fillText('Canale WhatsApp «Il dato è tratto™»',W/2,1390);
-    ctx.font='700 40px Archivo';ctx.fillStyle='#54627A';ctx.fillText('troisiricerche.net',W/2,1470);
-    ctx.restore();ctx.globalAlpha=1;
+  } else { // ── chiusura: sull'ultimo colpo cade Troisi Ricerche
+    piena('#FFFFFF');righe(NAVY,.025,t);
+    var e=snap((t-bt(54)+.034)/.12),sc=1.9-.9*e;if(t-bt(54)>0&&t-bt(54)<.2)sc*=1+.035*Math.sin((t-bt(54))/.2*Math.PI);
+    ctx.save();ctx.globalAlpha=cl((t-bt(54)+.034)/.05);ctx.translate(W/2,H/2-120);ctx.scale(sc,sc);logo(0,0,300,false);ctx.restore();ctx.globalAlpha=1;
+    var a=ease((t-bt(54)-.35)/.4);ctx.globalAlpha=a;ctx.textAlign='center';ctx.textBaseline='alphabetic';
+    ctx.font='800 54px Archivo';ctx.fillStyle=NAVY;ctx.fillText('troisiricerche.net',W/2,H/2+190);
+    ctx.font='600 36px Archivo';ctx.fillStyle='#54627A';ctx.fillText('Bari · Roma · Milano',W/2,H/2+260);ctx.globalAlpha=1;
   }
   ctx.restore();
   // lampo bianco sui cambi di sezione
