@@ -5,6 +5,7 @@ const { chromium } = require('playwright'); const { spawn } = require('child_pro
   const G = Object.entries(C).map(([g, v]) => ({ giorno: g[0].toUpperCase() + g.slice(1), portale: v.portale, sito: v.sito, sfondo: v.sfondo, fondo: v.fondo, col: v.col, colScuro: v.colScuro }));
   const out = process.argv[2] || 'promo.mp4'; const b = await chromium.launch({ args: ['--allow-file-access-from-files', '--disable-web-security'] }); const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
   await p.addInitScript('window.GIORNI=' + JSON.stringify(G) + ';');
+  if (process.env.BEAT) await p.addInitScript('window.BEAT=' + Number(process.env.BEAT) + ';window.NCLIP=' + Number(process.env.NCLIP || 96) + ';');
   await p.goto('file://' + path.join(__dirname, process.env.PAGINA || 'promo.html')); await p.evaluate(() => window.pronto);
   const F = await p.evaluate(() => window.FRAMES);
   const ff = spawn('ffmpeg', ['-y', '-f', 'image2pipe', '-framerate', '30', '-c:v', 'mjpeg', '-i', '-', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '23', '-preset', 'medium', '-movflags', '+faststart', out], { stdio: ['pipe', 'ignore', 'inherit'] });
