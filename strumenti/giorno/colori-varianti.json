@@ -1,0 +1,104 @@
+{
+ "luminosi": [
+  {
+   "data": "Lunedì · TroisiInsight",
+   "col": "#D6E4FF",
+   "sfondo": "#2F6FD6",
+   "fondo": "#163E86"
+  },
+  {
+   "data": "Martedì · CustomerPA™",
+   "col": "#FFF1C7",
+   "sfondo": "#C98A0C",
+   "fondo": "#6B4505"
+  },
+  {
+   "data": "Mercoledì · Benessere organizzativo",
+   "col": "#D2F7EA",
+   "sfondo": "#1F9E78",
+   "fondo": "#0B5743"
+  },
+  {
+   "data": "Giovedì · Digitalizzazione nella PA",
+   "col": "#D3F1FC",
+   "sfondo": "#1C8FB8",
+   "fondo": "#0B4D66"
+  },
+  {
+   "data": "Venerdì · Dibattito pubblico",
+   "col": "#FFE0E4",
+   "sfondo": "#D1495B",
+   "fondo": "#7A1E2B"
+  },
+  {
+   "data": "Sabato · Benessere digitale giovani",
+   "col": "#EBDFFF",
+   "sfondo": "#7D58C7",
+   "fondo": "#3E2775"
+  },
+  {
+   "data": "Domenica · Mappatura delle Competenze",
+   "col": "#FFE0EF",
+   "sfondo": "#D0558F",
+   "fondo": "#7A2150"
+  }
+ ],
+ "chiari": [
+  {
+   "data": "Lunedì · TroisiInsight",
+   "col": "#7EA6FF",
+   "sfondo": "#CFE0FB",
+   "fondo": "#F4F8FE",
+   "colScuro": "#1F5BC4",
+   "chiaro": true
+  },
+  {
+   "data": "Martedì · CustomerPA™",
+   "col": "#FFB020",
+   "sfondo": "#FBE6B0",
+   "fondo": "#FFFAEC",
+   "colScuro": "#B9740A",
+   "chiaro": true
+  },
+  {
+   "data": "Mercoledì · Benessere organizzativo",
+   "col": "#41DDA0",
+   "sfondo": "#C9EFE0",
+   "fondo": "#F2FBF7",
+   "colScuro": "#0E8A64",
+   "chiaro": true
+  },
+  {
+   "data": "Giovedì · Digitalizzazione nella PA",
+   "col": "#46C9F2",
+   "sfondo": "#CBEBF7",
+   "fondo": "#F1FAFD",
+   "colScuro": "#0A7FA8",
+   "chiaro": true
+  },
+  {
+   "data": "Venerdì · Dibattito pubblico",
+   "col": "#FF6F6F",
+   "sfondo": "#F9D3D7",
+   "fondo": "#FEF4F5",
+   "colScuro": "#C93445",
+   "chiaro": true
+  },
+  {
+   "data": "Sabato · Benessere digitale giovani",
+   "col": "#C9A7FF",
+   "sfondo": "#E3D6F7",
+   "fondo": "#F8F4FE",
+   "colScuro": "#6B45B8",
+   "chiaro": true
+  },
+  {
+   "data": "Domenica · Mappatura delle Competenze",
+   "col": "#F59AD0",
+   "sfondo": "#F9D5E7",
+   "fondo": "#FEF4F9",
+   "colScuro": "#B83A7A",
+   "chiaro": true
+  }
+ ]
+}

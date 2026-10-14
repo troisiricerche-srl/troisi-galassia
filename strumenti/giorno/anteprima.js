@@ -6,7 +6,7 @@ const { chromium } = require('playwright'); const fs = require('fs'); const path
     const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
     await p.addInitScript('window.DATI=' + JSON.stringify(d) + ';');
     await p.goto('file://' + path.join(__dirname, 'giorno.html')); await p.evaluate(() => window.pronto);
-    await p.evaluate(() => { for (let f = 0; f <= 102; f++) frame(f); });
+    await p.evaluate(() => { for (let f = 0; f <= (window.DATI.f || 102); f++) frame(f); });
     const f = `/tmp/ant${i}.png`; await p.locator('#cv').screenshot({ path: f }); files.push(f); await p.close();
   }
   await b.close();
