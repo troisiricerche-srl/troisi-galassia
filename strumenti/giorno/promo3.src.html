@@ -69,7 +69,7 @@ function frame(f){
   ctx.save();
   var sx=scossa(t,[0,4,8,12,16,17,19,21,22,23,25,26,27,29,30,31,33,35,37,39,41,43,48,50,52,54],14);ctx.translate(sx,sx*.4);
   if(k<12){ // ── INTRO: tre frasi, pestata-pestata-battimano-battimano
-    var fr=[['IL','DATO','È TRATTO™'],['OGNI','GIORNO','UN NUMERO'],['SULL\'','ITALIA','CON LA FONTE']][Math.max(0,Math.floor(k/4))];
+    var fr=[['IL','DATO','È TRATTO™'],['OGNI','MATTINA','UN DATO'],['UFFICIALE','SULL\'','ITALIA']][Math.max(0,Math.floor(k/4))];
     var b0=Math.max(0,Math.floor(k/4))*4, inv=(k%4)>=2;
     piena(inv?ARANCIO:NAVY); righe(inv?'#FFFFFF':'#FFFFFF',inv?.10:.04,t);
     var cA=inv?NAVY:BIANCO, cB=inv?BIANCO:ARANCIO;
@@ -124,7 +124,7 @@ function frame(f){
     ctx.fillStyle=NAVY;ctx.beginPath();ctx.arc(px+PW/2,py+300,120,0,6.283);ctx.fill();logo(px+PW/2,py+300,70,true);
     ctx.fillStyle='#111';ctx.font='800 50px Archivo';ctx.fillText('Il dato è tratto™',px+PW/2,py+500);
     ctx.fillStyle='#667';ctx.font='500 30px Archivo';ctx.fillText('Canale · 1.242 follower',px+PW/2,py+550);
-    ctx.fillStyle='#333';ctx.font='400 32px Newsreader';['I numeri che contano, su dati','ufficiali. Ogni giorno','«Il dato di oggi», con la fonte.'].forEach(function(r,i){ctx.fillText(r,px+PW/2,py+660+i*46);});
+    ctx.fillStyle='#333';ctx.font='400 32px Newsreader';['I numeri che contano, su dati','ufficiali. Ogni mattina','«Il dato di oggi».'].forEach(function(r,i){ctx.fillText(r,px+PW/2,py+660+i*46);});
     ctx.fillStyle='#eef1f5';rrect(px+45,py+840,PW-90,170,24);ctx.fill();ctx.save();rrect(px+45,py+840,PW-90,170,24);ctx.clip();if(POST.naturalWidth)ctx.drawImage(POST,px+45,py+840-120,PW-90,(PW-90)*1920/1080);ctx.restore();
     // pulsante
     var bw=PW-90,bx=px+45,by=py+PH-210,tap=t-bt(50),fatto=tap>0,pr=1-.06*Math.sin(Math.PI*cl((tap+.1)/.25));
@@ -135,7 +135,7 @@ function frame(f){
     slam('AL CANALE',bt(49),t,W/2,1790,900,110,NAVY);
     if(t>bt(52)-.017){var e2=snap((t-bt(52)+.017)/.15);ctx.fillStyle=hexA('#25D366',.94);ctx.fillRect(0,H*(1-e2),W,H*e2);}
     slam('IL DATO È TRATTO™',bt(52),t,W/2,H/2-80,940,170,BIANCO);
-    slam('UN DATO AL GIORNO, CON LA FONTE',bt(53),t,W/2,H/2+140,900,60,NAVY,{peso:800,da:1.4});
+    slam('OGNI MATTINA UN DATO UFFICIALE SULL\'ITALIA',bt(53),t,W/2,H/2+140,900,60,NAVY,{peso:800,da:1.4});
   } else { // ── chiusura: sull'ultimo colpo cade Troisi Ricerche
     piena('#FFFFFF');righe(NAVY,.025,t);
     var e=snap((t-bt(54)+.034)/.12),sc=1.9-.9*e;if(t-bt(54)>0&&t-bt(54)<.2)sc*=1+.035*Math.sin((t-bt(54))/.2*Math.PI);

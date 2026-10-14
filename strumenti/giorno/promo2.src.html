@@ -87,7 +87,7 @@ function telefono(t,y0){
   font(44,800);ctx.fillStyle='#000';ctx.fillText('Il dato è tratto™',PXc,sy+470);
   font(28,500);ctx.fillStyle='#667085';ctx.fillText('Canale · 1 mila follower',PXc,sy+515);
   ctx.font='400 28px Newsreader';ctx.fillStyle='#344054';
-  ['I numeri che contano, su dati ufficiali.','Ogni giorno «Il dato di oggi», con la fonte.','Ogni martedì la settimana in numeri.'].forEach(function(r,j){ctx.fillText(r,PXc,sy+575+j*38);});
+  ['I numeri che contano, su dati ufficiali.','Ogni mattina «Il dato di oggi».','Ogni martedì la settimana in numeri.'].forEach(function(r,j){ctx.fillText(r,PXc,sy+575+j*38);});
   // pulsante Iscriviti → Iscritto
   var tp=t-T_TAP, fatto=tp>0.12, bw=sw-100, bx=PXc-bw/2, by=sy+700, pr=1-.04*Math.sin(Math.PI*cl(tp/.25));
   ctx.save();ctx.translate(PXc,by+45);ctx.scale(pr,pr);ctx.translate(-PXc,-(by+45));
@@ -146,7 +146,7 @@ function frame(f){
     sfondo([233,240,250],[247,249,252]);puntini(.6);
     var a=snap((t-T_E)/.5);ctx.globalAlpha=a;
     ctx.save();ctx.translate(W/2,820);ctx.scale(.62,.62);titolo(99);ctx.restore();
-    ctx.textAlign='center';ctx.font='400 48px Newsreader';ctx.fillStyle=rgb(TENUE);ctx.fillText('Ogni giorno un numero sull\'Italia, con la fonte.',W/2,1060);
+    ctx.textAlign='center';ctx.font='400 48px Newsreader';ctx.fillStyle=rgb(TENUE);ctx.fillText('Ogni mattina un dato ufficiale sull\'Italia.',W/2,1060);
     var lg=document.getElementById('logo'),lh=120,lw=lg.naturalWidth*lh/lg.naturalHeight;ctx.drawImage(LOGO(),W/2-lw/2,1220,lw,lh);
     font(40,700);ctx.fillStyle=rgb(NAVY);ctx.fillText('troisiricerche.net',W/2,1440);ctx.globalAlpha=1;
   }
