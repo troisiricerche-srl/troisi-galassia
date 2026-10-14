@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="it"><head><meta charset="utf-8">
-<!-- Promo «Il dato di oggi» (stato WhatsApp / storie): «Il dato è tratto™» → «Il dato di oggi», che si sdoppia in 7 schede, una per giorno, ciascuna nel suo colore. 1080×1920. -->
+<!-- Promo «Il dato di oggi» (stati / storie), 1080×1920, a tempo con la musica (120 bpm, 1 battuta = 0,5 s).
+     0–3 s «Il dato è tratto™» → «Il dato di oggi»; 3,5–11 s le 7 schede a tutto schermo, una dopo l'altra (carosello);
+     11–12,5 s le schede si affiancano tutte; 12,5–16 s invito al canale. -->
 <style>
 @font-face{font-family:Archivo;src:url(archivo.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%}
 @font-face{font-family:Newsreader;src:url(news.woff2) format("woff2");font-weight:400}
@@ -14,6 +16,7 @@ var G=window.GIORNI||[];
 function hex(h){h=h.replace('#','');return [parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)];}
 function cl(x){return x<0?0:x>1?1:x;} function ease(t){t=cl(t);return t*t*(3-2*t);}
 function bez(t){t=cl(t);var a=0,b=1;for(var i=0;i<22;i++){var m=(a+b)/2,x=3*m*(1-m)*(1-m)*.2+3*m*m*(1-m)*.2+m*m*m;if(x<t)a=m;else b=m;}var u=(a+b)/2;return 3*u*(1-u)*(1-u)*.8+3*u*u*(1-u)+u*u*u;}
+function snap(t){t=cl(t);return 1-Math.pow(1-t,4);}
 function mix(a,b,t){return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];}
 function rgb(c,al){return 'rgba('+(c[0]|0)+','+(c[1]|0)+','+(c[2]|0)+','+(al==null?1:al)+')';}
 function font(px,peso){ctx.font=(peso||900)+' '+px+'px Archivo';}
@@ -21,9 +24,9 @@ var NAVY=[11,31,58], TENUE=[84,98,122], ARANCIO=[245,166,35], PILL2=[0,51,102];
 var seed=5; function rnd(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646;}
 var P=[];for(var i=0;i<900;i++)P.push({x:rnd()*W,y:rnd()*H,vx:(rnd()-.5)*.6,vy:(rnd()-.5)*.6});
 
-/* tempi */
-var T_CAMBIO=1.6, ST_OUT=.018, ST_IN=.022, TR=.5, OP=.4, VECCHIA='è tratto', NUOVA='di oggi';
-var T_SWAP=T_CAMBIO+.26+VECCHIA.length*ST_OUT, T_SU=3.6, T_CARTE=3.9, T_TESTI=5.6, T_CTA=6.6, TOT=12.5;
+/* tempi (allineati alle battute: 0,5 s) */
+var T_CAMBIO=1.5, ST_OUT=.018, ST_IN=.022, TR=.5, OP=.4, VECCHIA='è tratto', NUOVA='di oggi';
+var T_SWAP=T_CAMBIO+.26+VECCHIA.length*ST_OUT, T_SU=3.0, T_C0=3.5, SLOT=1.0, T_GRID=11.0, T_CTA=12.5, TOT=16.0;
 var FRAMES=Math.round(TOT*FPS), FS=150, AV={};
 function av(str){if(AV[str])return AV[str];font(FS);var o=[];for(var i=0;i<=str.length;i++)o.push(ctx.measureText(str.slice(0,i)).width);return AV[str]=o;}
 
@@ -39,40 +42,81 @@ function titolo(t){
   var tm=1-ease((t-T_CAMBIO)/.35);if(tm>0){font(FS*.34,800);ctx.globalAlpha=tm;ctx.fillStyle=rgb(NAVY);ctx.fillText('™',px+wp+8,py+FS*.42);ctx.globalAlpha=1;}
 }
 
-/* schede: 2 colonne × 4 righe, la settima al centro */
-var CW=450,CH=210,GX=40,GY=30,X0=(W-2*CW-GX)/2,Y0=470;
-function posto(i){var r=Math.floor(i/2),c=i%2;if(i===6)return {x:(W-CW)/2,y:Y0+3*(CH+GY)};return {x:X0+c*(CW+GX),y:Y0+r*(CH+GY)};}
-function scheda(i,t){
-  var g=G[i],st=T_CARTE+i*.16,u=bez((t-st)/.85);if(t<st)return;
-  var p=posto(i),cx0=W/2-CW/2,cy0=270-CH/2,x=cx0+(p.x-cx0)*u,y=cy0+(p.y-cy0)*u,s=.3+.7*u, rr=30+(CH/2-30)*(1-u);
-  var SF=hex(g.sfondo),CS=hex(g.colScuro),bg=mix([0,51,102],SF,ease((t-st-.2)/.6));
-  ctx.save();ctx.translate(x+CW/2,y+CH/2);ctx.scale(s,s);ctx.translate(-CW/2,-CH/2);ctx.globalAlpha=ease((t-st)/.25);
-  ctx.shadowColor='rgba(11,31,58,.10)';ctx.shadowBlur=24;ctx.shadowOffsetY=8;
-  ctx.fillStyle=rgb(bg);ctx.beginPath();ctx.roundRect(0,0,CW,CH,rr);ctx.fill();ctx.shadowColor='transparent';
-  var at=ease((t-st-.35)/.4);ctx.globalAlpha*=1;
-  // pillolina «di oggi»
-  font(30,800);var pw=ctx.measureText('di oggi').width+36;ctx.fillStyle=rgb(CS,at);ctx.beginPath();ctx.roundRect(28,26,pw,46,23);ctx.fill();
-  ctx.fillStyle=rgb([255,255,255],at);ctx.textAlign='left';ctx.fillText('di oggi',46,60);
-  font(56,800);ctx.fillStyle=rgb(CS,at);ctx.fillText(g.giorno,28,138);
-  ctx.font='400 32px Newsreader';ctx.fillStyle=rgb(NAVY,at);ctx.fillText(g.portale,30,184);
+/* una scheda grande (origine al centro), larghezza CW, altezza CHh */
+var CW=780, CHh=1180;
+function scheda(g,i,t,local){ // local: 0..1 entrata dei contenuti
+  var SF=hex(g.sfondo),FO=hex(g.fondo),CS=hex(g.colScuro),C=hex(g.col);
+  var x=-CW/2,y=-CHh/2;
+  ctx.shadowColor='rgba(11,31,58,.16)';ctx.shadowBlur=50;ctx.shadowOffsetY=20;
+  var gr=ctx.createLinearGradient(0,y,0,y+CHh);gr.addColorStop(0,rgb(SF));gr.addColorStop(1,rgb(FO));
+  ctx.fillStyle=gr;ctx.beginPath();ctx.roundRect(x,y,CW,CHh,56);ctx.fill();ctx.shadowColor='transparent';
+  ctx.save();ctx.beginPath();ctx.roundRect(x,y,CW,CHh,56);ctx.clip();
+  // trama di puntini nel colore del giorno
+  for(var r=0;r<22;r++)for(var c=0;c<15;c++){var px=x+40+c*50,py=y+330+r*36,d=Math.hypot(px-x-CW*.7,py-y-560);if(d<330){ctx.fillStyle=rgb(C,.30*(1-d/330));ctx.beginPath();ctx.arc(px,py,4,0,6.283);ctx.fill();}}
   ctx.restore();
+  var a=snap(local);
+  // numero d'ordine e pillola
+  font(34,800);ctx.textAlign='left';ctx.fillStyle=rgb(CS,.55*a);ctx.fillText((i+1)+' / 7',x+60,y+100);
+  font(40,800);var pw=ctx.measureText('Il dato di oggi').width+56;ctx.fillStyle=rgb(CS,a);ctx.beginPath();ctx.roundRect(x+60,y+140,pw,70,35);ctx.fill();
+  ctx.fillStyle=rgb([255,255,255],a);ctx.fillText('Il dato di oggi',x+88,y+188);
+  // giorno grande
+  var dy=40*(1-a),fs=150;font(fs,900);while(ctx.measureText(g.giorno).width>CW-112&&fs>60){fs-=4;font(fs,900);}ctx.fillStyle=rgb(CS,a);ctx.fillText(g.giorno,x+56,y+760+dy);
+  // osservatorio
+  ctx.font='400 64px Newsreader';ctx.fillStyle=rgb(NAVY,a);
+  var parole=g.portale.split(' '),riga='',yy=y+860+dy;parole.forEach(function(w){var p=riga?riga+' '+w:w;if(ctx.measureText(p).width>CW-120&&riga){ctx.fillText(riga,x+60,yy);yy+=74;riga=w;}else riga=p;});ctx.fillText(riga,x+60,yy);
+  // sito
+  font(44,700);var sw=ctx.measureText(g.sito).width+84;ctx.fillStyle=rgb([255,255,255],.92*a);ctx.beginPath();ctx.roundRect(x+60,y+CHh-160,sw,84,42);ctx.fill();
+  ctx.fillStyle=rgb(CS,a);ctx.beginPath();ctx.arc(x+100,y+CHh-118,14,0,6.283);ctx.lineWidth=4;ctx.strokeStyle=rgb(CS,a);ctx.stroke();ctx.beginPath();ctx.ellipse(x+100,y+CHh-118,6,14,0,0,6.283);ctx.stroke();ctx.beginPath();ctx.moveTo(x+86,y+CHh-118);ctx.lineTo(x+114,y+CHh-118);ctx.stroke();ctx.fillText(g.sito,x+132,y+CHh-104);
+}
+
+/* scheda piccola per la griglia finale */
+var gw=450,gh=210,GX=40,GY=30,X0=(W-2*gw-GX)/2,Y0=470;
+function posto(i){var r=Math.floor(i/2),c=i%2;if(i===6)return {x:(W-gw)/2,y:Y0+3*(gh+GY)};return {x:X0+c*(gw+GX),y:Y0+r*(gh+GY)};}
+function piccola(g,i,a){
+  var SF=hex(g.sfondo),CS=hex(g.colScuro);
+  ctx.fillStyle=rgb(SF);ctx.beginPath();ctx.roundRect(0,0,gw,gh,30);ctx.fill();
+  ctx.textAlign='left';font(56,800);ctx.fillStyle=rgb(CS,a);ctx.fillText(g.giorno,28,80);
+  ctx.font='400 30px Newsreader';ctx.fillStyle=rgb(NAVY,a);ctx.fillText(g.portale,30,124);
+  font(28,700);ctx.fillStyle=rgb(CS,a);ctx.fillText(g.sito,30,176);
 }
 
 function frame(f){
   var t=f/FPS;
-  var g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#E9F0FA');g.addColorStop(1,'#F7F9FC');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  var bg=ctx.createLinearGradient(0,0,0,H);bg.addColorStop(0,'#E9F0FA');bg.addColorStop(1,'#F7F9FC');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
   ctx.fillStyle='rgba(11,31,58,.10)';for(var i=0;i<P.length;i++){var p=P[i];p.x=(p.x+p.vx+W)%W;p.y=(p.y+p.vy+H)%H;ctx.beginPath();ctx.arc(p.x,p.y,1.6,0,6.283);ctx.fill();}
-  var u=bez((t-T_SU)/.8),sc=1-.56*u,cy=930+(250-930)*u;
+  // titolo: grande, poi in alto
+  var u=bez((t-T_SU)/.6),sc=1-.62*u,cy=930+(170-930)*u;
   ctx.save();ctx.translate(W/2,cy);ctx.scale(sc,sc);titolo(t);ctx.restore();
-  var a=ease((t-T_TESTI)/.5);
-  if(a>0){ctx.globalAlpha=a;ctx.textAlign='center';ctx.font='400 40px Newsreader';ctx.fillStyle=rgb(TENUE);ctx.fillText('Ogni giorno un numero dai nostri osservatori, con la fonte',W/2,410);ctx.globalAlpha=1;}
-  for(var i=0;i<G.length;i++)scheda(i,t);
+
+  // carosello delle 7 schede
+  if(t>=T_C0-.4&&t<T_GRID+.9){
+    var k=Math.floor((t-T_C0)/SLOT), loc=(t-T_C0)-k*SLOT, pos;
+    if(t<T_C0){pos=-1+snap((t-T_C0+.4)/.4);} // la prima entra da destra
+    else if(t<T_C0+7*SLOT){pos=k+(k<6?snap((loc-.62)/.38):0);} // resta ferma, poi scatta alla successiva sul battere
+    else pos=6;
+    var gridU=bez((t-T_GRID)/.9);
+    for(var i=0;i<7;i++){
+      var d=i-pos, cx=W/2+d*(CW+60), s=1-.12*Math.min(1,Math.abs(d)), cyC=1060;
+      var dest=posto(i), gx=dest.x+gw/2, gy=dest.y+gh/2;
+      var X=cx+(gx-cx)*gridU, Y=cyC+(gy-cyC)*gridU, S=s+(gw/CW-s)*gridU;
+      if(X<-CW||X>W+CW)continue;
+      ctx.save();ctx.translate(X,Y);ctx.scale(S,S);
+      var ent=t<T_C0?0:cl((t-T_C0-i*SLOT+.05)/.5);
+      if(gridU<.98)scheda(G[i],i,t,1);
+      ctx.restore();
+    }
+  }
+  if(t>=T_GRID+.9){
+    for(var i=0;i<7;i++){var p=posto(i);ctx.save();ctx.translate(p.x,p.y);piccola(G[i],i,1);ctx.restore();}
+  }
+  var a=ease((t-T_GRID-.6)/.5);
+  if(a>0){ctx.globalAlpha=a;ctx.textAlign='center';ctx.font='400 40px Newsreader';ctx.fillStyle=rgb(TENUE);ctx.fillText('7 giorni, 7 osservatori: un dato al giorno, con la fonte',W/2,400);ctx.globalAlpha=1;}
   var c=ease((t-T_CTA)/.5);
   if(c>0){ctx.globalAlpha=c;ctx.textAlign='center';
-    var bx=W/2-400,by=1500;ctx.fillStyle='#25D366';ctx.beginPath();ctx.roundRect(bx,by,800,120,60);ctx.fill();
-    ctx.fillStyle='#04261A';font(40,800);ctx.fillText('Iscriviti al canale WhatsApp',W/2,by+56);font(32,700);ctx.fillText('«Il dato è tratto™»',W/2,by+98);
-    font(30,600);ctx.fillStyle=rgb(TENUE);ctx.fillText('Ogni martedì: la settimana in numeri',W/2,1690);
-    ctx.globalAlpha=1;}
+    var bx=W/2-400,by=1500,pul=1+.03*Math.sin((t-T_CTA)*Math.PI*4);
+    ctx.save();ctx.translate(W/2,by+60);ctx.scale(pul,pul);ctx.fillStyle='#25D366';ctx.beginPath();ctx.roundRect(-400,-60,800,120,60);ctx.fill();
+    ctx.fillStyle='#04261A';font(40,800);ctx.fillText('Iscriviti al canale WhatsApp',0,-4);font(32,700);ctx.fillText('«Il dato è tratto™»',0,38);ctx.restore();
+    font(30,600);ctx.fillStyle=rgb(TENUE);ctx.fillText('Ogni martedì: la settimana in numeri',W/2,1690);ctx.globalAlpha=1;}
   var lg=document.getElementById('logo'),lh=64,lw=lg.naturalWidth*lh/lg.naturalHeight;
   ctx.drawImage(LOGO(),W-60-lw,H-160,lw,lh);
   ctx.textAlign='left';font(24,500);ctx.fillStyle='#5E7091';ctx.fillText('Troisi Ricerche · Bari · Roma · Milano',60,H-112);
