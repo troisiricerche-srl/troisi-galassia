@@ -73,7 +73,7 @@ function apertura(t){
     var u=t-CAD, seg=[['aeri',0],['podc',4*B],['woma',8*B]],k=u<4*B?0:u<8*B?1:2;
     clip(seg[k][0],CAD+seg[k][1],t,.07,.45);
     if(k===0){pillola(t,W/2,H/2-60,1.2,null);slam('IL PODCAST',CAD+B,t,W/2,H/2+120,900,90,ARANCIO,{peso:800,da:1.5});slam('di Troisi Ricerche · Bari · Roma · Milano',CAD+2*B,t,W/2,H/2+210,1200,44,BIANCO,{peso:600,da:1.2});}
-    if(k===1){slam('CON',CAD+4*B,t,W/2,H/2-170,400,70,ARANCIO,{peso:800});slam('ANDREA TROISI',CAD+5*B,t,W/2,H/2-30,1500,170,BIANCO);slam('CLAUDIO  ·  PEPE',CAD+6*B,t,W/2,H/2+140,1300,120,ARANCIO);}
+    if(k===1){slam('CON',CAD+4*B,t,W/2,H/2-170,400,70,ARANCIO,{peso:800});slam('ANDREA TROISI',CAD+5*B,t,W/2,H/2-30,1500,170,BIANCO);slam('STATISTICO E GIORNALISTA',CAD+6*B,t,W/2,H/2+140,1300,96,ARANCIO);}
     if(k===2){slam('I NUMERI',CAD+8*B,t,W*.5,H/2-100,1400,200,BIANCO);slam('DELLA SETTIMANA',CAD+9*B,t,W*.5,H/2+90,1600,150,ARANCIO);}
     onda(t,H-110,'rgba(255,255,255,.55)',1);
     [0,4,8].forEach(function(q){lampo(t,CAD+q*B,.7);});
