@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8">
+<!-- Promo «Il dato di oggi» v4 «stomp» (stati / storie / Reel), 1080×1920, 27,1 s.
+     Tipografia cinetica stile «stomp opener»: ogni parola cade su un colpo del brano «Claps» (Envato, 126 bpm).
+     Griglia dei battiti misurata sul file audio: primo colpo a P0, un battito = B secondi (vedi window.P0 / window.BEAT).
+     0–15 intro (pestata-pestata-battimano-battimano) · 16–43 i 7 giorni, 4 battiti ciascuno · 44–47 riepilogo
+     48–53 telefono: canale, tocco su «Iscriviti» · 54 colpo finale e chiusura.
+     Le risorse Envato (musica, promo2/*) NON vanno nel repository. -->
+<style>
+@font-face{font-family:Archivo;src:url(archivo.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%}
+@font-face{font-family:Newsreader;src:url(news.woff2) format("woff2");font-weight:400}
+html,body{margin:0;background:#0B1F3A}canvas{display:block}
+</style></head><body>
+<canvas id="cv" width="1080" height="1920"></canvas>
+<img id="logo" src="%%LOGO%%" alt="" style="display:none">
+<script>
+var W=1080,H=1920,cv=document.getElementById('cv'),ctx=cv.getContext('2d'),FPS=30;
+var G=window.GIORNI||[];
+var B=window.BEAT||.4765, P0=window.P0||.21, DUR=window.DURATA||27.14;
+var FRAMES=Math.round(DUR*FPS);
+var NAVY='#0B1F3A', ARANCIO='#F5A623', WA='#25D366', BIANCO='#FFFFFF';
+function img(src){var i=new Image();i.src=src;return i;}
+var SITI=[];for(var k=1;k<=7;k++)SITI.push(img('promo2/sito'+k+'.jpg'));
+var POST=img('promo2/post.jpg');
+function cl(x){return x<0?0:x>1?1:x;}
+function snap(t){t=cl(t);return 1-Math.pow(1-t,4);}
+function ease(t){t=cl(t);return t*t*(3-2*t);}
+function bt(k){return P0+k*B;}            // tempo del battito k
+function hexA(h,a){h=h.replace('#','');return 'rgba('+parseInt(h.substr(0,2),16)+','+parseInt(h.substr(2,2),16)+','+parseInt(h.substr(4,2),16)+','+a+')';}
+
+/* parola che «cade» sul colpo: arriva grande e sfocata, si pianta in 0,09 s, piccolo rimbalzo */
+function slam(txt,t0,t,x,y,maxW,px,col,opt){
+  opt=opt||{};var dt=t-t0; if(dt<-0.034)return;
+  var u=snap((dt+.034)/.12), s=(opt.da||1.9)-((opt.da||1.9)-1)*u;
+  if(dt>0&&dt<.2)s*=1+.035*Math.sin(dt/.2*Math.PI);
+  ctx.save();ctx.translate(x,y);if(opt.rot)ctx.rotate(opt.rot);
+  ctx.font=(opt.peso||900)+' '+px+'px Archivo';var w=ctx.measureText(txt).width;
+  var f=Math.min(1,maxW/w);ctx.scale(s*f,s*f);
+  ctx.globalAlpha=cl((dt+.034)/.05);ctx.fillStyle=col;ctx.textAlign=opt.al||'center';ctx.textBaseline='middle';
+  ctx.fillText(txt,0,0);ctx.restore();ctx.globalAlpha=1;
+}
+/* scossa della telecamera sui colpi forti */
+function scossa(t,ks,amp){var d=0;for(var i=0;i<ks.length;i++){var dt=t-bt(ks[i]);if(dt>=0&&dt<.18)d+=amp*(1-dt/.18)*Math.sin(dt*90);}return d;}
+function piena(c){ctx.fillStyle=c;ctx.fillRect(-40,-40,W+80,H+80);}
+function righe(c,a,t){ctx.save();ctx.strokeStyle=hexA(c,a);ctx.lineWidth=26;var o=(t*160)%120;for(var x=-H;x<W+H;x+=120){ctx.beginPath();ctx.moveTo(x+o,0);ctx.lineTo(x+o-H*.6,H);ctx.stroke();}ctx.restore();}
+function logoNavy(){if(logoNavy.c)return logoNavy.c;var im=document.getElementById('logo'),o=document.createElement('canvas');o.width=im.naturalWidth;o.height=im.naturalHeight;var c=o.getContext('2d');c.drawImage(im,0,0);var d=c.getImageData(0,0,o.width,o.height);for(var i=0;i<d.data.length;i+=4){if(d.data[i]>200&&d.data[i+1]>200&&d.data[i+2]>200){d.data[i]=11;d.data[i+1]=31;d.data[i+2]=58;}}c.putImageData(d,0,0);return logoNavy.c=o;}
+function logo(cx,cy,h,bianco){var im=bianco?document.getElementById('logo'):logoNavy(),w=im.width*h/im.height;ctx.drawImage(im,cx-w/2,cy-h/2,w,h);}
+function rrect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+
+/* pillola «Il dato è tratto™» → «Il dato di oggi» con lo scambio di lettere del sito */
+function pillola(t,tFlip,cy,scala){
+  ctx.save();ctx.translate(W/2,cy);ctx.scale(scala,scala);
+  var VE='è tratto',NU='di oggi',FS=96;ctx.font='900 '+FS+'px Archivo';ctx.textBaseline='alphabetic';
+  var wIl=ctx.measureText('Il dato ').width,wV=ctx.measureText(VE).width,wN=ctx.measureText(NU).width;
+  var u=ease((t-tFlip)/.45),wp=(wV+(wN-wV)*u)+70,tot=wIl+wp,x0=-tot/2,hP=FS*1.25;
+  ctx.fillStyle=BIANCO;ctx.textAlign='left';ctx.fillText('Il dato ',x0,FS*.36);
+  ctx.fillStyle=u<.5?ARANCIO:'#003366';rrect(x0+wIl,-hP/2,wp,hP,hP/2);ctx.fill();if(u>=.5){ctx.lineWidth=4;ctx.strokeStyle='rgba(255,255,255,.55)';ctx.stroke();}
+  ctx.save();rrect(x0+wIl,-hP/2,wp,hP,hP/2);ctx.clip();
+  var tSw=tFlip+.18;
+  for(var k=0;k<VE.length;k++){var e=snap((t-tFlip-k*.018)/.35);if(t<tSw+.2){ctx.globalAlpha=1-cl((t-tFlip-k*.018)/.3);ctx.fillStyle=NAVY;ctx.fillText(VE[k],x0+wIl+35+ctx.measureText(VE.slice(0,k)).width,FS*.36-hP*e);}}
+  for(var k=0;k<NU.length;k++){var e=snap((t-tSw-k*.022)/.35);ctx.globalAlpha=cl((t-tSw-k*.022)/.25);ctx.fillStyle=BIANCO;ctx.fillText(NU[k],x0+wIl+35+ctx.measureText(NU.slice(0,k)).width,FS*.36+hP*(1-e));}
+  ctx.restore();ctx.globalAlpha=1;
+  if(t<tFlip+.2){ctx.globalAlpha=1-cl((t-tFlip)/.2);ctx.font='800 34px Archivo';ctx.fillStyle=BIANCO;ctx.fillText('™',x0+wIl+wp+8,-FS*.2);ctx.globalAlpha=1;}
+  ctx.restore();
+}
+
+function frame(f){
+  var t=f/FPS, k=Math.floor((t-P0+.017)/B); // battito corrente (mezzo fotogramma di anticipo: il cambio cade sul colpo)
+  ctx.save();
+  var sx=scossa(t,[0,4,8,12,16,17,19,21,22,23,25,26,27,29,30,31,33,35,37,39,41,43,48,50,52,54],14);ctx.translate(sx,sx*.4);
+  if(k<12){ // ── INTRO: tre frasi, pestata-pestata-battimano-battimano
+    var fr=[['IL','DATO','È TRATTO™'],['OGNI','GIORNO','UN NUMERO'],['SULL\'','ITALIA','CON LA FONTE']][Math.max(0,Math.floor(k/4))];
+    var b0=Math.max(0,Math.floor(k/4))*4, inv=(k%4)>=2;
+    piena(inv?ARANCIO:NAVY); righe(inv?'#FFFFFF':'#FFFFFF',inv?.10:.04,t);
+    var cA=inv?NAVY:BIANCO, cB=inv?BIANCO:ARANCIO;
+    slam(fr[0],bt(b0),t,W/2,560,900,260,cA);
+    slam(fr[1],bt(b0+1),t,W/2,860,980,300,cA);
+    slam(fr[2],bt(b0+2),t,W/2,1180,960,190,cB,{da:2.4});
+    if(t>=bt(b0+3)-.017){var dt=t-bt(b0+3);ctx.fillStyle=inv?NAVY:ARANCIO;ctx.fillRect(W/2-380*snap((dt+.017)/.15),1330,760*snap((dt+.017)/.15),18);}
+  } else if(k<16){ // ── la pillola cambia sul battimano
+    piena(NAVY);righe('#FFFFFF',.04,t);
+    var s=snap((t-bt(12)+.017)/.15)*0+1; slam('',bt(12),t,0,0,1,1,BIANCO);
+    var sc=t<bt(12)+.15?1.9-.9*snap((t-bt(12)+.017)/.15):1;
+    pillola(t,bt(14),900,1.2*sc);
+    if(t>bt(15)-.017){slam('OGNI GIORNO · 7 OSSERVATORI',bt(15),t,W/2,1180,900,58,ARANCIO,{peso:800,da:1.4});}
+  } else if(k<44){ // ── I 7 GIORNI: 4 battiti ciascuno
+    var g=Math.floor((k-16)/4), q=(k-16)%4, d=G[g]||{}, b0=16+g*4, col=d.colScuro||NAVY;
+    if(q===0){ // giorno su tinta chiara
+      piena(d.sfondo||'#ddd');righe(col,.06,t);
+      slam((d.giorno||'').toUpperCase(),bt(b0),t,W/2,H/2,960,240,col);
+      slam(String(g+1)+' / 7',bt(b0),t,W/2,H/2+230,600,60,col,{peso:800,da:1.2});
+    } else if(q===1){ // nome del portale su tinta piena
+      piena(col);righe('#FFFFFF',.07,t);
+      slam((d.giorno||'').toUpperCase(),bt(b0),t,W/2,520,700,90,BIANCO,{peso:800,da:1});
+      slam(d.portale||'',bt(b0+1),t,W/2,H/2,960,170,BIANCO);
+    } else { // il sito scorre in una scheda inclinata, poi l'indirizzo pesta sotto
+      piena(d.fondo||'#f4f4f4');righe(col,.05,t);
+      var im=SITI[g],u=cl((t-bt(b0+2))/(2*B)),cw=760,ch=950,
+          ent=snap((t-bt(b0+2)+.017)/.18),y=H/2-120+(1-ent)*900;
+      ctx.save();ctx.translate(W/2,y);ctx.rotate((-3+((g%2)*6))*Math.PI/180*(1-.5*ent));
+      ctx.shadowColor='rgba(0,0,0,.25)';ctx.shadowBlur=50;ctx.shadowOffsetY=20;
+      ctx.fillStyle='#fff';rrect(-cw/2,-ch/2,cw,ch,28);ctx.fill();ctx.shadowColor='transparent';
+      ctx.save();rrect(-cw/2,-ch/2,cw,ch,28);ctx.clip();
+      if(im&&im.naturalWidth){var iw=cw,ih=im.naturalHeight*cw/im.naturalWidth,sy=-ch/2-(ih-ch)*ease(u);ctx.drawImage(im,-cw/2,sy,iw,ih);}
+      ctx.restore();ctx.lineWidth=10;ctx.strokeStyle=col;rrect(-cw/2,-ch/2,cw,ch,28);ctx.stroke();ctx.restore();
+      if(t>bt(b0+3)-.017){ctx.fillStyle=col;var e=snap((t-bt(b0+3)+.017)/.15);rrect(W/2-430*e,1440,860*e,130,65);ctx.fill();}
+      slam(d.sito||'',bt(b0+3),t,W/2,1507,780,70,BIANCO,{peso:800,da:1.5});
+    }
+  } else if(k<48){ // ── riepilogo: le 7 tinte a strisce, poi WhatsApp
+    var n=Math.min(7,Math.floor((t-bt(44)+.017)/(B/2))+1);
+    for(var i=0;i<7;i++){ctx.fillStyle=i<n?((G[i]||{}).colScuro||NAVY):NAVY;ctx.fillRect(0,i*H/7,W,H/7+1);}
+    slam('7 GIORNI',bt(44),t,W/2,700,960,230,BIANCO);
+    slam('7 OSSERVATORI',bt(45),t,W/2,960,960,150,BIANCO);
+    if(t>bt(46)-.017){var e=snap((t-bt(46)+.017)/.15);ctx.fillStyle=WA;ctx.fillRect(0,H/2-H*e/2,W,H*e);}
+    slam('1 CANALE',bt(46),t,W/2,H/2-60,960,230,BIANCO);
+    slam('WHATSAPP',bt(47),t,W/2,H/2+180,800,150,NAVY);
+  } else if(k<54){ // ── telefono: il canale, tocco su «Iscriviti»
+    piena('#E9F0FA');righe(NAVY,.035,t);
+    slam('ISCRIVITI',bt(48),t,W/2,250,900,150,NAVY);
+    var e=snap((t-bt(48)+.017)/.3),PW=620,PH=1240,px=W/2-PW/2,py=420+(1-e)*1400;
+    ctx.save();ctx.shadowColor='rgba(0,0,0,.3)';ctx.shadowBlur=60;ctx.fillStyle='#111';rrect(px-22,py-22,PW+44,PH+44,90);ctx.fill();ctx.restore();
+    ctx.save();rrect(px,py,PW,PH,70);ctx.clip();ctx.fillStyle='#fff';ctx.fillRect(px,py,PW,PH);
+    ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle='#8a8f98';ctx.font='600 30px Archivo';ctx.fillText('Info canale',px+PW/2,py+110);
+    ctx.fillStyle=NAVY;ctx.beginPath();ctx.arc(px+PW/2,py+300,120,0,6.283);ctx.fill();logo(px+PW/2,py+300,70,true);
+    ctx.fillStyle='#111';ctx.font='800 50px Archivo';ctx.fillText('Il dato è tratto™',px+PW/2,py+500);
+    ctx.fillStyle='#667';ctx.font='500 30px Archivo';ctx.fillText('Canale · 1.242 follower',px+PW/2,py+550);
+    ctx.fillStyle='#333';ctx.font='400 32px Newsreader';['I numeri che contano, su dati','ufficiali. Ogni giorno','«Il dato di oggi», con la fonte.'].forEach(function(r,i){ctx.fillText(r,px+PW/2,py+660+i*46);});
+    ctx.fillStyle='#eef1f5';rrect(px+45,py+840,PW-90,170,24);ctx.fill();ctx.save();rrect(px+45,py+840,PW-90,170,24);ctx.clip();if(POST.naturalWidth)ctx.drawImage(POST,px+45,py+840-120,PW-90,(PW-90)*1920/1080);ctx.restore();
+    // pulsante
+    var bw=PW-90,bx=px+45,by=py+PH-210,tap=t-bt(50),fatto=tap>0,pr=1-.06*Math.sin(Math.PI*cl((tap+.1)/.25));
+    ctx.save();ctx.translate(bx+bw/2,by+50);ctx.scale(pr,pr);ctx.fillStyle=fatto?'#E7F8EE':WA;rrect(-bw/2,-50,bw,100,50);ctx.fill();
+    ctx.font='800 44px Archivo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=fatto?'#0E7A3A':BIANCO;ctx.fillText(fatto?'✓ Iscritto':'Iscriviti',0,2);ctx.restore();
+    if(tap>-.5&&tap<.6){var a=tap<0?cl((tap+.5)/.3):1-cl(tap/.6);ctx.globalAlpha=a;ctx.fillStyle='rgba(30,30,30,.35)';ctx.beginPath();ctx.arc(bx+bw*.62,by+55,46+(tap>0?tap*120:0),0,6.283);ctx.fill();ctx.globalAlpha=1;}
+    ctx.restore();
+    slam('AL CANALE',bt(49),t,W/2,1790,900,110,NAVY);
+    if(t>bt(52)-.017){var e2=snap((t-bt(52)+.017)/.15);ctx.fillStyle=hexA('#25D366',.94);ctx.fillRect(0,H*(1-e2),W,H*e2);}
+    slam('FATTO.',bt(52),t,W/2,H/2-80,900,260,BIANCO);
+    slam('UN DATO AL GIORNO, CON LA FONTE',bt(53),t,W/2,H/2+140,900,60,NAVY,{peso:800,da:1.4});
+  } else { // ── chiusura sul colpo finale
+    piena('#F4F7FB');righe(NAVY,.03,t);
+    var e=snap((t-bt(54)+.017)/.2);
+    ctx.save();ctx.translate(W/2,0);ctx.scale(1+.5*(1-e),1+.5*(1-e));ctx.translate(-W/2,0);ctx.globalAlpha=cl(e*1.5);
+    ctx.fillStyle=NAVY;rrect(60,560,W-120,330,40);ctx.fill();pillola(99,0,725,.78);
+    ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.font='400 50px Newsreader';ctx.fillStyle='#54627A';ctx.fillText('Ogni giorno un numero sull\'Italia, con la fonte.',W/2,1010);
+    logo(W/2,1180,120,false);
+    ctx.font='800 46px Archivo';ctx.fillStyle=NAVY;ctx.fillText('Canale WhatsApp «Il dato è tratto™»',W/2,1390);
+    ctx.font='700 40px Archivo';ctx.fillStyle='#54627A';ctx.fillText('troisiricerche.net',W/2,1470);
+    ctx.restore();ctx.globalAlpha=1;
+  }
+  ctx.restore();
+  // lampo bianco sui cambi di sezione
+  [16,44,48,54].forEach(function(kk){var dt=t-bt(kk)+.03;if(dt>0&&dt<.1){ctx.fillStyle='rgba(255,255,255,'+(1-dt/.1)*.85+')';ctx.fillRect(0,0,W,H);}});
+  // logo discreto
+  var scuro=k<16||(k<44&&(k-16)%4===1)||(k>=44&&k<48);if(scuro){logo(W-150,H-110,50,true);}else if(k>=16&&k<44){logo(W-150,H-110,50,false);}
+}
+window.FRAMES=FRAMES;
+function caricata(i){return new Promise(function(r){i.complete&&i.naturalWidth?r():(i.onload=r,i.onerror=r);});}
+window.pronto=Promise.all([document.fonts.load('900 100px Archivo'),document.fonts.load('400 50px Newsreader'),caricata(document.getElementById('logo')),caricata(POST)].concat(SITI.map(caricata)));
+</script></body></html>
