@@ -1,7 +1,65 @@
-[{"data":"Lunedì · TroisiInsight","col":"#7EA6FF","sfondo":"#12306B"},
-{"data":"Martedì · CustomerPA™","col":"#FFB020","sfondo":"#4D3B05"},
-{"data":"Mercoledì · Benessere organizzativo","col":"#41DDA0","sfondo":"#0A4A3A"},
-{"data":"Giovedì · Digitalizzazione nella PA","col":"#46C9F2","sfondo":"#08415A"},
-{"data":"Venerdì · Dibattito pubblico","col":"#FF6F6F","sfondo":"#561A24"},
-{"data":"Sabato · Benessere digitale giovani","col":"#C9A7FF","sfondo":"#36215E"},
-{"data":"Domenica · Mappatura delle Competenze","col":"#F59AD0","sfondo":"#4E1838"}]
+{
+ "lunedì": {
+  "portale": "TroisiInsight",
+  "sito": "troisiinsight.it",
+  "chiaro": true,
+  "sfondo": "#CFE0FB",
+  "fondo": "#F4F8FE",
+  "col": "#7EA6FF",
+  "colScuro": "#1F5BC4"
+ },
+ "martedì": {
+  "portale": "CustomerPA™",
+  "sito": "customerpa.it",
+  "chiaro": true,
+  "sfondo": "#FBE6B0",
+  "fondo": "#FFFAEC",
+  "col": "#FFB020",
+  "colScuro": "#B9740A"
+ },
+ "mercoledì": {
+  "portale": "Benessere organizzativo",
+  "sito": "benessereorganizzativo.it",
+  "chiaro": true,
+  "sfondo": "#C9EFE0",
+  "fondo": "#F2FBF7",
+  "col": "#41DDA0",
+  "colScuro": "#0E8A64"
+ },
+ "giovedì": {
+  "portale": "Digitalizzazione nella PA",
+  "sito": "digitalizzazionenellapa.it",
+  "chiaro": true,
+  "sfondo": "#CBEBF7",
+  "fondo": "#F1FAFD",
+  "col": "#46C9F2",
+  "colScuro": "#0A7FA8"
+ },
+ "venerdì": {
+  "portale": "Dibattito pubblico",
+  "sito": "dibattito-pubblico.it",
+  "chiaro": true,
+  "sfondo": "#F9D3D7",
+  "fondo": "#FEF4F5",
+  "col": "#FF6F6F",
+  "colScuro": "#C93445"
+ },
+ "sabato": {
+  "portale": "Benessere digitale giovani",
+  "sito": "benesseredigitalegiovani.it",
+  "chiaro": true,
+  "sfondo": "#E3D6F7",
+  "fondo": "#F8F4FE",
+  "col": "#C9A7FF",
+  "colScuro": "#6B45B8"
+ },
+ "domenica": {
+  "portale": "Mappatura delle Competenze",
+  "sito": "mappaturadellecompetenze.it",
+  "chiaro": true,
+  "sfondo": "#F9D5E7",
+  "fondo": "#FEF4F9",
+  "col": "#F59AD0",
+  "colScuro": "#B83A7A"
+ }
+}
