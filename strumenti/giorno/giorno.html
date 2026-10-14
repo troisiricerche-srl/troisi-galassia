@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="it"><head><meta charset="utf-8">
-<!-- «Il dato di oggi» – video quotidiano 1080×1920 (Reel, LinkedIn, Facebook, WhatsApp).
+<!-- sfondo: colore del giorno (campo "sfondo" in dati.json), sfuma verso il blu notte in basso.
+     «Il dato di oggi» – video quotidiano 1080×1920 (Reel, LinkedIn, Facebook, WhatsApp).
      «Il dato [è tratto™]» → la pillola cambia parola in «di oggi» con lo stesso movimento del sito ildatoetratto.it
      (lettere che escono verso l'alto, una alla volta; le nuove entrano dal basso), poi i puntini compongono il numero. -->
 <style>
@@ -104,7 +105,8 @@ function frame(f){
     if(nf===2)forma(marchio(),f);}
   passo(f);
 
-  ctx.fillStyle='#050B17';ctx.fillRect(0,0,W,H);
+  if(D.sfondo){var SF=hex(D.sfondo),lg0=ctx.createLinearGradient(0,0,W*.35,H);lg0.addColorStop(0,rgb(SF));lg0.addColorStop(.55,rgb(mix(SF,[5,11,23],.55)));lg0.addColorStop(1,'#050B17');ctx.fillStyle=lg0;}else ctx.fillStyle='#050B17';
+  ctx.fillRect(0,0,W,H);
   var alone=ease((t-T_SWAP)/.8);
   if(alone>0){var g=ctx.createRadialGradient(W/2,t<T_SU?1000:710,40,W/2,t<T_SU?1000:710,640);g.addColorStop(0,rgb(TEMA,.13*alone));g.addColorStop(1,'rgba(5,11,23,0)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
   for(var i=0;i<N;i++){var p=P[i];ctx.fillStyle=rgb(p.r,p.a.toFixed(2));ctx.beginPath();ctx.arc(p.x,p.y,p.rad,0,6.283);ctx.fill();}
