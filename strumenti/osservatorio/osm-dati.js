@@ -208,7 +208,13 @@ bar.querySelector('.tg-sb-print').addEventListener('click',function(){window.pri
   OSM.elenco = async function () {
     if (!OSM.P) await OSM.init();
     const h = await H();
-    const ch = await fetch(`/?rest_route=/wp/v2/pages&parent=${OSM.pid}&per_page=100&status=publish&context=edit&_fields=id,slug,link,title,content`, { headers: h }).then(r => r.json());
+    let ch = [];
+    for (let pg = 1; pg < 50; pg++) {
+      const r = await fetch(`/?rest_route=/wp/v2/pages&parent=${OSM.pid}&per_page=100&page=${pg}&status=publish&context=edit&_fields=id,slug,link,title,content`, { headers: h });
+      if (!r.ok) break;
+      const j = await r.json(); ch = ch.concat(j);
+      if (j.length < 100) break;
+    }
     return ch.map(p => {
       const g = k => { const m = p.content.raw.match(new RegExp(`data-${k}="([^"]*)"`)); return m ? dec(m[1]) : ''; };
       return { id: p.id, link: p.link, slug: p.slug, title: dec(p.title.raw || p.title.rendered), fonte: g('fonte'), portale: g('portale'), etichetta: g('etichetta'), data: g('data'), sintesi: g('sintesi') };
