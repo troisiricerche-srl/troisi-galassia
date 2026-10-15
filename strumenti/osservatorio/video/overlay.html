@@ -1,0 +1,166 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:T;src:url(file:///root/.fonts/TitilliumWeb-Regular.ttf);font-weight:400}
+@font-face{font-family:T;src:url(file:///root/.fonts/TitilliumWeb-SemiBold.ttf);font-weight:600}
+@font-face{font-family:T;src:url(file:///root/.fonts/TitilliumWeb-Bold.ttf);font-weight:700}
+@font-face{font-family:T;src:url(file:///root/.fonts/TitilliumWeb-Black.ttf);font-weight:900}
+html,body{margin:0;background:transparent}
+</style></head>
+<body><canvas id="cv"></canvas>
+<script>
+// Sovrimpressioni del video di presentazione dell'Osservatorio sull'Innovazione del Mezzogiorno.
+// window.CONF = {W,H,fps,scene:[{tipo,da,a,...}],beats:[...],team:[{f,nome,ruolo}],pool:[path]} — tempi in secondi.
+const ROSSO = '#C83B2B', BLU = '#17324D', BIANCO = '#FFFFFF';
+const cv = document.getElementById('cv'); const C = window.CONF; cv.width = C.W; cv.height = C.H; const x = cv.getContext('2d');
+const V = C.H > C.W; const S = Math.min(C.W, C.H) / 1080;
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const eo = t => 1 - Math.pow(1 - cl(t), 3);
+const eio = t => { t = cl(t); return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+const eob = t => { t = cl(t); const c1 = 1.4, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); }; // con rimbalzo
+function pulse(t) { let best = 9; for (const b of C.beats) { const d = t - b; if (d >= 0 && d < best) best = d; } return Math.exp(-best * 6); }
+function font(w, px) { x.font = `${w} ${px * S}px T`; }
+function testo(s, px, w, colore, X, Y, align = 'left', alpha = 1, track = 0) {
+  font(w, px); x.fillStyle = colore; x.globalAlpha = alpha; x.textAlign = align; x.textBaseline = 'alphabetic';
+  x.letterSpacing = (track * S) + 'px'; x.fillText(s, X, Y); x.globalAlpha = 1; x.letterSpacing = '0px';
+}
+function sale(s, px, w, colore, X, Y, p, align = 'left', track = 0) {
+  font(w, px); const h = px * S * 1.25; x.save(); x.beginPath();
+  const mw = 4000; x.rect(align === 'center' ? X - mw / 2 : (align === 'right' ? X - mw : X), Y - h * .95, mw, h * 1.25); x.clip();
+  testo(s, px, w, colore, X, Y + (1 - eo(p)) * h, align, cl(p * 3), track); x.restore();
+}
+function logo(cx, cy, r, p, puls) {
+  x.save(); x.translate(cx, cy); const k = r / 50; x.strokeStyle = ROSSO; x.fillStyle = ROSSO; x.lineCap = 'round';
+  x.lineWidth = 2.4 * k; x.beginPath(); x.arc(0, 0, 20 * k, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * eio(p * 1.4)); x.stroke();
+  x.lineWidth = 1.3 * k; x.setLineDash([3 * k, 4 * k]); x.beginPath(); x.arc(0, 0, 30 * k, Math.PI / 2, Math.PI / 2 + Math.PI * 2 * eio(p * 1.2 - .1)); x.stroke(); x.setLineDash([]);
+  const L = eio((p - .35) / .5); x.lineWidth = 1.9 * k;
+  for (const [dx, dy] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
+    x.beginPath(); x.moveTo(dx * 30 * k, dy * 30 * k); x.lineTo(dx * (30 + 12 * L) * k, dy * (30 + 12 * L) * k); x.stroke();
+    if (L > .95) { x.beginPath(); x.arc(dx * 42 * k, dy * 42 * k, 3 * k, 0, 7); x.fill(); }
+  }
+  const pr = 3 * k * (1 + .9 * puls); x.beginPath(); x.arc(0, 0, pr, 0, 7); x.fill();
+  if (puls > .05) { x.globalAlpha = puls * .5; x.lineWidth = 2 * k; x.beginPath(); x.arc(0, 0, pr + 14 * k * (1 - puls), 0, 7); x.stroke(); x.globalAlpha = 1; }
+  x.restore();
+}
+function fondoBlu() {
+  x.fillStyle = BLU; x.fillRect(0, 0, C.W, C.H);
+  const g = x.createRadialGradient(C.W / 2, C.H / 2, 10, C.W / 2, C.H / 2, Math.max(C.W, C.H) * .7); g.addColorStop(0, 'rgba(30,64,96,.9)'); g.addColorStop(1, 'rgba(10,25,40,1)'); x.fillStyle = g; x.fillRect(0, 0, C.W, C.H);
+}
+function ombra(alto, basso) {
+  if (basso) { const g = x.createLinearGradient(0, C.H * .38, 0, C.H); g.addColorStop(0, 'rgba(10,25,40,0)'); g.addColorStop(.55, `rgba(10,25,40,${basso * .75})`); g.addColorStop(1, `rgba(10,25,40,${basso})`); x.fillStyle = g; x.fillRect(0, C.H * .38, C.W, C.H * .62); }
+  if (alto) { const g = x.createLinearGradient(0, 0, 0, C.H * .3); g.addColorStop(0, `rgba(10,25,40,${alto})`); g.addColorStop(1, 'rgba(10,25,40,0)'); x.fillStyle = g; x.fillRect(0, 0, C.W, C.H * .3); }
+}
+function filetto(X, Y, w, p) { x.fillStyle = ROSSO; x.fillRect(X, Y, w * eo(p) * S, 4 * S); }
+function marchio(alpha) {
+  x.globalAlpha = alpha; logo(70 * S, 66 * S, 26 * S, 1, 0);
+  testo("OSSERVATORIO SULL'INNOVAZIONE", 15, 600, BIANCO, 108 * S, 60 * S, 'left', alpha * .9, 2.5);
+  testo('DEL MEZZOGIORNO', 15, 700, BIANCO, 108 * S, 80 * S, 'left', alpha, 2.5); x.globalAlpha = 1;
+}
+const M = () => (V ? 70 : 110) * S;
+// immagini
+const IMG = {}; const carica = p => new Promise(r => { const im = new Image(); im.onload = () => { IMG[p] = im; r(); }; im.onerror = () => r(); im.src = 'file://' + p; });
+function foto(p, cx, cy, r, alpha = 1, bordo = 0) { // foto rotonda
+  const im = IMG[p]; if (!im) return; x.save(); x.globalAlpha = alpha; x.beginPath(); x.arc(cx, cy, r, 0, 7); x.closePath(); x.clip();
+  const s = Math.min(im.width, im.height); x.drawImage(im, (im.width - s) / 2, (im.height - s) / 2 * .6, s, s, cx - r, cy - r, 2 * r, 2 * r); x.restore();
+  if (bordo) { x.save(); x.globalAlpha = alpha; x.strokeStyle = ROSSO; x.lineWidth = bordo; x.beginPath(); x.arc(cx, cy, r + bordo / 2, 0, 7); x.stroke(); x.restore(); }
+}
+// celle del mosaico: lettere di «OSSERVATORIO SULL'INNOVAZIONE DEL MEZZOGIORNO»
+let CELLE = null, LATO = 0, MO = null, MK = null;
+function preparaMosaico() {
+  const righe = V ? ['OSSERVATORIO', "SULL'", 'INNOVAZIONE', 'DEL', 'MEZZOGIORNO'] : ['OSSERVATORIO', "SULL'INNOVAZIONE", 'DEL MEZZOGIORNO'];
+  const o = document.createElement('canvas'); o.width = C.W; o.height = C.H; const g = o.getContext('2d');
+  const larg = C.W * (V ? .94 : .9); let px = 400; g.font = `900 ${px}px T`;
+  const maxw = Math.max(...righe.map(r => g.measureText(r).width)); px = Math.floor(px * larg / maxw); g.font = `900 ${px}px T`;
+  const passo = px * .98; const y0 = C.H / 2 - passo * (righe.length - 1) / 2 + px * .35 - (V ? 0 : 20 * S);
+  g.fillStyle = '#fff'; g.textAlign = 'center'; g.textBaseline = 'alphabetic'; righe.forEach((r, i) => g.fillText(r, C.W / 2, y0 + i * passo));
+  window.MASCHERA = o; MO = document.createElement('canvas'); MO.width = C.W; MO.height = C.H; MK = document.createElement('canvas'); MK.width = C.W; MK.height = C.H;
+  const d = g.getImageData(0, 0, C.W, C.H).data; LATO = Math.max(10, Math.round(px / 8)); CELLE = [];
+  const dentro = (xx, yy) => { xx = Math.round(xx); yy = Math.round(yy); if (xx < 0 || yy < 0 || xx >= C.W || yy >= C.H) return false; return d[(yy * C.W + xx) * 4 + 3] > 100; };
+  for (let yy = LATO / 2; yy < C.H; yy += LATO) for (let xx = LATO / 2; xx < C.W; xx += LATO) {
+    const h = LATO * .45; if ([[0, 0], [-h, -h], [h, -h], [-h, h], [h, h], [0, -h], [0, h], [-h, 0], [h, 0]].some(([a, b]) => dentro(xx + a, yy + b))) CELLE.push({ x: xx, y: yy });
+  }
+  // ordine casuale ma stabile
+  let s = 7; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  CELLE.forEach(c => { c.k = rnd(); c.f = C.pool[Math.floor(rnd() * C.pool.length)]; c.dx = (rnd() - .5) * C.W * .8; c.dy = (rnd() - .5) * C.H * .8; });
+  CELLE.sort((a, b) => a.k - b.k);
+  // i primi tasselli sono i volti del team
+  C.team.forEach((t, i) => { if (CELLE[i]) CELLE[i].f = t.f; });
+  window.MOSAICO_INFO = { celle: CELLE.length, lato: LATO, px };
+}
+function scena(s, t) {
+  const d = s.a - s.da, u = t - s.da;
+  if (s.tipo === 'apertura' || s.tipo === 'chiusura') {
+    fondoBlu();
+    const fin = s.tipo === 'chiusura'; const cy = C.H / 2 - (V ? 200 : (fin ? 120 : 70)) * S;
+    logo(C.W / 2, cy, (V ? 150 : 120) * S, u / 1.6, pulse(t));
+    sale("OSSERVATORIO SULL'INNOVAZIONE", V ? 40 : 34, 600, BIANCO, C.W / 2, cy + (V ? 260 : 200) * S, (u - 1.6) / .6, 'center', 6);
+    sale('DEL MEZZOGIORNO', V ? 78 : 72, 900, BIANCO, C.W / 2, cy + (V ? 350 : 285) * S, (u - 2.0) / .6, 'center', 4);
+    if (u > 2.6) filetto(C.W / 2 - 60 * S, cy + (V ? 385 : 315) * S, 120, (u - 2.6) / .5);
+    if (fin) {
+      sale('osservatoriomezzogiorno.net', V ? 54 : 50, 700, ROSSO, C.W / 2, cy + (V ? 490 : 400) * S, (u - 2.9) / .5, 'center');
+      sale('DIVENTA SOCIO', V ? 30 : 26, 700, 'rgba(255,255,255,.85)', C.W / 2, cy + (V ? 560 : 455) * S, (u - 3.3) / .5, 'center', 6);
+    }
+    if (s.dissolvi && u < s.dissolvi) { x.fillStyle = `rgba(255,255,255,${(1 - u / s.dissolvi) * .9})`; x.fillRect(0, 0, C.W, C.H); }
+  } else if (s.tipo === 'claim') {
+    ombra(.5, .9); marchio(cl(u / .4));
+    const Y = C.H - (V ? 380 : 210) * S;
+    s.righe.forEach((r, i) => sale(r.t, r.px || (V ? 96 : 92), r.w || 900, r.c === 'r' ? ROSSO : BIANCO, M(), Y + i * (V ? 110 : 100) * S, (u - .15 - i * (s.passo || .45)) / .5));
+  } else if (s.tipo === 'area') {
+    ombra(.45, .92); marchio(1);
+    const Y = C.H - (V ? 330 : 170) * S;
+    filetto(M(), Y - (V ? 120 : 108) * S, 70, u / .4);
+    let pp = V ? 110 : 108; font(900, pp); const ww = x.measureText(s.parola).width, lim = C.W - 2 * M() - (V ? 0 : 160 * S); if (ww > lim) pp = Math.floor(pp * lim / ww);
+    sale(s.parola, pp, 900, BIANCO, M(), Y, (u - .08) / .45);
+    sale(s.sotto, V ? 36 : 34, 700, ROSSO, M(), Y + (V ? 70 : 62) * S, (u - .25) / .45);
+    if (s.n) testo(s.n, V ? 26 : 24, 700, 'rgba(255,255,255,.75)', C.W - M(), Y, 'right', cl((u - .3) / .4), 3);
+  } else if (s.tipo === 'numero') {
+    x.fillStyle = 'rgba(10,25,40,.78)'; x.fillRect(0, 0, C.W, C.H); marchio(1);
+    const cx = M(), Y = C.H / 2 + (V ? 40 : 30) * S;
+    sale(s.etichetta.toUpperCase(), V ? 30 : 28, 700, ROSSO, cx, Y - (V ? 190 : 170) * S, u / .4, 'left', 4);
+    const val = s.val * eo(u / .9); const txt = (s.pre || '') + val.toFixed(s.dec || 0).replace('.', ',') + (s.suf || '');
+    sale(txt, V ? 150 : 220, 900, BIANCO, cx, Y + (V ? 20 : 40) * S, u / .3);
+    s.righe.forEach((r, i) => sale(r, 40, 600, 'rgba(255,255,255,.92)', cx, Y + (V ? 100 : 120) * S + i * 52 * S, (u - .35 - i * .12) / .45));
+    testo(s.fonte, V ? 24 : 22, 400, 'rgba(255,255,255,.72)', cx, C.H - (V ? 120 : 70) * S, 'left', cl((u - .6) / .4));
+  } else if (s.tipo === 'team') {
+    fondoBlu();
+    const n = C.team.length, per = d / n, i = Math.min(n - 1, Math.floor(u / per)), v = (u - i * per) / per;
+    testo('LE PERSONE', V ? 30 : 26, 700, ROSSO, M(), (V ? 150 : 120) * S, 'left', cl(u / .4), 6);
+    // fila dei volti già presentati, che si sommano
+    const rr = (V ? 52 : 50) * S, gap = rr * 2.35, y = C.H - (V ? 210 : 120) * S, x0 = C.W / 2 - gap * (n - 1) / 2;
+    for (let j = 0; j < i; j++) foto(C.team[j].f, x0 + j * gap, y, rr, 1, 3 * S);
+    const tm = C.team[i]; const R = (V ? 250 : 230) * S;
+    const cx = V ? C.W / 2 : C.W * .3, cy = V ? C.H * .36 : C.H * .45;
+    // il volto entra grande e, alla fine del suo turno, scende nella fila
+    let fx = cx, fy = cy, fr = R * eob(v / .35);
+    if (v > .78) { const k = eio((v - .78) / .22); fx = cx + (x0 + i * gap - cx) * k; fy = cy + (y - cy) * k; fr = R + (rr - R) * k; }
+    foto(tm.f, fx, fy, Math.max(1, fr), 1, 6 * S);
+    const tx = V ? C.W / 2 : C.W * .52, al = V ? 'center' : 'left', ty = V ? C.H * .36 + R + 110 * S : C.H * .45 + 10 * S;
+    const fuori = v > .78 ? 1 - (v - .78) / .12 : 1;
+    x.save(); x.globalAlpha = cl(fuori);
+    sale(tm.nome, V ? 72 : 76, 900, BIANCO, tx, ty, (v - .12) / .2, al);
+    sale(tm.ruolo.toUpperCase(), V ? 30 : 30, 700, ROSSO, tx, ty + (V ? 60 : 62) * S, (v - .18) / .2, al, 3);
+    x.restore();
+  } else if (s.tipo === 'mosaico') {
+    fondoBlu(); if (!CELLE) preparaMosaico();
+    const N = CELLE.length, anim = d * .1; const o = MO.getContext('2d'); o.clearRect(0, 0, C.W, C.H);
+    for (let j = 0; j < N; j++) {
+      const c = CELLE[j]; const t0 = j < 8 ? j * d * .14 / 8 : d * .14 + d * .46 * Math.pow((j - 8) / Math.max(1, N - 8), 1 / 2.2);
+      if (u < t0) break;
+      const p = cl((u - t0) / (j < 8 ? anim * 2.5 : anim));
+      const big = j < 8 ? 7 : 2.2, sc = big + (1 - big) * eio(p);
+      const f = j < 8 ? .2 : 1, px = c.x + c.dx * (1 - eio(p)) * f, py = c.y + c.dy * (1 - eio(p)) * f;
+      const im = IMG[c.f]; if (!im) continue; const l = LATO * (j < 8 && p < 1 ? .94 : 1.02) * sc;
+      o.globalAlpha = cl(p * 3); o.drawImage(im, px - l / 2, py - l / 2, l, l); o.globalAlpha = 1;
+    }
+    const k = eio((u - d * .62) / (d * .14));
+    if (k < 1) { x.globalAlpha = 1 - k; x.drawImage(MO, 0, 0); x.globalAlpha = 1; }
+    if (k > 0) { const m = MK.getContext('2d'); m.globalCompositeOperation = 'source-over'; m.clearRect(0, 0, C.W, C.H); m.drawImage(MO, 0, 0); m.globalCompositeOperation = 'destination-in'; m.drawImage(window.MASCHERA, 0, 0); m.globalCompositeOperation = 'source-over';
+      x.globalAlpha = k; x.drawImage(MK, 0, 0); x.globalAlpha = 1; }
+    
+    if (s.dissolvi && u > d - s.dissolvi) { x.fillStyle = `rgba(255,255,255,${cl((u - (d - s.dissolvi)) / s.dissolvi) * .9})`; x.fillRect(0, 0, C.W, C.H); }
+  }
+}
+window.frame = f => { const t = f / C.fps; x.clearRect(0, 0, C.W, C.H); for (const s of C.scene) if (t >= s.da && t < s.a) scena(s, t); };
+window.pronto = Promise.all(['900', '700', '600', '400'].map(w => document.fonts.load(w + ' 40px T')))
+  .then(() => Promise.all([...C.team.map(t => t.f), ...C.pool].map(carica)));
+</script></body></html>
