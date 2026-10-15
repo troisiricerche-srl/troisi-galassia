@@ -73,6 +73,7 @@ function preparaMosaico() {
   const maxw = Math.max(...righe.map(r => g.measureText(r).width)); px = Math.floor(px * larg / maxw); g.font = `900 ${px}px T`;
   const passo = px * .98; const y0 = C.H / 2 - passo * (righe.length - 1) / 2 + px * .35 - (V ? 0 : 20 * S);
   g.fillStyle = '#fff'; g.textAlign = 'center'; g.textBaseline = 'alphabetic'; righe.forEach((r, i) => g.fillText(r, C.W / 2, y0 + i * passo));
+  window.TESTO_M = { righe, px, y0, passo };
   window.MASCHERA = o; MO = document.createElement('canvas'); MO.width = C.W; MO.height = C.H; MK = document.createElement('canvas'); MK.width = C.W; MK.height = C.H;
   const d = g.getImageData(0, 0, C.W, C.H).data; LATO = Math.max(10, Math.round(px / 8)); CELLE = [];
   const dentro = (xx, yy) => { xx = Math.round(xx); yy = Math.round(yy); if (xx < 0 || yy < 0 || xx >= C.W || yy >= C.H) return false; return d[(yy * C.W + xx) * 4 + 3] > 100; };
@@ -98,7 +99,12 @@ function scena(s, t) {
     if (u > 2.6) filetto(C.W / 2 - 60 * S, cy + (V ? 385 : 315) * S, 120, (u - 2.6) / .5);
     if (fin) {
       sale('osservatoriomezzogiorno.net', V ? 54 : 50, 700, ROSSO, C.W / 2, cy + (V ? 490 : 400) * S, (u - 2.9) / .5, 'center');
-      sale('DIVENTA SOCIO', V ? 30 : 26, 700, 'rgba(255,255,255,.85)', C.W / 2, cy + (V ? 560 : 455) * S, (u - 3.3) / .5, 'center', 6);
+      if (s.cta !== undefined && t >= s.cta) { // «Diventa socio» sull'ultimo colpo di tamburo
+        const q = t - s.cta, sc = eob(q / .28), bw = (V ? 640 : 620) * S, bh = (V ? 124 : 112) * S, by = cy + (V ? 600 : 490) * S;
+        x.save(); x.translate(C.W / 2, by); x.scale(sc, sc); x.fillStyle = ROSSO; x.beginPath(); x.roundRect(-bw / 2, -bh / 2, bw, bh, bh / 2); x.fill();
+        testo('DIVENTA SOCIO', V ? 58 : 54, 900, BIANCO, 0, (V ? 21 : 19) * S, 'center', 1, 5); x.restore();
+        if (q < .18) { x.fillStyle = `rgba(255,255,255,${(1 - q / .18) * .55})`; x.fillRect(0, 0, C.W, C.H); }
+      }
     }
     if (s.dissolvi && u < s.dissolvi) { x.fillStyle = `rgba(255,255,255,${(1 - u / s.dissolvi) * .9})`; x.fillRect(0, 0, C.W, C.H); }
   } else if (s.tipo === 'claim') {
@@ -155,7 +161,11 @@ function scena(s, t) {
     const k = eio((u - d * .62) / (d * .14));
     if (k < 1) { x.globalAlpha = 1 - k; x.drawImage(MO, 0, 0); x.globalAlpha = 1; }
     if (k > 0) { const m = MK.getContext('2d'); m.globalCompositeOperation = 'source-over'; m.clearRect(0, 0, C.W, C.H); m.drawImage(MO, 0, 0); m.globalCompositeOperation = 'destination-in'; m.drawImage(window.MASCHERA, 0, 0); m.globalCompositeOperation = 'source-over';
-      x.globalAlpha = k; x.drawImage(MK, 0, 0); x.globalAlpha = 1; }
+      x.globalAlpha = k; x.drawImage(MK, 0, 0); x.globalAlpha = 1;
+      // filo rosso sul contorno di ogni lettera, per leggerla meglio
+      const TM = window.TESTO_M; x.save(); x.globalAlpha = k; x.font = `900 ${TM.px}px T`; x.textAlign = 'center'; x.textBaseline = 'alphabetic';
+      x.strokeStyle = ROSSO; x.lineJoin = 'round'; x.lineWidth = Math.max(3, TM.px * .028);
+      TM.righe.forEach((r, i) => x.strokeText(r, C.W / 2, TM.y0 + i * TM.passo)); x.restore(); }
     
     if (s.dissolvi && u > d - s.dissolvi) { x.fillStyle = `rgba(255,255,255,${cl((u - (d - s.dissolvi)) / s.dissolvi) * .9})`; x.fillRect(0, 0, C.W, C.H); }
   }

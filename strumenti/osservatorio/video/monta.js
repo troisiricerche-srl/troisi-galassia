@@ -34,14 +34,16 @@ const T = [
   [40, 46, 'numero', 'bari-alto.mp4', 4, { etichetta: 'Export del Mezzogiorno · 1° semestre 2026', val: 35.1, dec: 1, suf: ' mld €', righe: ['+5,2% sullo stesso periodo del 2025', 'Italia: +4,5%'], fonte: 'Fonte: ISTAT, Le esportazioni delle regioni italiane (11 settembre 2026)' }],
   [46, 52, 'numero', 'polignano.mp4', 12, { etichetta: 'Export della Puglia · 1° semestre 2026', val: 15.2, dec: 1, pre: '+', suf: '%', righe: ['5,4 miliardi di euro esportati', 'dopo un primo semestre 2025 in calo'], fonte: 'Fonte: ISTAT, Le esportazioni delle regioni italiane (11 settembre 2026)' }],
   [52, 58, 'numero', 'team-ufficio.mp4', 5, { etichetta: 'Competenze digitali almeno di base · 2025', val: 43.5, dec: 1, suf: '%', righe: ['delle persone nel Sud', 'contro il 60,3% del Nord-Ovest'], fonte: 'Fonte: Eurostat (isoc_sk_dskl_i21)' }],
-  [58, 64, 'claim', 'parma-evento.mp4', 20, { righe: [{ t: 'Convegni, tavoli tecnici,', px: 80 }, { t: 'analisi su dati ufficiali.', px: 80, c: 'r' }] }],
+  [58, 64, 'claim', 'parma-evento.mp4', 18.45, { lento: 1.2, cx: .4, luce: .05,  righe: [{ t: 'Convegni, tavoli tecnici,', px: 80 }, { t: 'analisi su dati ufficiali.', px: 80, c: 'r' }] }],
   [64, 68, 'claim', 'applausi.mp4', 2, { righe: [{ t: 'Con imprese, università', px: 76 }, { t: 'e istituzioni.', px: 76 }] }],
   [68, 84, 'team', null],
   [84, 98, 'mosaico', null, 0, { dissolvi: .35 }],
-  [98, 112, 'chiusura', null, 0, { dissolvi: .5 }],
+  [98, 108, 'chiusura', null, 0, { dissolvi: .5 }],
 ];
 const fino = Number(FINO);
 const scene = T.filter(r => r[0] < fino).map(([da, a, tipo, clip, inp, par]) => ({ da: bt(da) - bt(0), a: bt(Math.min(a, fino)) - bt(0), tipo, clip, inp: inp || 0, ...(par || {}) }));
+const COLPO = Number(process.env.COLPO || (K === 'B' ? 58.03 : 0)); // ultimo colpo di tamburo nel brano (s)
+const ch = scene.find(x => x.tipo === 'chiusura'); if (ch && COLPO) { ch.cta = COLPO - bt(0); ch.a = Math.max(ch.a, ch.cta + 2.4); }
 const DUR = scene[scene.length - 1].a; const NF = Math.round(DUR * FPS);
 const tmp = path.join(DIR, 'tmp'); fs.mkdirSync(tmp, { recursive: true });
 (async () => {
@@ -58,15 +60,15 @@ const tmp = path.join(DIR, 'tmp'); fs.mkdirSync(tmp, { recursive: true });
   for (const s of scene) {
     const d = (s.a - s.da).toFixed(3);
     if (!s.clip) { fil.push(`color=c=0x0a1928:s=${W}x${H}:r=${FPS}:d=${d},setsar=1[s${n}]`); n++; continue; }
-    inp.push('-ss', String(s.inp), '-t', d, '-i', path.join(DIR, 'clip', s.clip)); const k = inp.filter(v => v === '-i').length - 1;
-    const z = V ? `scale=-2:${Math.round(H * 1.06)},crop=${W}:${H}:(iw-ow)/2+(iw-ow)*0.1*(t/${d}-0.5):(ih-oh)/2`
+    const L = s.lento || 1; inp.push('-ss', String(s.inp), '-t', (Number(d) / L + .1).toFixed(3), '-i', path.join(DIR, 'clip', s.clip)); const k = inp.filter(v => v === '-i').length - 1;
+    const cx = s.cx === undefined ? .5 : s.cx; const z = V ? `scale=-2:${Math.round(H * 1.06)},crop=${W}:${H}:(iw-ow)*${cx}+(iw-ow)*0.06*(t/${d}-0.5):(ih-oh)/2`
       : `scale=${Math.round(W * 1.08)}:-2,crop=${W}:${H}:(iw-ow)*(0.2+0.3*t/${d}):(ih-oh)/2`;
-    fil.push(`[${k}:v]fps=${FPS},${z},eq=saturation=0.92:contrast=1.06:brightness=-0.02,colorbalance=bs=0.04:bm=0.02,vignette=PI/5,setpts=PTS-STARTPTS,trim=duration=${d},setsar=1[s${n}]`); n++;
+    fil.push(`[${k}:v]setpts=(PTS-STARTPTS)*${L},fps=${FPS},${z},eq=saturation=0.92:contrast=1.06:brightness=${s.luce || -0.02},colorbalance=bs=0.04:bm=0.02,vignette=PI/5,setpts=PTS-STARTPTS,trim=duration=${d},setsar=1[s${n}]`); n++;
   }
   const cat = scene.map((_, i) => `[s${i}]`).join('') + `concat=n=${scene.length}:v=1:a=0,format=yuv420p[bg]`;
   const k = inp.filter(v => v === '-i').length; const mus = path.join(DIR, 'musica', WAV);
   const args = ['-y', '-loglevel', 'error', ...inp, '-i', ov, '-ss', String(bt(0)), '-i', mus,
-    '-filter_complex', fil.join(';') + ';' + cat + `;[bg][${k}:v]overlay=0:0:format=auto,format=yuv420p[v];[${k + 1}:a]afade=t=in:d=0.05,afade=t=out:st=${(DUR - 2.5).toFixed(2)}:d=2.5[a]`,
+    '-filter_complex', fil.join(';') + ';' + cat + `;[bg][${k}:v]overlay=0:0:format=auto,format=yuv420p[v];[${k + 1}:a]afade=t=in:d=0.05,afade=t=out:st=${(DUR - 1.4).toFixed(2)}:d=1.4[a]`,
     '-map', '[v]', '-map', '[a]', '-t', DUR.toFixed(3), '-c:v', 'libx264', '-preset', 'medium', '-crf', '20', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', OUT];
   const r = spawnSync('ffmpeg', args, { stdio: 'inherit' }); console.log('fatto', OUT, DUR.toFixed(2) + 's', 'codice', r.status);
 })();
