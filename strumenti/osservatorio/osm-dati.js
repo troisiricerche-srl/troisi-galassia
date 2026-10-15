@@ -16,6 +16,9 @@
   const dec = s => { const t = document.createElement('textarea'); t.innerHTML = s; return t.value; };
   const data = d => new Date(d).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
   const OSM = {};
+  const ICO = '<svg class="osm-i" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M7 16v-4M12 16V6M17 16V9"/></svg>';
+  // «TroisiInsight» non compare sul sito dell'Osservatorio: diventa «Congiuntura Italia» e il link all'originale non mostra il dominio (decisione di Andrea, 15/10/2026)
+  const nomePortale = p => p === 'TroisiInsight' ? 'Congiuntura Italia' : p;
   // Toglie dai paragrafi del testo le frasi promozionali su Troisi Ricerche (decisione di Andrea del 15/10/2026).
   // Non tocca didascalie dei grafici (figcaption) né il riquadro «Metodo e fonti» (aside/.ti-box).
   OSM.pulisci = function (html) {
@@ -179,6 +182,8 @@ bar.querySelector('.tg-sb-print').addEventListener('click',function(){window.pri
   OSM.pubblica = async function (src, portale, dominio, etichetta, opz) {
     opz = opz || {};
     if (!OSM.P) await OSM.init();
+    portale = nomePortale(portale);
+    const nascondiDominio = /troisiinsight/i.test(dominio);
     const h = await H();
     const title = dec(src.title.rendered);
     const slug = src.link.replace(/\/$/, '').split('/').pop().replace(/^\?p=/, 'analisi-');
@@ -187,15 +192,15 @@ bar.querySelector('.tg-sb-print').addEventListener('click',function(){window.pri
     const dt = data(src.date);
     const dup = await fetch(`/?rest_route=/wp/v2/pages&slug=${encodeURIComponent(slug)}&parent=${OSM.pid}&status=publish,draft,future,private&context=edit&_fields=id,link`, { headers: h }).then(r => r.json());
     if (dup.length && !opz.aggiorna) return { gia_presente: dup[0].id, link: dup[0].link };
-    const pul = OSM.pulisci(src.content.rendered);
+    const pul = OSM.pulisci(src.content.rendered.replace(/TroisiInsight/g, 'Congiuntura Italia'));
     const dtx = data(src.date);
     const bar = OSM.barra({ title, url: BASE + slug + '/', portale, dt: dtx, ex: desc });
-    const body = bar.css + `<article class="osm-art" data-fonte="${esc(src.link)}" data-portale="${esc(portale)}" data-etichetta="${esc(etichetta)}" data-data="${esc(src.date)}" data-sintesi="${esc(ex)}">\n${pul.html}\n<p class="osm-fonte">Analisi pubblicata da <strong>${esc(portale)}</strong>, osservatorio di Troisi Ricerche, il ${dt}. <a href="${esc(src.link)}" target="_blank" rel="noopener">Leggi l’articolo originale su ${esc(dominio)}</a>.</p>\n${bar.html}\n</article>\n` + bar.js + '\n';
+    const body = bar.css + `<article class="osm-art" data-fonte="${esc(src.link)}" data-portale="${esc(portale)}" data-etichetta="${esc(etichetta)}" data-data="${esc(src.date)}" data-sintesi="${esc(ex)}">\n${pul.html}\n<p class="osm-fonte">Analisi pubblicata da <strong>${esc(portale)}</strong>, osservatorio di Troisi Ricerche, il ${dt}. <a href="${esc(src.link)}" target="_blank" rel="noopener">Leggi l’articolo originale${nascondiDominio ? '' : ' su ' + esc(dominio)}</a>.</p>\n${bar.html}\n</article>\n` + bar.js + '\n';
     const html = OSM.build({
       title: `${title} — Dati e analisi | Osservatorio sull'Innovazione del Mezzogiorno`, desc,
       author: 'Andrea Troisi', canonical: src.link, ogurl: BASE + slug + '/', ogtype: 'article',
       breadcrumb: [['Home', '/home'], ['Notizie', '/notizie'], ['Dati e analisi', '/notizie/dati-e-analisi/'], [title, '']],
-      tag: '📊 Dati e analisi · ' + esc(etichetta), h1: title,
+      tag: ICO + ' Dati e analisi · ' + esc(etichetta), h1: title,
       firma: `a cura di&nbsp;<strong>Andrea Troisi</strong>&nbsp;· ${esc(portale)} · ${dt}`,
       body, back: `<a class="osm-back" href="/notizie/dati-e-analisi/">← Tutte le analisi</a>`
     });
@@ -230,7 +235,7 @@ bar.querySelector('.tg-sb-print').addEventListener('click',function(){window.pri
       desc: 'Analisi su dati ufficiali su innovazione, digitale, imprese, competenze e territorio, dagli osservatori di Troisi Ricerche.',
       author: "Osservatorio sull'Innovazione del Mezzogiorno", canonical: BASE, ogurl: BASE, ogtype: 'website',
       breadcrumb: [['Home', '/home'], ['Notizie', '/notizie'], ['Dati e analisi', '']],
-      tag: '📊 Dati e analisi', h1: 'Dati e analisi', firma: '',
+      tag: ICO + ' Dati e analisi', h1: 'Dati e analisi', firma: '',
       body: intro + `<div class="osm-dati-grid">\n${cards}\n</div>`
     });
     const r = await fetch(`/?rest_route=/wp/v2/pages/${OSM.pid}`, { method: 'POST', headers: h, body: JSON.stringify({ content: html }) }).then(r => r.json());
