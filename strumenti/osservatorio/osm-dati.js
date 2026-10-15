@@ -2,7 +2,7 @@
 // Si incolla in javascript_tool in una scheda aperta su https://www.osservatoriomezzogiorno.net/wp-admin/
 // (sessione WordPress «redazione»). Definisce window.OSM con:
 //   await OSM.init()                                   carica il modello di pagina (header, menu, footer del sito)
-//   await OSM.pubblica(src, portale, dominio, etichetta) crea la pagina dell'articolo (figlia di «Dati e analisi»)
+//   await OSM.pubblica(src, portale, dominio, etichetta, {aggiorna:true}) crea (o, con aggiorna, rifà) la pagina dell'articolo (figlia di «Dati e analisi»)
 //   await OSM.aggiornaIndice()                          rifà le schede della pagina «Dati e analisi»
 //   await OSM.elenco()                                 articoli già ripresi (slug, fonte)
 // src = oggetto della REST del portale: {date,title:{rendered},excerpt:{rendered},content:{rendered},link}
@@ -16,6 +16,22 @@
   const dec = s => { const t = document.createElement('textarea'); t.innerHTML = s; return t.value; };
   const data = d => new Date(d).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
   const OSM = {};
+  // Toglie dai paragrafi del testo le frasi promozionali su Troisi Ricerche (decisione di Andrea del 15/10/2026).
+  // Non tocca didascalie dei grafici (figcaption) né il riquadro «Metodo e fonti» (aside/.ti-box).
+  OSM.pulisci = function (html) {
+    const d = new DOMParser().parseFromString('<div id="r">' + html + '</div>', 'text/html');
+    const r = d.getElementById('r');
+    let tolte = [];
+    r.querySelectorAll('p, li').forEach(p => {
+      if (p.closest('figcaption, aside, .ti-box, figure')) return;
+      if (!/Troisi Ricerche/i.test(p.textContent)) return;
+      const frasi = p.innerHTML.split(/(?<=[.!?])\s+(?=[A-ZÀ-Ú«“"])/);
+      const tenute = frasi.filter(f => !/Troisi Ricerche/i.test(f.replace(/<[^>]+>/g, '')));
+      tolte = tolte.concat(frasi.filter(f => /Troisi Ricerche/i.test(f.replace(/<[^>]+>/g, ''))).map(f => f.replace(/<[^>]+>/g, '').trim()));
+      if (!tenute.length || !tenute.join(' ').replace(/<[^>]+>/g, '').trim()) p.remove(); else p.innerHTML = tenute.join(' ');
+    });
+    return { html: r.innerHTML, tolte };
+  };
   async function H() {
     const n = await fetch('/wp-admin/admin-ajax.php?action=rest-nonce').then(r => r.text());
     return { 'X-WP-Nonce': n, 'Content-Type': 'application/json' };
@@ -70,7 +86,8 @@
       `<div class="breadcrumb">\n  <div class="breadcrumb-inner">\n${bc}  </div>\n</div>\n\n<div class="page-hero">\n  <div class="page-hero-inner">\n    <div>\n      <div class="page-tag">${tag}</div>\n      <h1>${esc(h1)}</h1>\n      ${firma ? `<p class="osm-firma">${firma}</p>` : ''}\n    </div>\n  </div>\n</div>\n\n<div class="osm-wrap">\n${body}\n${back || ''}\n</div>\n\n` +
       P.foot;
   };
-  OSM.pubblica = async function (src, portale, dominio, etichetta) {
+  OSM.pubblica = async function (src, portale, dominio, etichetta, opz) {
+    opz = opz || {};
     if (!OSM.P) await OSM.init();
     const h = await H();
     const title = dec(src.title.rendered);
@@ -79,19 +96,22 @@
     const desc = ex.length > 160 ? ex.slice(0, 157).replace(/\s\S*$/, '') + '…' : ex;
     const dt = data(src.date);
     const dup = await fetch(`/?rest_route=/wp/v2/pages&slug=${encodeURIComponent(slug)}&parent=${OSM.pid}&status=publish,draft,future,private&context=edit&_fields=id,link`, { headers: h }).then(r => r.json());
-    if (dup.length) return { gia_presente: dup[0].id, link: dup[0].link };
-    const body = `<article class="osm-art" data-fonte="${esc(src.link)}" data-portale="${esc(portale)}" data-etichetta="${esc(etichetta)}" data-data="${esc(src.date)}" data-sintesi="${esc(ex)}">\n${src.content.rendered}\n<p class="osm-fonte">Analisi pubblicata da <strong>${esc(portale)}</strong>, osservatorio di Troisi Ricerche, il ${dt}. <a href="${esc(src.link)}" target="_blank" rel="noopener">Leggi l’articolo originale su ${esc(dominio)}</a>.</p>\n</article>\n`;
+    if (dup.length && !opz.aggiorna) return { gia_presente: dup[0].id, link: dup[0].link };
+    const pul = OSM.pulisci(src.content.rendered);
+    const body = `<article class="osm-art" data-fonte="${esc(src.link)}" data-portale="${esc(portale)}" data-etichetta="${esc(etichetta)}" data-data="${esc(src.date)}" data-sintesi="${esc(ex)}">\n${pul.html}\n<p class="osm-fonte">Analisi pubblicata da <strong>${esc(portale)}</strong>, osservatorio di Troisi Ricerche, il ${dt}. <a href="${esc(src.link)}" target="_blank" rel="noopener">Leggi l’articolo originale su ${esc(dominio)}</a>.</p>\n</article>\n`;
     const html = OSM.build({
       title: `${title} — Dati e analisi | Osservatorio sull'Innovazione del Mezzogiorno`, desc,
-      author: `${portale} · Troisi Ricerche`, canonical: src.link, ogurl: BASE + slug + '/', ogtype: 'article',
+      author: 'Andrea Troisi', canonical: src.link, ogurl: BASE + slug + '/', ogtype: 'article',
       breadcrumb: [['Home', '/home'], ['Notizie', '/notizie'], ['Dati e analisi', '/notizie/dati-e-analisi/'], [title, '']],
       tag: '📊 Dati e analisi · ' + esc(etichetta), h1: title,
-      firma: `a cura di&nbsp;<strong>${esc(portale)}</strong>&nbsp;· Troisi Ricerche · ${dt}`,
+      firma: `a cura di&nbsp;<strong>Andrea Troisi</strong>&nbsp;· ${esc(portale)} · ${dt}`,
       body, back: `<a class="osm-back" href="/notizie/dati-e-analisi/">← Tutte le analisi</a>`
     });
-    const r = await fetch('/?rest_route=/wp/v2/pages', { method: 'POST', headers: h, body: JSON.stringify({ title, slug, parent: OSM.pid, status: 'publish', template: 'osm-blank.php', content: html, comment_status: 'closed', ping_status: 'closed' }) }).then(r => r.json());
+    const dati = { title, slug, parent: OSM.pid, status: 'publish', template: 'osm-blank.php', content: html, date: src.date, comment_status: 'closed', ping_status: 'closed' };
+    const url = dup.length ? `/?rest_route=/wp/v2/pages/${dup[0].id}` : '/?rest_route=/wp/v2/pages';
+    const r = await fetch(url, { method: 'POST', headers: h, body: JSON.stringify(dati) }).then(r => r.json());
     if (!r.id) throw new Error('Pubblicazione non riuscita: ' + (r.message || JSON.stringify(r)));
-    return { id: r.id, link: r.link };
+    return { id: r.id, link: r.link, aggiornato: !!dup.length, frasi_tolte: pul.tolte };
   };
   OSM.elenco = async function () {
     if (!OSM.P) await OSM.init();
