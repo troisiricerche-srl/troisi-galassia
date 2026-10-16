@@ -165,7 +165,8 @@ def bozze(n):
             reg[a['link']] = {'id': rid, 'doi': doi, 'stato': 'bozza', 'file': nome, 'titolo': a['title'],
                               'portale': a['portale'], 'data': a['date'][:10]}
             salva_reg(reg)
-            print(f'BOZZA {rid} {doi} {a["date"][:10]} {a["title"][:70]}')
+            print(f'BOZZA {rid} {doi} {a["date"][:10]} {a["title"][:70]}', flush=True)
+            time.sleep(2)
         b.close()
 
 
@@ -177,7 +178,8 @@ def pubblica(ids):
         http('POST', f"{API}/records/{v['id']}/draft/actions/publish")
         v['stato'] = 'pubblicato'
         salva_reg(reg)
-        print(f"PUBBLICATO {v['id']} https://doi.org/{v['doi']} {v['titolo'][:70]}")
+        print(f"PUBBLICATO {v['id']} https://doi.org/{v['doi']} {v['titolo'][:70]}", flush=True)
+        time.sleep(1.5)
 
 
 def main():
