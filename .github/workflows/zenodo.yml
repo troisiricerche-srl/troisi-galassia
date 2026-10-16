@@ -1,0 +1,51 @@
+name: Zenodo – DOI delle analisi
+on:
+  workflow_dispatch:
+    inputs:
+      comando:
+        description: "bozze (crea bozze con DOI prenotato) oppure pubblica (rende definitive le bozze)"
+        required: true
+        default: bozze
+        type: choice
+        options: [bozze, pubblica]
+      numero:
+        description: "quante nuove bozze creare (solo per bozze)"
+        required: false
+        default: "3"
+      ids:
+        description: "per pubblica: id dei record separati da spazio (vuoto = tutte le bozze del registro)"
+        required: false
+        default: ""
+permissions:
+  contents: write
+concurrency: zenodo
+jobs:
+  zenodo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Strumenti
+        if: ${{ inputs.comando == 'bozze' }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-inter fonts-noto-core >/dev/null || true
+          pip install -q playwright==1.48.0
+          python -m playwright install --with-deps chromium >/dev/null
+      - name: Zenodo
+        env:
+          ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
+        run: |
+          cd strumenti/zenodo
+          if [ "${{ inputs.comando }}" = "bozze" ]; then python3 zenodo.py bozze "${{ inputs.numero }}"; else python3 zenodo.py pubblica ${{ inputs.ids }}; fi
+      - name: PDF prodotti
+        if: ${{ inputs.comando == 'bozze' && always() }}
+        uses: actions/upload-artifact@v4
+        with: { name: pdf-zenodo, path: strumenti/zenodo/pdf-uscita/*.pdf, if-no-files-found: ignore }
+      - name: Salva il registro
+        if: always()
+        run: |
+          git config user.name "zenodo-bot"; git config user.email "zenodo-bot@users.noreply.github.com"
+          git add strumenti/zenodo/registro.json 2>/dev/null || true
+          git diff --cached --quiet || (git commit -m "zenodo: registro (${{ inputs.comando }})" && git pull --rebase -q && git push -q)

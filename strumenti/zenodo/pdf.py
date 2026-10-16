@@ -52,25 +52,25 @@ def pulisci(content):
 
 CSS = r"""
 @page { size: A4; margin: 18mm 18mm 20mm 18mm;
-  @bottom-left { content: "Andrea Troisi · Troisi Ricerche · CC BY 4.0"; font: 7.5pt Inter, sans-serif; color: #7a8594; }
-  @bottom-right { content: counter(page) " / " counter(pages); font: 7.5pt Inter, sans-serif; color: #7a8594; } }
+  @bottom-left { content: "Andrea Troisi · UNIBA · Troisi Ricerche · CC BY 4.0"; font: 7.5pt Inter, 'Noto Sans', sans-serif; color: #7a8594; }
+  @bottom-right { content: counter(page) " / " counter(pages); font: 7.5pt Inter, 'Noto Sans', sans-serif; color: #7a8594; } }
 html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-body { margin: 0; font-family: 'Bitstream Charter', Charter, Georgia, serif; color: #1d2733; font-size: 10.6pt; line-height: 1.55; }
+body { margin: 0; font-family: 'Bitstream Charter', Charter, 'Noto Serif', Georgia, serif; color: #1d2733; font-size: 10.6pt; line-height: 1.55; }
 .band { background: #0a1628; color: #fff; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-radius: 4px; }
 .band img { height: 30px; }
-.band .s { font: 600 8pt Inter, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #e8c46a; text-align: right; line-height: 1.4 }
+.band .s { font: 600 8pt Inter, 'Noto Sans', sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #e8c46a; text-align: right; line-height: 1.4 }
 .band .s span { display: block; color: #cfd6df; font-weight: 400; letter-spacing: .04em }
-.tipo { font: 600 8pt Inter, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #8a6d1a; margin: 18px 0 6px; }
-h1.t { font: 700 20pt/1.18 Inter, sans-serif; color: #0a1628; margin: 0 0 10px; }
-.aut { font: 10pt Inter, sans-serif; color: #1d2733; margin: 0 0 2px; }
+.tipo { font: 600 8pt Inter, 'Noto Sans', sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #8a6d1a; margin: 18px 0 6px; }
+h1.t { font: 700 20pt/1.18 Inter, 'Noto Sans', sans-serif; color: #0a1628; margin: 0 0 10px; }
+.aut { font: 10pt Inter, 'Noto Sans', sans-serif; color: #1d2733; margin: 0 0 2px; }
 .aut b { font-weight: 700 }
-.aff { font: 8.5pt Inter, sans-serif; color: #5b6676; margin: 0 0 12px; }
-.meta { font: 8.3pt Inter, sans-serif; color: #3d4756; border-top: 1px solid #d5dbe3; border-bottom: 1px solid #d5dbe3; padding: 7px 0; margin: 0 0 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
+.aff { font: 8.5pt Inter, 'Noto Sans', sans-serif; color: #5b6676; margin: 0 0 12px; }
+.meta { font: 8.3pt Inter, 'Noto Sans', sans-serif; color: #3d4756; border-top: 1px solid #d5dbe3; border-bottom: 1px solid #d5dbe3; padding: 7px 0; margin: 0 0 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 3px 16px; }
 .meta div b { color: #0a1628 }
 .abs { background: #f4f6f9; border-left: 3px solid #c9981a; padding: 9px 12px; margin: 0 0 16px; font-size: 10pt; }
-.abs b { font: 700 8pt Inter, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #0a1628; display: block; margin-bottom: 3px }
-.art h2 { font: 700 13pt/1.3 Inter, sans-serif; color: #0a1628; margin: 1.3em 0 .45em; break-after: avoid; }
-.art h3 { font: 700 11pt Inter, sans-serif; color: #0a1628; break-after: avoid; }
+.abs b { font: 700 8pt Inter, 'Noto Sans', sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #0a1628; display: block; margin-bottom: 3px }
+.art h2 { font: 700 13pt/1.3 Inter, 'Noto Sans', sans-serif; color: #0a1628; margin: 1.3em 0 .45em; break-after: avoid; }
+.art h3 { font: 700 11pt Inter, 'Noto Sans', sans-serif; color: #0a1628; break-after: avoid; }
 .art p { margin: 0 0 .8em; orphans: 3; widows: 3; }
 .art a { color: #1d2733; text-decoration: none; }
 .art figure, .art .ti-chart, .art table, .art aside, .art .ti-kpi { break-inside: avoid; }
@@ -79,7 +79,7 @@ h1.t { font: 700 20pt/1.18 Inter, sans-serif; color: #0a1628; margin: 0 0 10px; 
 .art img { max-width: 100%; height: auto; }
 .art iframe, .art script, .art .tg-share, .art .ti-share, .art .flourish-embed { display: none !important; }
 .art table { font-size: 8.8pt !important; }
-.cit { margin-top: 18px; padding-top: 9px; border-top: 1px solid #d5dbe3; font: 8.3pt/1.5 Inter, sans-serif; color: #3d4756; break-inside: avoid; }
+.cit { margin-top: 18px; padding-top: 9px; border-top: 1px solid #d5dbe3; font: 8.3pt/1.5 Inter, 'Noto Sans', sans-serif; color: #3d4756; break-inside: avoid; }
 .cit b { color: #0a1628 }
 """
 
@@ -99,7 +99,7 @@ def pagina(a):
 <div class="tipo">Analisi · {html.escape(a['portale'])}</div>
 <h1 class="t">{html.escape(titolo)}</h1>
 <p class="aut"><b>Andrea Troisi</b> · ORCID {ORCID}</p>
-<p class="aff">Troisi Ricerche S.r.l., Via De Rossi 57, 70122 Bari (Italia)</p>
+<p class="aff">Università degli Studi di Bari Aldo Moro (UNIBA) · Troisi Ricerche S.r.l., Bari (Italia)</p>
 <div class="meta">
 <div><b>Data:</b> {dt}</div><div><b>Licenza:</b> CC BY 4.0</div>
 <div><b>DOI:</b> {html.escape(doi) if doi else '—'}</div><div><b>Lingua:</b> italiano</div>
