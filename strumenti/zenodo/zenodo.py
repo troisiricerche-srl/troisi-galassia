@@ -144,12 +144,14 @@ def bozze(n):
             rid = orfane.pop(a['title'], None)
             if not rid:
                 rid = http('POST', f'{API}/records', metadati(a))['id']
-            doi = ((http('GET', f'{API}/records/{rid}/draft').get('pids') or {}).get('doi') or {}).get('identifier')
+            def leggi_doi(x):
+                return (x.get('doi') or (x.get('metadata') or {}).get('doi')
+                        or ((x.get('pids') or {}).get('doi') or {}).get('identifier') or x.get('identifier'))
+            doi = leggi_doi(http('GET', f'{API}/records/{rid}/draft'))
             if not doi:
-                r = http('POST', f'{API}/records/{rid}/draft/pids/doi')
-                doi = r.get('identifier') or ((r.get('pids') or {}).get('doi') or {}).get('identifier')
+                doi = leggi_doi(http('POST', f'{API}/records/{rid}/draft/pids/doi')) or leggi_doi(http('GET', f'{API}/records/{rid}/draft'))
             if not doi:
-                doi = http('GET', f'{API}/records/{rid}/draft')['pids']['doi']['identifier']
+                raise SystemExit(f'DOI non trovato per la bozza {rid}')
             # file già presenti nella bozza (giro interrotto): si tolgono prima di ricaricare
             for f in http('GET', f'{API}/records/{rid}/draft/files').get('entries', []):
                 http('DELETE', f"{API}/records/{rid}/draft/files/{f['key']}")
