@@ -1,4 +1,13 @@
 {
+ "https://www.benesseredigitalegiovani.it/abbandono-scolastico-italia-2025/": {
+  "data": "2026-09-12",
+  "doi": "10.5281/zenodo.23420237",
+  "file": "troisi-benesseredigitalegiovani-2026-09-12-53.pdf",
+  "id": 23420237,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Abbandono scolastico: l’Italia scende all’8,2%, sotto la media europea"
+ },
  "https://www.benesseredigitalegiovani.it/ai-act-minori-regolamento-europeo-protezione-giovani/": {
   "data": "2026-03-21",
   "doi": "10.5281/zenodo.23419002",
@@ -34,6 +43,15 @@
   "portale": "Benessere Digitale Giovani",
   "stato": "pubblicato",
   "titolo": "Competenze digitali: il 68,5% dei giovani italiani ha almeno quelle di base"
+ },
+ "https://www.benesseredigitalegiovani.it/disoccupazione-giovanile-italia-agosto-2026/": {
+  "data": "2026-10-03",
+  "doi": "10.5281/zenodo.23420331",
+  "file": "troisi-benesseredigitalegiovani-2026-10-03-132.pdf",
+  "id": 23420331,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Disoccupazione giovanile: in Italia è al 20,3%, contro il 15,4% della media UE"
  },
  "https://www.benesseredigitalegiovani.it/dispositivi-giovani-smartphone-internet/": {
   "data": "2026-04-04",
@@ -89,6 +107,15 @@
   "stato": "pubblicato",
   "titolo": "Imparare online: il 56,4% dei giovani italiani usa materiali didattici in rete"
  },
+ "https://www.benesseredigitalegiovani.it/giovani-attivita-fisica-italia-europa/": {
+  "data": "2026-08-29",
+  "doi": "10.5281/zenodo.23420144",
+  "file": "troisi-benesseredigitalegiovani-2026-08-29-51.pdf",
+  "id": 23420144,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Attività fisica: solo il 38,7% dei giovani italiani fa abbastanza movimento"
+ },
  "https://www.benesseredigitalegiovani.it/giovani-cookie-tracciamento-privacy/": {
   "data": "2026-05-23",
   "doi": "10.5281/zenodo.23419478",
@@ -142,6 +169,15 @@
   "portale": "Benessere Digitale Giovani",
   "stato": "pubblicato",
   "titolo": "Sempre connessi: il 97,7% dei giovani italiani usa internet ogni giorno"
+ },
+ "https://www.benesseredigitalegiovani.it/giovani-livelli-soddisfazione-vita/": {
+  "data": "2026-08-22",
+  "doi": "10.5281/zenodo.23420101",
+  "file": "troisi-benesseredigitalegiovani-2026-08-22-50.pdf",
+  "id": 23420101,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Pochi insoddisfatti, pochi entusiasti: il profilo del benessere dei giovani italiani"
  },
  "https://www.benesseredigitalegiovani.it/giovani-messaggi-odio-online-europa/": {
   "data": "2026-08-08",
@@ -215,6 +251,24 @@
   "stato": "pubblicato",
   "titolo": "Video, streaming e videogiochi: i giovani italiani in linea con l’Europa"
  },
+ "https://www.benesseredigitalegiovani.it/nativi-digitali-giovani-adulti-confronto/": {
+  "data": "2026-09-19",
+  "doi": "10.5281/zenodo.23420278",
+  "file": "troisi-benesseredigitalegiovani-2026-09-19-54.pdf",
+  "id": 23420278,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Nativi digitali? Dove i giovani italiani superano gli adulti, e dove no"
+ },
+ "https://www.benesseredigitalegiovani.it/neet-giovani-italia-europa-2024/": {
+  "data": "2026-09-05",
+  "doi": "10.5281/zenodo.23420196",
+  "file": "troisi-benesseredigitalegiovani-2026-09-05-52.pdf",
+  "id": 23420196,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "NEET: in Italia il 15,2% dei giovani non studia e non lavora, in calo di undici punti dal 2014"
+ },
  "https://www.benesseredigitalegiovani.it/social-media-autostima-adolescenti-dati-pisa/": {
   "data": "2026-03-21",
   "doi": "10.5281/zenodo.23419007",
@@ -223,6 +277,15 @@
   "portale": "Benessere Digitale Giovani",
   "stato": "pubblicato",
   "titolo": "Social media e autostima degli adolescenti: cosa dicono i dati PISA su 270.000 quindicenni"
+ },
+ "https://www.benesseredigitalegiovani.it/soddisfazione-vita-giovani-italia-europa/": {
+  "data": "2026-08-15",
+  "doi": "10.5281/zenodo.23420064",
+  "file": "troisi-benesseredigitalegiovani-2026-08-15-49.pdf",
+  "id": 23420064,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Soddisfazione per la vita: i giovani italiani le danno 7,5 su 10"
  },
  "https://www.benesseredigitalegiovani.it/tempo-schermo-benessere-giovani-ricerca-2026/": {
   "data": "2026-03-21",
@@ -241,6 +304,33 @@
   "portale": "Benessere Organizzativo",
   "stato": "pubblicato",
   "titolo": "Autonomia sul lavoro: il 60,6% degli italiani decide almeno in parte cosa fare e in che ordine"
+ },
+ "https://www.benessereorganizzativo.it/benessere-lavoro-italia-12-indicatori-sintesi/": {
+  "data": "2026-09-23",
+  "doi": "10.5281/zenodo.23420303",
+  "file": "troisi-benessereorganizzativo-2026-09-23-97.pdf",
+  "id": 23420303,
+  "portale": "Benessere Organizzativo",
+  "stato": "bozza",
+  "titolo": "Il benessere al lavoro in Italia in 12 indicatori: dove siamo forti e dove restiamo indietro"
+ },
+ "https://www.benessereorganizzativo.it/conciliazione-lavoro-famiglia-italia-europa/": {
+  "data": "2026-09-09",
+  "doi": "10.5281/zenodo.23420212",
+  "file": "troisi-benessereorganizzativo-2026-09-09-95.pdf",
+  "id": 23420212,
+  "portale": "Benessere Organizzativo",
+  "stato": "bozza",
+  "titolo": "Conciliazione: una madre lavoratrice su quattro in Italia ha ridotto l’orario per i figli, contro il 15% in Europa"
+ },
+ "https://www.benessereorganizzativo.it/contratti-a-termine-involontari-italia-2025/": {
+  "data": "2026-08-19",
+  "doi": "10.5281/zenodo.23420080",
+  "file": "troisi-benessereorganizzativo-2026-08-19-92.pdf",
+  "id": 23420080,
+  "portale": "Benessere Organizzativo",
+  "stato": "bozza",
+  "titolo": "Contratti a termine: per il 55% dei precari italiani non è una scelta, contro il 27% in Europa"
  },
  "https://www.benessereorganizzativo.it/diritto-alla-disconnessione-contatti-lavoro-tempo-libero/": {
   "data": "2026-04-22",
@@ -304,6 +394,15 @@
   "portale": "Benessere Organizzativo",
   "stato": "pubblicato",
   "titolo": "Formazione degli adulti: nel 2025 solo il 10,8% degli italiani tra 25 e 64 anni ha seguito un corso nell’ultimo mese"
+ },
+ "https://www.benessereorganizzativo.it/formazione-continua-imprese-italia-cvts/": {
+  "data": "2026-09-02",
+  "doi": "10.5281/zenodo.23420163",
+  "file": "troisi-benessereorganizzativo-2026-09-02-94.pdf",
+  "id": 23420163,
+  "portale": "Benessere Organizzativo",
+  "stato": "bozza",
+  "titolo": "Formazione in azienda: il 68,9% delle imprese italiane forma il personale, più della media europea"
  },
  "https://www.benessereorganizzativo.it/infortuni-lavoro-settori-2024-sanita-pa/": {
   "data": "2026-07-08",
@@ -386,6 +485,15 @@
   "stato": "pubblicato",
   "titolo": "Lavoro serale e notturno: in Italia riguarda abitualmente il 9,2% e il 4,2% degli occupati"
  },
+ "https://www.benessereorganizzativo.it/orari-lunghi-49-ore-italia-europa-2025/": {
+  "data": "2026-09-30",
+  "doi": "10.5281/zenodo.23420321",
+  "file": "troisi-benessereorganizzativo-2026-09-30-104.pdf",
+  "id": 23420321,
+  "portale": "Benessere Organizzativo",
+  "stato": "bozza",
+  "titolo": "Orari lunghi: il 6,9% degli italiani lavora 49 ore o più a settimana. Tra i manager quasi uno su tre"
+ },
  "https://www.benessereorganizzativo.it/ore-lavorate-settimana-italia-europa-2025/": {
   "data": "2026-06-17",
   "doi": "10.5281/zenodo.23419595",
@@ -403,6 +511,33 @@
   "portale": "Benessere Organizzativo",
   "stato": "pubblicato",
   "titolo": "Part-time involontario: in Italia lo subisce il 51% di chi lavora a orario ridotto, contro il 18% in Europa"
+ },
+ "https://www.benessereorganizzativo.it/posti-vacanti-italia-europa-2025/": {
+  "data": "2026-08-26",
+  "doi": "10.5281/zenodo.23420122",
+  "file": "troisi-benessereorganizzativo-2026-08-26-93.pdf",
+  "id": 23420122,
+  "portale": "Benessere Organizzativo",
+  "stato": "bozza",
+  "titolo": "Posti vacanti: nel 2025 in Italia l’1,8% dei posti di lavoro era da coprire, contro il 2,1% in Europa"
+ },
+ "https://www.benessereorganizzativo.it/problemi-salute-causati-dal-lavoro-italia-europa/": {
+  "data": "2026-09-16",
+  "doi": "10.5281/zenodo.23420256",
+  "file": "troisi-benessereorganizzativo-2026-09-16-96.pdf",
+  "id": 23420256,
+  "portale": "Benessere Organizzativo",
+  "stato": "bozza",
+  "titolo": "Problemi di salute causati dal lavoro: li dichiara il 5,4% degli italiani, la metà della media europea"
+ },
+ "https://www.benessereorganizzativo.it/rischi-psicosociali-dimensione-azienda-settore/": {
+  "data": "2026-10-07",
+  "doi": "10.5281/zenodo.23420346",
+  "file": "troisi-benessereorganizzativo-2026-10-07-107.pdf",
+  "id": 23420346,
+  "portale": "Benessere Organizzativo",
+  "stato": "bozza",
+  "titolo": "Rischi psicosociali: nelle grandi unità produttive è esposto il 47,3% dei lavoratori italiani, nelle piccole il 32,6%"
  },
  "https://www.benessereorganizzativo.it/rischi-psicosociali-lavoro-italia-europa/": {
   "data": "2026-03-18",
@@ -503,6 +638,15 @@
   "stato": "pubblicato",
   "titolo": "Export italiano 2025: 643 miliardi (+3,3%). Il trend dal 2015 e i mercati che hanno fatto la differenza"
  },
+ "https://www.consulenzainternazionalizzazione.it/export-primo-semestre-2026-prezzi-volumi-ragioni-di-scambio/": {
+  "data": "2026-09-03",
+  "doi": "10.5281/zenodo.23420178",
+  "file": "troisi-consulenzainternazionalizzazione-2026-09-03-95.pdf",
+  "id": 23420178,
+  "portale": "Consulenza Internazionalizzazione",
+  "stato": "bozza",
+  "titolo": "Export primo semestre 2026: +4,5% in valore, ma i volumi crescono solo dello 0,7%"
+ },
  "https://www.consulenzainternazionalizzazione.it/export-puglia-2024-2025/": {
   "data": "2026-03-03",
   "doi": "10.5281/zenodo.23418649",
@@ -511,6 +655,15 @@
   "portale": "Consulenza Internazionalizzazione",
   "stato": "pubblicato",
   "titolo": "Export Puglia: -3,0% nel 2024, primo semestre 2025 ancora in calo. Cosa dicono i dati"
+ },
+ "https://www.consulenzainternazionalizzazione.it/export-regioni-primo-semestre-2026-mezzogiorno-puglia/": {
+  "data": "2026-09-17",
+  "doi": "10.5281/zenodo.23420265",
+  "file": "troisi-consulenzainternazionalizzazione-2026-09-17-96.pdf",
+  "id": 23420265,
+  "portale": "Consulenza Internazionalizzazione",
+  "stato": "bozza",
+  "titolo": "Export delle regioni, primo semestre 2026: Puglia +15,2%, Mezzogiorno +5,2%"
  },
  "https://www.consulenzainternazionalizzazione.it/export-regioni-primo-trimestre-2026/": {
   "data": "2026-06-11",
@@ -530,6 +683,15 @@
   "stato": "pubblicato",
   "titolo": "L’Italia esporta anche servizi: 149,5 miliardi nel 2025. Il turismo compensa i deficit di trasporti e servizi alle imprese"
  },
+ "https://www.consulenzainternazionalizzazione.it/fondo-394-investimenti-ia-simest-2026/": {
+  "data": "2026-10-01",
+  "doi": "10.5281/zenodo.23420327",
+  "file": "troisi-consulenzainternazionalizzazione-2026-10-01-132.pdf",
+  "id": 23420327,
+  "portale": "Consulenza Internazionalizzazione",
+  "stato": "bozza",
+  "titolo": "Fondo 394, 200 milioni per l’IA nelle PMI: in Italia la usa il 16,4% delle imprese"
+ },
  "https://www.consulenzainternazionalizzazione.it/imprese-esportatrici-europa-dimensione-concentrazione/": {
   "data": "2026-05-14",
   "doi": "10.5281/zenodo.23419435",
@@ -547,6 +709,15 @@
   "portale": "Consulenza Internazionalizzazione",
   "stato": "pubblicato",
   "titolo": "Quante sono le imprese che esportano in Italia e quanto conta la dimensione"
+ },
+ "https://www.consulenzainternazionalizzazione.it/investimenti-diretti-esteri-multinazionali-italiane/": {
+  "data": "2026-08-20",
+  "doi": "10.5281/zenodo.23420089",
+  "file": "troisi-consulenzainternazionalizzazione-2026-08-20-94.pdf",
+  "id": 23420089,
+  "portale": "Consulenza Internazionalizzazione",
+  "stato": "bozza",
+  "titolo": "Investimenti diretti: 801 miliardi di attività italiane all’estero. Il quadro a metà 2026"
  },
  "https://www.consulenzainternazionalizzazione.it/mercati-destinazione-export-italiano/": {
   "data": "2026-03-15",
@@ -773,6 +944,78 @@
   "stato": "pubblicato",
   "titolo": "Sanità digitale: sui servizi online al posto della visita l’Italia supera l’Europa (29,3% contro 20,8%)"
  },
+ "https://www.customerpa.it/2026/08/18/rinuncia-cure-reddito-quintili-italia-europa-2024/": {
+  "data": "2026-08-18",
+  "doi": "10.5281/zenodo.23420078",
+  "file": "troisi-customerpa-2026-08-18-59.pdf",
+  "id": 23420078,
+  "portale": "CustomerPA™",
+  "stato": "bozza",
+  "titolo": "Chi rinuncia alle cure: tra le famiglie più povere il 4,3%, tra le più ricche lo 0,6%"
+ },
+ "https://www.customerpa.it/2026/08/25/abbandono-scolastico-italia-2025-sotto-media-europea/": {
+  "data": "2026-08-25",
+  "doi": "10.5281/zenodo.23420115",
+  "file": "troisi-customerpa-2026-08-25-60.pdf",
+  "id": 23420115,
+  "portale": "CustomerPA™",
+  "stato": "bozza",
+  "titolo": "Abbandono scolastico: l’Italia scende all’8,2%, sotto la media europea e sotto l’obiettivo 2030"
+ },
+ "https://www.customerpa.it/2026/09/01/dichiarazione-redditi-online-italia-europa-2025/": {
+  "data": "2026-09-01",
+  "doi": "10.5281/zenodo.23420158",
+  "file": "troisi-customerpa-2026-09-01-61.pdf",
+  "id": 23420158,
+  "portale": "CustomerPA™",
+  "stato": "bozza",
+  "titolo": "Dichiarazione dei redditi: solo l’11,8% degli italiani la invia da sé online. Il peso degli intermediari"
+ },
+ "https://www.customerpa.it/2026/09/08/scuola-infanzia-3-6-anni-tempo-pieno-italia-europa/": {
+  "data": "2026-09-08",
+  "doi": "10.5281/zenodo.23420207",
+  "file": "troisi-customerpa-2026-09-08-62.pdf",
+  "id": 23420207,
+  "portale": "CustomerPA™",
+  "stato": "bozza",
+  "titolo": "Scuola dell’infanzia: il 92,4% dei bambini dai 3 anni la frequenta, il 73,4% a tempo pieno"
+ },
+ "https://www.customerpa.it/2026/09/15/auto-per-abitante-italia-prima-europa-2024/": {
+  "data": "2026-09-15",
+  "doi": "10.5281/zenodo.23420252",
+  "file": "troisi-customerpa-2026-09-15-63.pdf",
+  "id": 23420252,
+  "portale": "CustomerPA™",
+  "stato": "bozza",
+  "titolo": "Italia prima in Europa per auto: 701 ogni 1.000 abitanti. E il trasporto pubblico?"
+ },
+ "https://www.customerpa.it/2026/09/22/pa-online-italia-2008-2025-diciotto-anni/": {
+  "data": "2026-09-22",
+  "doi": "10.5281/zenodo.23420299",
+  "file": "troisi-customerpa-2026-09-22-64.pdf",
+  "id": 23420299,
+  "portale": "CustomerPA™",
+  "stato": "bozza",
+  "titolo": "Diciotto anni di PA online: l’Italia ha raddoppiato gli utenti, ma il divario con l’Europa non si chiude"
+ },
+ "https://www.customerpa.it/2026/09/29/indipendenza-giustizia-percepita-italia-europa-2025/": {
+  "data": "2026-09-29",
+  "doi": "10.5281/zenodo.23420318",
+  "file": "troisi-customerpa-2026-09-29-70.pdf",
+  "id": 23420318,
+  "portale": "CustomerPA™",
+  "stato": "bozza",
+  "titolo": "Giustizia: il 46% degli italiani ne giudica buona l’indipendenza, 8 punti sotto la media UE"
+ },
+ "https://www.customerpa.it/2026/10/06/mortalita-trattabile-italia-europa-2023/": {
+  "data": "2026-10-06",
+  "doi": "10.5281/zenodo.23420343",
+  "file": "troisi-customerpa-2026-10-06-74.pdf",
+  "id": 23420343,
+  "portale": "CustomerPA™",
+  "stato": "bozza",
+  "titolo": "Mortalità trattabile: in Italia 61,9 decessi ogni 100mila, il 29% in meno della media UE"
+ },
  "https://www.dibattito-pubblico.it/2026/03/20/cittadinanza-attiva-italia-europa/": {
   "data": "2026-03-20",
   "doi": "10.5281/zenodo.23418999",
@@ -961,6 +1204,69 @@
   "portale": "Dibattito Pubblico",
   "stato": "pubblicato",
   "titolo": "Alta velocità: 1.097 km di linee dedicate in Italia, meno della metà della Francia"
+ },
+ "https://www.dibattito-pubblico.it/2026/08/14/riciclo-rifiuti-urbani-italia-europa/": {
+  "data": "2026-08-14",
+  "doi": "10.5281/zenodo.23420060",
+  "file": "troisi-dibattito-pubblico-2026-08-14-37.pdf",
+  "id": 23420060,
+  "portale": "Dibattito Pubblico",
+  "stato": "bozza",
+  "titolo": "Riciclo dei rifiuti urbani: l’Italia al 50,8%, sopra la media europea ma lontana dal 55%"
+ },
+ "https://www.dibattito-pubblico.it/2026/08/21/rumore-criminalita-quartiere-percezione/": {
+  "data": "2026-08-21",
+  "doi": "10.5281/zenodo.23420096",
+  "file": "troisi-dibattito-pubblico-2026-08-21-38.pdf",
+  "id": 23420096,
+  "portale": "Dibattito Pubblico",
+  "stato": "bozza",
+  "titolo": "Rumore e sicurezza nel quartiere: gli italiani se ne lamentano meno degli altri europei"
+ },
+ "https://www.dibattito-pubblico.it/2026/08/28/pm25-morti-premature-inquinamento-italia/": {
+  "data": "2026-08-28",
+  "doi": "10.5281/zenodo.23420139",
+  "file": "troisi-dibattito-pubblico-2026-08-28-39.pdf",
+  "id": 23420139,
+  "portale": "Dibattito Pubblico",
+  "stato": "bozza",
+  "titolo": "Polveri sottili: in Italia 73 morti premature ogni 100.000 abitanti, quasi il doppio della media UE"
+ },
+ "https://www.dibattito-pubblico.it/2026/09/04/quota-autobus-treni-trasporto-passeggeri/": {
+  "data": "2026-09-04",
+  "doi": "10.5281/zenodo.23420186",
+  "file": "troisi-dibattito-pubblico-2026-09-04-40.pdf",
+  "id": 23420186,
+  "portale": "Dibattito Pubblico",
+  "stato": "bozza",
+  "titolo": "Autobus e treni: coprono il 16,7% del traffico passeggeri in Italia, poco sotto la media europea"
+ },
+ "https://www.dibattito-pubblico.it/2026/09/11/sicurezza-stradale-morti-italia-europa/": {
+  "data": "2026-09-11",
+  "doi": "10.5281/zenodo.23420228",
+  "file": "troisi-dibattito-pubblico-2026-09-11-41.pdf",
+  "id": 23420228,
+  "portale": "Dibattito Pubblico",
+  "stato": "bozza",
+  "titolo": "Sicurezza stradale: in Italia 5,1 morti ogni 100.000 abitanti, più della media europea"
+ },
+ "https://www.dibattito-pubblico.it/2026/09/18/partecipazione-online-offline-confronto-europeo/": {
+  "data": "2026-09-18",
+  "doi": "10.5281/zenodo.23420270",
+  "file": "troisi-dibattito-pubblico-2026-09-18-42.pdf",
+  "id": 23420270,
+  "portale": "Dibattito Pubblico",
+  "stato": "bozza",
+  "titolo": "Partecipare dentro e fuori dalla rete: l’Italia tra le eccezioni europee"
+ },
+ "https://www.dibattito-pubblico.it/2026/10/02/suolo-artificiale-italia-europa-2022/": {
+  "data": "2026-10-02",
+  "doi": "10.5281/zenodo.23420329",
+  "file": "troisi-dibattito-pubblico-2026-10-02-53.pdf",
+  "id": 23420329,
+  "portale": "Dibattito Pubblico",
+  "stato": "bozza",
+  "titolo": "Suolo artificiale: in Italia copre il 6,5% del territorio, contro il 4,4% della media UE"
  },
  "https://www.digitalizzazionenellapa.it/2026/03/19/competenze-digitali-di-base-italia-2025/": {
   "data": "2026-03-19",
@@ -1160,6 +1466,78 @@
   "stato": "pubblicato",
   "titolo": "Intelligenza artificiale in azienda: a cosa serve e cosa frena le imprese italiane"
  },
+ "https://www.digitalizzazionenellapa.it/2026/08/20/lavoro-da-remoto-accesso-remoto-imprese-italia/": {
+  "data": "2026-08-20",
+  "doi": "10.5281/zenodo.23420085",
+  "file": "troisi-digitalizzazionenellapa-2026-08-20-376.pdf",
+  "id": 23420085,
+  "portale": "DigitalizzazionePA",
+  "stato": "bozza",
+  "titolo": "Lavoro da remoto: il 76,9% delle imprese italiane dà accesso a distanza ai propri sistemi, contro l’83,5% in Europa"
+ },
+ "https://www.digitalizzazionenellapa.it/2026/08/27/settore-ict-valore-aggiunto-italia/": {
+  "data": "2026-08-27",
+  "doi": "10.5281/zenodo.23420137",
+  "file": "troisi-digitalizzazionenellapa-2026-08-27-377.pdf",
+  "id": 23420137,
+  "portale": "DigitalizzazionePA",
+  "stato": "bozza",
+  "titolo": "Il settore ICT vale il 3,14% del valore aggiunto in Italia, contro il 5,24% in Europa"
+ },
+ "https://www.digitalizzazionenellapa.it/2026/09/03/annunci-lavoro-online-specialisti-ict-italia/": {
+  "data": "2026-09-03",
+  "doi": "10.5281/zenodo.23420174",
+  "file": "troisi-digitalizzazionenellapa-2026-09-03-378.pdf",
+  "id": 23420174,
+  "portale": "DigitalizzazionePA",
+  "stato": "bozza",
+  "titolo": "Annunci di lavoro: in Italia l’11,3% cerca specialisti ICT, quasi il doppio della media europea"
+ },
+ "https://www.digitalizzazionenellapa.it/2026/09/10/annunci-lavoro-ict-regioni-profili-italia/": {
+  "data": "2026-09-10",
+  "doi": "10.5281/zenodo.23420222",
+  "file": "troisi-digitalizzazionenellapa-2026-09-10-379.pdf",
+  "id": 23420222,
+  "portale": "DigitalizzazionePA",
+  "stato": "bozza",
+  "titolo": "Annunci ICT per regione: il Lazio in testa con il 16,8%, cresce anche il Mezzogiorno"
+ },
+ "https://www.digitalizzazionenellapa.it/2026/09/17/divari-territoriali-digitale-nord-sud-aree-rurali/": {
+  "data": "2026-09-17",
+  "doi": "10.5281/zenodo.23420259",
+  "file": "troisi-digitalizzazionenellapa-2026-09-17-380.pdf",
+  "id": 23420259,
+  "portale": "DigitalizzazionePA",
+  "stato": "bozza",
+  "titolo": "Divari digitali territoriali: tra Nord-Ovest e Sud diciassette punti di competenze"
+ },
+ "https://www.digitalizzazionenellapa.it/2026/09/24/decennio-digitale-2030-pagella-italia/": {
+  "data": "2026-09-24",
+  "doi": "10.5281/zenodo.23420310",
+  "file": "troisi-digitalizzazionenellapa-2026-09-24-381.pdf",
+  "id": 23420310,
+  "portale": "DigitalizzazionePA",
+  "stato": "bozza",
+  "titolo": "Decennio digitale 2030: la pagella dell’Italia, obiettivo per obiettivo"
+ },
+ "https://www.digitalizzazionenellapa.it/2026/10/01/banca-online-internet-banking-italia-europa/": {
+  "data": "2026-10-01",
+  "doi": "10.5281/zenodo.23420323",
+  "file": "troisi-digitalizzazionenellapa-2026-10-01-391.pdf",
+  "id": 23420323,
+  "portale": "DigitalizzazionePA",
+  "stato": "bozza",
+  "titolo": "Banca online: la usa il 56,4% degli italiani, 13 punti sotto la media UE"
+ },
+ "https://www.digitalizzazionenellapa.it/2026/10/08/laureati-ict-titoli-terziari-italia-europa/": {
+  "data": "2026-10-08",
+  "doi": "10.5281/zenodo.23420355",
+  "file": "troisi-digitalizzazionenellapa-2026-10-08-395.pdf",
+  "id": 23420355,
+  "portale": "DigitalizzazionePA",
+  "stato": "bozza",
+  "titolo": "Laureati in ICT: in Italia sono l’1,6% dei titoli terziari, il valore più basso d’Europa"
+ },
  "https://www.governancefinanziaria.it/cloud-computing-imprese-italiane-2025/": {
   "data": "2026-03-25",
   "doi": "10.5281/zenodo.23419040",
@@ -1177,6 +1555,15 @@
   "portale": "Governance Finanziaria",
   "stato": "pubblicato",
   "titolo": "Debito delle imprese: in Italia è il 55,9% del PIL, sotto la media UE"
+ },
+ "https://www.governancefinanziaria.it/economia-circolare-italia-europa-2024/": {
+  "data": "2026-08-26",
+  "doi": "10.5281/zenodo.23420135",
+  "file": "troisi-governancefinanziaria-2026-08-26-84.pdf",
+  "id": 23420135,
+  "portale": "Governance Finanziaria",
+  "stato": "bozza",
+  "titolo": "Economia circolare: il 21,6% dei materiali usati in Italia viene dal riciclo, quasi il doppio della media UE"
  },
  "https://www.governancefinanziaria.it/emissioni-gas-serra-valore-aggiunto-italia/": {
   "data": "2026-07-29",
@@ -1232,6 +1619,15 @@
   "stato": "pubblicato",
   "titolo": "Imprese italiane: investono il 24,9% del valore aggiunto, più della media UE"
  },
+ "https://www.governancefinanziaria.it/nascite-cessazioni-imprese-italia-europa-2023/": {
+  "data": "2026-09-09",
+  "doi": "10.5281/zenodo.23420218",
+  "file": "troisi-governancefinanziaria-2026-09-09-85.pdf",
+  "id": 23420218,
+  "portale": "Governance Finanziaria",
+  "stato": "bozza",
+  "titolo": "Nuove imprese: in Italia nascono 7,8 imprese ogni 100 attive, tra i valori più bassi d’Europa"
+ },
  "https://www.governancefinanziaria.it/ricerca-sviluppo-imprese-italia-2024/": {
   "data": "2026-05-20",
   "doi": "10.5281/zenodo.23419462",
@@ -1249,6 +1645,15 @@
   "portale": "Governance Finanziaria",
   "stato": "pubblicato",
   "titolo": "Sicurezza informatica: solo il 32,2% delle imprese italiane usa almeno 7 misure"
+ },
+ "https://www.governancefinanziaria.it/specialisti-ict-italia-europa-2025/": {
+  "data": "2026-10-07",
+  "doi": "10.5281/zenodo.23420351",
+  "file": "troisi-governancefinanziaria-2026-10-07-150.pdf",
+  "id": 23420351,
+  "portale": "Governance Finanziaria",
+  "stato": "bozza",
+  "titolo": "Specialisti ICT: in Italia sono il 3,8% degli occupati, contro il 5,0% della media UE"
  },
  "https://www.governancefinanziaria.it/vendite-online-imprese-italiane-2025/": {
   "data": "2026-06-17",
@@ -1448,6 +1853,69 @@
   "stato": "pubblicato",
   "titolo": "Dopo la scuola: lavora il 71,8% dei giovani diplomati e laureati da uno a tre anni"
  },
+ "https://www.mappaturadellecompetenze.it/2026/08/16/sovraqualificazione-laureati-italia-europa/": {
+  "data": "2026-08-16",
+  "doi": "10.5281/zenodo.23420068",
+  "file": "troisi-mappaturadellecompetenze-2026-08-16-57.pdf",
+  "id": 23420068,
+  "portale": "Mappatura delle Competenze",
+  "stato": "bozza",
+  "titolo": "Laureati in lavori che non richiedono la laurea: sono il 21,1% in Italia"
+ },
+ "https://www.mappaturadellecompetenze.it/2026/08/23/laureati-stem-italia-europa-2024/": {
+  "data": "2026-08-23",
+  "doi": "10.5281/zenodo.23420107",
+  "file": "troisi-mappaturadellecompetenze-2026-08-23-58.pdf",
+  "id": 23420107,
+  "portale": "Mappatura delle Competenze",
+  "stato": "bozza",
+  "titolo": "Laureati STEM: in Italia sono 21,2 ogni mille giovani tra 20 e 29 anni"
+ },
+ "https://www.mappaturadellecompetenze.it/2026/08/30/occupazione-servizi-alta-intensita-conoscenza/": {
+  "data": "2026-08-30",
+  "doi": "10.5281/zenodo.23420148",
+  "file": "troisi-mappaturadellecompetenze-2026-08-30-59.pdf",
+  "id": 23420148,
+  "portale": "Mappatura delle Competenze",
+  "stato": "bozza",
+  "titolo": "Economia della conoscenza: il 35,2% degli occupati italiani lavora nei servizi più qualificati"
+ },
+ "https://www.mappaturadellecompetenze.it/2026/09/06/laureati-campo-di-studio-italia-informatica/": {
+  "data": "2026-09-06",
+  "doi": "10.5281/zenodo.23420198",
+  "file": "troisi-mappaturadellecompetenze-2026-09-06-61.pdf",
+  "id": 23420198,
+  "portale": "Mappatura delle Competenze",
+  "stato": "bozza",
+  "titolo": "Laureati in informatica: sono l’1,6% dei laureati italiani, contro il 5,0% europeo"
+ },
+ "https://www.mappaturadellecompetenze.it/2026/09/13/professioni-qualificate-italia-europa-isco/": {
+  "data": "2026-09-13",
+  "doi": "10.5281/zenodo.23420244",
+  "file": "troisi-mappaturadellecompetenze-2026-09-13-62.pdf",
+  "id": 23420244,
+  "portale": "Mappatura delle Competenze",
+  "stato": "bozza",
+  "titolo": "Professioni qualificate: sono il 37,1% degli occupati in Italia, contro il 45,3% europeo"
+ },
+ "https://www.mappaturadellecompetenze.it/2026/09/20/capitale-umano-inutilizzato-slack-italia/": {
+  "data": "2026-09-20",
+  "doi": "10.5281/zenodo.23420287",
+  "file": "troisi-mappaturadellecompetenze-2026-09-20-63.pdf",
+  "id": 23420287,
+  "portale": "Mappatura delle Competenze",
+  "stato": "bozza",
+  "titolo": "Lavoro potenziale inutilizzato: in Italia è il 14,7% della forza lavoro allargata"
+ },
+ "https://www.mappaturadellecompetenze.it/2026/10/04/ricercatori-italia-europa-imprese-2024/": {
+  "data": "2026-10-04",
+  "doi": "10.5281/zenodo.23420335",
+  "file": "troisi-mappaturadellecompetenze-2026-10-04-133.pdf",
+  "id": 23420335,
+  "portale": "Mappatura delle Competenze",
+  "stato": "bozza",
+  "titolo": "Ricercatori: in Italia sono lo 0,77% degli occupati, contro l’1,11% della UE"
+ },
  "https://www.troisiinsight.it/2026/03/16/pil-pro-capite-regioni-italiane-divario-nord-sud-2024/": {
   "data": "2026-03-16",
   "doi": "10.5281/zenodo.23418977",
@@ -1645,5 +2113,77 @@
   "portale": "TroisiInsight",
   "stato": "pubblicato",
   "titolo": "Aeroporti, il carburante caro non ferma i passeggeri: Italia +5,0% nei primi quattro mesi"
+ },
+ "https://www.troisiinsight.it/2026/08/17/ferie-una-settimana-vacanza-italiani-non-possono-permettersela-2025/": {
+  "data": "2026-08-17",
+  "doi": "10.5281/zenodo.23420076",
+  "file": "troisi-troisiinsight-2026-08-17-53.pdf",
+  "id": 23420076,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Ferragosto amaro: un italiano su tre non può permettersi una settimana di vacanza"
+ },
+ "https://www.troisiinsight.it/2026/08/24/produzione-industriale-italia-germania-giugno-2026/": {
+  "data": "2026-08-24",
+  "doi": "10.5281/zenodo.23420111",
+  "file": "troisi-troisiinsight-2026-08-24-54.pdf",
+  "id": 23420111,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Industria, il semestre della crisi energetica: Italia ferma, Germania in affanno"
+ },
+ "https://www.troisiinsight.it/2026/08/31/poverta-energetica-case-fredde-europa-italia-2025/": {
+  "data": "2026-08-31",
+  "doi": "10.5281/zenodo.23420152",
+  "file": "troisi-troisiinsight-2026-08-31-55.pdf",
+  "id": 23420152,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Povertà energetica: l’8,6% degli italiani non riesce a scaldare casa"
+ },
+ "https://www.troisiinsight.it/2026/09/07/auto-elettriche-immatricolazioni-2025-italia-europa/": {
+  "data": "2026-09-07",
+  "doi": "10.5281/zenodo.23420201",
+  "file": "troisi-troisiinsight-2026-09-07-56.pdf",
+  "id": 23420201,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Auto elettriche: in Europa sono il 17% del mercato, in Italia il 6%"
+ },
+ "https://www.troisiinsight.it/2026/09/14/rendimenti-btp-agosto-2026-francia-sorpasso-italia/": {
+  "data": "2026-09-14",
+  "doi": "10.5281/zenodo.23420246",
+  "file": "troisi-troisiinsight-2026-09-14-57.pdf",
+  "id": 23420246,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Titoli di Stato, il sorpasso: ad agosto la Francia paga più dell’Italia"
+ },
+ "https://www.troisiinsight.it/2026/09/21/energia-rinnovabile-2025-italia-20-per-cento-europa/": {
+  "data": "2026-09-21",
+  "doi": "10.5281/zenodo.23420291",
+  "file": "troisi-troisiinsight-2026-09-21-58.pdf",
+  "id": 23420291,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Rinnovabili: l’Europa al 26%, l’Italia al 20,5%. Ma sulla sola elettricità siamo al 43%"
+ },
+ "https://www.troisiinsight.it/2026/09/28/salari-orari-inflazione-italia-secondo-trimestre-2026/": {
+  "data": "2026-09-28",
+  "doi": "10.5281/zenodo.23420312",
+  "file": "troisi-troisiinsight-2026-09-28-66.pdf",
+  "id": 23420312,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Salari orari, l’Italia torna sotto l’inflazione: +2,1% contro il 3,0%. In cinque anni −7,1% reale"
+ },
+ "https://www.troisiinsight.it/2026/10/05/prezzi-case-secondo-trimestre-2026-europa-italia/": {
+  "data": "2026-10-05",
+  "doi": "10.5281/zenodo.23420341",
+  "file": "troisi-troisiinsight-2026-10-05-71.pdf",
+  "id": 23420341,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Prezzi delle case, l’Europa rallenta al +4,7%. Italia +4%: dal 2015 +21%, contro il +69% dell’UE"
  }
 }
