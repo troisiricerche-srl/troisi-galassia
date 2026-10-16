@@ -192,9 +192,7 @@ def aggiorna(ids):
     print(f'Record da aggiornare: {len(scelti)}', flush=True)
     for v in scelti:
         rid = v['id']
-        d = http('POST', f'{API}/records/{rid}/draft')
-        body = {k: d[k] for k in ('access', 'files', 'metadata', 'pids') if k in d}
-        http('PUT', f'{API}/records/{rid}/draft', body)
+        http('POST', f'{API}/records/{rid}/draft')  # bozza di modifica (se esiste già, la riprende)
         http('POST', f'{API}/records/{rid}/draft/actions/publish')
         v['aggiornato'] = time.strftime('%Y-%m-%d')
         salva_reg(reg)
