@@ -129,14 +129,25 @@ def bozze(n):
     from playwright.sync_api import sync_playwright
     reg = carica_reg()
     nuovi = [a for a in articoli() if a['link'] not in reg][:n]
+    # bozze rimaste senza registro da giri interrotti: si riusano (stesso titolo), niente doppioni
+    orfane = {}
+    note = {v['id'] for v in reg.values()}
+    for h in http('GET', f'{API}/user/records?size=100&is_published=false&sort=newest').get('hits', {}).get('hits', []):
+        if h['id'] not in note and not h.get('is_published'):
+            orfane.setdefault(h['metadata']['title'], h['id'])
+    print(f'Bozze orfane riusabili: {len(orfane)}')
     OUT.mkdir(exist_ok=True)
     print(f'Articoli da depositare in questo giro: {len(nuovi)}')
     with sync_playwright() as p:
         b = p.chromium.launch(); pg = b.new_page()
         for a in nuovi:
-            d = http('POST', f'{API}/records', metadati(a))
-            rid = d['id']
-            doi = http('POST', f'{API}/records/{rid}/draft/pids/doi')['pids']['doi']['identifier']
+            rid = orfane.pop(a['title'], None)
+            if not rid:
+                rid = http('POST', f'{API}/records', metadati(a))['id']
+            r = http('POST', f'{API}/records/{rid}/draft/pids/doi')
+            doi = r.get('identifier') or (r.get('pids') or {}).get('doi', {}).get('identifier')
+            if not doi:
+                doi = http('GET', f'{API}/records/{rid}/draft')['pids']['doi']['identifier']
             a['doi'] = doi
             nome = f"troisi-{a['sito'].split('.')[0]}-{a['date'][:10]}-{a['id']}.pdf"
             pg.set_content(P.pagina(a), wait_until='load')
