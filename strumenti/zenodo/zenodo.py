@@ -144,10 +144,15 @@ def bozze(n):
             rid = orfane.pop(a['title'], None)
             if not rid:
                 rid = http('POST', f'{API}/records', metadati(a))['id']
-            r = http('POST', f'{API}/records/{rid}/draft/pids/doi')
-            doi = r.get('identifier') or (r.get('pids') or {}).get('doi', {}).get('identifier')
+            doi = ((http('GET', f'{API}/records/{rid}/draft').get('pids') or {}).get('doi') or {}).get('identifier')
+            if not doi:
+                r = http('POST', f'{API}/records/{rid}/draft/pids/doi')
+                doi = r.get('identifier') or ((r.get('pids') or {}).get('doi') or {}).get('identifier')
             if not doi:
                 doi = http('GET', f'{API}/records/{rid}/draft')['pids']['doi']['identifier']
+            # file già presenti nella bozza (giro interrotto): si tolgono prima di ricaricare
+            for f in http('GET', f'{API}/records/{rid}/draft/files').get('entries', []):
+                http('DELETE', f"{API}/records/{rid}/draft/files/{f['key']}")
             a['doi'] = doi
             nome = f"troisi-{a['sito'].split('.')[0]}-{a['date'][:10]}-{a['id']}.pdf"
             pg.set_content(P.pagina(a), wait_until='load')
