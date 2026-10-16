@@ -61,6 +61,8 @@ def http(method, url, data=None, ctype='application/json', auth=True):
             msg = e.read().decode('utf-8', 'replace')[:800]
             if e.code in (429, 502, 503, 504) and tent < 3:
                 time.sleep(10 * (tent + 1)); continue
+            if auth:
+                print(f'::error::Zenodo {e.code} {method} {url.replace(API, "")} :: ' + msg.replace(chr(10), ' ')[:600], flush=True)
             raise SystemExit(f'ERRORE {e.code} {method} {url}\n{msg}')
 
 
@@ -160,7 +162,7 @@ def pubblica(ids):
         print(f"PUBBLICATO {v['id']} https://doi.org/{v['doi']} {v['titolo'][:70]}")
 
 
-if __name__ == '__main__':
+def main():
     cmd = sys.argv[1] if len(sys.argv) > 1 else 'elenco'
     if cmd in ('bozze', 'pubblica') and not TOKEN:
         raise SystemExit('Manca ZENODO_TOKEN')
@@ -171,3 +173,15 @@ if __name__ == '__main__':
     else:
         for k, v in carica_reg().items():
             print(v['stato'], v['id'], v['doi'], v['data'], v['titolo'][:60])
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except SystemExit:
+        raise
+    except Exception as e:
+        import traceback
+        tb = traceback.format_exc().replace(chr(10), ' | ')
+        print('::error::' + tb[-900:], flush=True)
+        raise
