@@ -7,13 +7,13 @@ on:
         required: true
         default: bozze
         type: choice
-        options: [bozze, pubblica]
+        options: [bozze, pubblica, aggiorna]
       numero:
         description: "quante nuove bozze creare (solo per bozze)"
         required: false
         default: "3"
       ids:
-        description: "per pubblica: id dei record separati da spazio (vuoto = tutte le bozze del registro)"
+        description: "per pubblica/aggiorna: id dei record separati da spazio (vuoto = tutte le bozze del registro)"
         required: false
         default: ""
 permissions:
@@ -38,7 +38,7 @@ jobs:
           ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
         run: |
           cd strumenti/zenodo
-          if [ "${{ inputs.comando }}" = "bozze" ]; then python3 zenodo.py bozze "${{ inputs.numero }}"; else python3 zenodo.py pubblica ${{ inputs.ids }}; fi
+          if [ "${{ inputs.comando }}" = "bozze" ]; then python3 zenodo.py bozze "${{ inputs.numero }}"; elif [ "${{ inputs.comando }}" = "aggiorna" ]; then python3 zenodo.py aggiorna ${{ inputs.ids }}; else python3 zenodo.py pubblica ${{ inputs.ids }}; fi
       - name: PDF prodotti
         if: ${{ inputs.comando == 'bozze' && always() }}
         uses: actions/upload-artifact@v4

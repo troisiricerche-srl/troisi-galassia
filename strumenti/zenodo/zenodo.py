@@ -4,6 +4,7 @@
 Comandi:
   python3 zenodo.py bozze N        crea fino a N nuove bozze: metadati, DOI prenotato, PDF caricato
   python3 zenodo.py pubblica [ids]  pubblica le bozze (tutte quelle in registro, o solo gli id indicati)
+  python3 zenodo.py aggiorna [ids] riapre e ripubblica i record pubblicati (stesso DOI): DataCite/ORCID si aggiornano
   python3 zenodo.py elenco          stampa lo stato del registro
 Token: variabile d'ambiente ZENODO_TOKEN (segreto del repository, mai scritto altrove).
 Registro: registro.json (link originale -> id record, DOI, stato).
@@ -182,12 +183,33 @@ def pubblica(ids):
         time.sleep(1.5)
 
 
+def aggiorna(ids):
+    """Riapre in modifica i record già pubblicati e li ripubblica senza nuova versione:
+    Zenodo ritrasmette i metadati a DataCite (che li inoltra a ORCID con l'Auto-Update)."""
+    reg = carica_reg()
+    tutti = [v for v in sorted(reg.values(), key=lambda x: x['data']) if v['stato'] == 'pubblicato']
+    scelti = [v for v in tutti if not ids or str(v['id']) in ids]
+    print(f'Record da aggiornare: {len(scelti)}', flush=True)
+    for v in scelti:
+        rid = v['id']
+        d = http('POST', f'{API}/records/{rid}/draft')
+        body = {k: d[k] for k in ('access', 'files', 'metadata', 'pids') if k in d}
+        http('PUT', f'{API}/records/{rid}/draft', body)
+        http('POST', f'{API}/records/{rid}/draft/actions/publish')
+        v['aggiornato'] = time.strftime('%Y-%m-%d')
+        salva_reg(reg)
+        print(f"AGGIORNATO {rid} https://doi.org/{v['doi']} {v['titolo'][:70]}", flush=True)
+        time.sleep(1.5)
+
+
 def main():
     cmd = sys.argv[1] if len(sys.argv) > 1 else 'elenco'
-    if cmd in ('bozze', 'pubblica') and not TOKEN:
+    if cmd in ('bozze', 'pubblica', 'aggiorna') and not TOKEN:
         raise SystemExit('Manca ZENODO_TOKEN')
     if cmd == 'bozze':
         bozze(int(sys.argv[2]) if len(sys.argv) > 2 else 3)
+    elif cmd == 'aggiorna':
+        aggiorna([x for x in sys.argv[2:] if x])
     elif cmd == 'pubblica':
         pubblica([x for x in sys.argv[2:] if x])
     else:
