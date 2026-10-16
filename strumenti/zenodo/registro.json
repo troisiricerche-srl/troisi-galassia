@@ -1,4 +1,166 @@
 {
+ "https://www.benesseredigitalegiovani.it/ai-act-minori-regolamento-europeo-protezione-giovani/": {
+  "data": "2026-03-21",
+  "doi": "10.5281/zenodo.23419002",
+  "file": "troisi-benesseredigitalegiovani-2026-03-21-20.pdf",
+  "id": 23419002,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "AI Act e minori: cosa cambia per i giovani con il regolamento europeo sull’intelligenza artificiale"
+ },
+ "https://www.benesseredigitalegiovani.it/ai-adolescenti-chatbot-supporto-emotivo/": {
+  "data": "2026-03-21",
+  "doi": "10.5281/zenodo.23419013",
+  "file": "troisi-benesseredigitalegiovani-2026-03-21-16.pdf",
+  "id": 23419013,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "AI e adolescenti: perché il 41% chiede aiuto ai chatbot nei momenti difficili"
+ },
+ "https://www.benesseredigitalegiovani.it/dispositivi-giovani-smartphone-internet/": {
+  "data": "2026-04-04",
+  "doi": "10.5281/zenodo.23419109",
+  "file": "troisi-benesseredigitalegiovani-2026-04-04-30.pdf",
+  "id": 23419109,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Smartphone, portatile, console: con cosa si collegano i giovani italiani"
+ },
+ "https://www.benesseredigitalegiovani.it/divieto-smartphone-scuola-2026-circolare-valditara/": {
+  "data": "2026-03-21",
+  "doi": "10.5281/zenodo.23419009",
+  "file": "troisi-benesseredigitalegiovani-2026-03-21-17.pdf",
+  "id": 23419009,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Divieto smartphone a scuola 2026: cosa prevede la circolare Valditara e cosa dicono i dati"
+ },
+ "https://www.benesseredigitalegiovani.it/genitori-smartphone-paradosso-regole-famiglia/": {
+  "data": "2026-03-21",
+  "doi": "10.5281/zenodo.23419004",
+  "file": "troisi-benesseredigitalegiovani-2026-03-21-19.pdf",
+  "id": 23419004,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Genitori e smartphone: chi usa di più il telefono in famiglia? Il paradosso dei dati"
+ },
+ "https://www.benesseredigitalegiovani.it/giovani-internet-ogni-giorno-italia-europa/": {
+  "data": "2026-03-28",
+  "doi": "10.5281/zenodo.23419053",
+  "file": "troisi-benesseredigitalegiovani-2026-03-28-29.pdf",
+  "id": 23419053,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Sempre connessi: il 97,7% dei giovani italiani usa internet ogni giorno"
+ },
+ "https://www.benesseredigitalegiovani.it/giovani-messaggistica-videochiamate/": {
+  "data": "2026-04-18",
+  "doi": "10.5281/zenodo.23419182",
+  "file": "troisi-benesseredigitalegiovani-2026-04-18-32.pdf",
+  "id": 23419182,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Messaggi e videochiamate: qui i giovani italiani sono sopra la media europea"
+ },
+ "https://www.benesseredigitalegiovani.it/giovani-social-network-italia-ultima-europa/": {
+  "data": "2026-04-11",
+  "doi": "10.5281/zenodo.23419150",
+  "file": "troisi-benesseredigitalegiovani-2026-04-11-31.pdf",
+  "id": 23419150,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Social network: i giovani italiani sono i meno attivi d’Europa"
+ },
+ "https://www.benesseredigitalegiovani.it/giovani-video-streaming-videogiochi/": {
+  "data": "2026-04-25",
+  "doi": "10.5281/zenodo.23419228",
+  "file": "troisi-benesseredigitalegiovani-2026-04-25-33.pdf",
+  "id": 23419228,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Video, streaming e videogiochi: i giovani italiani in linea con l’Europa"
+ },
+ "https://www.benesseredigitalegiovani.it/social-media-autostima-adolescenti-dati-pisa/": {
+  "data": "2026-03-21",
+  "doi": "10.5281/zenodo.23419007",
+  "file": "troisi-benesseredigitalegiovani-2026-03-21-18.pdf",
+  "id": 23419007,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Social media e autostima degli adolescenti: cosa dicono i dati PISA su 270.000 quindicenni"
+ },
+ "https://www.benesseredigitalegiovani.it/tempo-schermo-benessere-giovani-ricerca-2026/": {
+  "data": "2026-03-21",
+  "doi": "10.5281/zenodo.23419015",
+  "file": "troisi-benesseredigitalegiovani-2026-03-21-15.pdf",
+  "id": 23419015,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Tempo schermo e benessere dei giovani: cosa dice la ricerca nel 2026"
+ },
+ "https://www.benessereorganizzativo.it/autonomia-sul-lavoro-italia-europa/": {
+  "data": "2026-04-15",
+  "doi": "10.5281/zenodo.23419163",
+  "file": "troisi-benessereorganizzativo-2026-04-15-74.pdf",
+  "id": 23419163,
+  "portale": "Benessere Organizzativo",
+  "stato": "bozza",
+  "titolo": "Autonomia sul lavoro: il 60,6% degli italiani decide almeno in parte cosa fare e in che ordine"
+ },
+ "https://www.benessereorganizzativo.it/diritto-alla-disconnessione-contatti-lavoro-tempo-libero/": {
+  "data": "2026-04-22",
+  "doi": "10.5281/zenodo.23419209",
+  "file": "troisi-benessereorganizzativo-2026-04-22-75.pdf",
+  "id": 23419209,
+  "portale": "Benessere Organizzativo",
+  "stato": "bozza",
+  "titolo": "Diritto alla disconnessione: il 16,3% degli occupati italiani viene contattato più volte per lavoro nel tempo libero"
+ },
+ "https://www.benessereorganizzativo.it/fattori-rischio-psicosociale-principali-italia/": {
+  "data": "2026-03-25",
+  "doi": "10.5281/zenodo.23419035",
+  "file": "troisi-benessereorganizzativo-2026-03-25-71.pdf",
+  "id": 23419035,
+  "portale": "Benessere Organizzativo",
+  "stato": "bozza",
+  "titolo": "Pressione dei tempi e clienti difficili: i rischi psicosociali che pesano di più sui lavoratori"
+ },
+ "https://www.benessereorganizzativo.it/flessibilita-orario-lavoro-italia-europa/": {
+  "data": "2026-04-29",
+  "doi": "10.5281/zenodo.23419250",
+  "file": "troisi-benessereorganizzativo-2026-04-29-76.pdf",
+  "id": 23419250,
+  "portale": "Benessere Organizzativo",
+  "stato": "bozza",
+  "titolo": "Orari di lavoro: per il 71,3% degli italiani li decide l’azienda, contro il 59,2% in Europa"
+ },
+ "https://www.benessereorganizzativo.it/lavorare-sotto-pressione-tempo-italia-settori/": {
+  "data": "2026-04-08",
+  "doi": "10.5281/zenodo.23419127",
+  "file": "troisi-benessereorganizzativo-2026-04-08-73.pdf",
+  "id": 23419127,
+  "portale": "Benessere Organizzativo",
+  "stato": "bozza",
+  "titolo": "Un lavoratore su tre lavora spesso sotto pressione: in Italia il 33,7%, ma nella finanza si arriva al 50,1%"
+ },
+ "https://www.benessereorganizzativo.it/rischi-psicosociali-lavoro-italia-europa/": {
+  "data": "2026-03-18",
+  "doi": "10.5281/zenodo.23418983",
+  "file": "troisi-benessereorganizzativo-2026-03-18-70.pdf",
+  "id": 23418983,
+  "portale": "Benessere Organizzativo",
+  "stato": "bozza",
+  "titolo": "Rischi psicosociali: il 39,1% dei lavoratori italiani si dichiara esposto, contro il 44,6% in Europa"
+ },
+ "https://www.benessereorganizzativo.it/stress-depressione-ansia-problemi-salute-lavoro/": {
+  "data": "2026-04-01",
+  "doi": "10.5281/zenodo.23419082",
+  "file": "troisi-benessereorganizzativo-2026-04-01-72.pdf",
+  "id": 23419082,
+  "portale": "Benessere Organizzativo",
+  "stato": "bozza",
+  "titolo": "Stress, depressione e ansia: sono il 15,6% dei problemi di salute causati dal lavoro in Italia"
+ },
  "https://www.consulenzainternazionalizzazione.it/export-2024-mezzogiorno-territori/": {
   "data": "2026-03-13",
   "doi": "10.5281/zenodo.23418756",
@@ -7,6 +169,24 @@
   "portale": "Consulenza Internazionalizzazione",
   "stato": "pubblicato",
   "titolo": "Export 2024: Italia a 623,5 miliardi (-0,4%), il Mezzogiorno cede il 5,4%. E nel 2025 il Sud riparte"
+ },
+ "https://www.consulenzainternazionalizzazione.it/export-extra-ue-febbraio-2026/": {
+  "data": "2026-04-02",
+  "doi": "10.5281/zenodo.23419095",
+  "file": "troisi-consulenzainternazionalizzazione-2026-04-02-84.pdf",
+  "id": 23419095,
+  "portale": "Consulenza Internazionalizzazione",
+  "stato": "bozza",
+  "titolo": "Export extra UE a febbraio 2026: +2,5% sull’anno, ma il primo bimestre chiude a -1,3%"
+ },
+ "https://www.consulenzainternazionalizzazione.it/export-italiano-2025-dati-trend/": {
+  "data": "2026-03-15",
+  "doi": "10.5281/zenodo.23418974",
+  "file": "troisi-consulenzainternazionalizzazione-2026-03-15-14.pdf",
+  "id": 23418974,
+  "portale": "Consulenza Internazionalizzazione",
+  "stato": "bozza",
+  "titolo": "Export italiano 2025: 643 miliardi (+3,3%). Il trend dal 2015 e i mercati che hanno fatto la differenza"
  },
  "https://www.consulenzainternazionalizzazione.it/export-puglia-2024-2025/": {
   "data": "2026-03-03",
@@ -17,6 +197,24 @@
   "stato": "pubblicato",
   "titolo": "Export Puglia: -3,0% nel 2024, primo semestre 2025 ancora in calo. Cosa dicono i dati"
  },
+ "https://www.consulenzainternazionalizzazione.it/export-servizi-italia-2025-turismo-trasporti-ict/": {
+  "data": "2026-04-16",
+  "doi": "10.5281/zenodo.23419172",
+  "file": "troisi-consulenzainternazionalizzazione-2026-04-16-85.pdf",
+  "id": 23419172,
+  "portale": "Consulenza Internazionalizzazione",
+  "stato": "bozza",
+  "titolo": "L’Italia esporta anche servizi: 149,5 miliardi nel 2025. Il turismo compensa i deficit di trasporti e servizi alle imprese"
+ },
+ "https://www.consulenzainternazionalizzazione.it/imprese-esportatrici-italiane-dimensione/": {
+  "data": "2026-03-15",
+  "doi": "10.5281/zenodo.23418970",
+  "file": "troisi-consulenzainternazionalizzazione-2026-03-15-15.pdf",
+  "id": 23418970,
+  "portale": "Consulenza Internazionalizzazione",
+  "stato": "bozza",
+  "titolo": "Quante sono le imprese che esportano in Italia e quanto conta la dimensione"
+ },
  "https://www.consulenzainternazionalizzazione.it/mercati-destinazione-export-italiano/": {
   "data": "2026-03-15",
   "doi": "10.5281/zenodo.23418772",
@@ -25,5 +223,347 @@
   "portale": "Consulenza Internazionalizzazione",
   "stato": "pubblicato",
   "titolo": "Dove esporta l’Italia: i primi dieci mercati e le regole di accesso a marzo 2026"
+ },
+ "https://www.consulenzainternazionalizzazione.it/peso-italia-export-mondiale-2025/": {
+  "data": "2026-04-30",
+  "doi": "10.5281/zenodo.23419263",
+  "file": "troisi-consulenzainternazionalizzazione-2026-04-30-86.pdf",
+  "id": 23419263,
+  "portale": "Consulenza Internazionalizzazione",
+  "stato": "bozza",
+  "titolo": "Quanto pesa l’Italia nell’export mondiale: settimo esportatore di merci nel 2025, con il 2,8%"
+ },
+ "https://www.consulenzainternazionalizzazione.it/settori-export-italiano-2025/": {
+  "data": "2026-03-15",
+  "doi": "10.5281/zenodo.23418966",
+  "file": "troisi-consulenzainternazionalizzazione-2026-03-15-16.pdf",
+  "id": 23418966,
+  "portale": "Consulenza Internazionalizzazione",
+  "stato": "bozza",
+  "titolo": "I settori dell’export italiano nel 2025: farmaceutica e metalli trainano, moda, auto e raffinazione in calo"
+ },
+ "https://www.customerpa.it/2026/03/17/pa-online-italia-2025-eurostat/": {
+  "data": "2026-03-17",
+  "doi": "10.5281/zenodo.23418979",
+  "file": "troisi-customerpa-2026-03-17-37.pdf",
+  "id": 23418979,
+  "portale": "CustomerPA™",
+  "stato": "bozza",
+  "titolo": "PA online: nel 2025 solo il 43,5% degli italiani ha usato un servizio pubblico digitale"
+ },
+ "https://www.customerpa.it/2026/03/24/cosa-fanno-cittadini-siti-pa-2025/": {
+  "data": "2026-03-24",
+  "doi": "10.5281/zenodo.23419031",
+  "file": "troisi-customerpa-2026-03-24-38.pdf",
+  "id": 23419031,
+  "portale": "CustomerPA™",
+  "stato": "bozza",
+  "titolo": "Cosa fanno gli italiani sui siti della PA: molta ricerca di informazioni, poche pratiche complete"
+ },
+ "https://www.customerpa.it/2026/03/31/quanti-questionari-servono-customer-satisfaction-pa/": {
+  "data": "2026-03-31",
+  "doi": "10.5281/zenodo.23419076",
+  "file": "troisi-customerpa-2026-03-31-39.pdf",
+  "id": 23419076,
+  "portale": "CustomerPA™",
+  "stato": "bozza",
+  "titolo": "Quanti questionari servono? Il margine di errore spiegato a chi deve misurare la soddisfazione"
+ },
+ "https://www.customerpa.it/2026/04/07/liste-attesa-bisogni-cure-non-soddisfatti-italia-europa-2024/": {
+  "data": "2026-04-07",
+  "doi": "10.5281/zenodo.23419123",
+  "file": "troisi-customerpa-2026-04-07-40.pdf",
+  "id": 23419123,
+  "portale": "CustomerPA™",
+  "stato": "bozza",
+  "titolo": "Liste d’attesa: il 1,9% degli italiani rinuncia a una visita. Meno della media UE, ma l’indicatore non dice tutto"
+ },
+ "https://www.customerpa.it/2026/04/14/asili-nido-bambini-sotto-3-anni-italia-europa-2024/": {
+  "data": "2026-04-14",
+  "doi": "10.5281/zenodo.23419158",
+  "file": "troisi-customerpa-2026-04-14-41.pdf",
+  "id": 23419158,
+  "portale": "CustomerPA™",
+  "stato": "bozza",
+  "titolo": "Asili nido: il 39,4% dei bambini sotto i 3 anni frequenta un servizio educativo, l’Italia raggiunge la media UE"
+ },
+ "https://www.customerpa.it/2026/04/21/riciclo-rifiuti-urbani-italia-europa-2023/": {
+  "data": "2026-04-21",
+  "doi": "10.5281/zenodo.23419200",
+  "file": "troisi-customerpa-2026-04-21-42.pdf",
+  "id": 23419200,
+  "portale": "CustomerPA™",
+  "stato": "bozza",
+  "titolo": "Rifiuti urbani: l’Italia ricicla il 50,8%, sopra la media europea ma ancora sotto l’obiettivo 2025"
+ },
+ "https://www.customerpa.it/2026/04/28/giovani-anziani-pa-digitale-italia-2025/": {
+  "data": "2026-04-28",
+  "doi": "10.5281/zenodo.23419244",
+  "file": "troisi-customerpa-2026-04-28-44.pdf",
+  "id": 23419244,
+  "portale": "CustomerPA™",
+  "stato": "bozza",
+  "titolo": "PA digitale, la sorpresa dei giovani: solo il 31,4% dei 16-24enni italiani la usa, meno degli over 55"
+ },
+ "https://www.dibattito-pubblico.it/2026/03/20/cittadinanza-attiva-italia-europa/": {
+  "data": "2026-03-20",
+  "doi": "10.5281/zenodo.23418999",
+  "file": "troisi-dibattito-pubblico-2026-03-20-16.pdf",
+  "id": 23418999,
+  "portale": "Dibattito Pubblico",
+  "stato": "bozza",
+  "titolo": "Cittadinanza attiva: in Italia partecipa il 2,2% degli adulti, in Europa il 7,2%"
+ },
+ "https://www.dibattito-pubblico.it/2026/03/27/chi-partecipa-vita-civica-eta-istruzione/": {
+  "data": "2026-03-27",
+  "doi": "10.5281/zenodo.23419050",
+  "file": "troisi-dibattito-pubblico-2026-03-27-17.pdf",
+  "id": 23419050,
+  "portale": "Dibattito Pubblico",
+  "stato": "bozza",
+  "titolo": "Chi partecipa alla vita civica: tra i laureati italiani il 4,1%, in Europa il 13,2%"
+ },
+ "https://www.dibattito-pubblico.it/2026/04/03/perche-non-si-partecipa-vita-civica/": {
+  "data": "2026-04-03",
+  "doi": "10.5281/zenodo.23419101",
+  "file": "troisi-dibattito-pubblico-2026-04-03-18.pdf",
+  "id": 23419101,
+  "portale": "Dibattito Pubblico",
+  "stato": "bozza",
+  "titolo": "Perché non si partecipa: in Italia solo il 34,5% dice di non essere interessato"
+ },
+ "https://www.dibattito-pubblico.it/2026/04/10/volontariato-formale-informale-italia/": {
+  "data": "2026-04-10",
+  "doi": "10.5281/zenodo.23419145",
+  "file": "troisi-dibattito-pubblico-2026-04-10-19.pdf",
+  "id": 23419145,
+  "portale": "Dibattito Pubblico",
+  "stato": "bozza",
+  "titolo": "Volontariato: in Italia lo fa il 5,3% in un’organizzazione, meno della metà della media europea"
+ },
+ "https://www.dibattito-pubblico.it/2026/04/17/consultazioni-online-petizioni-italia-2025/": {
+  "data": "2026-04-17",
+  "doi": "10.5281/zenodo.23419178",
+  "file": "troisi-dibattito-pubblico-2026-04-17-20.pdf",
+  "id": 23419178,
+  "portale": "Dibattito Pubblico",
+  "stato": "bozza",
+  "titolo": "Consultazioni e petizioni online: l’Italia al 10,7%, in linea con la media europea"
+ },
+ "https://www.dibattito-pubblico.it/2026/04/24/opinioni-online-temi-civici-politici/": {
+  "data": "2026-04-24",
+  "doi": "10.5281/zenodo.23419223",
+  "file": "troisi-dibattito-pubblico-2026-04-24-21.pdf",
+  "id": 23419223,
+  "portale": "Dibattito Pubblico",
+  "stato": "bozza",
+  "titolo": "Opinioni su temi civici e politici in rete: in Italia le esprime il 21,1%, sopra la media europea"
+ },
+ "https://www.digitalizzazionenellapa.it/2026/03/19/competenze-digitali-di-base-italia-2025/": {
+  "data": "2026-03-19",
+  "doi": "10.5281/zenodo.23418987",
+  "file": "troisi-digitalizzazionenellapa-2026-03-19-354.pdf",
+  "id": 23418987,
+  "portale": "DigitalizzazionePA",
+  "stato": "bozza",
+  "titolo": "Competenze digitali di base: l’Italia sale al 54,3%, ma resta sei punti sotto la media europea"
+ },
+ "https://www.digitalizzazionenellapa.it/2026/03/26/persone-mai-usato-internet-italia/": {
+  "data": "2026-03-26",
+  "doi": "10.5281/zenodo.23419046",
+  "file": "troisi-digitalizzazionenellapa-2026-03-26-355.pdf",
+  "id": 23419046,
+  "portale": "DigitalizzazionePA",
+  "stato": "bozza",
+  "titolo": "Chi non ha mai usato internet: in Italia è ancora il 6,3% degli adulti, in Europa il 4,4%"
+ },
+ "https://www.digitalizzazionenellapa.it/2026/04/02/intelligenza-artificiale-generativa-uso-cittadini-italia/": {
+  "data": "2026-04-02",
+  "doi": "10.5281/zenodo.23419090",
+  "file": "troisi-digitalizzazionenellapa-2026-04-02-356.pdf",
+  "id": 23419090,
+  "portale": "DigitalizzazionePA",
+  "stato": "bozza",
+  "titolo": "IA generativa: la usa il 19,9% degli italiani, contro il 32,7% degli europei"
+ },
+ "https://www.digitalizzazionenellapa.it/2026/04/09/intelligenza-artificiale-imprese-italia-2025/": {
+  "data": "2026-04-09",
+  "doi": "10.5281/zenodo.23419141",
+  "file": "troisi-digitalizzazionenellapa-2026-04-09-357.pdf",
+  "id": 23419141,
+  "portale": "DigitalizzazionePA",
+  "stato": "bozza",
+  "titolo": "Intelligenza artificiale nelle imprese: in Italia la usa il 16,4%, il doppio dell’anno prima"
+ },
+ "https://www.digitalizzazionenellapa.it/2026/04/16/cloud-computing-imprese-italia-seconda-europa/": {
+  "data": "2026-04-16",
+  "doi": "10.5281/zenodo.23419167",
+  "file": "troisi-digitalizzazionenellapa-2026-04-16-358.pdf",
+  "id": 23419167,
+  "portale": "DigitalizzazionePA",
+  "stato": "bozza",
+  "titolo": "Cloud computing: con il 75,6% delle imprese l’Italia è seconda in Europa"
+ },
+ "https://www.digitalizzazionenellapa.it/2026/04/23/intensita-digitale-pmi-italia/": {
+  "data": "2026-04-23",
+  "doi": "10.5281/zenodo.23419217",
+  "file": "troisi-digitalizzazionenellapa-2026-04-23-359.pdf",
+  "id": 23419217,
+  "portale": "DigitalizzazionePA",
+  "stato": "bozza",
+  "titolo": "PMI digitali: il 70,2% ha un’intensità digitale almeno di base, lontano dall’obiettivo del 90%"
+ },
+ "https://www.digitalizzazionenellapa.it/2026/04/30/identita-digitale-eid-uso-italia-europa/": {
+  "data": "2026-04-30",
+  "doi": "10.5281/zenodo.23419257",
+  "file": "troisi-digitalizzazionenellapa-2026-04-30-360.pdf",
+  "id": 23419257,
+  "portale": "DigitalizzazionePA",
+  "stato": "bozza",
+  "titolo": "Identità digitale: la usa il 53,2% degli italiani, poco sopra la media europea"
+ },
+ "https://www.governancefinanziaria.it/cloud-computing-imprese-italiane-2025/": {
+  "data": "2026-03-25",
+  "doi": "10.5281/zenodo.23419040",
+  "file": "troisi-governancefinanziaria-2026-03-25-73.pdf",
+  "id": 23419040,
+  "portale": "Governance Finanziaria",
+  "stato": "bozza",
+  "titolo": "Cloud nelle imprese: l’Italia al 75,6%, seconda in Europa"
+ },
+ "https://www.governancefinanziaria.it/imposte-ambientali-italia-europa-2024/": {
+  "data": "2026-04-22",
+  "doi": "10.5281/zenodo.23419213",
+  "file": "troisi-governancefinanziaria-2026-04-22-75.pdf",
+  "id": 23419213,
+  "portale": "Governance Finanziaria",
+  "stato": "bozza",
+  "titolo": "Imposte ambientali: in Italia valgono il 2,75% del PIL"
+ },
+ "https://www.governancefinanziaria.it/intensita-digitale-pmi-italia-2025/": {
+  "data": "2026-04-08",
+  "doi": "10.5281/zenodo.23419129",
+  "file": "troisi-governancefinanziaria-2026-04-08-74.pdf",
+  "id": 23419129,
+  "portale": "Governance Finanziaria",
+  "stato": "bozza",
+  "titolo": "PMI digitali: il 79,5% ha almeno un livello di base"
+ },
+ "https://www.mappaturadellecompetenze.it/2026/03/22/competenze-digitali-adulti-italia-europa-2025/": {
+  "data": "2026-03-22",
+  "doi": "10.5281/zenodo.23419017",
+  "file": "troisi-mappaturadellecompetenze-2026-03-22-36.pdf",
+  "id": 23419017,
+  "portale": "Mappatura delle Competenze",
+  "stato": "bozza",
+  "titolo": "Competenze digitali: il 54,3% degli italiani ha almeno quelle di base"
+ },
+ "https://www.mappaturadellecompetenze.it/2026/03/29/competenze-digitali-eta-titolo-studio/": {
+  "data": "2026-03-29",
+  "doi": "10.5281/zenodo.23419060",
+  "file": "troisi-mappaturadellecompetenze-2026-03-29-37.pdf",
+  "id": 23419060,
+  "portale": "Mappatura delle Competenze",
+  "stato": "bozza",
+  "titolo": "Competenze digitali: il titolo di studio conta più dell’età"
+ },
+ "https://www.mappaturadellecompetenze.it/2026/04/05/competenze-digitali-cinque-aree-italia/": {
+  "data": "2026-04-05",
+  "doi": "10.5281/zenodo.23419115",
+  "file": "troisi-mappaturadellecompetenze-2026-04-05-38.pdf",
+  "id": 23419115,
+  "portale": "Mappatura delle Competenze",
+  "stato": "bozza",
+  "titolo": "Le cinque aree delle competenze digitali: dove l’Italia è più indietro"
+ },
+ "https://www.mappaturadellecompetenze.it/2026/04/12/posti-vacanti-italia-europa-2025/": {
+  "data": "2026-04-12",
+  "doi": "10.5281/zenodo.23419152",
+  "file": "troisi-mappaturadellecompetenze-2026-04-12-39.pdf",
+  "id": 23419152,
+  "portale": "Mappatura delle Competenze",
+  "stato": "bozza",
+  "titolo": "Posti vacanti: in Italia l’1,8% dei posti di lavoro è in attesa di essere coperto"
+ },
+ "https://www.mappaturadellecompetenze.it/2026/04/19/imprese-formazione-competenze-digitali-dipendenti/": {
+  "data": "2026-04-19",
+  "doi": "10.5281/zenodo.23419190",
+  "file": "troisi-mappaturadellecompetenze-2026-04-19-40.pdf",
+  "id": 23419190,
+  "portale": "Mappatura delle Competenze",
+  "stato": "bozza",
+  "titolo": "Formazione digitale in azienda: la offre il 17,9% delle imprese italiane"
+ },
+ "https://www.mappaturadellecompetenze.it/2026/04/26/difficolta-reclutare-specialisti-ict-imprese/": {
+  "data": "2026-04-26",
+  "doi": "10.5281/zenodo.23419234",
+  "file": "troisi-mappaturadellecompetenze-2026-04-26-41.pdf",
+  "id": 23419234,
+  "portale": "Mappatura delle Competenze",
+  "stato": "bozza",
+  "titolo": "Specialisti ICT introvabili: il 58,4% delle imprese che li cercano fatica a trovarli"
+ },
+ "https://www.troisiinsight.it/2026/03/16/pil-pro-capite-regioni-italiane-divario-nord-sud-2024/": {
+  "data": "2026-03-16",
+  "doi": "10.5281/zenodo.23418977",
+  "file": "troisi-troisiinsight-2026-03-16-31.pdf",
+  "id": 23418977,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Il divario che non si chiude: il PIL pro capite delle regioni italiane"
+ },
+ "https://www.troisiinsight.it/2026/03/23/intelligenza-artificiale-imprese-europee-italia-2025/": {
+  "data": "2026-03-23",
+  "doi": "10.5281/zenodo.23419023",
+  "file": "troisi-troisiinsight-2026-03-23-32.pdf",
+  "id": 23419023,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Intelligenza artificiale in azienda: l’Europa raddoppia, l’Italia insegue"
+ },
+ "https://www.troisiinsight.it/2026/03/30/disoccupazione-giovanile-italia-europa-gennaio-2026/": {
+  "data": "2026-03-30",
+  "doi": "10.5281/zenodo.23419067",
+  "file": "troisi-troisiinsight-2026-03-30-33.pdf",
+  "id": 23419067,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Disoccupazione giovanile: l’Italia scende al 18,5%, ma resta lontana dall’Europa"
+ },
+ "https://www.troisiinsight.it/2026/04/06/inflazione-marzo-2026-shock-energetico-hormuz/": {
+  "data": "2026-04-06",
+  "doi": "10.5281/zenodo.23419121",
+  "file": "troisi-troisiinsight-2026-04-06-34.pdf",
+  "id": 23419121,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Inflazione, il primo mese di Hormuz: area euro al 2,6%, Italia all’1,6%"
+ },
+ "https://www.troisiinsight.it/2026/04/13/richieste-asilo-europa-2025-italia-seconda/": {
+  "data": "2026-04-13",
+  "doi": "10.5281/zenodo.23419156",
+  "file": "troisi-troisiinsight-2026-04-13-35.pdf",
+  "id": 23419156,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Asilo in Europa: le domande calano del 26%, ma l’Italia è seconda solo alla Spagna"
+ },
+ "https://www.troisiinsight.it/2026/04/20/fiducia-consumatori-marzo-2026-crollo-italia/": {
+  "data": "2026-04-20",
+  "doi": "10.5281/zenodo.23419194",
+  "file": "troisi-troisiinsight-2026-04-20-36.pdf",
+  "id": 23419194,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Fiducia dei consumatori: a marzo l’Italia tocca il minimo da tre anni"
+ },
+ "https://www.troisiinsight.it/2026/04/27/debito-pubblico-2025-italia-137-per-cento-pil/": {
+  "data": "2026-04-27",
+  "doi": "10.5281/zenodo.23419239",
+  "file": "troisi-troisiinsight-2026-04-27-37.pdf",
+  "id": 23419239,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Debito pubblico 2025: l’Italia sale al 137,1% del PIL, seconda solo alla Grecia"
  }
 }
