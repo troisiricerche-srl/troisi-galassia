@@ -1,0 +1,240 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:A;src:url(archivo.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%}
+html,body{margin:0;background:transparent}
+</style></head>
+<body><canvas id="cv"></canvas>
+<script>
+// Sovrimpressioni del video istituzionale di Troisi Ricerche.
+// window.CONF = {W,H,fps,scene:[{tipo,da,a,...}],beats:[...],pool:[path],primi:[path],carte:{...},logo:{testo}} — tempi in secondi.
+const ROSSO = '#AD0E13', ARANCIO = '#F57F1F', BLU = '#00264D', BIANCO = '#FFFFFF';
+const cv = document.getElementById('cv'); const C = window.CONF; cv.width = C.W; cv.height = C.H; const x = cv.getContext('2d');
+const V = C.H > C.W; const S = Math.min(C.W, C.H) / 1080;
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const eo = t => 1 - Math.pow(1 - cl(t), 3);
+const eio = t => { t = cl(t); return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+const eob = t => { t = cl(t); const c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
+function pulse(t) { let best = 9; for (const b of C.beats) { const d = t - b; if (d >= 0 && d < best) best = d; } return Math.exp(-best * 6); }
+function font(w, px, st = 100) { x.font = `${w} ${px * S}px A`; x.fontStretch = st >= 110 ? 'expanded' : (st <= 80 ? 'condensed' : 'normal'); }
+function testo(s, px, w, colore, X, Y, align = 'left', alpha = 1, track = 0, st = 100) {
+  font(w, px, st); x.fillStyle = colore; x.globalAlpha = alpha; x.textAlign = align; x.textBaseline = 'alphabetic';
+  x.letterSpacing = (track * S) + 'px'; x.fillText(s, X, Y); x.globalAlpha = 1; x.letterSpacing = '0px';
+}
+function sale(s, px, w, colore, X, Y, p, align = 'left', track = 0, st = 100) {
+  font(w, px, st); const h = px * S * 1.3; x.save(); x.beginPath();
+  const mw = 5000; x.rect(align === 'center' ? X - mw / 2 : (align === 'right' ? X - mw : X), Y - h * .95, mw, h * 1.3); x.clip();
+  testo(s, px, w, colore, X, Y + (1 - eo(p)) * h, align, cl(p * 3), track, st); x.restore();
+}
+function larghezza(s, px, w, st = 100) { font(w, px, st); return x.measureText(s).width; }
+// marchio TT disegnato in vettoriale (proporzioni dal logo ufficiale, unità = px del file 776×428)
+const TR = [[11, 13, 270, 64], [104, 77, 85, 101]], TA = [[222, 106, 179, 65], [222, 171, 88, 101]];
+const IMG = {}; const carica = p => new Promise(r => { const im = new Image(); im.onload = () => { IMG[p] = im; r(); }; im.onerror = () => r(); im.src = p.startsWith('/') ? 'file://' + p : p; });
+function marchioTT(X, Y, k, pR = 1, pA = 1, alpha = 1) { // X,Y = angolo in alto a sinistra del logo intero; k = scala
+  x.save(); x.globalAlpha = alpha;
+  const dyR = (1 - eob(pR)) * -260, dxA = (1 - eo(pA)) * 300;
+  x.fillStyle = ROSSO; x.globalAlpha = alpha * cl(pR * 4); for (const [a, b, w, h] of TR) x.fillRect(X + a * k, Y + (b + dyR) * k, w * k + .5, h * k + .5);
+  x.fillStyle = ARANCIO; x.globalAlpha = alpha * cl(pA * 4); for (const [a, b, w, h] of TA) x.fillRect(X + (a + dxA) * k, Y + b * k, w * k + .5, h * k + .5);
+  x.restore();
+}
+function scritta(X, Y, k, p = 1, alpha = 1) { // «TROISI RICERCHE» del logo (immagine), rivelata da sinistra
+  const im = IMG[C.logo.testo]; if (!im) return; const w = im.width * k, h = im.height * k;
+  x.save(); x.globalAlpha = alpha; x.beginPath(); x.rect(X + 380 * k, Y + 230 * k, w * eio(p), h); x.clip(); x.drawImage(im, X + 380 * k, Y + 230 * k, w, h); x.restore();
+}
+function logoIntero(cx, cy, larg, pR, pA, pT, alpha = 1) { const k = larg / 776; const X = cx - larg / 2, Y = cy - 428 * k / 2; marchioTT(X, Y, k, pR, pA, alpha); scritta(X, Y, k, pT, alpha); }
+function fondoBlu() {
+  x.fillStyle = BLU; x.fillRect(0, 0, C.W, C.H);
+  const g = x.createRadialGradient(C.W / 2, C.H * .45, 10, C.W / 2, C.H / 2, Math.max(C.W, C.H) * .75); g.addColorStop(0, 'rgba(10,70,130,.85)'); g.addColorStop(1, 'rgba(0,20,42,1)'); x.fillStyle = g; x.fillRect(0, 0, C.W, C.H);
+  // trama di punti, come i dati
+  x.fillStyle = 'rgba(255,255,255,.05)'; const p = 36 * S; for (let yy = p / 2; yy < C.H; yy += p) for (let xx = p / 2; xx < C.W; xx += p) { x.beginPath(); x.arc(xx, yy, 1.6 * S, 0, 7); x.fill(); }
+}
+function ombra(alto, basso) {
+  if (basso) { const g = x.createLinearGradient(0, C.H * .35, 0, C.H); g.addColorStop(0, 'rgba(0,25,50,0)'); g.addColorStop(.55, `rgba(0,25,50,${basso * .75})`); g.addColorStop(1, `rgba(0,25,50,${basso})`); x.fillStyle = g; x.fillRect(0, C.H * .35, C.W, C.H * .65); }
+  if (alto) { const g = x.createLinearGradient(0, 0, 0, C.H * .28); g.addColorStop(0, `rgba(0,25,50,${alto})`); g.addColorStop(1, 'rgba(0,25,50,0)'); x.fillStyle = g; x.fillRect(0, 0, C.W, C.H * .28); }
+}
+function filetto(X, Y, w, p) { x.fillStyle = ARANCIO; x.fillRect(X, Y, w * eo(p) * S, 5 * S); x.fillStyle = ROSSO; x.fillRect(X, Y, w * .35 * eo(p) * S, 5 * S); }
+function firma(alpha) { const k = (V ? 150 : 140) * S / 776; marchioTT(M(), (V ? 70 : 52) * S, k, 1, 1, alpha); scritta(M(), (V ? 70 : 52) * S, k, 1, alpha); }
+const M = () => (V ? 70 : 110) * S;
+function didascalia(s, u, Y) { if (!s) return; testo(s.toUpperCase(), V ? 24 : 22, 600, 'rgba(255,255,255,.8)', M(), Y, 'left', cl((u - .5) / .4), 2.5); }
+// mosaico «TROISI RICERCHE»
+let CELLE = null, LATO = 0, MO = null, MK = null;
+function preparaMosaico() {
+  const righe = ['TROISI', 'RICERCHE'];
+  const o = document.createElement('canvas'); o.width = C.W; o.height = C.H; const g = o.getContext('2d');
+  const larg = C.W * (V ? .92 : .84); let px = 400; const f = p => `900 ${p}px A`; g.font = f(px); g.fontStretch = 'normal';
+  const pxs = righe.map(r => { let q = Math.floor(400 * larg / g.measureText(r).width); if (!V) q = Math.min(q, C.H * .4); return q; });
+  px = Math.min(...pxs); const tot = pxs[0] * .74 + pxs[1] * .74 + px * .3; const ys = []; let yy = C.H / 2 - tot / 2 - (V ? 40 : 30) * S;
+  pxs.forEach((q, i) => { yy += q * .74; ys.push(yy); yy += px * .3; });
+  g.fillStyle = '#fff'; g.textAlign = 'center'; g.textBaseline = 'alphabetic'; righe.forEach((r, i) => { g.font = f(pxs[i]); g.fillText(r, C.W / 2, ys[i]); });
+  window.TESTO_M = { righe, px, pxs, ys };
+  window.MASCHERA = o; MO = document.createElement('canvas'); MO.width = C.W; MO.height = C.H; MK = document.createElement('canvas'); MK.width = C.W; MK.height = C.H;
+  const d = g.getImageData(0, 0, C.W, C.H).data; LATO = Math.max(10, Math.round(Math.max(...pxs) / (V ? 6 : 7))); CELLE = [];
+  const dentro = (xx, yy) => { xx = Math.round(xx); yy = Math.round(yy); if (xx < 0 || yy < 0 || xx >= C.W || yy >= C.H) return false; return d[(yy * C.W + xx) * 4 + 3] > 100; };
+  for (let yy = LATO / 2; yy < C.H; yy += LATO) for (let xx = LATO / 2; xx < C.W; xx += LATO) {
+    const h = LATO * .45; if ([[0, 0], [-h, -h], [h, -h], [-h, h], [h, h], [0, -h], [0, h], [-h, 0], [h, 0]].some(([a, b]) => dentro(xx + a, yy + b))) CELLE.push({ x: xx, y: yy });
+  }
+  let s = 11; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  const pool = C.pool.slice(); for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+  CELLE.forEach((c, i) => { c.k = rnd(); c.f = pool[i % pool.length]; c.dx = (rnd() - .5) * C.W * .8; c.dy = (rnd() - .5) * C.H * .8; });
+  CELLE.sort((a, b) => a.k - b.k);
+  C.primi.forEach((p, i) => { if (CELLE[i]) CELLE[i].f = p; }); // i primi tasselli: le foto con Andrea
+  window.MOSAICO_INFO = { celle: CELLE.length, lato: LATO, px, pool: C.pool.length };
+}
+function tassello(o, im, cx, cy, l) { const s = Math.min(im.width, im.height); o.drawImage(im, (im.width - s) / 2, (im.height - s) / 2 * .7, s, s, cx - l / 2, cy - l / 2, l, l); }
+function carta(im, cx, cy, maxw, maxh, rot, sc, alpha) {
+  const r = Math.min(maxw / im.width, maxh / im.height); const w = im.width * r * sc, h = im.height * r * sc, b = 12 * S * sc;
+  x.save(); x.globalAlpha = alpha; x.translate(cx, cy); x.rotate(rot);
+  x.shadowColor = 'rgba(0,0,0,.45)'; x.shadowBlur = 40 * S; x.shadowOffsetY = 16 * S; x.fillStyle = '#fff'; x.fillRect(-w / 2 - b, -h / 2 - b, w + 2 * b, h + 2 * b);
+  x.shadowColor = 'transparent'; x.drawImage(im, -w / 2, -h / 2, w, h); x.restore();
+}
+function scena(s, t) {
+  const d = s.a - s.da, u = t - s.da + (s.gia || 0);
+  if (s.tipo === 'apertura') {
+    fondoBlu();
+    const larg = (V ? 820 : 900) * S, cy = C.H / 2 - (V ? 120 : 70) * S;
+    logoIntero(C.W / 2, cy, larg, (u - .25) / .7, (u - .9) / .7, (u - 1.7) / .8);
+    const y2 = cy + 428 * (larg / 776) / 2 + (V ? 120 : 95) * S;
+    sale('ISTITUTO DI RICERCA STATISTICA', V ? 40 : 36, 700, BIANCO, C.W / 2, y2, (u - 2.6) / .6, 'center', 7);
+    if (u > 3.1) { x.fillStyle = ARANCIO; const w = 140 * S * eo((u - 3.1) / .5); x.fillRect(C.W / 2 - w / 2, y2 + 34 * S, w, 5 * S); }
+    sale('DAL 2006 · BARI · ROMA · MILANO', V ? 30 : 28, 600, 'rgba(255,255,255,.85)', C.W / 2, y2 + (V ? 95 : 85) * S, (u - 3.3) / .6, 'center', 5);
+    if (u > d - .35) { x.fillStyle = `rgba(255,255,255,${cl((u - (d - .35)) / .35) * .85})`; x.fillRect(0, 0, C.W, C.H); }
+  } else if (s.tipo === 'claim') {
+    ombra(.55, .92); firma(cl(u / .4));
+    const n = s.righe.length, passo = (V ? 112 : 104) * S, Y = C.H - (V ? 300 : 150) * S - (n - 1) * passo;
+    s.righe.forEach((r, i) => { let px = r.px || (V ? 92 : 96); const lim = C.W - 2 * M(); const w = larghezza(r.t, px, 900); if (w > lim) px = Math.floor(px * lim / w);
+      sale(r.t, px, 900, r.c === 'a' ? ARANCIO : BIANCO, M(), Y + i * passo, (u - .15 - i * (s.passo || .4)) / .5); });
+    if (s.didascalia) didascalia(s.didascalia, u, Y - (V ? 120 : 112) * S);
+  } else if (s.tipo === 'parola') {
+    ombra(.5, .95); firma(1);
+    const Y = C.H - (V ? 300 : 150) * S;
+    let px = V ? 104 : 104; const lim = C.W - 2 * M(); let righe = [s.parola];
+    if (larghezza(s.parola, px, 900) > lim && s.parola.includes(' ')) { const sp = [...s.parola.matchAll(/ /g)].map(m => m.index); const mid = s.parola.length / 2; const i = sp.sort((a, b) => Math.abs(a - mid) - Math.abs(b - mid))[0]; righe = [s.parola.slice(0, i), s.parola.slice(i + 1)]; }
+    const wmax = Math.max(...righe.map(r => larghezza(r, px, 900))); if (wmax > lim) px = Math.floor(px * lim / wmax);
+    const ly = px * S * 1.02; righe.forEach((r, i) => sale(r, px, 900, ARANCIO, M(), Y - (righe.length - 1 - i) * ly, (u - .05 - i * .12) / .35));
+    sale('Misuriamo', V ? 64 : 60, 300, BIANCO, M(), Y - (righe.length - 1) * ly - (V ? 116 : 104) * S, s.primo ? (u - .05) / .4 : 1);
+    filetto(M(), Y + 34 * S, 110, (u - .2) / .4);
+    if (s.n) testo(s.n, V ? 26 : 24, 700, 'rgba(255,255,255,.7)', C.W - M(), (V ? 112 : 92) * S, 'right', cl(u / .3), 3);
+    didascalia(s.didascalia, u, Y + (V ? 92 : 84) * S);
+  } else if (s.tipo === 'numero') {
+    x.fillStyle = 'rgba(0,25,50,.72)'; x.fillRect(0, 0, C.W, C.H); firma(1);
+    const cx = V ? C.W / 2 : M(), al = V ? 'center' : 'left', Y = C.H / 2 + (V ? 60 : 70) * S;
+    const val = Math.round(s.val * eo(u / .8)); const txt = val + (s.suf || '');
+    sale(txt, V ? 300 : 300, 900, BIANCO, cx, Y, u / .25, al, 0, 100);
+    sale(s.etichetta, V ? 64 : 64, 700, ARANCIO, cx, Y + (V ? 110 : 100) * S, (u - .2) / .35, al);
+    if (s.n) testo(s.n, V ? 26 : 24, 700, 'rgba(255,255,255,.7)', C.W - M(), (V ? 112 : 92) * S, 'right', 1, 3);
+  } else if (s.tipo === 'carte') {
+    fondoBlu();
+    const L = s.carte, per = d / L.length, k = Math.min(L.length - 1, Math.floor(u / per));
+    testo('NEI LUOGHI DOVE SI DECIDE', V ? 28 : 26, 700, ARANCIO, M(), (V ? 130 : 110) * S, 'left', cl(u / .4), 4);
+    for (let j = 0; j <= k; j++) {
+      const c = L[j], im = IMG[c.f]; if (!im) continue; const v = (u - j * per) / per;
+      const p = eob(v / .3), att = j < k ? 1 - (k - j) * .18 : 1;
+      const cx = C.W / 2 + (c.ox || 0) * S * (V ? .15 : 1), cy = C.H / 2 + (V ? -20 : 10) * S + (c.oy || 0) * S;
+      const sx = (1 - eo(v / .3)) * (j % 2 ? 1 : -1) * C.W * .7;
+      carta(im, cx + sx, cy, (V ? 860 : 1100) * S, (V ? 1000 : 720) * S, (c.r || 0) * Math.PI / 180, (j < k ? .92 : .9 + .1 * p) * (1 + .04 * cl(v)), cl(att));
+    }
+    const c = L[k], v = (u - k * per) / per;
+    const Y = C.H - (V ? 170 : 70) * S; x.fillStyle = 'rgba(0,25,50,.8)';
+    font(800, V ? 44 : 44); const w = x.measureText(c.t).width + 60 * S; x.save(); x.globalAlpha = cl(v / .2); x.fillRect(C.W / 2 - w / 2, Y - 58 * S, w, 82 * S); x.fillStyle = ARANCIO; x.fillRect(C.W / 2 - w / 2, Y + 24 * S, w, 5 * S); x.restore();
+    sale(c.t, V ? 44 : 44, 800, BIANCO, C.W / 2, Y, (v - .05) / .25, 'center');
+  } else if (s.tipo === 'mosaico') {
+    fondoBlu(); if (!CELLE) preparaMosaico();
+    const N = CELLE.length, anim = d * .1, P = C.primi.length; const o = MO.getContext('2d'); o.clearRect(0, 0, C.W, C.H);
+    for (let j = 0; j < N; j++) {
+      const c = CELLE[j]; const t0 = j < P ? j * d * .2 / P : d * .2 + d * .42 * Math.pow((j - P) / Math.max(1, N - P), 1 / 2.2);
+      if (u < t0) break;
+      const p = cl((u - t0) / (j < P ? anim * 2.2 : anim));
+      const big = j < P ? 8 : 2.2, sc = big + (1 - big) * eio(p);
+      const f = j < P ? .15 : 1, px = c.x + c.dx * (1 - eio(p)) * f, py = c.y + c.dy * (1 - eio(p)) * f;
+      const im = IMG[c.f]; if (!im) continue; const l = LATO * (j < P && p < 1 ? .94 : 1.02) * sc;
+      o.globalAlpha = cl(p * 3); tassello(o, im, px, py, l); o.globalAlpha = 1;
+    }
+    const k = eio((u - d * .64) / (d * .14));
+    if (k < 1) { x.globalAlpha = 1 - k; x.drawImage(MO, 0, 0); x.globalAlpha = 1; }
+    if (k > 0) { const m = MK.getContext('2d'); m.globalCompositeOperation = 'source-over'; m.clearRect(0, 0, C.W, C.H); m.drawImage(MO, 0, 0); m.globalCompositeOperation = 'destination-in'; m.drawImage(window.MASCHERA, 0, 0); m.globalCompositeOperation = 'source-over';
+      x.globalAlpha = k; x.drawImage(MK, 0, 0); x.globalAlpha = 1;
+      const TM = window.TESTO_M; x.save(); x.globalAlpha = k; x.textAlign = 'center'; x.textBaseline = 'alphabetic';
+      x.lineJoin = 'round'; TM.righe.forEach((r, i) => { x.font = `900 ${TM.pxs[i]}px A`; x.lineWidth = Math.max(3, TM.pxs[i] * .03); x.strokeStyle = i ? ARANCIO : ROSSO; x.strokeText(r, C.W / 2, TM.ys[i]); }); x.restore();
+      sale('Vent\'anni di ricerche, convegni, persone.', V ? 46 : 50, 700, BIANCO, C.W / 2, TM.ys[1] + (V ? 140 : 110) * S, (u - d * .74) / .5, 'center'); }
+    if (s.dissolvi && u > d - s.dissolvi) { x.fillStyle = `rgba(0,20,42,${cl((u - (d - s.dissolvi)) / s.dissolvi)})`; x.fillRect(0, 0, C.W, C.H); }
+  } else if (s.tipo === 'chiusura') {
+    fondoBlu();
+    const larg = (V ? 760 : 720) * S, cy = C.H / 2 - (V ? 230 : 150) * S;
+    logoIntero(C.W / 2, cy, larg, u / .6, (u - .35) / .6, (u - .7) / .7);
+    const y2 = cy + 428 * (larg / 776) / 2 + (V ? 120 : 95) * S;
+    sale('Misuriamo ciò che conta.', V ? 58 : 54, 700, BIANCO, C.W / 2, y2, (u - 1.0) / .5, 'center');
+    sale('BARI · ROMA · MILANO', V ? 30 : 28, 600, 'rgba(255,255,255,.8)', C.W / 2, y2 + (V ? 70 : 62) * S, (u - 1.2) / .5, 'center', 6);
+    if (s.cta !== undefined && t >= s.cta) { // il sito sull'ultimo colpo
+      const q = t - s.cta, sc = eob(q / .28), bw = (V ? 700 : 660) * S, bh = (V ? 120 : 110) * S, by = y2 + (V ? 230 : 190) * S;
+      x.save(); x.translate(C.W / 2, by); x.scale(sc, sc); x.fillStyle = ARANCIO; x.beginPath(); x.roundRect(-bw / 2, -bh / 2, bw, bh, bh / 2); x.fill();
+      testo('troisiricerche.net', V ? 58 : 54, 800, BIANCO, 0, (V ? 20 : 19) * S, 'center', 1, 1); x.restore();
+      if (q < .18) { x.fillStyle = `rgba(255,255,255,${(1 - q / .18) * .5})`; x.fillRect(0, 0, C.W, C.H); }
+    }
+    if (s.dissolvi && u < s.dissolvi) { x.fillStyle = `rgba(0,20,42,${1 - u / s.dissolvi})`; x.fillRect(0, 0, C.W, C.H); }
+  }
+}
+
+function telefono(im, cx, cy, h, rot = 0, alpha = 1) {
+  if (!im) return; const sw = h * im.width / im.height, b = h * .035, R = h * .07;
+  x.save(); x.globalAlpha = alpha; x.translate(cx, cy); x.rotate(rot);
+  x.shadowColor = 'rgba(0,0,0,.55)'; x.shadowBlur = 60 * S; x.shadowOffsetY = 24 * S; x.fillStyle = '#0B1220';
+  x.beginPath(); x.roundRect(-sw / 2 - b, -h / 2 - b * 1.6, sw + 2 * b, h + 3.2 * b, R); x.fill(); x.shadowColor = 'transparent';
+  x.strokeStyle = 'rgba(255,255,255,.18)'; x.lineWidth = 2 * S; x.stroke();
+  x.save(); x.beginPath(); x.roundRect(-sw / 2, -h / 2, sw, h, R * .6); x.clip(); x.drawImage(im, -sw / 2, -h / 2, sw, h); x.restore();
+  x.fillStyle = '#0B1220'; x.beginPath(); x.roundRect(-sw * .14, -h / 2 + b * .2, sw * .28, b * 1.1, b); x.fill();
+  x.restore();
+}
+function stelle(t) { // galassia: punti che ruotano lentamente intorno al centro
+  let s = 3; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647; const cx = C.W / 2, cy = C.H / 2;
+  for (let i = 0; i < 260; i++) { const r = Math.pow(rnd(), .6) * Math.max(C.W, C.H) * .75, a0 = rnd() * 7, v = (.04 + rnd() * .06) * (r < 300 * S ? 2 : 1), a = a0 + t * v;
+    x.globalAlpha = .25 + rnd() * .6; x.fillStyle = rnd() < .12 ? ARANCIO : BIANCO; x.beginPath(); x.arc(cx + Math.cos(a) * r, cy + Math.sin(a) * r * .55, (rnd() * 2.2 + .6) * S, 0, 7); x.fill(); }
+  x.globalAlpha = 1;
+}
+function scenaG(s, t) {
+  const d = s.a - s.da, u = t - s.da, L = C.siti;
+  if (s.tipo === 'galassia') {
+    fondoBlu(); stelle(t);
+    x.strokeStyle = 'rgba(245,127,31,.35)'; x.lineWidth = 2 * S; for (let k = 1; k <= 3; k++) { const p = eo((u - k * .3) / 1.2); x.beginPath(); x.ellipse(C.W / 2, C.H / 2, k * 260 * S * p, k * 140 * S * p, 0, 0, 7); x.stroke(); }
+    const k = (V ? 420 : 380) * S / 776; marchioTT(C.W / 2 - 205 * k, C.H / 2 - 140 * k - (V ? 60 : 30) * S, k, (u - .2) / .7, (u - .7) / .7);
+    sale('Una galassia di siti.', V ? 70 : 72, 900, BIANCO, C.W / 2, C.H / 2 + (V ? 230 : 230) * S, (u - 1.6) / .5, 'center');
+    sale('Un solo metodo.', V ? 70 : 72, 900, ARANCIO, C.W / 2, C.H / 2 + (V ? 320 : 315) * S, (u - 2.2) / .5, 'center');
+    if (u > d - .3) { x.fillStyle = `rgba(255,255,255,${cl((u - (d - .3)) / .3) * .6})`; x.fillRect(0, 0, C.W, C.H); }
+  } else if (s.tipo === 'telefoni') {
+    fondoBlu(); stelle(t);
+    const n = L.length, per = d / n, i = Math.min(n - 1, Math.floor(u / per)), v = (u - i * per) / per;
+    const ph = (V ? 1000 : 800) * S;
+    // i telefoni già visti restano sullo sfondo, piccoli, in orbita
+    for (let j = 0; j < i; j++) { const a = j / n * Math.PI * 2 + t * .15, rx = (V ? 420 : 760) * S, ry = (V ? 760 : 330) * S;
+      telefono(IMG[L[j].f], C.W / 2 + Math.cos(a) * rx, C.H / 2 + Math.sin(a) * ry, ph * .32, Math.sin(a) * .15, .55); }
+    const cx = V ? C.W / 2 : C.W * .34, cy = V ? C.H * .37 : C.H / 2 + 10 * S;
+    const ent = eob(v / .28), usc = v > .86 ? eio((v - .86) / .14) : 0;
+    const a = i / n * Math.PI * 2 + t * .15, ox = C.W / 2 + Math.cos(a) * (V ? 420 : 760) * S, oy = C.H / 2 + Math.sin(a) * (V ? 760 : 330) * S;
+    const fx = cx + (ox - cx) * usc, fy = cy + (1 - ent) * C.H * .9 + (oy - cy) * usc, fh = ph * (1 - .68 * usc);
+    telefono(IMG[L[i].f], fx, fy, fh, (1 - ent) * .25 + Math.sin(a) * .15 * usc, 1);
+    const tx = V ? C.W / 2 : C.W * .6, al = V ? 'center' : 'left', ty = V ? C.H * .37 + ph / 2 + 230 * S : C.H / 2 - 20 * S;
+    x.save(); x.globalAlpha = cl(1 - usc * 2);
+    testo(String(i + 1).padStart(2, '0') + ' / ' + (s.totale || n), V ? 26 : 26, 700, 'rgba(255,255,255,.65)', tx, ty - (V ? 120 : 130) * S, al, cl((v - .1) / .2), 4);
+    let px = V ? 74 : 78; const lim = V ? C.W - 2 * M() : C.W * .36; const w = larghezza(L[i].nome, px, 900); if (w > lim) px = Math.floor(px * lim / w);
+    sale(L[i].nome, px, 900, BIANCO, tx, ty, (v - .12) / .2, al);
+    sale(L[i].dominio, V ? 40 : 40, 700, ARANCIO, tx, ty + (V ? 70 : 70) * S, (v - .2) / .2, al);
+    x.restore();
+  } else if (s.tipo === 'griglia') {
+    fondoBlu(); stelle(t);
+    const n = L.length, cols = V ? 3 : 5, rows = Math.ceil(n / cols), ph = (V ? 420 : 380) * S, gw = ph * .8, gh = ph * 1.12;
+    const z = 1 + .12 * eio(u / d);
+    for (let j = 0; j < n; j++) { const c = j % cols, r = Math.floor(j / cols); const inRow = Math.min(cols, n - r * cols);
+      const px = C.W / 2 + (c - (inRow - 1) / 2) * gw * z, py = C.H / 2 - (V ? 120 : 60) * S + (r - (rows - 1) / 2) * gh * z;
+      const p = eob((u - j * .06) / .5); telefono(IMG[L[j].f], px, py + (1 - p) * 200 * S, ph * z * cl(p, .01), 0, cl(p * 2)); }
+    const by = V ? C.H - 260 * S : C.H - 90 * S; x.fillStyle = 'rgba(0,25,50,.85)'; const bw = larghezza('Oltre 20 siti, un solo metodo.', V ? 56 : 60, 900) + 80 * S;
+    x.globalAlpha = cl((u - .6) / .3); x.fillRect(C.W / 2 - bw / 2, by - 70 * S, bw, 100 * S); x.globalAlpha = 1;
+    sale('Oltre 20 siti, un solo metodo.', V ? 56 : 60, 900, BIANCO, C.W / 2, by, (u - .7) / .4, 'center');
+  } else if (s.tipo === 'silenzio') {
+    x.fillStyle = '#00142A'; x.fillRect(0, 0, C.W, C.H);
+    sale('Ogni mattina', V ? 70 : 72, 300, BIANCO, C.W / 2, C.H / 2 - 30 * S, (u - .1) / .4, 'center');
+    sale('un dato ufficiale sull\'Italia.', V ? 66 : 72, 900, ARANCIO, C.W / 2, C.H / 2 + 60 * S, (u - .4) / .4, 'center');
+  }
+}
+window.frame = f => { const t = f / C.fps; x.clearRect(0, 0, C.W, C.H); for (const s of C.scene) if (t >= s.da && t < s.a) (['galassia','telefoni','griglia','silenzio'].includes(s.tipo) ? scenaG : scena)(s, t); };
+const tutte = () => { const L = [C.logo.testo, ...(C.pool || []), ...(C.primi || [])]; C.scene.forEach(s => (s.carte || []).forEach(c => L.push(c.f))); (C.siti || []).forEach(c => L.push(c.f)); return [...new Set(L)]; };
+window.pronto = Promise.all(['900', '800', '700', '600', '300'].map(w => document.fonts.load(w + ' 40px A'))).then(() => Promise.all(tutte().map(carica)));
+</script></body></html>
