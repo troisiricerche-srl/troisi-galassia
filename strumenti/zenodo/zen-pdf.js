@@ -60,7 +60,7 @@
     c.removeAttribute('style');
     let s = new XMLSerializer().serializeToString(c);
     s = s.replace(/font-family="[^"]*"/g, '');
-    const w = Math.min(490, vb.length === 4 ? vb[2] * 0.68 : 490);
+    const w = Math.min(440, vb.length === 4 ? vb[2] * 0.62 : 440);
     return { svg: s, width: w, alignment: 'center', margin: [0, 4, 0, 4] };
   }
 
@@ -90,7 +90,7 @@
         const t = n.querySelector('.ti-chart-title'); if (t) st.push({ text: txt(t.innerHTML), style: 'figT' });
         const s = n.querySelector('.ti-chart-sub'); if (s) st.push({ text: txt(s.innerHTML), style: 'figS' });
         const lg = n.querySelector('.ti-legend');
-        if (lg) { const r = []; lg.querySelectorAll('span').forEach(sp => { const i = sp.querySelector('i'); const col = i && (i.getAttribute('style') || '').match(/background:\s*([^;]+)/); r.push({ text: '■ ', color: col ? col[1].trim() : BLU }); r.push({ text: txt(sp.innerHTML) + '    ' }); }); st.push({ text: r, style: 'figS' }); }
+        if (lg) { const cols = []; lg.querySelectorAll('span').forEach(sp => { const i = sp.querySelector('i'); const col = i && (i.getAttribute('style') || '').match(/background:\s*([^;]+)/); cols.push({ canvas: [{ type: 'rect', x: 0, y: 2.5, w: 7, h: 7, r: 1, color: col ? col[1].trim() : BLU }], width: 10 }); cols.push({ text: txt(sp.innerHTML), width: 'auto', fontSize: 7.6, color: GRIGIO, margin: [0, 0, 10, 0] }); }); st.push({ columns: cols, columnGap: 0, margin: [0, 1, 0, 3] }); }
         n.querySelectorAll('svg').forEach(sv => st.push(svgNode(sv)));
         n.querySelectorAll('img').forEach(() => st.push({ text: '[immagine nella versione online]', style: 'nota' }));
         const fc = n.querySelector('figcaption'); if (fc) st.push({ text: runs(fc), style: 'cap' });
