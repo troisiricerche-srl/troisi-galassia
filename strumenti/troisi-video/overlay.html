@@ -182,7 +182,8 @@ function battitura(s, t, y) {
   const nA = Math.max(0, Math.min(A.length, Math.floor((t - s.scrivi) / vel) + 1)) * (t >= s.scrivi ? 1 : 0);
   const nB = t >= s.davvero ? Math.min(B.length, Math.floor((t - s.davvero) / vel) + 1) : 0;
   const scrive = (t >= s.scrivi && nA < A.length) || (t >= s.davvero && nB < B.length);
-  const acceso = scrive || (t * 2) % 2 < 1.15;
+  const fermo = s.cta !== undefined && t >= s.cta + .5; // dopo il sito il cursore sparisce: fermo immagine pulito
+  const acceso = !fermo && (scrive || (t * 2) % 2 < 1.15);
   if (t < s.scrivi - .9) return y;
   font(w, px); x.textAlign = 'left'; x.textBaseline = 'alphabetic'; x.letterSpacing = '0px';
   const due = V; // in verticale «Davvero.» va a capo
