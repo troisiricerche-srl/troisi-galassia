@@ -1,0 +1,148 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:A;src:url(archivo.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%}
+html,body{margin:0;background:transparent}
+</style></head>
+<body><canvas id="cv"></canvas>
+<script>
+// Video brevi dei siti di Troisi Ricerche (Mappatura delle Competenze, Registro delle Competenze, CustomerPA™…).
+// window.CONF = {W,H,fps,scene,beats,tema:{c1,c2,fondo},sito:{nome,dominio},logo:{testo},foto:[...]}
+const ROSSO = '#AD0E13', ARANCIO = '#F57F1F', BIANCO = '#FFFFFF';
+const cv = document.getElementById('cv'); const C = window.CONF; cv.width = C.W; cv.height = C.H; const x = cv.getContext('2d');
+const V = C.H > C.W; const S = Math.min(C.W, C.H) / 1080; const T = C.tema;
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const eo = t => 1 - Math.pow(1 - cl(t), 3);
+const eio = t => { t = cl(t); return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+const eob = t => { t = cl(t); const c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
+function font(w, px) { x.font = `${w} ${px * S}px A`; }
+function testo(s, px, w, colore, X, Y, align = 'left', alpha = 1, track = 0) { font(w, px); x.fillStyle = colore; x.globalAlpha = alpha; x.textAlign = align; x.textBaseline = 'alphabetic'; x.letterSpacing = (track * S) + 'px'; x.fillText(s, X, Y); x.globalAlpha = 1; x.letterSpacing = '0px'; }
+function sale(s, px, w, colore, X, Y, p, align = 'left', track = 0) { font(w, px); const h = px * S * 1.3; x.save(); x.beginPath(); const mw = 5000; x.rect(align === 'center' ? X - mw / 2 : (align === 'right' ? X - mw : X), Y - h * .95, mw, h * 1.3); x.clip(); testo(s, px, w, colore, X, Y + (1 - eo(p)) * h, align, cl(p * 3), track); x.restore(); }
+function larg(s, px, w) { font(w, px); return x.measureText(s).width; }
+function aCapo(t, px, w, lim) { const p = t.split(' '); const out = []; let r = ''; for (const q of p) { const c = r ? r + ' ' + q : q; if (larg(c, px, w) > lim && r) { out.push(r); r = q; } else r = c; } if (r) out.push(r); return out; }
+const M = () => (V ? 80 : 120) * S;
+const IMG = {}; const carica = p => new Promise(r => { const im = new Image(); im.onload = () => { IMG[p] = im; r(); }; im.onerror = () => r(); im.src = 'file://' + p; });
+const TR = [[11, 13, 270, 64], [104, 77, 85, 101]], TA = [[222, 106, 179, 65], [222, 171, 88, 101]];
+function marchioTT(X, Y, k, alpha = 1) { x.save(); x.globalAlpha = alpha; x.fillStyle = ROSSO; for (const [a, b, w, h] of TR) x.fillRect(X + a * k, Y + b * k, w * k + .5, h * k + .5); x.fillStyle = ARANCIO; for (const [a, b, w, h] of TA) x.fillRect(X + a * k, Y + b * k, w * k + .5, h * k + .5); x.restore(); }
+function logoTR(X, Y, larghezza, alpha = 1) { const k = larghezza / 776; marchioTT(X, Y, k, alpha); const im = IMG[C.logo.testo]; if (im) { x.save(); x.globalAlpha = alpha; x.drawImage(im, X + 392 * k, Y + 236 * k, 378 * k, 378 * k * im.height / im.width); x.restore(); } }
+function fondo() { x.fillStyle = T.fondo; x.fillRect(0, 0, C.W, C.H); const g = x.createRadialGradient(C.W * .7, C.H * .25, 10, C.W / 2, C.H / 2, Math.max(C.W, C.H) * .8); g.addColorStop(0, T.alone); g.addColorStop(1, 'rgba(0,0,0,0)'); x.fillStyle = g; x.fillRect(0, 0, C.W, C.H);
+  x.strokeStyle = 'rgba(255,255,255,.045)'; x.lineWidth = 1; const p = 60 * S; for (let xx = p; xx < C.W; xx += p) { x.beginPath(); x.moveTo(xx, 0); x.lineTo(xx, C.H); x.stroke(); } for (let yy = p; yy < C.H; yy += p) { x.beginPath(); x.moveTo(0, yy); x.lineTo(C.W, yy); x.stroke(); } }
+function ombra(alto, basso) { if (basso) { const g = x.createLinearGradient(0, C.H * .3, 0, C.H); g.addColorStop(0, 'rgba(5,10,25,0)'); g.addColorStop(.6, `rgba(5,10,25,${basso * .8})`); g.addColorStop(1, `rgba(5,10,25,${basso})`); x.fillStyle = g; x.fillRect(0, C.H * .3, C.W, C.H * .7); } if (alto) { const g = x.createLinearGradient(0, 0, 0, C.H * .25); g.addColorStop(0, `rgba(5,10,25,${alto})`); g.addColorStop(1, 'rgba(5,10,25,0)'); x.fillStyle = g; x.fillRect(0, 0, C.W, C.H * .25); } }
+function firma(alpha = 1) { // nome del sito in alto a sinistra
+  const X = M(), Y = (V ? 110 : 80) * S; x.save(); x.globalAlpha = alpha; x.fillStyle = T.c1; x.beginPath(); x.roundRect(X, Y - 34 * S, 46 * S, 46 * S, 10 * S); x.fill();
+  testo(C.sito.sigla, 20, 900, BIANCO, X + 23 * S, Y - 4 * S, 'center'); testo(C.sito.nome, 26, 800, BIANCO, X + 60 * S, Y - 4 * S); x.restore(); }
+function kicker(s, Y, p, align = 'left', X) { sale(s.toUpperCase(), V ? 26 : 24, 800, T.c2, X === undefined ? M() : X, Y, p, align, 4); }
+function titolo(righe, Y, u, px, align = 'left', X) { const lim = C.W - 2 * M(); let pp = px; righe.forEach(r => { const w = larg(r.t || r, pp, 900); if (w > lim) pp = Math.floor(pp * lim / w); });
+  righe.forEach((r, i) => sale(r.t || r, pp, 900, r.c ? T.c2 : BIANCO, X === undefined ? M() : X, Y + i * pp * 1.08 * S, (u - .1 - i * .12) / .4, align)); return Y + (righe.length - 1) * pp * 1.08 * S; }
+function pill(s, X, Y, p, colore, align = 'left') { font(800, V ? 28 : 26); const w = x.measureText(s).width + 44 * S, h = 58 * S; const x0 = align === 'center' ? X - w / 2 : X; const sc = eob(p);
+  x.save(); x.translate(x0 + w / 2, Y); x.scale(sc, sc); x.globalAlpha = cl(p * 3); x.fillStyle = colore || 'rgba(255,255,255,.12)'; x.strokeStyle = 'rgba(255,255,255,.35)'; x.lineWidth = 2 * S; x.beginPath(); x.roundRect(-w / 2, -h / 2, w, h, h / 2); x.fill(); x.stroke();
+  testo(s, V ? 28 : 26, 800, BIANCO, 0, 10 * S, 'center'); x.restore(); return w; }
+function esempio(Y) { testo('ESEMPIO ILLUSTRATIVO', V ? 20 : 18, 700, 'rgba(255,255,255,.55)', C.W - M(), Y, 'right', 1, 3); }
+// cursore che lampeggia e testo battuto
+function battuto(s, px, w, colore, X, Y, t0, t, vel = .05, align = 'left') { const n = Math.max(0, Math.min(s.length, Math.floor((t - t0) / vel))); font(w, px); const tot = x.measureText(s).width; const X0 = align === 'center' ? X - tot / 2 : X;
+  x.textAlign = 'left'; x.fillStyle = colore; x.fillText(s.slice(0, n), X0, Y); return { fine: n >= s.length, xc: X0 + x.measureText(s.slice(0, n)).width }; }
+function scena(s, t) {
+  const d = s.a - s.da, u = t - s.da;
+  if (s.tipo === 'gancio') { // domanda battuta sopra il filmato
+    ombra(.5, .95); firma(cl(u / .4));
+    const px = s.px || (V ? 84 : 92), lim = C.W - 2 * M(); const righe = aCapo(s.testo, px, 900, lim); const passo = px * 1.12 * S; const Y0 = C.H - (V ? 360 : 190) * S - (righe.length - 1) * passo;
+    let t0 = s.da + .3, ult = null; righe.forEach((r, i) => { const res = battuto(r, px, 900, i === righe.length - 1 && s.ultimaColorata ? T.c2 : BIANCO, M(), Y0 + i * passo, t0, t, .045); ult = { ...res, y: Y0 + i * passo, inizio: t0 }; t0 += r.length * .045; if (t < t0) return; });
+    let cur = null; for (let i = 0, tt = s.da + .3; i < righe.length; i++) { const fineRiga = tt + righe[i].length * .045; if (t < fineRiga || i === righe.length - 1) { font(900, px); const n = Math.max(0, Math.min(righe[i].length, Math.floor((t - tt) / .045))); cur = { x: M() + x.measureText(righe[i].slice(0, n)).width, y: Y0 + i * passo }; break; } tt = fineRiga; }
+    if (cur && ((t * 2.2) % 2 < 1.2)) { x.fillStyle = T.c2; x.fillRect(cur.x + 6 * S, cur.y + 8 * S, px * .5 * S, 7 * S); }
+  } else if (s.tipo === 'clip') { // filmato con titolo
+    ombra(.5, .95); firma(1);
+    const Y = C.H - (V ? 330 : 170) * S; kicker(s.kicker || '', Y - (s.righe.length) * (V ? 96 : 100) * S - 20 * S, u / .4);
+    titolo(s.righe, Y - (s.righe.length - 1) * (V ? 96 : 100) * S, u, V ? 88 : 92);
+    if (s.didascalia) testo(s.didascalia.toUpperCase(), V ? 22 : 20, 600, 'rgba(255,255,255,.75)', M(), Y + (V ? 70 : 64) * S, 'left', cl((u - .5) / .4), 2.5);
+  } else if (s.tipo === 'heatmap') {
+    fondo(); firma(1); const Yt = (V ? 440 : 235) * S; kicker(s.kicker, Yt - 70 * S, u / .4); titolo(s.righe, Yt, u, V ? 72 : 66);
+    const R = s.ruoli, K = s.comp, L = s.livelli; const top = V ? 740 * S : 380 * S, lw = (V ? 330 : 380) * S, cw = V ? (C.W - 2 * M() - lw) / K.length : Math.min(250 * S, (C.W - 2 * M() - lw) / K.length), ch = (V ? 120 : 110) * S;
+    K.forEach((k, j) => { const X = M() + lw + j * cw + cw / 2; testo(k.toUpperCase(), V ? 20 : 20, 800, 'rgba(255,255,255,.7)', X, top - 20 * S, 'center', cl((u - .3) / .4), 1.5); });
+    R.forEach((r, i) => { const Y = top + i * (ch + 12 * S); testo(r, V ? 26 : 26, 700, BIANCO, M(), Y + ch / 2 + 9 * S, 'left', cl((u - .35 - i * .08) / .3));
+      K.forEach((k, j) => { const lv = L[i][j], p = eob((u - .5 - (i * K.length + j) * .05) / .35); if (p <= 0) return; const col = lv >= 5 ? T.alto : lv >= 4 ? T.medio : '#E5484D';
+        const X = M() + lw + j * cw; x.save(); x.translate(X + cw / 2, Y + ch / 2); x.scale(p, p); x.fillStyle = col; x.globalAlpha = .9; x.beginPath(); x.roundRect(-cw / 2 + 6 * S, -ch / 2, cw - 12 * S, ch, 14 * S); x.fill(); x.globalAlpha = 1; testo('LV' + lv, V ? 30 : 30, 900, BIANCO, 0, 11 * S, 'center'); x.restore(); }); });
+    const yl = top + R.length * (ch + 12 * S) + (V ? 60 : 40) * S; [['Alta', T.alto], ['Media', T.medio], ['Gap', '#E5484D']].forEach(([n, c], i) => { const X = M() + i * (V ? 220 : 200) * S; x.globalAlpha = cl((u - 1.6) / .4); x.fillStyle = c; x.beginPath(); x.roundRect(X, yl - 22 * S, 28 * S, 28 * S, 6 * S); x.fill(); x.globalAlpha = 1; testo(n, 26, 600, BIANCO, X + 40 * S, yl, 'left', cl((u - 1.6) / .4)); });
+    esempio(yl);
+  } else if (s.tipo === 'barre') {
+    fondo(); firma(1); const Yt = (V ? 440 : 235) * S; kicker(s.kicker, Yt - 70 * S, u / .4); titolo(s.righe, Yt, u, V ? 72 : 66);
+    const top = (V ? 740 : 390) * S, bh = (V ? 70 : 52) * S, gap = (V ? 92 : 78) * S, bw = C.W - 2 * M() - (V ? 0 : 0);
+    s.voci.forEach(([n, v], i) => { const Y = top + i * (bh + gap); const p = eio((u - .4 - i * .15) / .9); const isGap = v < 40;
+      testo(n, V ? 32 : 30, 700, BIANCO, M(), Y - 14 * S, 'left', cl((u - .3 - i * .15) / .3));
+      x.fillStyle = 'rgba(255,255,255,.1)'; x.beginPath(); x.roundRect(M(), Y, bw, bh, bh / 2); x.fill();
+      x.fillStyle = isGap ? '#E5484D' : T.c1; x.beginPath(); x.roundRect(M(), Y, Math.max(bh, bw * v / 100 * p), bh, bh / 2); x.fill();
+      testo(Math.round(v * p) + '%', V ? 30 : 28, 900, BIANCO, M() + Math.max(bh, bw * v / 100 * p) - 22 * S, Y + bh / 2 + 10 * S, 'right', cl(p * 3));
+      if (isGap && p > .95) { const q = eob((u - .4 - i * .15 - .9) / .3); x.save(); x.translate(M() + bw * v / 100 + 90 * S, Y + bh / 2); x.scale(q, q); x.fillStyle = '#E5484D'; x.beginPath(); x.roundRect(-55 * S, -22 * S, 110 * S, 44 * S, 22 * S); x.fill(); testo('GAP', 24, 900, BIANCO, 0, 9 * S, 'center', 1, 3); x.restore(); } });
+    esempio(top + s.voci.length * (bh + gap) + 10 * S);
+  } else if (s.tipo === 'passi') {
+    fondo(); firma(1); const Yt = (V ? 440 : 235) * S; kicker(s.kicker, Yt - 70 * S, u / .4); titolo(s.righe, Yt, u, V ? 72 : 66);
+    const n = s.passi.length, per = (d * .7) / n;
+    if (V) { const top = 680 * S, h = 260 * S; x.strokeStyle = 'rgba(255,255,255,.2)'; x.lineWidth = 4 * S; x.beginPath(); x.moveTo(M() + 45 * S, top + 45 * S); x.lineTo(M() + 45 * S, top + 45 * S + (n - 1) * h * eio((u - .3) / (d * .7))); x.stroke();
+      s.passi.forEach(([a, b], i) => { const v = (u - .3 - i * per) / .4; if (v <= 0) return; const Y = top + i * h; const q = eob(v); x.save(); x.translate(M() + 45 * S, Y + 45 * S); x.scale(q, q); x.fillStyle = T.c1; x.beginPath(); x.arc(0, 0, 45 * S, 0, 7); x.fill(); testo(String(i + 1).padStart(2, '0'), 30, 900, BIANCO, 0, 11 * S, 'center'); x.restore();
+        sale(a, 46, 900, BIANCO, M() + 120 * S, Y + 40 * S, v / .8); aCapo(b, 30, 500, C.W - 2 * M() - 120 * S).forEach((r, k) => sale(r, 30, 500, 'rgba(255,255,255,.8)', M() + 120 * S, Y + 90 * S + k * 40 * S, (v - .2 - k * .1) / .8)); });
+    } else { const top = 470 * S, w = (C.W - 2 * M()) / n; x.strokeStyle = 'rgba(255,255,255,.2)'; x.lineWidth = 4 * S; x.beginPath(); x.moveTo(M() + w / 2, top); x.lineTo(M() + w / 2 + (n - 1) * w * eio((u - .3) / (d * .7)), top); x.stroke();
+      s.passi.forEach(([a, b], i) => { const v = (u - .3 - i * per) / .4; if (v <= 0) return; const X = M() + i * w + w / 2, q = eob(v); x.save(); x.translate(X, top); x.scale(q, q); x.fillStyle = T.c1; x.beginPath(); x.arc(0, 0, 50 * S, 0, 7); x.fill(); testo(String(i + 1).padStart(2, '0'), 32, 900, BIANCO, 0, 12 * S, 'center'); x.restore();
+        sale(a, 40, 900, BIANCO, X, top + 120 * S, v / .8, 'center'); aCapo(b, 26, 500, w - 40 * S).forEach((r, k) => sale(r, 26, 500, 'rgba(255,255,255,.8)', X, top + 170 * S + k * 36 * S, (v - .2 - k * .1) / .8, 'center')); }); }
+  } else if (s.tipo === 'badge') {
+    fondo(); firma(1); const Y = V ? C.H * .4 : C.H * .38; kicker(s.kicker, Y - 90 * S, u / .4, 'center', C.W / 2);
+    let pp = V ? 80 : 84; s.righe.forEach(r => { const w = larg(r.t || r, pp, 900); if (w > C.W - 2 * M()) pp = Math.floor(pp * (C.W - 2 * M()) / w); });
+    s.righe.forEach((r, i) => sale(r.t || r, pp, 900, r.c ? T.c2 : BIANCO, C.W / 2, Y + i * pp * 1.08 * S, (u - .1 - i * .12) / .4, 'center'));
+    const yb = Y + s.righe.length * pp * 1.08 * S + (V ? 110 : 80) * S; const per = V ? 1 : s.badge.length; const righeB = []; for (let i = 0; i < s.badge.length; i += (V ? 2 : per)) righeB.push(s.badge.slice(i, i + (V ? 2 : per)));
+    righeB.forEach((rb, ri) => { font(800, V ? 28 : 26); const ws = rb.map(b => x.measureText(b).width + 44 * S); const tot = ws.reduce((a, b) => a + b, 0) + (rb.length - 1) * 20 * S; let X = C.W / 2 - tot / 2;
+      rb.forEach((b, j) => { const k = ri * 2 + j; pill(b, X, yb + ri * 80 * S, (u - .6 - k * .15) / .35, T.c1 + 'CC'); X += ws[j] + 20 * S; }); });
+  } else if (s.tipo === 'certificato') {
+    fondo(); firma(1); const cw = (V ? 900 : 760) * S, chh = (V ? 1080 : 940) * S, cx = V ? C.W / 2 : C.W * .62, cy = V ? C.H * .56 : C.H * .55;
+    if (!V) { kicker(s.kicker, 300 * S, u / .4); titolo(s.righe, 380 * S, u, 66); } else { kicker(s.kicker, 230 * S, u / .4); titolo(s.righe, 310 * S, u, 64); }
+    const p = eob((u - .3) / .6); x.save(); x.translate(cx, cy + (1 - p) * 200 * S); x.rotate((1 - cl(p)) * -.08); x.globalAlpha = cl(p * 2);
+    x.shadowColor = 'rgba(0,0,0,.5)'; x.shadowBlur = 50 * S; x.shadowOffsetY = 20 * S; x.fillStyle = '#FBFBF8'; x.beginPath(); x.roundRect(-cw / 2, -chh / 2, cw, chh, 24 * S); x.fill(); x.shadowColor = 'transparent';
+    x.fillStyle = T.c1; x.beginPath(); x.roundRect(-cw / 2, -chh / 2, cw, 110 * S, [24 * S, 24 * S, 0, 0]); x.fill();
+    testo('REGISTRO DELLE COMPETENZE', 26, 900, BIANCO, -cw / 2 + 40 * S, -chh / 2 + 66 * S, 'left', 1, 2);
+    const X0 = -cw / 2 + 40 * S; let Y = -chh / 2 + 180 * S; const lab = (l, v, yy, q) => { testo(l, 18, 700, '#7A8794', X0, yy, 'left', cl(q * 3), 2); testo(v, 30, 800, '#14202B', X0, yy + 40 * S, 'left', cl(q * 3)); };
+    lab('TITOLARE', s.titolare, Y, (u - .7) / .3); Y += 100 * S; lab('ORGANIZZAZIONE', s.org, Y, (u - .8) / .3); Y += 120 * S;
+    s.voci.forEach(([c, lv, ok], i) => { const q = (u - 1.0 - i * .25) / .3; if (q <= 0) return; x.globalAlpha = cl(q * 3) * cl(p * 2); x.fillStyle = '#EEF2F1'; x.beginPath(); x.roundRect(X0, Y - 44 * S, cw - 80 * S, 76 * S, 14 * S); x.fill(); x.globalAlpha = cl(p * 2);
+      testo(c, 28, 700, '#14202B', X0 + 24 * S, Y + 4 * S, 'left', cl(q * 3)); testo(lv, 24, 800, T.c1, X0 + cw - 300 * S, Y + 4 * S, 'left', cl(q * 3));
+      const sc = eob((q - .5) / .5); x.save(); x.translate(X0 + cw - 125 * S, Y - 6 * S); x.scale(sc, sc); x.fillStyle = ok ? T.c1 : '#E5A33B'; x.beginPath(); x.roundRect(-55 * S, -22 * S, 110 * S, 44 * S, 22 * S); x.fill(); testo(ok ? '✓ CERT.' : 'IN CORSO', 18, 900, BIANCO, 0, 7 * S, 'center'); x.restore(); Y += 100 * S; });
+    // QR e codice
+    const qv = (u - 1.9) / .4; if (qv > 0) { const qs = 150 * S, qx = cw / 2 - 40 * S - qs, qy = chh / 2 - 40 * S - qs; let sd = 9; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647; x.globalAlpha = cl(qv) * cl(p * 2); x.fillStyle = '#14202B'; const n = 21, c = qs / n;
+      for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) { const fin = (i < 7 && j < 7) || (i < 7 && j >= n - 7) || (i >= n - 7 && j < 7); if (fin) { const a = i % 14, b2 = j % 14; const ii = i < 7 ? i : i - (n - 7), jj = j < 7 ? j : j - (n - 7); if (ii === 0 || ii === 6 || jj === 0 || jj === 6 || (ii >= 2 && ii <= 4 && jj >= 2 && jj <= 4)) x.fillRect(qx + j * c, qy + i * c, c, c); } else if (rnd() < .5) x.fillRect(qx + j * c, qy + i * c, c, c); }
+      testo(s.codice, 18, 600, '#7A8794', X0, chh / 2 - 50 * S, 'left', cl(qv)); x.globalAlpha = 1; }
+    x.restore();
+  } else if (s.tipo === 'gauge') {
+    fondo(); firma(1); const cx = V ? C.W / 2 : C.W * .32, cy = V ? C.H * .52 : C.H * .62, R = (V ? 330 : 300) * S;
+    if (V) { kicker(s.kicker, 250 * S, u / .4, 'center', C.W / 2); titolo(s.righe, 330 * S, u, 64, 'center', C.W / 2); } else { kicker(s.kicker, 300 * S, u / .4, 'left', C.W * .56); titolo(s.righe, 380 * S, u, 62, 'left', C.W * .56); }
+    const p = eio((u - .3) / 1.4), v = s.valore * p; x.lineCap = 'round'; x.lineWidth = 46 * S; x.strokeStyle = 'rgba(255,255,255,.1)'; x.beginPath(); x.arc(cx, cy, R, Math.PI, 2 * Math.PI); x.stroke();
+    if (s.soglia !== undefined) { const a = Math.PI + Math.PI * s.soglia / 100; x.save(); x.strokeStyle = BIANCO; x.lineWidth = 4 * S; x.beginPath(); x.moveTo(cx + Math.cos(a) * (R - 40 * S), cy + Math.sin(a) * (R - 40 * S)); x.lineTo(cx + Math.cos(a) * (R + 40 * S), cy + Math.sin(a) * (R + 40 * S)); x.stroke(); x.restore();
+      testo('soglia ' + s.soglia, 22, 700, BIANCO, cx + Math.cos(a) * (R + 70 * S), cy + Math.sin(a) * (R + 70 * S), 'center', cl((u - .6) / .4)); }
+    const g = x.createLinearGradient(cx - R, 0, cx + R, 0); g.addColorStop(0, '#E5484D'); g.addColorStop(.55, '#E5A33B'); g.addColorStop(1, T.c2); x.strokeStyle = g; x.lineWidth = 46 * S; x.beginPath(); x.arc(cx, cy, R, Math.PI, Math.PI + Math.PI * v / 100); x.stroke(); x.lineCap = 'butt';
+    testo(Math.round(v) + '', V ? 190 : 170, 900, BIANCO, cx, cy - 20 * S, 'center'); testo(s.etichetta, V ? 30 : 28, 700, T.c2, cx, cy + 50 * S, 'center', cl((u - .3) / .4), 2);
+    if (s.sotto) s.sotto.forEach(([n, val], i) => { const X = V ? M() + (i % 2) * (C.W - 2 * M()) / 2 : C.W * .56 + (i % 2) * 330 * S, Y = V ? cy + 200 * S + Math.floor(i / 2) * 150 * S : 560 * S + Math.floor(i / 2) * 150 * S; const q = eo((u - 1.0 - i * .15) / .5);
+      testo(Math.round(val * q) + '', 64, 900, BIANCO, X, Y, 'left', cl(q * 3)); testo(n.toUpperCase(), 20, 700, 'rgba(255,255,255,.7)', X, Y + 34 * S, 'left', cl(q * 3), 2); });
+    esempio(V ? C.H - 230 * S : C.H - 60 * S);
+  } else if (s.tipo === 'leggi') {
+    fondo(); firma(1); const Yt = (V ? 440 : 235) * S; kicker(s.kicker, Yt - 70 * S, u / .4); titolo(s.righe, Yt, u, V ? 72 : 66);
+    const n = s.leggi.length, per = (d * .65) / n; const top = (V ? 680 : 380) * S;
+    s.leggi.forEach(([norma, cosa], i) => { const v = (u - .4 - i * per) / .45; if (v <= 0) return; const q = eo(v);
+      const w = V ? C.W - 2 * M() : (C.W - 2 * M() - 2 * 30 * S) / 3, h = V ? 280 * S : 420 * S, X = V ? M() : M() + i * (w + 30 * S), Y = V ? top + i * (h + 30 * S) : top;
+      x.save(); x.translate((1 - q) * 120 * S, 0); x.globalAlpha = cl(v * 2); x.fillStyle = 'rgba(255,255,255,.07)'; x.strokeStyle = 'rgba(255,255,255,.18)'; x.lineWidth = 2 * S; x.beginPath(); x.roundRect(X, Y, w, h, 22 * S); x.fill(); x.stroke();
+      x.fillStyle = T.c2; x.fillRect(X, Y + 30 * S, 8 * S, 70 * S);
+      testo(norma, V ? 40 : 36, 900, BIANCO, X + 40 * S, Y + 78 * S); aCapo(cosa, V ? 32 : 30, 500, w - 80 * S).forEach((r, k) => testo(r, V ? 32 : 30, 500, 'rgba(255,255,255,.85)', X + 40 * S, Y + (V ? 140 : 150) * S + k * 44 * S)); x.restore(); });
+  } else if (s.tipo === 'foto') {
+    fondo(); firma(1); const im = IMG[s.f]; const p = eob((u - .1) / .5);
+    if (im) { const mw = (V ? 920 : 1040) * S, mh = (V ? 760 : 640) * S, r = Math.min(mw / im.width, mh / im.height), w = im.width * r, h = im.height * r, cx = V ? C.W / 2 : C.W * .6, cy = V ? C.H * .44 : C.H * .52;
+      x.save(); x.globalAlpha = cl(p * 2); x.translate(cx, cy + (1 - cl(p)) * 120 * S); x.rotate((s.rot || -2) * Math.PI / 180 * cl(p)); const z = 1 + .04 * cl(u / d); x.scale(z, z); x.shadowColor = 'rgba(0,0,0,.5)'; x.shadowBlur = 50 * S; x.shadowOffsetY = 20 * S; x.fillStyle = BIANCO; x.fillRect(-w / 2 - 14 * S, -h / 2 - 14 * S, w + 28 * S, h + 28 * S); x.shadowColor = 'transparent'; x.drawImage(im, -w / 2, -h / 2, w, h); x.restore(); }
+    if (V) { kicker(s.kicker, C.H - 420 * S, (u - .3) / .4); titolo(s.righe, C.H - 340 * S, u - .3, 70); } else { kicker(s.kicker, 380 * S, (u - .3) / .4); titolo(s.righe, 460 * S, u - .3, 60); }
+  } else if (s.tipo === 'chiusura') {
+    fondo(); const cy = V ? C.H * .36 : C.H * .36; const p = eob(u / .5);
+    x.save(); x.translate(C.W / 2, cy - (V ? 110 : 90) * S); x.scale(p, p); x.fillStyle = T.c1; x.beginPath(); x.roundRect(-70 * S, -70 * S, 140 * S, 140 * S, 30 * S); x.fill(); testo(C.sito.sigla, 54, 900, BIANCO, 0, 19 * S, 'center'); x.restore();
+    let pn = V ? 86 : 96; const wn = larg(C.sito.nome, pn, 900); if (wn > C.W - 2 * M()) pn = Math.floor(pn * (C.W - 2 * M()) / wn);
+    sale(C.sito.nome, pn, 900, BIANCO, C.W / 2, cy + (V ? 90 : 80) * S, (u - .3) / .4, 'center');
+    if (C.sito.claim) sale(C.sito.claim, V ? 38 : 38, 500, 'rgba(255,255,255,.85)', C.W / 2, cy + (V ? 160 : 145) * S, (u - .5) / .4, 'center');
+    const q = (u - .9) / .3; if (q > 0) { const sc = eob(q); font(800, V ? 46 : 44); const bw = x.measureText(C.sito.dominio).width + 80 * S, bh = 96 * S, by = cy + (V ? 290 : 260) * S; x.save(); x.translate(C.W / 2, by); x.scale(sc, sc); x.fillStyle = T.c2; x.beginPath(); x.roundRect(-bw / 2, -bh / 2, bw, bh, bh / 2); x.fill(); testo(C.sito.dominio, V ? 46 : 44, 800, T.testoPill || BIANCO, 0, 16 * S, 'center'); x.restore(); }
+    const al = cl((u - 1.5) / .5); const ly = C.H - (V ? 420 : 250) * S; testo('UN PROGETTO DI', V ? 22 : 20, 700, 'rgba(255,255,255,.7)', C.W / 2, ly, 'center', al, 4);
+    const lw = (V ? 320 : 280) * S; logoTR(C.W / 2 - lw / 2, ly + 30 * S, lw, al);
+    testo('Misuriamo ciò che conta. Davvero.', V ? 28 : 26, 600, 'rgba(255,255,255,.85)', C.W / 2, ly + 30 * S + lw * 428 / 776 + 60 * S, 'center', cl((u - 1.9) / .5));
+    if (s.dissolvi && u < s.dissolvi) { x.fillStyle = `rgba(5,10,25,${1 - u / s.dissolvi})`; x.fillRect(0, 0, C.W, C.H); }
+  }
+}
+window.frame = f => { const t = f / C.fps; x.clearRect(0, 0, C.W, C.H); for (const s of C.scene) if (t >= s.da && t < s.a) scena(s, t); };
+window.pronto = Promise.all(['900', '800', '700', '600', '500'].map(w => document.fonts.load(w + ' 40px A'))).then(() => Promise.all([C.logo.testo, ...C.scene.filter(s => s.f).map(s => s.f)].map(carica)));
+</script></body></html>
