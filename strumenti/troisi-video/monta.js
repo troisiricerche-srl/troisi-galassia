@@ -16,7 +16,7 @@ const T = [
   [8, 12, 'claim', 'senato.mp4', 2.3, { righe: [{ t: 'Misuriamo' }, { t: 'ciò che conta.', c: 'a' }], didascalia: 'Senato della Repubblica · giugno 2026', cxv: .38 }],
   [12, 16, 'claim', 'senato.mp4', 14.0, { righe: [{ t: 'Dati ufficiali,' }, { t: 'metodo scientifico.', c: 'a' }], cxv: .55 }],
   [16, 20, 'claim', 'cibari-porto.mp4', 4.3, { lento: 2, righe: [{ t: 'Dal 2006 trasformiamo i dati', px: V ? 64 : 80 }, { t: 'in conoscenza per chi decide.', c: 'a', px: V ? 64 : 80 }] }],
-  [20, 24, 'claim', 'cibari-porto.mp4', 5.45, { lento: 2, gia: 10, righe: [{ t: 'Dal 2006 trasformiamo i dati', px: V ? 64 : 80 }, { t: 'in conoscenza per chi decide.', c: 'a', px: V ? 64 : 80 }] }],
+  [20, 24, 'claim', 'cibari-porto.mp4', 5.42, { lento: 3.3, gia: 10, righe: [{ t: 'Dal 2006 trasformiamo i dati', px: V ? 64 : 80 }, { t: 'in conoscenza per chi decide.', c: 'a', px: V ? 64 : 80 }] }],
   [24, 28, 'parola', 'forum.mp4', 8.9, { primo: true, parola: 'la soddisfazione dei cittadini', didascalia: 'Forum dei Pubblici Ufficiali · II edizione', cxv: .45 }],
   [28, 32, 'parola', 'aqv.mp4', 7.3, { parola: 'la qualità della vita', didascalia: 'Associazione Qualità della Vita · Conferenza annuale 2023', cxv: .55 }],
   [32, 36, 'parola', 'radio.mp4', 5.4, { parola: 'le opinioni', didascalia: "Indagine sull'ascolto delle radio in Puglia", cxv: .5 }],
@@ -37,7 +37,7 @@ const T = [
   [84, 999, 'chiusura', null, 0, { dissolvi: .3 }],
 ];
 const scene = T.map(([da, a, tipo, clip, inp, par]) => ({ da: bt(da), a: a === 999 ? DUR : bt(a), tipo, clip, inp: inp || 0, ...(par || {}) }));
-const COLPO = 53.452; scene.find(s => s.tipo === 'chiusura').cta = COLPO;
+const COLPO = 53.452; Object.assign(scene.find(s => s.tipo === 'chiusura'), { scrivi: COLPO, davvero: 56.3, cta: 57.6 });
 const NF = Math.round(DUR * FPS);
 const tmp = path.join(DIR, 'tmp'); fs.mkdirSync(tmp, { recursive: true });
 (async () => {

@@ -17,13 +17,13 @@ const SITI = [
   ['09-benesseredigitalegiovani.it.jpg', 'Benessere digitale giovani', 'benesseredigitalegiovani.it'],
   ['03-andreatroisi.it.jpg', 'Il fondatore', 'andreatroisi.it'],
 ].map(([f, nome, dominio]) => ({ f: S(f), nome, dominio }));
-const HIT = 32.02, DUR = 36.6;
+const HIT = 32.02, DUR = 39.5;
 const scene = [
   { tipo: 'galassia', da: 0, a: b(8) },
   { tipo: 'telefoni', da: b(8), a: b(48), totale: 10 },
   { tipo: 'griglia', da: b(48), a: 30.3 },
   { tipo: 'silenzio', da: 30.3, a: HIT },
-  { tipo: 'chiusura', da: HIT, a: DUR, cta: HIT + 1.3 },
+  { tipo: 'chiusura', da: HIT, a: DUR, scrivi: HIT + 1.1, davvero: HIT + 4.0, cta: HIT + 5.3 },
 ];
 (async () => {
   const br = await chromium.launch({ args: ['--allow-file-access-from-files'] }); const p = await br.newPage({ viewport: { width: W, height: H } });

@@ -162,10 +162,10 @@ function scena(s, t) {
     const larg = (V ? 760 : 720) * S, cy = C.H / 2 - (V ? 230 : 150) * S;
     logoIntero(C.W / 2, cy, larg, u / .6, (u - .35) / .6, (u - .7) / .7);
     const y2 = cy + 428 * (larg / 776) / 2 + (V ? 120 : 95) * S;
-    sale('Misuriamo ciò che conta.', V ? 58 : 54, 700, BIANCO, C.W / 2, y2, (u - 1.0) / .5, 'center');
-    sale('BARI · ROMA · MILANO', V ? 30 : 28, 600, 'rgba(255,255,255,.8)', C.W / 2, y2 + (V ? 70 : 62) * S, (u - 1.2) / .5, 'center', 6);
+    const yb = battitura(s, t, y2);
+    sale('BARI · ROMA · MILANO', V ? 30 : 28, 600, 'rgba(255,255,255,.8)', C.W / 2, yb + (V ? 70 : 62) * S, (u - .9) / .5, 'center', 6);
     if (s.cta !== undefined && t >= s.cta) { // il sito sull'ultimo colpo
-      const q = t - s.cta, sc = eob(q / .28), bw = (V ? 700 : 660) * S, bh = (V ? 120 : 110) * S, by = y2 + (V ? 230 : 190) * S;
+      const q = t - s.cta, sc = eob(q / .28), bw = (V ? 700 : 660) * S, bh = (V ? 120 : 110) * S, by = yb + (V ? 230 : 190) * S;
       x.save(); x.translate(C.W / 2, by); x.scale(sc, sc); x.fillStyle = ARANCIO; x.beginPath(); x.roundRect(-bw / 2, -bh / 2, bw, bh, bh / 2); x.fill();
       testo('troisiricerche.net', V ? 58 : 54, 800, BIANCO, 0, (V ? 20 : 19) * S, 'center', 1, 1); x.restore();
       if (q < .18) { x.fillStyle = `rgba(255,255,255,${(1 - q / .18) * .5})`; x.fillRect(0, 0, C.W, C.H); }
@@ -174,6 +174,28 @@ function scena(s, t) {
   }
 }
 
+
+// «Misuriamo ciò che conta.» battuto a macchina con il cursore che lampeggia, poi «Davvero.»
+function battitura(s, t, y) {
+  const A = 'Misuriamo ciò che conta.', B = 'Davvero.', px = V ? 68 : 66, vel = .065, w = 700;
+  const nA = Math.max(0, Math.min(A.length, Math.floor((t - s.scrivi) / vel) + 1)) * (t >= s.scrivi ? 1 : 0);
+  const nB = t >= s.davvero ? Math.min(B.length, Math.floor((t - s.davvero) / vel) + 1) : 0;
+  const scrive = (t >= s.scrivi && nA < A.length) || (t >= s.davvero && nB < B.length);
+  const acceso = scrive || (t * 2) % 2 < 1.15;
+  if (t < s.scrivi - .9) return y;
+  font(w, px); x.textAlign = 'left'; x.textBaseline = 'alphabetic'; x.letterSpacing = '0px';
+  const due = V; // in verticale «Davvero.» va a capo
+  const sp = x.measureText(' ').width;
+  const wA = x.measureText(A).width, wB = x.measureText(B).width;
+  let xA, yA = y, xB, yB;
+  if (!due) { const tot = wA + sp + wB; xA = C.W / 2 - tot / 2; xB = xA + wA + sp; yB = y; }
+  else { xA = C.W / 2 - wA / 2; xB = C.W / 2 - wB / 2; yB = y + px * S * 1.25; }
+  x.fillStyle = BIANCO; x.fillText(A.slice(0, nA), xA, yA);
+  if (nB) { x.fillStyle = ARANCIO; x.fillText(B.slice(0, nB), xB, yB); }
+  let cx, cyy; if (nB || t >= s.davvero) { cx = xB + x.measureText(B.slice(0, nB)).width; cyy = yB; } else { cx = xA + x.measureText(A.slice(0, nA)).width + (nA === A.length && !due ? sp : 0); cyy = yA; }
+  if (acceso) { x.fillStyle = ARANCIO; x.fillRect(cx + 3 * S, cyy + 6 * S, px * S * .55, 6 * S); }
+  return due ? yB : y;
+}
 function telefono(im, cx, cy, h, rot = 0, alpha = 1) {
   if (!im) return; const sw = h * im.width / im.height, b = h * .035, R = h * .07;
   x.save(); x.globalAlpha = alpha; x.translate(cx, cy); x.rotate(rot);
