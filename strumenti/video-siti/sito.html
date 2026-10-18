@@ -25,7 +25,7 @@ const IMG = {}; const carica = p => new Promise(r => { const im = new Image(); i
 const TR = [[11, 13, 270, 64], [104, 77, 85, 101]], TA = [[222, 106, 179, 65], [222, 171, 88, 101]];
 function marchioTT(X, Y, k, alpha = 1) { x.save(); x.globalAlpha = alpha; x.fillStyle = ROSSO; for (const [a, b, w, h] of TR) x.fillRect(X + a * k, Y + b * k, w * k + .5, h * k + .5); x.fillStyle = ARANCIO; for (const [a, b, w, h] of TA) x.fillRect(X + a * k, Y + b * k, w * k + .5, h * k + .5); x.restore(); }
 function logoTR(X, Y, larghezza, alpha = 1) { const k = larghezza / 776; marchioTT(X, Y, k, alpha); const im = IMG[C.logo.testo]; if (im) { x.save(); x.globalAlpha = alpha; x.drawImage(im, X + 392 * k, Y + 236 * k, 378 * k, 378 * k * im.height / im.width); x.restore(); } }
-function fondo() { x.fillStyle = T.fondo; x.fillRect(0, 0, C.W, C.H); const g = x.createRadialGradient(C.W * .7, C.H * .25, 10, C.W / 2, C.H / 2, Math.max(C.W, C.H) * .8); g.addColorStop(0, T.alone); g.addColorStop(1, 'rgba(0,0,0,0)'); x.fillStyle = g; x.fillRect(0, 0, C.W, C.H);
+function fondo() { const sc = window.SC, velo = sc && sc.clip && sc.tipo !== 'gancio' && sc.tipo !== 'clip'; x.save(); if (velo) x.globalAlpha = sc.velo || .74; x.fillStyle = T.fondo; x.fillRect(0, 0, C.W, C.H); x.restore(); const g = x.createRadialGradient(C.W * .7, C.H * .25, 10, C.W / 2, C.H / 2, Math.max(C.W, C.H) * .8); g.addColorStop(0, T.alone); g.addColorStop(1, 'rgba(0,0,0,0)'); x.fillStyle = g; x.fillRect(0, 0, C.W, C.H);
   x.strokeStyle = 'rgba(255,255,255,.045)'; x.lineWidth = 1; const p = 60 * S; for (let xx = p; xx < C.W; xx += p) { x.beginPath(); x.moveTo(xx, 0); x.lineTo(xx, C.H); x.stroke(); } for (let yy = p; yy < C.H; yy += p) { x.beginPath(); x.moveTo(0, yy); x.lineTo(C.W, yy); x.stroke(); } }
 function ombra(alto, basso) { if (basso) { const g = x.createLinearGradient(0, C.H * .3, 0, C.H); g.addColorStop(0, 'rgba(5,10,25,0)'); g.addColorStop(.6, `rgba(5,10,25,${basso * .8})`); g.addColorStop(1, `rgba(5,10,25,${basso})`); x.fillStyle = g; x.fillRect(0, C.H * .3, C.W, C.H * .7); } if (alto) { const g = x.createLinearGradient(0, 0, 0, C.H * .25); g.addColorStop(0, `rgba(5,10,25,${alto})`); g.addColorStop(1, 'rgba(5,10,25,0)'); x.fillStyle = g; x.fillRect(0, 0, C.W, C.H * .25); } }
 function firma(alpha = 1) { // nome del sito in alto a sinistra
@@ -157,6 +157,6 @@ function scena(s, t) {
     if (s.dissolvi && u < s.dissolvi) { x.fillStyle = `rgba(5,10,25,${1 - u / s.dissolvi})`; x.fillRect(0, 0, C.W, C.H); }
   }
 }
-window.frame = f => { const t = f / C.fps; x.clearRect(0, 0, C.W, C.H); for (const s of C.scene) if (t >= s.da && t < s.a) scena(s, t); };
+window.frame = f => { const t = f / C.fps; x.clearRect(0, 0, C.W, C.H); for (const s of C.scene) if (t >= s.da && t < s.a) { window.SC = s; scena(s, t); } };
 window.pronto = Promise.all(['900', '800', '700', '600', '500'].map(w => document.fonts.load(w + ' 40px A'))).then(() => Promise.all([C.logo.testo, ...C.scene.filter(s => s.f).map(s => s.f)].map(carica)));
 </script></body></html>

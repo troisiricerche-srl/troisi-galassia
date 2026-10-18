@@ -8,3 +8,8 @@ Filmati (clip/), foto (foto/) e musica Envato (musica/) restano fuori dal reposi
 `siti-config.js` contiene le configurazioni di troisiricerche, ildatoetratto, delfi, troisiinsight, benessereorganizzativo, osservatoriobenessere, tip, troisiformazione, tindex, digitalizzazione, dibattito, internazionalizzazione, bdg, sveglia, voiceinhub, andreatroisi. `monta-sito.js` le carica in automatico (`node monta-sito.js delfi v delfi-v.mp4`).
 Ogni scena dura un numero di battiti (`nb`); i battiti avanzati fino al punto di chiusura del brano vengono distribuiti fra le scene. Nuovi tipi di scena: `numero` (valore grande, testo e «Fonte: …») e `sito` (la home del sito in un telefono che scorre).
 Ogni numero porta la sua fonte: Eurostat (NEET 2025), ISTAT (disoccupazione, agosto 2026, dati provvisori), OCSE PISA 2025 (sintesi INVALSI), ISTAT (elenco comuni), MEF e IPA (partecipate).
+
+## Filmati diversi per ogni sito (18/10/2026)
+
+Ogni video usa filmati suoi, nessuno ripetuto fra i siti: il gancio e, sotto le grafiche, un filmato velato (una scena con `clip` e un tipo grafico mostra il filmato sotto un velo del colore del tema, opacità `velo`, predefinita 0,74).
+I 46 spezzoni (clip/xx-nome.mp4, 10 s, 1080p) vengono da eventi e video di Troisi Ricerche e da filmati Envato già scaricati; restano fuori dal repository.
