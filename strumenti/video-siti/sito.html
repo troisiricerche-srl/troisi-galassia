@@ -130,6 +130,20 @@ function scena(s, t) {
     if (im) { const mw = (V ? 920 : 1040) * S, mh = (V ? 760 : 640) * S, r = Math.min(mw / im.width, mh / im.height), w = im.width * r, h = im.height * r, cx = V ? C.W / 2 : C.W * .6, cy = V ? C.H * .44 : C.H * .52;
       x.save(); x.globalAlpha = cl(p * 2); x.translate(cx, cy + (1 - cl(p)) * 120 * S); x.rotate((s.rot || -2) * Math.PI / 180 * cl(p)); const z = 1 + .04 * cl(u / d); x.scale(z, z); x.shadowColor = 'rgba(0,0,0,.5)'; x.shadowBlur = 50 * S; x.shadowOffsetY = 20 * S; x.fillStyle = BIANCO; x.fillRect(-w / 2 - 14 * S, -h / 2 - 14 * S, w + 28 * S, h + 28 * S); x.shadowColor = 'transparent'; x.drawImage(im, -w / 2, -h / 2, w, h); x.restore(); }
     if (V) { kicker(s.kicker, C.H - 420 * S, (u - .3) / .4); titolo(s.righe, C.H - 340 * S, u - .3, 70); } else { kicker(s.kicker, 380 * S, (u - .3) / .4); titolo(s.righe, 460 * S, u - .3, 60); }
+  } else if (s.tipo === 'numero') { // un dato con la fonte
+    fondo(); firma(1); const cx = V ? M() : M(), Y = V ? C.H * .5 : C.H * .56;
+    kicker(s.kicker, Y - (V ? 330 : 300) * S, u / .4);
+    const val = s.val * eo((u - .1) / .9); const txt = (s.pre || '') + val.toLocaleString('it-IT', { minimumFractionDigits: s.dec || 0, maximumFractionDigits: s.dec || 0 }) + (s.suf || '');
+    let px = V ? 230 : 260; const wv = larg(txt, px, 900); if (wv > C.W - 2 * M()) px = Math.floor(px * (C.W - 2 * M()) / wv);
+    sale(txt, px, 900, T.c2, cx, Y, u / .3);
+    const lim = C.W - 2 * M(); aCapo(s.testo, V ? 46 : 46, 700, lim).forEach((r, i) => sale(r, V ? 46 : 46, 700, BIANCO, cx, Y + (V ? 110 : 100) * S + i * 60 * S, (u - .35 - i * .1) / .4));
+    if (s.fonte) testo('Fonte: ' + s.fonte, V ? 24 : 22, 500, 'rgba(255,255,255,.7)', cx, C.H - (V ? 240 : 80) * S, 'left', cl((u - .8) / .4));
+  } else if (s.tipo === 'sito') { // la home del sito in un telefono
+    fondo(); firma(1); const im = IMG[s.f]; const ph = (V ? 1120 : 820) * S, pw = ph * .727; const cx = V ? C.W / 2 : C.W * .68, cy = V ? C.H * .56 : C.H * .53; const p = eob((u - .1) / .5);
+    if (im) { x.save(); x.translate(cx, cy + (1 - cl(p)) * 400 * S); x.rotate((1 - cl(p)) * .15); const b = ph * .035, R = ph * .07; x.shadowColor = 'rgba(0,0,0,.55)'; x.shadowBlur = 60 * S; x.shadowOffsetY = 24 * S; x.fillStyle = '#0B1220'; x.beginPath(); x.roundRect(-pw / 2 - b, -ph / 2 - b * 1.6, pw + 2 * b, ph + 3.2 * b, R); x.fill(); x.shadowColor = 'transparent';
+      x.save(); x.beginPath(); x.roundRect(-pw / 2, -ph / 2, pw, ph, R * .6); x.clip(); const sc = pw / im.width, ih = im.height * sc, off = Math.max(0, ih - ph) * eio((u - .8) / (d - 1.2)); x.drawImage(im, -pw / 2, -ph / 2 - off, pw, ih); x.restore(); x.restore(); }
+    if (V) { kicker(s.kicker || 'Scopri il sito', 200 * S, u / .4, 'center', C.W / 2); sale(C.sito.dominio, 56, 900, BIANCO, C.W / 2, 280 * S, (u - .15) / .4, 'center'); }
+    else { kicker(s.kicker || 'Scopri il sito', 420 * S, u / .4); sale(C.sito.dominio, 60, 900, BIANCO, M(), 500 * S, (u - .15) / .4); if (s.riga) aCapo(s.riga, 34, 500, C.W * .45).forEach((r, i) => sale(r, 34, 500, 'rgba(255,255,255,.85)', M(), 580 * S + i * 46 * S, (u - .3 - i * .1) / .4)); }
   } else if (s.tipo === 'chiusura') {
     fondo(); const cy = V ? C.H * .36 : C.H * .36; const p = eob(u / .5);
     x.save(); x.translate(C.W / 2, cy - (V ? 110 : 90) * S); x.scale(p, p); x.fillStyle = T.c1; x.beginPath(); x.roundRect(-70 * S, -70 * S, 140 * S, 140 * S, 30 * S); x.fill(); testo(C.sito.sigla, 54, 900, BIANCO, 0, 19 * S, 'center'); x.restore();

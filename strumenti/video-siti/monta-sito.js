@@ -44,7 +44,7 @@ const CFG = {
         { tipo: 'chiusura', da: B(62), a: 36, dissolvi: .25 },
       ] }; },
 };
-const cfg = CFG[SITO](); const scene = cfg.scene; const DUR = cfg.dur; const NF = Math.round(DUR * FPS);
+const ALTRI = require('./siti-config.js')(DIR); const cfg = (CFG[SITO] || ALTRI[SITO])(); const scene = cfg.scene; const DUR = cfg.dur; const NF = Math.round(DUR * FPS);
 const tmp = path.join(DIR, 'tmp'); fs.mkdirSync(tmp, { recursive: true });
 (async () => {
   const br = await chromium.launch({ args: ['--allow-file-access-from-files'] }); const p = await br.newPage({ viewport: { width: W, height: H } });
