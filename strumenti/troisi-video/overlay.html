@@ -227,27 +227,28 @@ function scenaG(s, t) {
     const ph = (V ? 1000 : 800) * S;
     // i telefoni già visti restano sullo sfondo, piccoli, in orbita
     for (let j = 0; j < i; j++) { const a = j / n * Math.PI * 2 + t * .15, rx = (V ? 420 : 760) * S, ry = (V ? 760 : 330) * S;
-      telefono(IMG[L[j].f], C.W / 2 + Math.cos(a) * rx, C.H / 2 + Math.sin(a) * ry, ph * .32, Math.sin(a) * .15, .55); }
+      telefono(IMG[L[j].f], C.W / 2 + Math.cos(a) * rx, C.H / 2 + Math.sin(a) * ry, ph * (n > 12 ? .24 : .32), Math.sin(a) * .15, .5); }
     const cx = V ? C.W / 2 : C.W * .34, cy = V ? C.H * .37 : C.H / 2 + 10 * S;
-    const ent = eob(v / .28), usc = v > .86 ? eio((v - .86) / .14) : 0;
+    const ent = eob(v / .22), usc = v > .84 ? eio((v - .84) / .16) : 0;
     const a = i / n * Math.PI * 2 + t * .15, ox = C.W / 2 + Math.cos(a) * (V ? 420 : 760) * S, oy = C.H / 2 + Math.sin(a) * (V ? 760 : 330) * S;
     const fx = cx + (ox - cx) * usc, fy = cy + (1 - ent) * C.H * .9 + (oy - cy) * usc, fh = ph * (1 - .68 * usc);
     telefono(IMG[L[i].f], fx, fy, fh, (1 - ent) * .25 + Math.sin(a) * .15 * usc, 1);
     const tx = V ? C.W / 2 : C.W * .6, al = V ? 'center' : 'left', ty = V ? C.H * .37 + ph / 2 + 230 * S : C.H / 2 - 20 * S;
     x.save(); x.globalAlpha = cl(1 - usc * 2);
-    testo(String(i + 1).padStart(2, '0') + ' / ' + (s.totale || n), V ? 26 : 26, 700, 'rgba(255,255,255,.65)', tx, ty - (V ? 120 : 130) * S, al, cl((v - .1) / .2), 4);
+    testo(String(i + 1).padStart(2, '0') + ' / ' + (s.totale || n), V ? 26 : 26, 700, 'rgba(255,255,255,.65)', tx, ty - (V ? 120 : 130) * S, al, cl((v - .05) / .15), 4);
     let px = V ? 74 : 78; const lim = V ? C.W - 2 * M() : C.W * .36; const w = larghezza(L[i].nome, px, 900); if (w > lim) px = Math.floor(px * lim / w);
-    sale(L[i].nome, px, 900, BIANCO, tx, ty, (v - .12) / .2, al);
-    sale(L[i].dominio, V ? 40 : 40, 700, ARANCIO, tx, ty + (V ? 70 : 70) * S, (v - .2) / .2, al);
+    sale(L[i].nome, px, 900, BIANCO, tx, ty, (v - .06) / .16, al);
+    let pd = 40; const wd = larghezza(L[i].dominio, pd, 700); if (wd > lim) pd = Math.floor(pd * lim / wd);
+    sale(L[i].dominio, pd, 700, ARANCIO, tx, ty + (V ? 70 : 70) * S, (v - .1) / .16, al);
     x.restore();
   } else if (s.tipo === 'griglia') {
     fondoBlu(); stelle(t);
-    const n = L.length, cols = V ? 3 : 5, rows = Math.ceil(n / cols), ph = (V ? 420 : 380) * S, gw = ph * .8, gh = ph * 1.12;
-    const z = 1 + .12 * eio(u / d);
+    const n = L.length, cols = V ? (n > 12 ? 4 : 3) : (n > 12 ? 7 : 5), rows = Math.ceil(n / cols), ph = (V ? (n > 12 ? 255 : 420) : (n > 12 ? 225 : 380)) * S, gw = ph * .8, gh = ph * 1.1;
+    const z = 1 + (n > 12 ? .05 : .12) * eio(u / d);
     for (let j = 0; j < n; j++) { const c = j % cols, r = Math.floor(j / cols); const inRow = Math.min(cols, n - r * cols);
-      const px = C.W / 2 + (c - (inRow - 1) / 2) * gw * z, py = C.H / 2 - (V ? 120 : 60) * S + (r - (rows - 1) / 2) * gh * z;
-      const p = eob((u - j * .06) / .5); telefono(IMG[L[j].f], px, py + (1 - p) * 200 * S, ph * z * cl(p, .01), 0, cl(p * 2)); }
-    const by = V ? C.H - 260 * S : C.H - 90 * S; x.fillStyle = 'rgba(0,25,50,.85)'; const bw = larghezza('Oltre 20 siti, un solo metodo.', V ? 56 : 60, 900) + 80 * S;
+      const px = C.W / 2 + (c - (inRow - 1) / 2) * gw * z, py = C.H / 2 - (V ? 110 : 75) * S + (r - (rows - 1) / 2) * gh * z;
+      const p = eob((u - j * (n > 12 ? .035 : .06)) / .5); telefono(IMG[L[j].f], px, py + (1 - p) * 200 * S, ph * z * cl(p, .01), 0, cl(p * 2)); }
+    const by = V ? C.H - 150 * S : C.H - 60 * S; x.fillStyle = 'rgba(0,25,50,.85)'; const bw = larghezza('Oltre 20 siti, un solo metodo.', V ? 56 : 60, 900) + 80 * S;
     x.globalAlpha = cl((u - .6) / .3); x.fillRect(C.W / 2 - bw / 2, by - 70 * S, bw, 100 * S); x.globalAlpha = 1;
     sale('Oltre 20 siti, un solo metodo.', V ? 56 : 60, 900, BIANCO, C.W / 2, by, (u - .7) / .4, 'center');
   } else if (s.tipo === 'silenzio') {
