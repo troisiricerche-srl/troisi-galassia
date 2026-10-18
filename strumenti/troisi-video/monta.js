@@ -15,8 +15,7 @@ const T = [
   [0, 8, 'apertura', null],
   [8, 12, 'claim', 'senato.mp4', 2.3, { righe: [{ t: 'Misuriamo' }, { t: 'ciò che conta.', c: 'a' }], didascalia: 'Senato della Repubblica · giugno 2026', cxv: .38 }],
   [12, 16, 'claim', 'senato.mp4', 14.0, { righe: [{ t: 'Dati ufficiali,' }, { t: 'metodo scientifico.', c: 'a' }], cxv: .55 }],
-  [16, 20, 'claim', 'cibari-porto.mp4', 4.3, { lento: 2, righe: [{ t: 'Dal 2006 trasformiamo i dati', px: V ? 64 : 80 }, { t: 'in conoscenza per chi decide.', c: 'a', px: V ? 64 : 80 }] }],
-  [20, 24, 'claim', 'cibari-porto.mp4', 5.42, { lento: 3.3, gia: 10, righe: [{ t: 'Dal 2006 trasformiamo i dati', px: V ? 64 : 80 }, { t: 'in conoscenza per chi decide.', c: 'a', px: V ? 64 : 80 }] }],
+  [16, 24, 'mondo', null, 0, { dissolvi: .2 }],
   [24, 28, 'parola', 'forum.mp4', 8.9, { primo: true, parola: 'la soddisfazione dei cittadini', didascalia: 'Forum dei Pubblici Ufficiali · II edizione', cxv: .45 }],
   [28, 32, 'parola', 'aqv.mp4', 7.3, { parola: 'la qualità della vita', didascalia: 'Associazione Qualità della Vita · Conferenza annuale 2023', cxv: .55 }],
   [32, 36, 'parola', 'bilancio.mp4', 5.15, { lento: 1.6, parola: 'le competenze', didascalia: 'Teatro Petruzzelli · Mappatura delle competenze', cxv: .2 }],
@@ -43,7 +42,7 @@ const NF = Math.round(DUR * FPS);
 const tmp = path.join(DIR, 'tmp'); fs.mkdirSync(tmp, { recursive: true });
 (async () => {
   const b = await chromium.launch({ args: ['--allow-file-access-from-files'] }); const p = await b.newPage({ viewport: { width: W, height: H } });
-  await p.addInitScript('window.CONF=' + JSON.stringify({ W, H, fps: FPS, scene, pool: POOL, primi: PRIMI, logo: { testo: path.join(DIR, 'logo', 'testo-bianco.svg') }, beats: M.beats }));
+  await p.addInitScript('window.CONF=' + JSON.stringify({ W, H, fps: FPS, scene, pool: POOL, primi: PRIMI, mondo: JSON.parse(fs.readFileSync(path.join(DIR, 'mondo.json')))[ORI], logo: { testo: path.join(DIR, 'logo', 'testo-bianco.svg') }, beats: M.beats }));
   await p.goto('file://' + path.join(DIR, 'overlay.html')); await p.evaluate(() => window.pronto);
   if (process.env.PROVA) { for (const ts of process.env.PROVA.split(',')) { const f = Math.round(Number(ts) * FPS); const d = await p.evaluate(f => { frame(f); return document.getElementById('cv').toDataURL('image/png'); }, f); fs.writeFileSync(path.join(tmp, `prova-${ORI}-${ts}.png`), Buffer.from(d.split(',')[1], 'base64')); } console.log(JSON.stringify(await p.evaluate(() => window.MOSAICO_INFO || null))); await b.close(); return; }
   const ov = path.join(tmp, `ov-${ORI}.mov`);

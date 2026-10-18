@@ -215,6 +215,36 @@ function stelle(t) { // galassia: punti che ruotano lentamente intorno al centro
 }
 
 function aCapo(t, px, w, lim) { const p = t.split(' '); const out = []; let r = ''; for (const q of p) { const c = r ? r + ' ' + q : q; if (larghezza(c, px, w) > lim && r) { out.push(r); r = q; } else r = c; } if (r) out.push(r); return out; }
+
+let MONDO = null;
+function scenaMondo(s, t) {
+  const d = s.a - s.da, u = t - s.da; fondoBlu();
+  if (!MONDO) { const m = C.mondo; MONDO = { terra: m.terra.map(q => new Path2D(q)), sel: m.sel.map(q => ({ ...q, p: new Path2D(q.d) })) }; }
+  const z = 1 + .04 * eio(u / d); x.save(); x.translate(C.W / 2, C.H / 2); x.scale(z, z); x.translate(-C.W / 2, -C.H / 2);
+  x.globalAlpha = cl(u / .5); x.fillStyle = 'rgba(255,255,255,.13)'; x.strokeStyle = 'rgba(0,20,42,.6)'; x.lineWidth = .8;
+  for (const q of MONDO.terra) { x.fill(q); x.stroke(q); } x.globalAlpha = 1;
+  const n = MONDO.sel.length, t0 = .45, step = (d * .62) / n;
+  MONDO.sel.forEach((q, i) => { const v = (u - t0 - i * step) / .35; if (v <= 0) return;
+    x.globalAlpha = cl(v); x.fillStyle = ARANCIO; x.fill(q.p); x.globalAlpha = 1; });
+  // Europa: un solo marchio, i paesi segnati con un punto
+  const iEu = MONDO.sel.findIndex(q => q.eu);
+  MONDO.sel.forEach((q, i) => { const v = (u - t0 - i * step) / .35; if (v <= 0 || !q.eu) return; x.fillStyle = BIANCO; x.beginPath(); x.arc(q.x, q.y, 5 * S * eob(cl(v)), 0, 7); x.fill(); });
+  const pins = MONDO.sel.map((q, i) => ({ ...q, i })).filter(q => !q.eu); if (iEu >= 0) pins.unshift({ x: C.mondo.europa[0], y: C.mondo.europa[1] - 60 * S, i: iEu });
+  pins.forEach(q => { const i = q.i; const v = (u - t0 - i * step) / .35; if (v <= 0) return;
+    const k = (V ? 30 : 32) * S / 400, sc = eob(cl(v)), px = q.x, py = q.y - (q.eu === undefined ? 0 : 34 * S);
+    x.save(); x.translate(px, py); x.scale(sc, sc);
+    if (v < 1.6) { x.globalAlpha = cl(1.6 - v) * .7; x.strokeStyle = ARANCIO; x.lineWidth = 3 * S; x.beginPath(); x.arc(0, 0, (14 + 40 * cl(v / 1.6)) * S, 0, 7); x.stroke(); x.globalAlpha = 1; }
+    x.fillStyle = BIANCO; x.beginPath(); x.arc(0, 0, 25 * S, 0, 7); x.fill();
+    marchioTT(-205 * k, -140 * k - 1 * S, k * .9, 1, 1); x.restore(); });
+  x.restore();
+  sale('I nostri clienti nel mondo', V ? 76 : 80, 900, BIANCO, C.W / 2, (V ? 470 : 150) * S, (u - .1) / .4, 'center');
+  if (u > .4) { x.fillStyle = ARANCIO; const w = 120 * S * eo((u - .4) / .4); x.fillRect(C.W / 2 - w / 2, (V ? 510 : 186) * S, w, 5 * S); }
+  // elenco dei paesi che si compone
+  const vis = MONDO.sel.filter((q, i) => u - t0 - i * step > 0).map(q => q.nome);
+  if (vis.length) { const px = V ? 34 : 30, lim = C.W - 2 * M(); const righe = aCapo(vis.join(' · '), px, 600, lim);
+    righe.forEach((r, i) => testo(r, px, 600, 'rgba(255,255,255,.9)', C.W / 2, (V ? 1330 : 990) * S + i * px * 1.5 * S - (righe.length - 1) * px * 1.5 * S * (V ? 0 : 1), 'center')); }
+  if (s.dissolvi && u > d - s.dissolvi) { x.fillStyle = `rgba(0,20,42,${cl((u - (d - s.dissolvi)) / s.dissolvi)})`; x.fillRect(0, 0, C.W, C.H); }
+}
 function scenaGruppo(s, t) {
   const d = s.a - s.da, u = t - s.da, L = s.siti, n = L.length;
   fondoBlu(); stelle(t);
@@ -279,7 +309,7 @@ function scenaG(s, t) {
     sale('un dato ufficiale sull\'Italia.', V ? 66 : 72, 900, ARANCIO, C.W / 2, C.H / 2 + 60 * S, (u - .4) / .4, 'center');
   }
 }
-window.frame = f => { const t = f / C.fps; x.clearRect(0, 0, C.W, C.H); for (const s of C.scene) if (t >= s.da && t < s.a) (s.tipo === 'gruppo' ? scenaGruppo : ['galassia','telefoni','griglia','silenzio'].includes(s.tipo) ? scenaG : scena)(s, t); };
+window.frame = f => { const t = f / C.fps; x.clearRect(0, 0, C.W, C.H); for (const s of C.scene) if (t >= s.da && t < s.a) (s.tipo === 'mondo' ? scenaMondo : s.tipo === 'gruppo' ? scenaGruppo : ['galassia','telefoni','griglia','silenzio'].includes(s.tipo) ? scenaG : scena)(s, t); };
 const tutte = () => { const L = [C.logo.testo, ...(C.pool || []), ...(C.primi || [])]; C.scene.forEach(s => (s.carte || []).forEach(c => L.push(c.f))); (C.siti || []).forEach(c => L.push(c.f)); C.scene.forEach(s => (s.siti || []).forEach(c => L.push(c.f))); return [...new Set(L)]; };
 window.pronto = Promise.all(['900', '800', '700', '600', '300'].map(w => document.fonts.load(w + ' 40px A'))).then(() => Promise.all(tutte().map(carica)));
 </script></body></html>
