@@ -8,7 +8,7 @@ const V = ORI === 'v'; const W = V ? 1080 : 1920, H = V ? 1920 : 1080, FPS = 25;
 const bt = k => k === 0 ? 0 : M.beats[k];
 const FT = path.join(DIR, 'foto'); const hero = n => path.join(FT, 'hero', n + '.jpg'); const dos = n => path.join(FT, 'dossier', n + '.jpg');
 const POOL = fs.readdirSync(path.join(FT, 'pool')).map(f => path.join(FT, 'pool', f));
-const PRIMI = ['troisi-banner', 'senato-leggio', 'telecamera', 'scrivania', 'libro', 'camera-deputati', 'istat', 'stretta-mano'].map(hero).concat([dos('d03'), dos('d34')]);
+const PRIMI = ['troisi-banner', 'senato-leggio', 'telecamera', 'scrivania', 'libro', 'camera-deputati', 'sassoli', 'stretta-mano'].map(hero).concat([dos('d03'), dos('d34')]);
 const DUR = 61.2;
 // battito di partenza, battito di fine, tipo, clip, punto d'ingresso (s), parametri
 const T = [
@@ -19,9 +19,9 @@ const T = [
   [20, 24, 'claim', 'cibari-porto.mp4', 5.42, { lento: 3.3, gia: 10, righe: [{ t: 'Dal 2006 trasformiamo i dati', px: V ? 64 : 80 }, { t: 'in conoscenza per chi decide.', c: 'a', px: V ? 64 : 80 }] }],
   [24, 28, 'parola', 'forum.mp4', 8.9, { primo: true, parola: 'la soddisfazione dei cittadini', didascalia: 'Forum dei Pubblici Ufficiali · II edizione', cxv: .45 }],
   [28, 32, 'parola', 'aqv.mp4', 7.3, { parola: 'la qualità della vita', didascalia: 'Associazione Qualità della Vita · Conferenza annuale 2023', cxv: .55 }],
-  [32, 36, 'parola', 'radio.mp4', 5.4, { parola: 'le opinioni', didascalia: "Indagine sull'ascolto delle radio in Puglia", cxv: .5 }],
+  [32, 36, 'parola', 'bilancio.mp4', 5.15, { lento: 1.6, parola: 'le competenze', didascalia: 'Teatro Petruzzelli · Mappatura delle competenze', cxv: .2 }],
   [36, 40, 'parola', 'sis.mp4', 2.4, { parola: 'i fenomeni sociali', didascalia: 'Società Italiana di Statistica · 52ª Riunione scientifica', cxv: .62 }],
-  [40, 44, 'parola', 'cibari-andrea.mp4', 0, { parola: 'i territori' }],
+  [40, 44, 'parola', 'eduexhibition.mp4', 3.9, { parola: 'la scuola che innova', didascalia: 'Edu Exhibition · II edizione', cxv: .5 }],
   [44, 48, 'parola', 'cibari-andrea.mp4', 8.0, { parola: 'il cibo e la salute', didascalia: '3° Convegno CiBARI «Il cibo della salute»', cxv: .45 }],
   [48, 51, 'numero', 'forum.mp4', 16, { val: 20, suf: '+', etichetta: 'anni di attività' }],
   [51, 54, 'numero', 'sis.mp4', 25.4, { val: 500, suf: '+', etichetta: 'ricerche realizzate' }],
@@ -30,9 +30,10 @@ const T = [
   [60, 70, 'carte', null, 0, { carte: [
     { f: hero('senato-leggio'), t: 'Senato della Repubblica', r: -3 },
     { f: hero('camera-deputati'), t: 'Camera dei deputati', r: 2.5, ox: 30 },
-    { f: hero('istat'), t: 'Istat · Roma', r: -2, ox: -20 },
+    { f: hero('sassoli'), t: 'Con David Sassoli', r: -2, ox: -20 },
     { f: hero('milano-leggio'), t: 'Regione Lombardia · Milano', r: 3, ox: 40 },
-    { f: hero('uniba-laptop'), t: 'Bari', r: -1.5, ox: -30 }] }],
+    { f: hero('uniba-laptop'), t: 'Bari', r: -1.5, ox: -30 },
+    { f: hero('forum-2026'), t: 'Forum dei Pubblici Ufficiali · Bari, 2026', r: 2, ox: 20 }] }],
   [70, 84, 'mosaico', null, 0, { dissolvi: .3 }],
   [84, 999, 'chiusura', null, 0, { dissolvi: .3 }],
 ];
@@ -42,7 +43,7 @@ const NF = Math.round(DUR * FPS);
 const tmp = path.join(DIR, 'tmp'); fs.mkdirSync(tmp, { recursive: true });
 (async () => {
   const b = await chromium.launch({ args: ['--allow-file-access-from-files'] }); const p = await b.newPage({ viewport: { width: W, height: H } });
-  await p.addInitScript('window.CONF=' + JSON.stringify({ W, H, fps: FPS, scene, pool: POOL, primi: PRIMI, logo: { testo: path.join(FT, 'logo-testo-bianco.png') }, beats: M.beats }));
+  await p.addInitScript('window.CONF=' + JSON.stringify({ W, H, fps: FPS, scene, pool: POOL, primi: PRIMI, logo: { testo: path.join(DIR, 'logo', 'testo-bianco.svg') }, beats: M.beats }));
   await p.goto('file://' + path.join(DIR, 'overlay.html')); await p.evaluate(() => window.pronto);
   if (process.env.PROVA) { for (const ts of process.env.PROVA.split(',')) { const f = Math.round(Number(ts) * FPS); const d = await p.evaluate(f => { frame(f); return document.getElementById('cv').toDataURL('image/png'); }, f); fs.writeFileSync(path.join(tmp, `prova-${ORI}-${ts}.png`), Buffer.from(d.split(',')[1], 'base64')); } console.log(JSON.stringify(await p.evaluate(() => window.MOSAICO_INFO || null))); await b.close(); return; }
   const ov = path.join(tmp, `ov-${ORI}.mov`);

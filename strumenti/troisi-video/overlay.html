@@ -38,8 +38,9 @@ function marchioTT(X, Y, k, pR = 1, pA = 1, alpha = 1) { // X,Y = angolo in alto
   x.restore();
 }
 function scritta(X, Y, k, p = 1, alpha = 1) { // «TROISI RICERCHE» del logo (immagine), rivelata da sinistra
-  const im = IMG[C.logo.testo]; if (!im) return; const w = im.width * k, h = im.height * k;
-  x.save(); x.globalAlpha = alpha; x.beginPath(); x.rect(X + 380 * k, Y + 230 * k, w * eio(p), h); x.clip(); x.drawImage(im, X + 380 * k, Y + 230 * k, w, h); x.restore();
+  const im = IMG[C.logo.testo]; if (!im) return; const vett = /\.svg$/.test(C.logo.testo);
+  const X0 = X + (vett ? 392 : 380) * k, Y0 = Y + (vett ? 236 : 230) * k, w = vett ? 378 * k : im.width * k, h = vett ? 378 * k * im.height / im.width : im.height * k;
+  x.save(); x.globalAlpha = alpha; x.beginPath(); x.rect(X0, Y0, w * eio(p), h); x.clip(); x.drawImage(im, X0, Y0, w, h); x.restore();
 }
 function logoIntero(cx, cy, larg, pR, pA, pT, alpha = 1) { const k = larg / 776; const X = cx - larg / 2, Y = cy - 428 * k / 2; marchioTT(X, Y, k, pR, pA, alpha); scritta(X, Y, k, pT, alpha); }
 function fondoBlu() {
@@ -212,6 +213,25 @@ function stelle(t) { // galassia: punti che ruotano lentamente intorno al centro
     x.globalAlpha = .25 + rnd() * .6; x.fillStyle = rnd() < .12 ? ARANCIO : BIANCO; x.beginPath(); x.arc(cx + Math.cos(a) * r, cy + Math.sin(a) * r * .55, (rnd() * 2.2 + .6) * S, 0, 7); x.fill(); }
   x.globalAlpha = 1;
 }
+
+function aCapo(t, px, w, lim) { const p = t.split(' '); const out = []; let r = ''; for (const q of p) { const c = r ? r + ' ' + q : q; if (larghezza(c, px, w) > lim && r) { out.push(r); r = q; } else r = c; } if (r) out.push(r); return out; }
+function scenaGruppo(s, t) {
+  const d = s.a - s.da, u = t - s.da, L = s.siti, n = L.length;
+  fondoBlu(); stelle(t);
+  let pt = V ? 66 : 70; const wt = larghezza(s.titolo, pt, 900); if (wt > C.W - 2 * M()) pt = Math.floor(pt * (C.W - 2 * M()) / wt);
+  sale(s.titolo, pt, 900, BIANCO, C.W / 2, (V ? 200 : 120) * S, (u - .1) / .4, 'center');
+  if (u > .4) { x.fillStyle = ARANCIO; const w = 120 * S * eo((u - .4) / .4); x.fillRect(C.W / 2 - w / 2, (V ? 236 : 150) * S, w, 5 * S); }
+  const cols = V ? (n > 6 ? 3 : 2) : Math.ceil(n / 2), rows = Math.ceil(n / cols);
+  const top = (V ? 280 : 175) * S, avail = C.H - top - (V ? 110 : 30) * S; const ph = Math.min((V ? 520 : 420) * S, avail / rows - 80 * S), gw = Math.min(ph * .86, (C.W - 2 * M()) / cols), rh = ph + 80 * S, y0 = top + (avail - rows * rh) / 2 + ph / 2;
+  const per = (d * .62) / n;
+  for (let j = 0; j < n; j++) { const c = j % cols, r = Math.floor(j / cols), inRow = Math.min(cols, n - r * cols);
+    const px = C.W / 2 + (c - (inRow - 1) / 2) * gw, py = y0 + r * rh;
+    const v = (u - .5 - j * per) / .45; if (v <= 0) continue; const p = eob(v);
+    telefono(IMG[L[j].f], px, py + (1 - p) * 260 * S, ph * cl(p, .01) * (gw < ph * .78 ? gw / (ph * .78) : 1), (1 - cl(v)) * .2, cl(v * 2));
+    let pn = V ? 26 : 24; const lim = gw * .96; const wn = larghezza(L[j].nome, pn, 800); if (wn > lim) pn = Math.floor(pn * lim / wn);
+    testo(L[j].nome, pn, 800, BIANCO, px, py + ph * .5 + 48 * S, 'center', cl((v - .3) * 2)); }
+  if (s.frase) sale(s.frase, V ? 40 : 40, 600, ARANCIO, C.W / 2, C.H - (V ? 150 : 70) * S, (u - d * .7) / .4, 'center');
+}
 function scenaG(s, t) {
   const d = s.a - s.da, u = t - s.da, L = C.siti;
   if (s.tipo === 'galassia') {
@@ -238,8 +258,10 @@ function scenaG(s, t) {
     testo(String(i + 1).padStart(2, '0') + ' / ' + (s.totale || n), V ? 26 : 26, 700, 'rgba(255,255,255,.65)', tx, ty - (V ? 120 : 130) * S, al, cl((v - .05) / .15), 4);
     let px = V ? 74 : 78; const lim = V ? C.W - 2 * M() : C.W * .36; const w = larghezza(L[i].nome, px, 900); if (w > lim) px = Math.floor(px * lim / w);
     sale(L[i].nome, px, 900, BIANCO, tx, ty, (v - .06) / .16, al);
+    let yy = ty;
+    if (L[i].cosa) { const righe = aCapo(L[i].cosa, V ? 44 : 42, 500, lim); righe.forEach((r, k) => { yy += (k ? 54 : 78) * S; sale(r, V ? 44 : 42, 500, 'rgba(255,255,255,.92)', tx, yy, (v - .12 - k * .04) / .16, al); }); }
     let pd = 40; const wd = larghezza(L[i].dominio, pd, 700); if (wd > lim) pd = Math.floor(pd * lim / wd);
-    sale(L[i].dominio, pd, 700, ARANCIO, tx, ty + (V ? 70 : 70) * S, (v - .1) / .16, al);
+    sale(L[i].dominio, pd, 700, ARANCIO, tx, yy + (L[i].cosa ? 76 : 70) * S, (v - .18) / .16, al);
     x.restore();
   } else if (s.tipo === 'griglia') {
     fondoBlu(); stelle(t);
@@ -257,7 +279,7 @@ function scenaG(s, t) {
     sale('un dato ufficiale sull\'Italia.', V ? 66 : 72, 900, ARANCIO, C.W / 2, C.H / 2 + 60 * S, (u - .4) / .4, 'center');
   }
 }
-window.frame = f => { const t = f / C.fps; x.clearRect(0, 0, C.W, C.H); for (const s of C.scene) if (t >= s.da && t < s.a) (['galassia','telefoni','griglia','silenzio'].includes(s.tipo) ? scenaG : scena)(s, t); };
-const tutte = () => { const L = [C.logo.testo, ...(C.pool || []), ...(C.primi || [])]; C.scene.forEach(s => (s.carte || []).forEach(c => L.push(c.f))); (C.siti || []).forEach(c => L.push(c.f)); return [...new Set(L)]; };
+window.frame = f => { const t = f / C.fps; x.clearRect(0, 0, C.W, C.H); for (const s of C.scene) if (t >= s.da && t < s.a) (s.tipo === 'gruppo' ? scenaGruppo : ['galassia','telefoni','griglia','silenzio'].includes(s.tipo) ? scenaG : scena)(s, t); };
+const tutte = () => { const L = [C.logo.testo, ...(C.pool || []), ...(C.primi || [])]; C.scene.forEach(s => (s.carte || []).forEach(c => L.push(c.f))); (C.siti || []).forEach(c => L.push(c.f)); C.scene.forEach(s => (s.siti || []).forEach(c => L.push(c.f))); return [...new Set(L)]; };
 window.pronto = Promise.all(['900', '800', '700', '600', '300'].map(w => document.fonts.load(w + ' 40px A'))).then(() => Promise.all(tutte().map(carica)));
 </script></body></html>
