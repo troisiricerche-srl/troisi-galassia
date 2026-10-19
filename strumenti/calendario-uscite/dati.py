@@ -148,24 +148,24 @@ EP = [
 ]
 CODA_DS = "Delitti statistici: ogni venerdì un errore di ragionamento, smontato con i numeri."
 PRIMO_COMMENTO = f"Ogni mattina un dato ufficiale sull'Italia → canale WhatsApp «Il dato è tratto™» {WA}"
-REQ_DS = "Al momento della pubblicazione: etichetta «Creato con IA» di Meta (voce sintetica), poi disattivare remix e riuso dell'audio; su YouTube registrare il brano in Claim Clear."
+REQ_DS = "Dopo la pubblicazione: disattivare remix e riuso dell'audio su Instagram e Facebook; su YouTube registrare il brano in Claim Clear."
 
 # ---------------- calendario ----------------
 D = dt.date
-SEASON = [  # (data martedì/mercoledì sito, chiave sito, data venerdì, n. puntata)
- (D(2026,11,3), 'delfi', D(2026,11,6), 1),
- (D(2026,11,10), 'troisiinsight', D(2026,11,13), 2),
- (D(2026,11,17), 'customerpa', D(2026,11,20), 3),
- (D(2026,11,24), 'troisiricerche', D(2026,11,27), 4),
- (D(2026,12,1), 'tindex', D(2026,12,4), 5),
+SEASON = [  # (data mercoledì sito, chiave sito, data venerdì, n. puntata): il martedì resta alla sintesi settimanale de Il dato è tratto™
+ (D(2026,11,4), 'delfi', D(2026,11,6), 1),
+ (D(2026,11,11), 'troisiinsight', D(2026,11,13), 2),
+ (D(2026,11,18), 'customerpa', D(2026,11,20), 3),
+ (D(2026,11,25), 'troisiricerche', D(2026,11,27), 4),
+ (D(2026,12,2), 'tindex', D(2026,12,4), 5),
  (D(2026,12,9), 'benessereorganizzativo', D(2026,12,11), 6),
- (D(2026,12,15), 'ildatoetratto', D(2026,12,18), 7),
- (D(2027,1,5), 'osservatoriobenessere', D(2027,1,8), 8),
- (D(2027,1,12), 'sveglia', D(2027,1,15), 9),
- (D(2027,1,19), 'bdg', D(2027,1,22), 10),
+ (D(2026,12,16), 'ildatoetratto', D(2026,12,18), 7),
+ (D(2027,1,7), 'osservatoriobenessere', D(2027,1,8), 8),
+ (D(2027,1,13), 'sveglia', D(2027,1,15), 9),
+ (D(2027,1,20), 'bdg', D(2027,1,22), 10),
 ]
 DOPO = ['mappatura', 'registro', 'tip', 'troisiformazione', 'digitalizzazione', 'dibattito', 'internazionalizzazione', 'voiceinhub', 'andreatroisi']
-DOPO_DATE = [D(2027,1,26) + dt.timedelta(weeks=i) for i in range(len(DOPO))]
+DOPO_DATE = [D(2027,1,27) + dt.timedelta(weeks=i) for i in range(len(DOPO))]
 
 posts = []
 def add(d, ora, canale, **k):
@@ -226,10 +226,10 @@ def uscita_ep(d, n, settimana):
 d = D(2026,10,26)
 g = dict(gruppo='2026-10-26-istituzionale', serie='Lancio', titolo='Video istituzionale Troisi Ricerche', fase='Settimana 0 · lancio', settimana=0,
          nota="Prima di pubblicare: confermare Corea del Sud o del Nord nella mappa «I nostri clienti nel mondo». Fissare il post in alto su ogni canale.")
-TI = ("Misuriamo ciò che conta. Davvero.\nDal 2006 siamo un istituto di ricerca statistica: indagini, piattaforme e osservatori per enti pubblici, imprese e territori. Dal Senato della Repubblica al Forum dei Pubblici Ufficiali, dalle scuole alla qualità della vita.\nBari · Roma · Milano.")
+TI = ("Misuriamo ciò che conta. Davvero.\nDal 2006 siamo un istituto di ricerca statistica: indagini, piattaforme e osservatori per enti pubblici, imprese e territori. Dalle PMI alle grandi aziende, dal Senato della Repubblica al Forum dei Pubblici Ufficiali, dall'Italia all'estero, dalle scuole alla qualità della vita.\nBari · Roma · Milano.")
 LI = url('troisiricerche.net', 'linkedin', 'lancio', 'istituzionale')
 add(d, '08:30', 'LinkedIn · pagina Troisi Ricerche', id='ist-li', formato='Video orizzontale 16:9', file=TV+'Troisi-Ricerche-video-istituzionale-orizzontale-HQ.mp4', testo=TI+"\n\n→ troisiricerche.net", hashtag='#statistica #ricerca #PA', link=LI, primo_commento='', **g)
-add(d, '09:00', 'LinkedIn · profilo di Andrea', id='ist-lia', formato='Condivisione del post della pagina', file='—', testo="Vent'anni di Troisi Ricerche in un minuto. Grazie a chi ha lavorato con noi in questi anni.", hashtag='', link='', primo_commento='', **g)
+add(d, '09:00', 'LinkedIn · profilo di Andrea', id='ist-lia', formato='Condivisione del post della pagina', file='—', testo="Vent'anni di Troisi Ricerche in un minuto. Grazie a chi lavora e ha lavorato con noi in questi anni.", hashtag='', link='', primo_commento='', **g)
 add(d, '13:00', 'Instagram · Reel @troisiricerche', id='ist-ig', formato='Reel verticale 9:16 · da fissare in alto', file=TV+'Troisi-Ricerche-video-istituzionale-verticale-HQ.mp4', testo=TI+"\n\nLink in bio.", hashtag='#statistica #ricerca #sondaggi #PA #Bari', link=url('troisiricerche.net','instagram','lancio','istituzionale'), primo_commento=PRIMO_COMMENTO, **g)
 add(d, '13:00', 'Facebook · pagina Troisi Ricerche', id='ist-fb', formato='Video orizzontale 16:9 · da fissare in alto', file=TV+'Troisi-Ricerche-video-istituzionale-orizzontale-HQ.mp4', testo=TI+"\n\n→ troisiricerche.net", hashtag='#statistica #ricerca #PA', link=url('troisiricerche.net','facebook','lancio','istituzionale'), primo_commento='', **g)
 add(d, '13:00', 'YouTube · video', id='ist-yt', formato='Video orizzontale 16:9 · in evidenza sul canale', file=TV+'Troisi-Ricerche-video-istituzionale-orizzontale-HQ.mp4', testo="Titolo: Troisi Ricerche · Misuriamo ciò che conta. Davvero.\n\nDescrizione:\n"+TI+"\n\n"+url('troisiricerche.net','youtube','lancio','istituzionale'), hashtag='#statistica #ricerca #PA', link=url('troisiricerche.net','youtube','lancio','istituzionale'), primo_commento='', **g)
@@ -239,17 +239,17 @@ d = D(2026,10,29)
 g = dict(gruppo='2026-10-29-galassia', serie='Lancio', titolo='La galassia dei siti', fase='Settimana 0 · lancio', settimana=0, nota='Versione corta sui social, lunga su YouTube e sul sito.')
 TG = ("Un istituto, una galassia di strumenti.\nPer la pubblica amministrazione: CustomerPA™, Benessere Organizzativo, l'Osservatorio sul Benessere Organizzativo, TIP, l'Indice di Performance Territoriale, Digitalizzazione nella PA, Dibattito Pubblico.\nPer le imprese: Mappatura e Registro delle Competenze, Troisi Formazione, Consulenza Internazionalizzazione.\nPer cittadini e territori: Il dato è tratto™, DELFI, TroisiInsight, Benessere Digitale Giovani, Sveglia Digitale, VoiceInHub.\nNelle prossime settimane vi presentiamo i siti uno per uno.")
 add(d, '08:30', 'LinkedIn · pagina Troisi Ricerche', id='gal-li', formato='Video orizzontale 16:9 · versione corta', file=TV+'Troisi-Ricerche-galassia-corta-orizzontale-HQ.mp4', testo=TG, hashtag='#statistica #PA #imprese', link=url('troisiricerche.net','linkedin','lancio','galassia'), primo_commento='', **g)
-add(d, '12:30', 'LinkedIn · profilo di Andrea', id='gal-lia', formato='Condivisione del post della pagina', file='—', testo="Diciannove siti, un solo metodo. Da martedì li raccontiamo uno a settimana.", hashtag='', link='', primo_commento='', **g)
+add(d, '12:30', 'LinkedIn · profilo di Andrea', id='gal-lia', formato='Condivisione del post della pagina', file='—', testo="Diciannove siti, un solo metodo. Da mercoledì li raccontiamo uno a settimana.", hashtag='', link='', primo_commento='', **g)
 add(d, '13:00', 'Instagram · Reel @troisiricerche', id='gal-ig', formato='Reel verticale 9:16 · versione corta', file=TV+'Troisi-Ricerche-galassia-corta-verticale-HQ.mp4', testo=TG, hashtag='#statistica #PA #imprese #dati #Italia', link=url('troisiricerche.net','instagram','lancio','galassia'), primo_commento='', **g)
 add(d, '13:00', 'Facebook · pagina Troisi Ricerche', id='gal-fb', formato='Reel verticale 9:16 · versione corta', file=TV+'Troisi-Ricerche-galassia-corta-verticale-HQ.mp4', testo=TG, hashtag='#statistica #PA #imprese', link=url('troisiricerche.net','facebook','lancio','galassia'), primo_commento='', **g)
 add(d, '18:00', 'YouTube · video', id='gal-yt', formato='Video orizzontale 16:9 · versione lunga', file=TV+'Troisi-Ricerche-galassia-lunga-orizzontale-HQ.mp4', testo="Titolo: La galassia di Troisi Ricerche · 19 siti, un metodo\n\nDescrizione:\n"+TG+"\n\n"+url('troisiricerche.net','youtube','lancio','galassia'), hashtag='#statistica #PA #imprese', link=url('troisiricerche.net','youtube','lancio','galassia'), primo_commento='', **g)
 add(d, '18:00', 'Sito · troisiricerche.net', id='gal-web', formato='Video orizzontale, versione lunga, nella pagina dei servizi', file=TV+'Troisi-Ricerche-galassia-lunga-orizzontale-HQ.mp4', testo='Inserire la versione lunga nella pagina che elenca i siti della galassia.', hashtag='', link='', primo_commento='', **g)
 
 for i, (ds, k, df, n) in enumerate(SEASON, start=1):
-    uscita_sito(ds, k, 'Stagione 1 · martedì sito, venerdì puntata', i)
+    uscita_sito(ds, k, 'Stagione 1 · mercoledì sito, venerdì puntata', i)
     uscita_ep(df, n, i)
 for j, (k, d) in enumerate(zip(DOPO, DOPO_DATE), start=11):
-    uscita_sito(d, k, 'Dopo la stagione · un sito a settimana', j)
+    uscita_sito(d, k, 'Dopo la stagione · un sito ogni mercoledì', j)
 
 posts.sort(key=lambda p: (p['data'], p['ora'], p['canale']))
 json.dump(posts, open('posts.json', 'w'), ensure_ascii=False)
