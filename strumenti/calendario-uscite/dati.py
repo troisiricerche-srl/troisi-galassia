@@ -251,6 +251,14 @@ for i, (ds, k, df, n) in enumerate(SEASON, start=1):
 for j, (k, d) in enumerate(zip(DOPO, DOPO_DATE), start=11):
     uscita_sito(d, k, 'Dopo la stagione · un sito ogni mercoledì', j)
 
+# Orari (decisione di Andrea, 19/10): tutto alle 7:00, mezz'ora dopo il dato del mattino delle 6:30.
+for p in posts:
+    if p['canale'].startswith('LinkedIn · profilo'):
+        p['ora'] = '07:15'; p['nota'] = (p['nota'] + ' ' if p['nota'] else '') + 'LinkedIn non programma le ricondivisioni: si fa a mano appena il post della pagina è uscito.'
+    elif p['canale'].startswith('Instagram · Storia'):
+        p['ora'] = '07:05'
+    else:
+        p['ora'] = '07:00'
 posts.sort(key=lambda p: (p['data'], p['ora'], p['canale']))
 json.dump(posts, open('posts.json', 'w'), ensure_ascii=False)
 print(len(posts), 'uscite;', len({p["gruppo"] for p in posts}), 'gruppi')
