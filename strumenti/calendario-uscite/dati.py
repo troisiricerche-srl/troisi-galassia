@@ -24,12 +24,12 @@ SITI = {
    '#datajournalism #ISTAT #lavoro', '#datajournalism #statistica #ISTAT #lavoro #Italia',
    "I dati che raccontano l'Italia che cambia.\nAd agosto 2026 il tasso di disoccupazione in Italia è salito al 6,2% (ISTAT, dati provvisori). Su TroisiInsight lo leggiamo insieme agli altri numeri ufficiali: un articolo di data journalism ogni lunedì, report scaricabili su territori, PA e competenze, dashboard da esplorare.",
    "Ogni lunedì su TroisiInsight prendiamo un dato ufficiale e lo spieghiamo senza scorciatoie. Questo è il laboratorio da cui partono le nostre analisi.",
-   "I dati che raccontano l'Italia che cambia · TroisiInsight", 'Prima di pubblicare: controllare che il dato ISTAT di settembre non abbia già sostituito quello di agosto.'),
+   "I dati che raccontano l'Italia che cambia · TroisiInsight", 'Promemoria per Andrea entro l\'11/11: se ISTAT ha già diffuso il dato di settembre, il 6,2% di agosto resta corretto ma va letto come dato di agosto.'),
  'customerpa': ('CustomerPA™', 'customerpa.it', 'prova-CustomerPA',
    '#customersatisfaction #PA #performance', '#customersatisfaction #PA #cittadini #performance #CustomerPA',
    "Il tuo ente misura davvero la soddisfazione dei cittadini?\nCon CustomerPA™ la rilevazione segue quattro passi: audit in 8 punti con il CustomerPA™ Score, indagine con metodo statistico validato, report allegabile alla Relazione sulla Performance, documentazione a supporto dell'OIV.",
    "Misurare la soddisfazione dei cittadini è il lavoro che facciamo da più tempo. Con CustomerPA™ l'abbiamo reso un percorso chiaro, in quattro passi.",
-   'Il tuo ente misura davvero la soddisfazione dei cittadini? · CustomerPA™', 'Video di prova già approvato. Da verificare i riferimenti normativi in grafica (D.Lgs. 150/2009 «rilevazione annuale»).'),
+   'Il tuo ente misura davvero la soddisfazione dei cittadini? · CustomerPA™', 'Promemoria per Andrea entro il 18/11: verificare in grafica la «rilevazione annuale» attribuita al D.Lgs. 150/2009.'),
  'troisiricerche': ('Troisi Ricerche', 'troisiricerche.net', 'Troisi-Ricerche',
    '#ricerchedimercato #statistica #PA', '#statistica #ricerchedimercato #sondaggi #PA #Bari',
    "Dal 2006 trasformiamo i dati in conoscenza per chi decide.\nIndagini di mercato, sociali e sondaggi di opinione; piattaforme come CustomerPA™, DELFI e TIP; osservatori che pubblicano analisi su dati ufficiali.\nUn metodo certificato: TÜV ISO 9001:2015, istituto accreditato MIUR.\nBari · Roma · Milano.",
@@ -39,7 +39,7 @@ SITI = {
    '#territorio #comuni #benchmarking', '#territorio #comuni #benchmarking #PA #ITP',
    "Come funziona davvero il tuo territorio?\nL'Indice di Performance Territoriale (ITP) misura comuni, province e regioni su servizi, governance e sviluppo: 38 indicatori in 5 dimensioni, un unico indice da 0 a 100.",
    "Con l'ITP abbiamo provato a rispondere a una domanda che ogni amministratore si fa: come sta andando il nostro territorio, rispetto agli altri?",
-   'Come funziona davvero il tuo territorio? · Indice di Performance Territoriale', 'Prima di pubblicare: allineare su t-index.it il numero dei comuni (7.901) a quello di DELFI (7.896).'),
+   'Come funziona davvero il tuo territorio? · Indice di Performance Territoriale', 'Promemoria per Andrea entro il 2/12: allineare su t-index.it il numero dei comuni (7.901) a quello di DELFI (7.896); si vede nel video.'),
  'benessereorganizzativo': ('Benessere Organizzativo', 'benessereorganizzativo.it', 'Benessere-Organizzativo',
    '#benessereorganizzativo #stresslavorocorrelato #HR', '#benessereorganizzativo #stresslavorocorrelato #HR #PA #lavoro',
    "Come stanno davvero le persone nella tua organizzazione?\nLa valutazione dello stress lavoro-correlato è prevista per tutti i datori di lavoro (D.Lgs. 81/2008, art. 28); le PA devono garantire un ambiente di lavoro improntato al benessere organizzativo (D.Lgs. 165/2001, art. 7).\nIl nostro metodo: questionario sul modello ANAC, analisi di clima, stress e benessere, report integrabile nel DVR e nella Relazione sulla Performance.",
@@ -49,7 +49,7 @@ SITI = {
    '#ildatoetratto #datiufficiali #Italia', '#ildatoetratto #statistica #datiufficiali #Italia #Eurostat',
    "Ogni mattina un dato ufficiale sull'Italia.\nUn esempio: nel 2025 il 13,3% dei giovani italiani tra 15 e 29 anni non lavorava e non studiava (Eurostat).\nIl dato è tratto™ arriva sul canale WhatsApp, appena esce, oppure via email ogni due settimane, gratis e senza pubblicità.",
    "Ogni mattina scegliamo un dato ufficiale e lo spieghiamo in poche righe. Se vi va, seguiteci sul canale WhatsApp.",
-   "Ogni mattina un dato ufficiale sull'Italia · Il dato è tratto™", "Prima di pubblicare: togliere da ildatoetratto.it la frase «In pochi secondi, con la fonte»; si vede nel video."),
+   "Ogni mattina un dato ufficiale sull'Italia · Il dato è tratto™", "Promemoria per Andrea entro il 16/12: togliere da ildatoetratto.it la frase «In pochi secondi, con la fonte»; si vede nel video."),
  'osservatoriobenessere': ('Osservatorio sul Benessere Organizzativo', 'osservatoriobenessereorganizzativo.it', 'Osservatorio-Benessere-Organizzativo',
    '#benessereorganizzativo #partecipate #ranking', '#benessereorganizzativo #partecipate #PA #ranking #lavoro',
    "Dove si lavora meglio, tra le società pubbliche?\nL'Osservatorio sul Benessere Organizzativo parte da un database di 6.685 società partecipate e controllate dalla PA attive (fonte: MEF e IPA) e costruisce il ranking nazionale con l'IBO Score™: 20 regioni, 18 settori. Prima edizione 2026, premio nel 2027.",
@@ -84,7 +84,7 @@ SITI = {
    '#formazionefinanziata #Fondimpresa #competenze', '#formazionefinanziata #Fondimpresa #competenze #formazione #imprese',
    "La tua azienda versa ogni mese fondi per la formazione. Li stai usando?\nCon Troisi Formazione il percorso è misurabile: fabbisogni dalla Mappatura delle Competenze, piano formativo finanziato dai fondi interprofessionali (Fondimpresa, Fondirigenti, Fondo Forte), formazione in aula e online, certificazione nel Registro delle Competenze.",
    "Molte imprese versano i contributi per la formazione e non li usano. Con Troisi Formazione proviamo a trasformarli in competenze.",
-   'La tua azienda usa i fondi per la formazione? · Troisi Formazione', "In grafica c'è «A costo zero»: verificare che sia corretto per tutti i fondi citati prima di pubblicare."),
+   'La tua azienda usa i fondi per la formazione? · Troisi Formazione', "Promemoria per Andrea entro il 17/2: in grafica c'è «A costo zero», da verificare per tutti i fondi citati."),
  'digitalizzazione': ('Digitalizzazione nella PA', 'digitalizzazionenellapa.it', 'Digitalizzazione-nella-PA',
    '#PA #digitalizzazione #innovazione', '#PA #digitalizzazione #innovazione #PNRR #dati',
    "La tua amministrazione è pronta per il digitale?\nSu Digitalizzazione nella PA raccogliamo gli strumenti data-driven per la PA italiana: l'Indice di Performance Territoriale, CustomerPA™ per la soddisfazione dei cittadini, il monitoraggio dei progetti PNRR, la mappatura delle competenze del personale.",
@@ -104,7 +104,7 @@ SITI = {
    '#podcast #PA #innovazione', '#podcast #PA #innovazione #territorio #dati',
    "La voce dei dati, dell'innovazione e del territorio.\nVoiceInHub è il podcast di Andrea Troisi. Prima serie: «Il Metodo Troisi»; primo episodio: cos'è l'ITP e come si misura la performance di un comune. Poi conversazioni con chi lavora sui dati.\nIn arrivo su Spotify, YouTube e nelle app di podcast: lasciate la vostra email per l'avviso al lancio.",
    "Sto preparando un podcast: parleremo di PA, innovazione e territorio, con i dati in mano. Se volete saperlo per primi, lasciate l'email su voiceinhub.it.",
-   "VoiceInHub · Il podcast su dati, innovazione e territorio", 'Pubblicare solo se la data di lancio del podcast è vicina; altrimenti spostare.'),
+   "VoiceInHub · Il podcast su dati, innovazione e territorio", 'Promemoria per Andrea entro il 17/3: il video invita all\'avviso di lancio del podcast; se il lancio è lontano, valutare se spostarlo.'),
  'andreatroisi': ('Andrea Troisi', 'andreatroisi.it', 'Andrea-Troisi',
    '#statistica #ricerca #università', '#statistica #ricerca #università #dati #AndreaTroisi',
    "Andrea Troisi ha fondato Troisi Ricerche nel 2006. Statistico, professore universitario (Università degli Studi di Bari Aldo Moro), giornalista: ricerca e analisi dei dati, customer satisfaction nella PA, AI e data science.\nHa presentato i suoi studi al Senato della Repubblica (2026) e alla Camera dei deputati (2019).",
@@ -117,7 +117,7 @@ EP = [
  (1, "L'uomo da un milione al bar", 'Media e mediana', 'ep01-luomo-da-un-milione-al-bar', 70.5, 'delfiweb.it',
   "Un bar, dieci clienti da 1.500 euro al mese. Entra un uomo che ne guadagna un milione: nessuno ha avuto un aumento, ma lo stipendio medio del bar supera i 92.000 euro.\nLa media non mente, ma risponde a una domanda che nessuno ha fatto. Mettiamo in fila gli stipendi: quello in mezzo, la mediana, è rimasto a 1.500.\nUn dato vero: a Bari il reddito medio dichiarato è di circa 25.000 euro (DELFI, su dati MEF). È una media, e nei redditi la mediana di solito sta più in basso.\nQuando leggete «reddito medio», chiedetevi: chi è appena entrato nel bar?\n\nI redditi medi di tutti i 7.896 comuni su delfiweb.it.",
   '#statistica #media #mediana #redditi #datajournalism',
-  'Prima di pubblicare: correggere su DELFI etichetta e fonte della scheda Economia e chiarire se 24.971 € è per contribuente o per abitante. Ascolto finale di Andrea.'),
+  'Promemoria per Andrea entro il 6/11: correggere su DELFI etichetta e fonte della scheda Economia e chiarire se 24.971 € è per contribuente o per abitante.'),
  (2, 'Il colpevole sbagliato', 'Correlazione e causalità', 'ep02-il-colpevole-sbagliato', 60.5, 'troisiinsight.it',
   "D'estate aumentano i gelati venduti. E aumentano gli incidenti in acqua. Due curve che salgono insieme: il sospettato perfetto è il gelato.\nMa il gelato è innocente. C'è un terzo personaggio che muove entrambe: il caldo.\nIn statistica si chiama correlazione spuria, e il colpevole nascosto è la variabile confondente. Succede ogni giorno, nei titoli che legano un cibo alla salute o una legge a un numero.\nDue curve che si somigliano sono un indizio. Non una prova.\n\nAnalisi sui dati ufficiali su troisiinsight.it.",
   '#statistica #correlazione #causalità #datajournalism', ''),
@@ -135,7 +135,7 @@ EP = [
   '#statistica #sondaggi #questionari #benessereorganizzativo', ''),
  (7, 'La persona che non esiste', 'Media e distribuzione', 'ep07-la-persona-che-non-esiste', 66.7, 'ildatoetratto.it',
   "In Italia il numero medio di figli per donna è stimato in 1,14 (ISTAT, 2025). Ora cercate una donna con 1,14 figli: non la troverete.\nLa media non descrive una persona, descrive un insieme: mescola chi non ha figli, chi ne ha uno, chi ne ha tre. Progettare un servizio per la persona media rischia di significare progettarlo per qualcuno che non esiste.\nPer questo accanto alla media gli statistici guardano la distribuzione.\nLa persona media non esiste. Le persone sì.\n\nOgni mattina un dato ufficiale sull'Italia su ildatoetratto.it.",
-  '#statistica #ISTAT #natalità #media #ildatoetratto', 'Ricontrollare «1,18 nel 2024» (in grafica) sul comunicato ISTAT del 31/3/2026.'),
+  '#statistica #ISTAT #natalità #media #ildatoetratto', 'Promemoria per Andrea entro il 18/12: ricontrollare «1,18 nel 2024» (in grafica) sul comunicato ISTAT del 31/3/2026.'),
  (8, 'Il futuro non è una certezza', 'Previsioni e incertezza', 'ep08-il-futuro-non-e-una-certezza', 62.8, 'troisiricerche.net',
   "Una previsione dice: l'anno prossimo il dato sarà questo. Un solo numero. Sembra una certezza.\nMa ogni previsione poggia su dati del passato e su ipotesi sul futuro: cambiano le ipotesi, cambia il risultato. Per questo una previsione seria è un ventaglio, con uno scenario basso, uno centrale e uno alto. E più ci si allontana nel tempo, più il ventaglio si apre.\nDiffidate di chi vi consegna il futuro con un solo decimale.\n\nRicerca statistica applicata dal 2006 su troisiricerche.net.",
   '#statistica #previsioni #incertezza #scenari', ''),
@@ -225,7 +225,7 @@ def uscita_ep(d, n, settimana):
 # settimana 0: lancio
 d = D(2026,10,26)
 g = dict(gruppo='2026-10-26-istituzionale', serie='Lancio', titolo='Video istituzionale Troisi Ricerche', fase='Settimana 0 · lancio', settimana=0,
-         nota="Prima di pubblicare: confermare Corea del Sud o del Nord nella mappa «I nostri clienti nel mondo». Fissare il post in alto su ogni canale.")
+         nota="Fissare il post in alto su ogni canale. Musica e filmati Envato: licenze da completare entro il 26/10 (Andrea).")
 TI = ("Misuriamo ciò che conta. Davvero.\nDal 2006 siamo un istituto di ricerca statistica: indagini, piattaforme e osservatori per enti pubblici, imprese e territori. Dalle PMI alle grandi aziende, dal Senato della Repubblica al Forum dei Pubblici Ufficiali, dall'Italia all'estero, dalle scuole alla qualità della vita.\nBari · Roma · Milano.")
 LI = url('troisiricerche.net', 'linkedin', 'lancio', 'istituzionale')
 add(d, '08:30', 'LinkedIn · pagina Troisi Ricerche', id='ist-li', formato='Video orizzontale 16:9', file=TV+'Troisi-Ricerche-video-istituzionale-orizzontale-HQ.mp4', testo=TI+"\n\n→ troisiricerche.net", hashtag='#statistica #ricerca #PA', link=LI, primo_commento='', **g)
