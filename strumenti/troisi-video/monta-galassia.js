@@ -9,7 +9,7 @@ const SITI = [
   ['00-troisiricerche.net.jpg', "L'istituto", 'troisiricerche.net', 'Ricerche di mercato, sociali e sondaggi di opinione, dal 2006'],
   ['01-customerpa.it.jpg', 'CustomerPA™', 'customerpa.it', 'La customer satisfaction delle pubbliche amministrazioni'],
   ['02-ildatoetratto.it.jpg', 'Il dato è tratto™', 'ildatoetratto.it', "Ogni mattina un dato ufficiale sull'Italia"],
-  ['05-delfiweb.it.jpg', 'DELFI', 'delfiweb.it', 'I dati di tutti i 7.896 comuni italiani'],
+  ['05-delfiweb.it.jpg', 'DELFI', 'delfiweb.it', 'I dati dei comuni italiani, uno per uno'],
   ['10-troisiinsight.it.jpg', 'TroisiInsight', 'troisiinsight.it', "Analisi e report sull'Italia che cambia"],
   ['04-benessereorganizzativo.it.jpg', 'Benessere organizzativo', 'benessereorganizzativo.it', 'Clima interno e stress lavoro-correlato in PA e aziende'],
   ['19-osservatoriobenessereorganizzativo.it.jpg', 'Osservatorio sul Benessere Organizzativo', 'osservatoriobenessereorganizzativo.it', 'Il ranking delle società partecipate'],

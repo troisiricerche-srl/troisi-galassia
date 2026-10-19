@@ -36,7 +36,7 @@ const CFG = {
       sito: { nome: 'CustomerPA™', sigla: 'CPA', dominio: 'customerpa.it', claim: 'La customer satisfaction delle pubbliche amministrazioni' },
       scene: [
         { tipo: 'gancio', da: 0, a: B(12), clip: 'callcenter2.mp4', inp: 0, testo: 'Il tuo ente misura davvero la soddisfazione dei cittadini?', ultimaColorata: true, cxv: .5 },
-        { tipo: 'leggi', da: B(12), a: B(26), kicker: 'Non è una scelta', righe: ['È previsto', { t: 'dalle norme.', c: 1 }], leggi: [['D.Lgs. 150/2009', 'Rilevazione annuale della soddisfazione degli utenti'], ['D.L. 80/2021 · PIAO', 'La customer satisfaction come obiettivo misurabile'], ['D.Lgs. 33/2013', 'Risultati pubblicati in Amministrazione Trasparente']] },
+        { tipo: 'leggi', da: B(12), a: B(26), kicker: 'Non è una scelta', righe: ['È previsto', { t: 'dalle norme.', c: 1 }], leggi: [['D.Lgs. 150/2009', 'Art. 19-bis: sistemi di rilevazione della soddisfazione degli utenti'], ['D.L. 80/2021 · PIAO', 'Il Piano che fissa gli obiettivi di performance dell’ente'], ['D.Lgs. 33/2013', 'Risultati pubblicati in Amministrazione Trasparente']] },
         { tipo: 'gauge', da: B(26), a: B(36), kicker: 'CustomerPA™ Score', righe: ['Quanto è conforme', { t: 'il tuo ente?', c: 1 }], valore: 74, soglia: 70, etichetta: 'SCORE · 0–100' },
         { tipo: 'foto', da: B(36), a: B(44), f: FOTO('forum-2026.jpg'), rot: -2, kicker: 'Forum dei Pubblici Ufficiali · Bari, 2026', righe: ['Dal questionario', { t: 'al dato.', c: 1 }] },
         { tipo: 'foto', da: B(44), a: B(50), f: FOTO('camera-deputati.jpg'), rot: 2, kicker: 'Camera dei deputati', righe: ['Un metodo presentato', { t: 'alla Camera.', c: 1 }] },

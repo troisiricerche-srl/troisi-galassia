@@ -24,7 +24,7 @@ module.exports = (DIR) => {
       { tipo: 'sito', nb: 10, f: SITO('02-ildatoetratto.it.jpg'), riga: 'Le analisi degli osservatori di Troisi Ricerche, in un unico posto.' } ]),
     delfi: () => seq('B', { tema: tema('#F97316', '#FDBA74', '#14142B', 'rgba(249,115,22,.32)'), sito: { nome: 'DELFI', sigla: 'DF', dominio: 'delfiweb.it', claim: 'I dati di tutti i comuni italiani' } }, [
       { tipo: 'gancio', nb: 12, clip: 'de-mappa.mp4', inp: 0, testo: 'Quanto conosci davvero il tuo comune?', ultimaColorata: true },
-      { clip: 'de-bari.mp4', inp: 0, tipo: 'numero', nb: 12, kicker: 'Tutti i comuni', val: 7896, dec: 0, suf: '', testo: 'comuni italiani, con dati verificati da fonti istituzionali', fonte: 'ISTAT, elenco dei comuni italiani' },
+      { clip: 'de-bari.mp4', inp: 0, tipo: 'numero', nb: 12, kicker: 'La banca dati', val: 7896, dec: 0, suf: '', testo: 'comuni nella banca dati DELFI, con dati da fonti istituzionali', fonte: 'DELFI, su elenco ISTAT dei comuni 2025' },
       { clip: 'de-cattedrale.mp4', inp: 0, tipo: 'badge', nb: 12, kicker: 'Cosa trovi', righe: ['Dati reali', { t: 'contro percezioni.', c: 1 }], badge: ['Popolazione', 'Reddito', 'Raccolta differenziata', 'Rischio sismico', 'Turismo', 'PNRR', 'Scuole', 'Sanità'] },
       { tipo: 'sito', nb: 14, f: SITO('05-delfiweb.it.jpg'), riga: 'Cerca un comune e confrontalo con gli altri.' } ]),
     troisiinsight: () => seq('M', { tema: tema('#E8A020', '#FCD34D', '#0F2238', 'rgba(232,160,32,.3)'), sito: { nome: 'TroisiInsight', sigla: 'TI', dominio: 'troisiinsight.it', claim: "I dati che raccontano l'Italia che cambia" } }, [
@@ -50,7 +50,7 @@ module.exports = (DIR) => {
     troisiformazione: () => seq('M', { tema: tema('#1D4ED8', '#F59E0B', '#0B1E4A', 'rgba(29,78,216,.36)'), sito: { nome: 'Troisi Formazione', sigla: 'TF', dominio: 'troisiformazione.it', claim: 'La formazione finanziata, trasformata in competenze' } }, [
       { tipo: 'gancio', nb: 10, clip: 'tf-relatore.mp4', inp: 0, testo: 'La tua azienda versa ogni mese fondi per la formazione. Li stai usando?', ultimaColorata: true },
       { clip: 'tf-sala.mp4', inp: 0, tipo: 'passi', nb: 14, kicker: 'Il percorso', righe: ['Competenze misurabili', { t: 'e certificate.', c: 1 }], passi: [['Fabbisogni', 'Dalla Mappatura delle Competenze'], ['Piano', 'Il piano formativo finanziato dai fondi'], ['Formazione', 'In aula e online'], ['Certificazione', 'Nel Registro delle Competenze']] },
-      { clip: 'tf-studenti.mp4', inp: 0, lento: 1.3, tipo: 'badge', nb: 10, kicker: 'Fondi interprofessionali', righe: ['A costo', { t: 'zero.', c: 1 }], badge: ['Fondimpresa', 'Fondirigenti', 'Fondo Forte', 'TÜV ISO 9001:2015'] },
+      { clip: 'tf-studenti.mp4', inp: 0, lento: 1.3, tipo: 'badge', nb: 10, kicker: 'Fondi interprofessionali', righe: ['Formazione', { t: 'finanziata.', c: 1 }], badge: ['Fondimpresa', 'Fondirigenti', 'Fondo Forte', 'TÜV ISO 9001:2015'] },
       { tipo: 'sito', nb: 10, f: SITO('14-troisiformazione.it.jpg') } ]),
     tindex: () => seq('A', { tema: tema('#E8A020', '#FCD34D', '#14304F', 'rgba(232,160,32,.3)'), sito: { nome: 'Indice di Performance Territoriale', sigla: 'ITP', dominio: 't-index.it', claim: 'La performance di comuni, province e regioni' } }, [
       { tipo: 'gancio', nb: 10, clip: 'ix-stazione.mp4', inp: 0, testo: 'Come funziona davvero il tuo territorio?', ultimaColorata: true },
