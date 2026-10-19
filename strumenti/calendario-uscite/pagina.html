@@ -1,0 +1,231 @@
+<title>Calendario uscite Troisi Ricerche</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Registro editoriale: colonna centrale, settimane come fascicoli, ogni uscita è una scheda da firmare */
+:root{
+  --bg:#F4F6F9; --carta:#FFFFFF; --ink:#0E1B2C; --ink2:#4A5869; --linea:#D9DFE7;
+  --blu:#0B5CAD; --arancio:#C77A0A; --ok:#1E7A46; --okbg:#E3F3EA; --mod:#B4471B; --modbg:#FBE9E1; --att:#6B7686; --attbg:#ECEFF3;
+  --serie-ds:#7A2E3A; --serie-siti:#0B5CAD; --serie-lancio:#C77A0A;
+  --f-display:"Archivo", "Helvetica Neue", Arial, sans-serif; --f-body:"Archivo", "Helvetica Neue", Arial, sans-serif; --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B1320; --carta:#121D2E; --ink:#E8EDF3; --ink2:#A3B0C0; --linea:#24324A;
+  --blu:#5EA2EC; --arancio:#F0B04A; --ok:#5CCB8A; --okbg:#173426; --mod:#F08A5D; --modbg:#3A2218; --att:#A3B0C0; --attbg:#1C2939;
+  --serie-ds:#E08A97; --serie-siti:#5EA2EC; --serie-lancio:#F0B04A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1320; --carta:#121D2E; --ink:#E8EDF3; --ink2:#A3B0C0; --linea:#24324A;
+  --blu:#5EA2EC; --arancio:#F0B04A; --ok:#5CCB8A; --okbg:#173426; --mod:#F08A5D; --modbg:#3A2218; --att:#A3B0C0; --attbg:#1C2939;
+  --serie-ds:#E08A97; --serie-siti:#5EA2EC; --serie-lancio:#F0B04A; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:28px 64px}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(26px,4vw,38px);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.sotto{color:var(--ink2);margin:6px 0 0;max-width:68ch}
+.conti{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 6px}
+.conto{background:var(--carta);border:1px solid var(--linea);border-radius:8px;padding:8px 14px;min-width:120px}
+.conto b{display:block;font-size:22px;font-variant-numeric:tabular-nums}
+.conto span{font-size:12px;color:var(--ink2);text-transform:uppercase;letter-spacing:.06em}
+.barra{height:6px;border-radius:3px;background:var(--attbg);overflow:hidden;display:flex;margin:10px 0 0}
+.barra i{display:block;height:100%}
+.filtri{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;background:var(--bg);padding:12px 0;display:flex;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--linea)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--bg)}
+select,input[type=search]{font:inherit;font-size:14px;color:var(--ink);background:var(--carta);border:1px solid var(--linea);border-radius:6px;padding:7px 10px;min-width:0}
+input[type=search]{flex:1 1 180px}
+.stato-db{font-size:12px;color:var(--ink2);margin-left:auto;align-self:center}
+.settimana{margin-top:30px}
+.settimana>h2{font-family:var(--f-display);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--ink2);margin:0 0 10px;display:flex;gap:10px;align-items:baseline}
+.settimana>h2 em{font-style:normal;color:var(--ink);letter-spacing:.02em;text-transform:none;font-size:15px}
+.uscita{background:var(--carta);border:1px solid var(--linea);border-radius:10px;margin-bottom:12px;overflow:hidden}
+.u-testa{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px 16px;cursor:pointer}
+.u-testa:focus-visible{outline:2px solid var(--blu);outline-offset:-2px}
+.data{font-family:var(--f-mono);font-size:12px;line-height:1.25;text-align:center;border-right:1px solid var(--linea);padding-right:14px;min-width:66px}
+.data b{display:block;font-family:var(--f-display);font-size:24px;font-weight:800}
+.u-tit{min-width:0}
+.serie{font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.serie[data-s="Delitti statistici"]{color:var(--serie-ds)} .serie[data-s="Video dei siti"]{color:var(--serie-siti)} .serie[data-s="Lancio"]{color:var(--serie-lancio)}
+.u-tit h3{margin:2px 0 0;font-size:18px;font-weight:600;text-wrap:balance}
+.u-tit .canali{font-size:13px;color:var(--ink2);margin-top:2px}
+.pill{font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.p-ok{background:var(--okbg);color:var(--ok)} .p-mod{background:var(--modbg);color:var(--mod)} .p-att{background:var(--attbg);color:var(--att)}
+.avviso{margin:0 16px 12px;padding:9px 12px;border-left:3px solid var(--arancio);background:var(--attbg);font-size:13.5px;border-radius:0 6px 6px 0}
+.u-corpo{border-top:1px solid var(--linea)}
+.u-azioni{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;border-bottom:1px solid var(--linea)}
+.post{display:grid;grid-template-columns:150px 1fr;gap:4px 18px;padding:14px 16px;border-bottom:1px solid var(--linea)}
+.post:last-child{border-bottom:0}
+.p-sx{font-size:13px}
+.ora{font-family:var(--f-mono);font-size:15px;font-weight:500}
+.canale{font-weight:600;margin-top:2px}
+.formato{color:var(--ink2);font-size:12.5px;margin-top:4px}
+.p-dx{min-width:0;display:grid;gap:8px}
+.testo{white-space:pre-wrap;background:var(--bg);border:1px solid var(--linea);border-radius:6px;padding:10px 12px;font-size:14px;overflow-wrap:anywhere}
+.riga{font-size:13px;color:var(--ink2);overflow-wrap:anywhere}
+.riga b{color:var(--ink);font-weight:600}
+.mono{font-family:var(--f-mono);font-size:12px}
+.tasti{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+button{font:inherit;font-size:13px;border-radius:6px;border:1px solid var(--linea);background:var(--carta);color:var(--ink);padding:6px 11px;cursor:pointer}
+button:hover{border-color:var(--ink2)}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--blu);outline-offset:1px}
+button.ok[aria-pressed="true"]{background:var(--okbg);color:var(--ok);border-color:var(--ok)}
+button.mod[aria-pressed="true"]{background:var(--modbg);color:var(--mod);border-color:var(--mod)}
+button:disabled{opacity:.5;cursor:default}
+textarea{font:inherit;font-size:13.5px;width:100%;min-height:58px;color:var(--ink);background:var(--carta);border:1px solid var(--linea);border-radius:6px;padding:8px 10px;resize:vertical}
+.nota-salvata{font-size:12px;color:var(--ink2)}
+.vuoto{color:var(--ink2);padding:30px 0}
+.piede{margin-top:40px;color:var(--ink2);font-size:13px}
+@media (max-width:640px){.post{grid-template-columns:1fr}.u-testa{grid-template-columns:auto 1fr}.u-testa .pill{grid-column:2;justify-self:start}}
+@media (prefers-reduced-motion:no-preference){.uscita{transition:border-color .15s}}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Calendario uscite</h1>
+    <p class="sotto">Video istituzionale, galassia, video dei siti e «Delitti statistici», dal 26 ottobre 2026 al 23 marzo 2027. Aprite un'uscita, controllate testi e orari, poi segnate <b>Approvata</b> o <b>Da modificare</b> con una nota. Niente viene pubblicato da questa pagina.</p>
+    <div class="conti" id="conti"></div>
+    <div class="barra" id="barra" aria-hidden="true"></div>
+  </header>
+
+  <div class="filtri" role="search">
+    <select id="f-serie" aria-label="Serie"><option value="">Tutte le serie</option><option>Lancio</option><option>Video dei siti</option><option>Delitti statistici</option></select>
+    <select id="f-canale" aria-label="Canale"><option value="">Tutti i canali</option></select>
+    <select id="f-stato" aria-label="Stato"><option value="">Tutti gli stati</option><option value="att">Da rivedere</option><option value="ok">Approvate</option><option value="mod">Da modificare</option></select>
+    <input type="search" id="f-cerca" placeholder="Cerca nei testi…" aria-label="Cerca nei testi">
+    <span class="stato-db" id="stato-db">Collegamento alle revisioni…</span>
+  </div>
+
+  <main id="lista"></main>
+
+  <p class="piede">Orari proposti, da adattare con i dati dei vostri account dopo le prime settimane. Ogni link ha i parametri UTM per sapere da quale video arrivano le visite. File: cartella Download › SITI WEB - Troisi Ricerche.</p>
+</div>
+
+<script id="dati" type="application/json">__POSTS__</script>
+<script>
+(function(){
+  const POSTS = JSON.parse(document.getElementById('dati').textContent);
+  const rev = {};           // id post -> {stato, nota}
+  let db = null, canWrite = false;
+  const aperti = new Set();
+  const $ = s => document.querySelector(s);
+  const GRUPPI = [];
+  const perGruppo = {};
+  for (const p of POSTS){ if(!perGruppo[p.gruppo]){perGruppo[p.gruppo]=[];GRUPPI.push(p.gruppo);} perGruppo[p.gruppo].push(p); }
+
+  const canali = [...new Set(POSTS.map(p=>p.canale.startsWith('Sito ·')?'Siti web':p.canale))].sort();
+  for (const c of canali){ const o=document.createElement('option'); o.textContent=c; $('#f-canale').appendChild(o); }
+
+  const statoPost = id => (rev[id] && rev[id].stato) || 'att';
+  function statoGruppo(g){
+    const s = perGruppo[g].map(p=>statoPost(p.id));
+    if (s.includes('mod')) return 'mod';
+    if (s.every(x=>x==='ok')) return 'ok';
+    return 'att';
+  }
+  const ETI = {ok:'Approvata', mod:'Da modificare', att:'Da rivedere'};
+
+  function conti(){
+    const n = {ok:0,mod:0,att:0}; for (const p of POSTS) n[statoPost(p.id)]++;
+    $('#conti').innerHTML='';
+    const voci=[['Uscite',POSTS.length],['Giorni di pubblicazione',GRUPPI.length],['Approvate',n.ok],['Da modificare',n.mod],['Da rivedere',n.att]];
+    for (const [t,v] of voci){ const d=document.createElement('div'); d.className='conto'; const b=document.createElement('b'); b.textContent=v; const s=document.createElement('span'); s.textContent=t; d.append(b,s); $('#conti').appendChild(d); }
+    const tot=POSTS.length; $('#barra').innerHTML=`<i style="width:${n.ok/tot*100}%;background:var(--ok)"></i><i style="width:${n.mod/tot*100}%;background:var(--mod)"></i>`;
+  }
+
+  function filtra(p){
+    const fs=$('#f-serie').value, fc=$('#f-canale').value, fst=$('#f-stato').value, q=$('#f-cerca').value.trim().toLowerCase();
+    if (fs && p.serie!==fs) return false;
+    if (fc && (p.canale.startsWith('Sito ·')?'Siti web':p.canale)!==fc) return false;
+    if (fst && statoPost(p.id)!==fst) return false;
+    if (q && !(p.testo+' '+p.titolo+' '+p.hashtag+' '+p.canale).toLowerCase().includes(q)) return false;
+    return true;
+  }
+
+  function el(tag, cls, txt){ const e=document.createElement(tag); if(cls) e.className=cls; if(txt!==undefined) e.textContent=txt; return e; }
+
+  async function copia(testo, btn){
+    try { await navigator.clipboard.writeText(testo); btn.textContent='Copiato'; }
+    catch(e){ btn.textContent='Selezionate e copiate a mano'; }
+    setTimeout(()=>btn.textContent='Copia testo',1600);
+  }
+
+  async function salva(id, patch){
+    rev[id] = Object.assign({stato:'att',nota:''}, rev[id]||{}, patch);
+    disegna();
+    if (!db) return;
+    try { await db.collection('revisioni').doc(id).set({stato:rev[id].stato, nota:rev[id].nota||'', aggiornato:new Date().toISOString()}); }
+    catch(e){ $('#stato-db').textContent='Salvataggio non riuscito: riprovate tra poco.'; }
+  }
+
+  function cardPost(p){
+    const r=el('div','post');
+    const sx=el('div','p-sx'); sx.append(el('div','ora',p.ora), el('div','canale',p.canale), el('div','formato',p.formato));
+    const dx=el('div','p-dx');
+    const testoCompleto = p.testo + (p.hashtag? '\n\n'+p.hashtag : '');
+    dx.append(el('div','testo',testoCompleto));
+    if (p.primo_commento){ const d=el('div','riga'); d.innerHTML='<b>Primo commento</b> '; d.append(document.createTextNode(p.primo_commento)); dx.append(d); }
+    if (p.link){ const d=el('div','riga'); d.innerHTML='<b>Link</b> '; const s=el('span','mono',p.link); d.append(s); dx.append(d); }
+    if (p.file && p.file!=='—'){ const d=el('div','riga'); d.innerHTML='<b>File</b> '; d.append(el('span','mono',p.file)); dx.append(d); }
+    const t=el('div','tasti');
+    const bc=el('button','', 'Copia testo'); bc.type='button'; bc.onclick=()=>copia(testoCompleto,bc);
+    const st=statoPost(p.id);
+    const bo=el('button','ok','Approvata'); bo.type='button'; bo.setAttribute('aria-pressed', st==='ok'); bo.onclick=()=>salva(p.id,{stato: st==='ok'?'att':'ok'});
+    const bm=el('button','mod','Da modificare'); bm.type='button'; bm.setAttribute('aria-pressed', st==='mod'); bm.onclick=()=>salva(p.id,{stato: st==='mod'?'att':'mod'});
+    if (!canWrite){ bo.disabled=bm.disabled=true; }
+    t.append(bc,bo,bm); dx.append(t);
+    const ta=el('textarea'); ta.id='nota-'+p.id; ta.placeholder='Nota per Claude (cosa cambiare in questa uscita)'; ta.value=(rev[p.id]&&rev[p.id].nota)||''; ta.disabled=!canWrite;
+    ta.addEventListener('change',()=>salva(p.id,{nota:ta.value, stato: ta.value.trim()? 'mod' : statoPost(p.id)}));
+    dx.append(ta);
+    r.append(sx,dx); return r;
+  }
+
+  function disegna(){
+    conti();
+    const lista=$('#lista'); const scroll=window.scrollY; lista.innerHTML='';
+    let sett=null, box=null, mostrati=0;
+    for (const g of GRUPPI){
+      const ps=perGruppo[g].filter(filtra); if(!ps.length) continue; mostrati++;
+      const p0=perGruppo[g][0];
+      const chiave = p0.settimana===0 ? 'Settimana 0' : (p0.settimana<=10 ? 'Settimana '+p0.settimana : 'Settimana '+p0.settimana);
+      if (chiave!==sett){ sett=chiave; box=el('section','settimana'); const h=el('h2'); h.append(document.createTextNode(chiave)); h.append(el('em','',p0.fase)); box.append(h); lista.append(box); }
+      const u=el('article','uscita');
+      const testa=el('div','u-testa'); testa.tabIndex=0; testa.setAttribute('role','button'); testa.setAttribute('aria-expanded', aperti.has(g));
+      const d=new Date(p0.data+'T12:00:00');
+      const data=el('div','data'); data.append(document.createTextNode(p0.giorno.split(' ')[0])); data.append(el('b','',d.getDate())); data.append(document.createTextNode(p0.giorno.split(' ').slice(2).join(' ')));
+      const tit=el('div','u-tit'); const se=el('div','serie',p0.serie); se.dataset.s=p0.serie; tit.append(se, el('h3','',p0.titolo), el('div','canali', perGruppo[g].length+' uscite · '+[...new Set(perGruppo[g].map(x=>x.ora))].join(', ')));
+      const sg=statoGruppo(g); const pill=el('span','pill p-'+sg, ETI[sg]);
+      testa.append(data,tit,pill);
+      const tog=()=>{ aperti.has(g)?aperti.delete(g):aperti.add(g); disegna(); };
+      testa.onclick=tog; testa.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();} };
+      u.append(testa);
+      if (p0.nota) u.append(el('div','avviso',p0.nota));
+      if (aperti.has(g)){
+        const corpo=el('div','u-corpo');
+        const az=el('div','u-azioni');
+        const ba=el('button','ok','Approva tutta l\'uscita'); ba.type='button'; ba.disabled=!canWrite; ba.onclick=async()=>{ for(const p of perGruppo[g]) await salva(p.id,{stato:'ok'}); };
+        az.append(ba); corpo.append(az);
+        for (const p of ps) corpo.append(cardPost(p));
+        u.append(corpo);
+      }
+      box.append(u);
+    }
+    if (!mostrati) lista.append(el('p','vuoto','Nessuna uscita con questi filtri.'));
+    window.scrollTo(0,scroll);
+  }
+
+  for (const id of ['#f-serie','#f-canale','#f-stato']) $(id).addEventListener('change',disegna);
+  $('#f-cerca').addEventListener('input',disegna);
+  aperti.add(GRUPPI[0]);
+  disegna();
+
+  (async()=>{
+    const c = window.claude && window.claude.use ? await window.claude.use('db') : null;
+    if (!c){ $('#stato-db').textContent='Revisioni non disponibili in questa vista: aprite la pagina da claude.ai con il vostro account.'; return; }
+    db=c; canWrite=true; $('#stato-db').textContent='Revisioni salvate e condivise';
+    db.collection('revisioni').onSnapshot(snap=>{
+      for (const d of snap.docs){ const v=d.data()||{}; rev[d.id]={stato:v.stato||'att', nota:v.nota||''}; }
+      const attivo=document.activeElement; if (attivo && attivo.tagName==='TEXTAREA') return; // non interrompere chi scrive
+      disegna();
+    }, e=>{ $('#stato-db').textContent= e.code==='not_granted' ? 'Sola lettura: non potete segnare le revisioni.' : 'Revisioni non raggiungibili in questo momento.'; canWrite = e.code!=='not_granted' && canWrite; disegna(); });
+  })();
+})();
+</script>
