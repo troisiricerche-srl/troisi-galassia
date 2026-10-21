@@ -74,3 +74,5 @@ Testi nella sezione d) di `dato-di-oggi/<oggi>/testi.txt`. Se nel LEGGIMI.txt di
 - LinkedIn: pagina dei post pubblicati, primo [data-urn] activity col testo del dato di oggi → «Commenta come Troisi Ricerche…»
   → commento WhatsApp → «Commenta»; commento Instagram: rimuovi l'anteprima (X) → «Commenta»; verifica «2 commenti».
 Se un post di stamattina NON è uscito, non pubblicarlo da solo: scrivilo ad Andrea.
+- SOLO IL MARTEDÌ: aggiungi anche i primi commenti ai post di «Il dato è tratto™» usciti alle 9:00 (Reel Instagram e carosello LinkedIn),
+  con i testi di `ildatoetratto.it/carosello-linkedin/<data di oggi>/` (vedi IL-DATO-E-TRATTO.md, punto 8).
