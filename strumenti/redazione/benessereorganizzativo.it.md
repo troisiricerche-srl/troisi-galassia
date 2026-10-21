@@ -1,0 +1,7 @@
+# Benessere Organizzativo – www.benessereorganizzativo.it (uscita: MERCOLEDÌ, settimanale)
+Benessere organizzativo, stress lavoro-correlato, sicurezza e qualità del lavoro, per PA e aziende.
+- Temi da ruotare: rischi psicosociali e stress (hsw_exp*, hsw_pb*); salute e sicurezza (hsw_n2_01, hsw_n2_02); tempi di lavoro (lfsa_ewh*, lfsa_ewp*); conciliazione e flessibilità (lfsa_ehomp, moduli LFS 2018/2019, congedi); competenze e formazione (trng_lfse_01, CVTS); persone e organizzazione (età del personale e PA lfsa_egan2, parità e divario retributivo, part-time involontario, termine, posti vacanti); clima e organizzazione (soddisfazione ilc_pw*, autonomia). Aggiungi i settori (PA, sanità, istruzione) quando i dati lo permettono. Chiudi con cosa significa per un'organizzazione (valutazione stress lavoro-correlato, indagini di clima, D.Lgs. 81/2008).
+- Segnala la rottura di serie LFS 2021; gli orari atipici sono rilevati ogni due anni (anni dispari).
+- Struttura: `<style>` identico, div.tr-art, lead, div.ti-kpi, h2, 2-3 figure.ti-chart (figcaption «Fonte: Eurostat, dataset X. Elaborazione: Andrea Troisi · BenessereOrganizzativo · Troisi Ricerche.»), eventuale table.ti-tab, aside.ti-box «Metodo e fonti».
+- Colori: UE verde scuro #1a7a6b, altri Paesi verde acqua #3dbfab, Italia arancio #e8a020.
+- 600-1000 parole. Categorie: Analisi 9 sempre + Rischi psicosociali 10, Clima e organizzazione 21, Tempi di lavoro 25, Conciliazione e flessibilità 29, Salute e sicurezza 33, Competenze e formazione 53, Persone e organizzazione 59.

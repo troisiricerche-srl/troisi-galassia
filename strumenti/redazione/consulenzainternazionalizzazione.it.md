@@ -1,0 +1,7 @@
+# Consulenza Internazionalizzazione – www.consulenzainternazionalizzazione.it (uscita: GIOVEDÌ, OGNI DUE SETTIMANE)
+- Permalink semplici: /wp-json/ NON funziona, usa sempre /?rest_route=.
+- Cadenza: dovuta se l'ultimo articolo ha 13 giorni o più rispetto al giorno di uscita (serie: 29/10, 12/11…). Altrimenti pausa.
+- Tema: internazionalizzazione delle imprese italiane. Filoni: export mensile e per mercati (ISTAT), export delle regioni, servizi e bilancia dei pagamenti (Banca d'Italia), dazi e politica commerciale (Commissione UE, USTR), cambi e competitività (BCE, ISTAT prezzi all'export), imprese esportatrici (Eurostat TEC), IDE, agevolazioni (SIMEST/394/81: solo fonti ufficiali e scadenze verificate), strategia. Fonti con data di pubblicazione nel box «Metodo e fonti». Paragrafo «Cosa significa per le PMI»; al massimo una frase finale sobria su come Troisi Ricerche lavora con le PMI.
+- Colori: Italia oro #c9981a, confronto navy #0a1628, altri teal #0d7a6e o grigio #6b7a8d. 550-850 parole.
+- Categorie (una): 3 Dati e mercati, 4 Agevolazioni e finanziamenti, 5 Dazi dogane logistica, 6 Strategia export — privilegia 4, 5, 6 quando i dati lo consentono.
+- Immagine: gradiente da #0a1628 al colore della categoria (3 #0d7a6e barre; 4 #1a4d7a euro; 5 #3b5068 nave; 6 #6b4f12 bussola), nome categoria in #f2b441 con barretta #e8a020, sotto «Guide e dati verificati», in basso «Consulenza Internazionalizzazione · Troisi Ricerche».

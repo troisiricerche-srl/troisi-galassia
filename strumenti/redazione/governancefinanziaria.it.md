@@ -1,0 +1,6 @@
+# Governance Finanziaria – www.governancefinanziaria.it (uscita: MERCOLEDÌ, OGNI DUE SETTIMANE)
+- Cadenza: dovuta se l'ultima analisi (categoria 22) ha 13 giorni o più rispetto al giorno di uscita (serie: 7/10, 21/10, 4/11, 18/11…). Altrimenti settimana di pausa: non scrivere.
+- Aree da alternare (quella che manca da più tempo): Finanza d'impresa (nasq_10_ki, nasa_10_f_bs, bd_size, sts_rb_q, credito BCE); ESG e sostenibilità (nrg_ind_ei, env_ac_aeint_r2, env_ac_cur, env_ac_tax, rifiuti, rinnovabili); Digitale e AI (isoc_cicce_use, isoc_eb_ai, isoc_e_dii, isoc_ec_eseln2, isoc_cisce_ra, rd_e_gerdtot, specialisti ICT). Chiudi con cosa significa per governance e controllo di gestione delle imprese. Nessun numero non verificabile su Troisi Ricerche o Fondirigenti.
+- Colori: Italia oro #b8860b, UE-27 navy #1e3a5f, altri #7f9cc0. 600-900 parole.
+- Immagine: gradiente da #12243d al colore dell'area (Finanza/Governance #2f5d8a icona barre; ESG #2e7d5b icona foglia; Digitale e AI #4a5fa8 icona chip; quadro d'insieme #7a5a14 icona griglia), nome area in #e8c46a con barretta #b8860b, in basso «Governance Finanziaria · Troisi Ricerche».
+- Categorie: Analisi 22 + Governance 2 (finanza d'impresa) / ESG 3 / Digital 4. 3-5 tag. Non toccare le bozze della categoria Articoli (8).
