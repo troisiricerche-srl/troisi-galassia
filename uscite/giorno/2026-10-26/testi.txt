@@ -1,0 +1,42 @@
+IL DATO DI OGGI · Lunedì 26 ottobre 2026 · 136,7% · TroisiInsight
+Articolo: https://www.troisiinsight.it/2026/10/26/debito-deficit-pubblico-2025-italia-europa/ (programmato per il 26/10 alle 00:01)
+Verifica Eurostat (gov_10dd_edpt1, PC_GDP, S13, GD, 2025, aggiornato 21/10/2026, nessun flag): Italia 136,7%, UE-27 81,5%; Italia 2ª su 27 dopo la Grecia (145,4%), Francia 115,7%. Serie IT: 2023 134,0, 2024 134,3. Deficit (B9) IT −3,1 = UE −3,1 (2022 IT −8,1). Interessi (D41PAY) IT 3,8 = HU 3,8, i più alti; UE 1,9. Trimestrale (gov_10q_ggdebt) 2026-Q2 IT 139,9 p, EL 140,8 p. CONFERMATO.
+
+===== a) LINKEDIN / FACEBOOK =====
+Deficit nella media europea, debito di nuovo in salita. Nel 2025 il disavanzo pubblico italiano è sceso al 3,1% del PIL, lo stesso valore della media UE (era l'8,1% nel 2022). Il debito invece è salito per il secondo anno, al 136,7% del PIL: solo la Grecia ha un rapporto più alto, la media UE è all'81,5%.
+
+Pesano gli interessi: 87,2 miliardi, il 3,8% del PIL. In rapporto al PIL è la spesa più alta dell'Unione insieme a quella ungherese e il doppio della media UE (1,9%).
+
+L'analisi completa di TroisiInsight, su dati Eurostat 2025:
+https://www.troisiinsight.it/2026/10/26/debito-deficit-pubblico-2025-italia-europa/
+
+Il dato di oggi: ogni mattina un dato ufficiale sull'Italia dai nostri osservatori. Ogni martedì «Il dato è tratto™» raccoglie la settimana.
+
+#IlDatoDiOggi #TroisiRicerche #ContiPubblici #DebitoPubblico #Eurostat #ilDatoètratto
+
+===== b) INSTAGRAM =====
+Deficit nella media europea, debito di nuovo in salita. Nel 2025 il disavanzo italiano è sceso al 3,1% del PIL, come la media UE, ma il debito è salito al 136,7% del PIL: secondo nell'Unione dopo la Grecia, contro l'81,5% della media UE.
+
+Fonte: Eurostat (gov_10dd_edpt1), 2025 · analisi completa su troisiinsight.it (link nel primo commento 👇)
+
+Ogni mattina un dato ufficiale sull'Italia: canale WhatsApp «Il dato è tratto™», link in bio.
+
+#IlDatoDiOggi #ilDatoètratto #TroisiRicerche #dati #statistica #Italia #debitopubblico #contipubblici #economia #Eurostat
+
+===== c) WHATSAPP =====
+📊 Il dato di oggi · 136,7%
+Il debito pubblico italiano in rapporto al PIL nel 2025: secondo nell'UE dopo la Grecia, mentre il deficit (3,1%) è sceso al livello della media europea.
+👉 https://www.troisiinsight.it/2026/10/26/debito-deficit-pubblico-2025-italia-europa/
+
+===== d) COMMENTI =====
+Facebook e LinkedIn
+1) 💬 Iscrivetevi al canale WhatsApp «Il dato è tratto™»: ogni mattina un dato ufficiale sull'Italia, ogni martedì la settimana in numeri.
+https://whatsapp.com/channel/0029VbE9Kx9DeONGCBFx5v42
+2) 📲 Seguiteci anche su Instagram: ogni giorno il dato in 15 secondi.
+https://www.instagram.com/troisiricerche/
+
+Instagram
+📎 L'analisi completa: troisiinsight.it/2026/10/26/debito-deficit-pubblico-2025-italia-europa/ · 💬 Canale WhatsApp «Il dato è tratto™»: whatsapp.com/channel/0029VbE9Kx9DeONGCBFx5v42
+
+===== PUNTO DEBOLE =====
+Il rapporto debito/PIL del 2025 è definitivo per la notifica di ottobre ma può essere rivisto; i valori trimestrali del 2026 (139,9%) sono provvisori. L'aumento del debito (129 miliardi) supera di molto il deficit (69,7): la differenza è un aggiustamento stock-flussi che Eurostat non scompone nei dataset usati, quindi non ne attribuiamo la causa.
