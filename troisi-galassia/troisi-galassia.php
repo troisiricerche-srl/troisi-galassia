@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Troisi Galassia
  * Description: Verifica Google Search Console, temi/parole chiave in dati strutturati, avviso immediato ai motori (IndexNow) e sitemap con data di modifica, dati strutturati coerenti (Troisi Ricerche / Andrea Troisi), tag Open Graph, Google Analytics 4 (solo dopo il consenso Iubenda), robots.txt aperto ai crawler IA, llms.txt, canonical sugli archivi, gestione dei vecchi indirizzi (301/410), pulsanti Condividi e Stampa sotto ogni articolo e aggiornamento automatico, per tutti i siti della galassia Troisi Ricerche. Non duplica ciò che il tema già stampa.
- * Version: 1.7.1
+ * Version: 1.8.0
  * Author: Troisi Ricerche
  * Update URI: https://github.com/troisiricerche-srl/troisi-galassia
  * Requires at least: 5.5
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TG_VERSION', '1.7.1' );
+define( 'TG_VERSION', '1.8.0' );
 define( 'TG_BING_CODE', '4931BB11CCDED6E9008DF80C2CA47D36' ); // Bing Webmaster Tools, account troisiricerche@gmail.com (codice unico per account)
 define( 'TG_GA4_ID', 'G-S8N55XBJHV' ); // GA4, proprietà «Galassia Troisi Ricerche» (account andreatroisi), stream unico per tutti i siti
 define( 'TG_ORG_ID', 'https://troisiricerche.net/#organization' );
@@ -1407,6 +1407,107 @@ add_action( 'wp_footer', function () {
 </style>
 	<?php
 }, 101 );
+
+/* ------------------------------------------------------------------
+ * 12-bis. Pop-up del video di presentazione del sito (dalla 1.8.0)
+ *     Decisione di Andrea del 25/10/2026: in home di ogni sito, lo stesso
+ *     pop-up del video istituzionale di troisiricerche.net, acceso dal giorno
+ *     in cui il video del sito esce sui social (programmazione-uscite).
+ *     I video sono tutti nella libreria media di troisiricerche.net.
+ *     Una volta per visitatore, muto all'avvio; ?video=1 lo mostra sempre
+ *     (anche prima della data, per controllo).
+ * ------------------------------------------------------------------ */
+function tg_video_siti() {
+	// host => data di accensione (ora di Roma)
+	return array(
+		'troisiinsight.it'                    => '2026-11-11',
+		'customerpa.it'                       => '2026-11-18',
+		't-index.it'                          => '2026-12-02',
+		'benessereorganizzativo.it'           => '2026-12-09',
+		'ildatoetratto.it'                    => '2026-12-16',
+		'svegliadigitale.it'                  => '2027-01-13',
+		'benesseredigitalegiovani.it'         => '2027-01-20',
+		'mappaturadellecompetenze.it'         => '2027-01-27',
+		'registrodellecompetenze.it'          => '2027-02-03',
+		'tiplive.it'                          => '2027-02-10',
+		'troisiformazione.it'                 => '2027-02-17',
+		'digitalizzazionenellapa.it'          => '2027-02-24',
+		'dibattito-pubblico.it'               => '2027-03-03',
+		'consulenzainternazionalizzazione.it' => '2027-03-10',
+		'voiceinhub.it'                       => '2027-03-17',
+		'andreatroisi.it'                     => '2027-03-24',
+	);
+}
+
+function tg_video_sito() {
+	$host = tg_host();
+	$map  = tg_video_siti();
+	if ( empty( $map[ $host ] ) ) {
+		return null;
+	}
+	$oggi  = ( new DateTime( 'now', new DateTimeZone( 'Europe/Rome' ) ) )->format( 'Y-m-d' );
+	$forza = isset( $_GET['video'] ) && '1' === $_GET['video']; // phpcs:ignore WordPress.Security.NonceVerification
+	if ( $oggi < $map[ $host ] && ! $forza ) {
+		return null;
+	}
+	$nome = ( 'andreatroisi.it' === $host ) ? 'Andrea Troisi' : tg_site()[0];
+	return array(
+		'video' => 'https://www.troisiricerche.net/wp-content/uploads/2026/10/video-sito-' . preg_replace( '/\.(it|net)$/', '', $host ) . '.mp4',
+		'nome'  => $nome,
+		'forza' => $forza,
+	);
+}
+
+add_action( 'wp_footer', function () {
+	if ( is_admin() || is_feed() || tg_is_hub() || ! ( is_front_page() || is_home() ) || is_paged() ) {
+		return;
+	}
+	$d = tg_video_sito();
+	if ( ! $d ) {
+		return;
+	}
+	?>
+<div id="tg-vpop" class="tg-vpop" role="dialog" aria-modal="true" aria-label="<?php echo esc_attr( 'Video di presentazione: ' . $d['nome'] ); ?>" hidden>
+<div class="tg-vpop-box">
+<button type="button" class="tg-vpop-x" aria-label="Chiudi il video">&times;</button>
+<video class="tg-vpop-v" controls muted playsinline preload="none"><source src="<?php echo esc_url( $d['video'] ); ?>" type="video/mp4"></video>
+<div class="tg-vpop-bar"><span><b><?php echo esc_html( $d['nome'] ); ?></b></span><button type="button" class="tg-vpop-a">🔊 Attiva l'audio</button></div>
+</div>
+</div>
+<style id="tg-vpop-css">
+.tg-vpop{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(10,22,38,.78);opacity:0;transition:opacity .25s;font:16px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+.tg-vpop[hidden]{display:none!important}
+.tg-vpop.is-on{opacity:1}
+.tg-vpop-box{position:relative;width:min(960px,100%);background:#0f2540;border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.tg-vpop-v{display:block;width:100%!important;max-width:none!important;aspect-ratio:16/9;height:auto!important;background:#0f2540;margin:0!important}
+.tg-vpop-x{position:absolute;top:8px;right:8px;z-index:2;width:40px;height:40px;border:0!important;border-radius:50%!important;background:rgba(0,0,0,.55)!important;color:#fff!important;font-size:26px!important;line-height:40px!important;cursor:pointer;padding:0!important;min-width:0!important}
+.tg-vpop-x:hover,.tg-vpop-x:focus-visible{background:#E8630A!important;outline:none}
+.tg-vpop-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 16px;color:#fff}
+.tg-vpop-bar b{color:#E8630A}
+.tg-vpop-a{border:0!important;border-radius:999px!important;background:#E8630A!important;color:#fff!important;font-weight:700;font-size:15px!important;padding:8px 16px!important;cursor:pointer;line-height:1.3!important}
+.tg-vpop-a[hidden]{display:none!important}
+body.tg-vpop-aperto{overflow:hidden}
+@media print{.tg-vpop{display:none!important}}
+</style>
+<script>
+(function(){
+var K='tg_video_sito_visto',p=document.getElementById('tg-vpop');if(!p)return;
+var forza=<?php echo $d['forza'] ? 'true' : 'false'; ?>;
+try{if(!forza&&localStorage.getItem(K))return;}catch(e){}
+var v=p.querySelector('video'),a=p.querySelector('.tg-vpop-a'),x=p.querySelector('.tg-vpop-x'),prima=null;
+function chiudi(){if(p.hidden)return;try{v.pause();}catch(e){}p.classList.remove('is-on');document.body.classList.remove('tg-vpop-aperto');setTimeout(function(){p.hidden=true;},250);document.removeEventListener('keydown',tasto);if(prima&&prima.focus)prima.focus();}
+function tasto(e){if(e.key==='Escape')chiudi();}
+function apri(){prima=document.activeElement;p.hidden=false;try{localStorage.setItem(K,String(Date.now()));}catch(e){}document.body.classList.add('tg-vpop-aperto');requestAnimationFrame(function(){p.classList.add('is-on');});v.muted=true;var r=v.play();if(r&&r.catch)r.catch(function(){});x.focus();document.addEventListener('keydown',tasto);}
+x.addEventListener('click',chiudi);
+p.addEventListener('click',function(e){if(e.target===p)chiudi();});
+a.addEventListener('click',function(){v.muted=false;v.volume=1;if(v.paused)v.play();a.hidden=true;});
+v.addEventListener('volumechange',function(){a.hidden=!v.muted;});
+v.addEventListener('ended',function(){setTimeout(chiudi,1500);});
+setTimeout(apri,1200);
+})();
+</script>
+	<?php
+}, 60 );
 
 /* ------------------------------------------------------------------
  * 13. Aggiornamento automatico (dalla 1.6.0)
