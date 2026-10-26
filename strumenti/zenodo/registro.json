@@ -215,6 +215,15 @@
   "stato": "pubblicato",
   "titolo": "Notizie online: le legge meno di un giovane italiano su due"
  },
+ "https://www.benesseredigitalegiovani.it/giovani-opinioni-civiche-politiche-online-2025/": {
+  "data": "2026-10-17",
+  "doi": "10.5281/zenodo.23673899",
+  "file": "troisi-benesseredigitalegiovani-2026-10-17-143.pdf",
+  "id": 23673899,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Il 26,7% dei giovani italiani esprime online opinioni su temi civici o politici, contro il 20,4% in UE"
+ },
  "https://www.benesseredigitalegiovani.it/giovani-programmazione-competenze-informatiche/": {
   "data": "2026-07-11",
   "doi": "10.5281/zenodo.23419798",
@@ -223,6 +232,15 @@
   "portale": "Benessere Digitale Giovani",
   "stato": "pubblicato",
   "titolo": "Programmare: lo fa il 14,5% dei giovani italiani, come in Europa"
+ },
+ "https://www.benesseredigitalegiovani.it/giovani-ricerca-lavoro-online-2025/": {
+  "data": "2026-10-24",
+  "doi": "10.5281/zenodo.23673925",
+  "file": "troisi-benesseredigitalegiovani-2026-10-24-147.pdf",
+  "id": 23673925,
+  "portale": "Benessere Digitale Giovani",
+  "stato": "bozza",
+  "titolo": "Cercare lavoro online: lo fa il 24,3% dei giovani italiani, contro il 30,3% in UE"
  },
  "https://www.benesseredigitalegiovani.it/giovani-social-network-italia-ultima-europa/": {
   "data": "2026-04-11",
@@ -322,6 +340,15 @@
   "portale": "Benessere Organizzativo",
   "stato": "pubblicato",
   "titolo": "Il benessere al lavoro in Italia in 12 indicatori: dove siamo forti e dove restiamo indietro"
+ },
+ "https://www.benessereorganizzativo.it/competenze-digitali-occupati-italia-europa-2025/": {
+  "data": "2026-10-21",
+  "doi": "10.5281/zenodo.23673911",
+  "file": "troisi-benessereorganizzativo-2026-10-21-115.pdf",
+  "id": 23673911,
+  "portale": "Benessere Organizzativo",
+  "stato": "bozza",
+  "titolo": "Competenze digitali: il 65,5% degli occupati in Italia ha almeno le basi, contro il 68,7% UE"
  },
  "https://www.benessereorganizzativo.it/conciliazione-lavoro-famiglia-italia-europa/": {
   "data": "2026-09-09",
@@ -1053,6 +1080,15 @@
   "stato": "pubblicato",
   "titolo": "Limitazioni nelle attività: in Italia il 16,5% contro il 24,2% UE. Ma il calo del 2024 è una rottura di serie"
  },
+ "https://www.customerpa.it/2026/10/20/incidenti-stradali-morti-italia-europa-regioni-2024/": {
+  "data": "2026-10-20",
+  "doi": "10.5281/zenodo.23673909",
+  "file": "troisi-customerpa-2026-10-20-87.pdf",
+  "id": 23673909,
+  "portale": "CustomerPA™",
+  "stato": "bozza",
+  "titolo": "Strade: in Italia 51 morti per milione di abitanti, la media UE è 44. Dal 2019 il Nord migliora, il Sud peggiora"
+ },
  "https://www.dibattito-pubblico.it/2026/03/20/cittadinanza-attiva-italia-europa/": {
   "data": "2026-03-20",
   "doi": "10.5281/zenodo.23418999",
@@ -1332,6 +1368,15 @@
   "stato": "pubblicato",
   "titolo": "Povertà energetica: l’8,6% degli italiani non riesce a scaldare casa, in linea con la media UE"
  },
+ "https://www.dibattito-pubblico.it/2026/10/23/auto-per-abitante-italia-europa-2025/": {
+  "data": "2026-10-23",
+  "doi": "10.5281/zenodo.23673919",
+  "file": "troisi-dibattito-pubblico-2026-10-23-69.pdf",
+  "id": 23673919,
+  "portale": "Dibattito Pubblico",
+  "stato": "bozza",
+  "titolo": "Auto in Italia: 709 ogni 1.000 abitanti nel 2025, il valore più alto dell’UE"
+ },
  "https://www.digitalizzazionenellapa.it/2026/03/19/competenze-digitali-di-base-italia-2025/": {
   "data": "2026-03-19",
   "doi": "10.5281/zenodo.23418987",
@@ -1610,6 +1655,15 @@
   "portale": "DigitalizzazionePA",
   "stato": "pubblicato",
   "titolo": "Social media in azienda: li usa il 59,0% delle imprese italiane, contro il 63,6% in Europa"
+ },
+ "https://www.digitalizzazionenellapa.it/2026/10/22/salute-online-informazioni-sanitarie-italia-europa/": {
+  "data": "2026-10-22",
+  "doi": "10.5281/zenodo.23673915",
+  "file": "troisi-digitalizzazionenellapa-2026-10-22-405.pdf",
+  "id": 23673915,
+  "portale": "DigitalizzazionePA",
+  "stato": "bozza",
+  "titolo": "Salute online: il 62,1% degli italiani cerca informazioni sanitarie su internet, sopra la media UE"
  },
  "https://www.governancefinanziaria.it/cloud-computing-imprese-italiane-2025/": {
   "data": "2026-03-25",
@@ -1998,6 +2052,24 @@
   "stato": "pubblicato",
   "titolo": "Abbandoni precoci: l’Italia scende all’8,2%, sotto la media UE"
  },
+ "https://www.mappaturadellecompetenze.it/2026/10/18/giovani-neet-italia-europa-2025/": {
+  "data": "2026-10-18",
+  "doi": "10.5281/zenodo.23673905",
+  "file": "troisi-mappaturadellecompetenze-2026-10-18-144.pdf",
+  "id": 23673905,
+  "portale": "Mappatura delle Competenze",
+  "stato": "bozza",
+  "titolo": "Giovani NEET: l’Italia scende al 13,3%, ma resta tra i valori più alti della UE"
+ },
+ "https://www.mappaturadellecompetenze.it/2026/10/25/corsi-online-adulti-italia-europa-2025/": {
+  "data": "2026-10-25",
+  "doi": "10.5281/zenodo.23673934",
+  "file": "troisi-mappaturadellecompetenze-2026-10-25-147.pdf",
+  "id": 23673934,
+  "portale": "Mappatura delle Competenze",
+  "stato": "bozza",
+  "titolo": "Corsi online: li ha seguiti il 19,4% degli italiani, più della media UE"
+ },
  "https://www.troisiinsight.it/2026/03/16/pil-pro-capite-regioni-italiane-divario-nord-sud-2024/": {
   "data": "2026-03-16",
   "doi": "10.5281/zenodo.23418977",
@@ -2276,5 +2348,23 @@
   "portale": "TroisiInsight",
   "stato": "pubblicato",
   "titolo": "Disoccupazione, l’Italia risale al 6,2%: in tre mesi 159 mila disoccupati in più"
+ },
+ "https://www.troisiinsight.it/2026/10/18/inflazione-settembre-2026-area-euro-italia-energia/": {
+  "data": "2026-10-18",
+  "doi": "10.5281/zenodo.23673907",
+  "file": "troisi-troisiinsight-2026-10-18-81.pdf",
+  "id": 23673907,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Inflazione, l’energia spinge l’area euro al 3,8%: il massimo da tre anni. Italia al 4,2%"
+ },
+ "https://www.troisiinsight.it/2026/10/26/debito-deficit-pubblico-2025-italia-europa/": {
+  "data": "2026-10-26",
+  "doi": "10.5281/zenodo.23673938",
+  "file": "troisi-troisiinsight-2026-10-26-85.pdf",
+  "id": 23673938,
+  "portale": "TroisiInsight",
+  "stato": "bozza",
+  "titolo": "Debito pubblico, l’Italia sale al 136,7% del PIL. Il deficit scende al 3,1%, come la media UE"
  }
 }
