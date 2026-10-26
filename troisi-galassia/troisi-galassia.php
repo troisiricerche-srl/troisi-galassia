@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Troisi Galassia
  * Description: Verifica Google Search Console, temi/parole chiave in dati strutturati, avviso immediato ai motori (IndexNow) e sitemap con data di modifica, dati strutturati coerenti (Troisi Ricerche / Andrea Troisi), tag Open Graph, Google Analytics 4 (solo dopo il consenso Iubenda), robots.txt aperto ai crawler IA, llms.txt, canonical sugli archivi, gestione dei vecchi indirizzi (301/410), pulsanti Condividi e Stampa sotto ogni articolo e aggiornamento automatico, per tutti i siti della galassia Troisi Ricerche. Non duplica ciò che il tema già stampa.
- * Version: 1.8.0
+ * Version: 1.8.1
  * Author: Troisi Ricerche
  * Update URI: https://github.com/troisiricerche-srl/troisi-galassia
  * Requires at least: 5.5
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TG_VERSION', '1.8.0' );
+define( 'TG_VERSION', '1.8.1' );
 define( 'TG_BING_CODE', '4931BB11CCDED6E9008DF80C2CA47D36' ); // Bing Webmaster Tools, account troisiricerche@gmail.com (codice unico per account)
 define( 'TG_GA4_ID', 'G-S8N55XBJHV' ); // GA4, proprietà «Galassia Troisi Ricerche» (account andreatroisi), stream unico per tutti i siti
 define( 'TG_ORG_ID', 'https://troisiricerche.net/#organization' );
@@ -292,6 +292,14 @@ function tg_filter_html( $html ) {
 	$html = preg_replace( '/("streetAddress"\s*:\s*")Bari — sede principale(")/u', '$1Via De Rossi 57$2', $html );
 	// Marchio depositato (ottobre 2026): «CustomerPA» diventa «CustomerPA™» nel testo visibile della pagina.
 	$html = tg_trademark_customerpa( $html );
+	// Pop-up del video di presentazione del sito (dalla 1.8.0; prima di </body> dalla 1.8.1).
+	if ( false === strpos( $html, 'id="tg-vpop"' ) && false !== stripos( $html, '</body>' ) ) {
+		$pop = tg_video_popup_html();
+		if ( $pop ) {
+			$pos  = strripos( $html, '</body>' );
+			$html = substr( $html, 0, $pos ) . $pop . substr( $html, $pos );
+		}
+	}
 	$add ="\n<!-- Troisi Galassia " . TG_VERSION . " -->\n";
 
 	// Verifica Google Search Console.
@@ -1451,6 +1459,9 @@ function tg_video_sito() {
 		return null;
 	}
 	$nome = ( 'andreatroisi.it' === $host ) ? 'Andrea Troisi' : tg_site()[0];
+	if ( 'customerpa.it' === $host ) {
+		$nome = 'CustomerPA™'; // marchio depositato nel testo visibile
+	}
 	return array(
 		'video' => 'https://www.troisiricerche.net/wp-content/uploads/2026/10/video-sito-' . preg_replace( '/\.(it|net)$/', '', $host ) . '.mp4',
 		'nome'  => $nome,
@@ -1458,20 +1469,23 @@ function tg_video_sito() {
 	);
 }
 
-add_action( 'wp_footer', function () {
+// Le home di molti siti sono modelli scritti a mano senza wp_footer (es. customerpa.it, troisiinsight.it):
+// il pop-up si inserisce prima di </body> dal filtro dell'HTML della pagina (tg_filter_html), dalla 1.8.1.
+function tg_video_popup_html() {
 	if ( is_admin() || is_feed() || tg_is_hub() || ! ( is_front_page() || is_home() ) || is_paged() ) {
-		return;
+		return '';
 	}
 	$d = tg_video_sito();
 	if ( ! $d ) {
-		return;
+		return '';
 	}
-	?>
-<div id="tg-vpop" class="tg-vpop" role="dialog" aria-modal="true" aria-label="<?php echo esc_attr( 'Video di presentazione: ' . $d['nome'] ); ?>" hidden>
+	// Niente ob_start(): questa funzione gira dentro il filtro dell'output (tg_filter_html).
+	$tpl = <<<'TGVPOP'
+<div id="tg-vpop" class="tg-vpop" role="dialog" aria-modal="true" aria-label="%ARIA%" hidden>
 <div class="tg-vpop-box">
 <button type="button" class="tg-vpop-x" aria-label="Chiudi il video">&times;</button>
-<video class="tg-vpop-v" controls muted playsinline preload="none"><source src="<?php echo esc_url( $d['video'] ); ?>" type="video/mp4"></video>
-<div class="tg-vpop-bar"><span><b><?php echo esc_html( $d['nome'] ); ?></b></span><button type="button" class="tg-vpop-a">🔊 Attiva l'audio</button></div>
+<video class="tg-vpop-v" controls muted playsinline preload="none"><source src="%VIDEO%" type="video/mp4"></video>
+<div class="tg-vpop-bar"><span><b>%NOME%</b></span><button type="button" class="tg-vpop-a">🔊 Attiva l'audio</button></div>
 </div>
 </div>
 <style id="tg-vpop-css">
@@ -1492,7 +1506,7 @@ body.tg-vpop-aperto{overflow:hidden}
 <script>
 (function(){
 var K='tg_video_sito_visto',p=document.getElementById('tg-vpop');if(!p)return;
-var forza=<?php echo $d['forza'] ? 'true' : 'false'; ?>;
+var forza=%FORZA%;
 try{if(!forza&&localStorage.getItem(K))return;}catch(e){}
 var v=p.querySelector('video'),a=p.querySelector('.tg-vpop-a'),x=p.querySelector('.tg-vpop-x'),prima=null;
 function chiudi(){if(p.hidden)return;try{v.pause();}catch(e){}p.classList.remove('is-on');document.body.classList.remove('tg-vpop-aperto');setTimeout(function(){p.hidden=true;},250);document.removeEventListener('keydown',tasto);if(prima&&prima.focus)prima.focus();}
@@ -1506,8 +1520,14 @@ v.addEventListener('ended',function(){setTimeout(chiudi,1500);});
 setTimeout(apri,1200);
 })();
 </script>
-	<?php
-}, 60 );
+TGVPOP;
+	return strtr( $tpl, array(
+		'%ARIA%'  => esc_attr( 'Video di presentazione: ' . $d['nome'] ),
+		'%VIDEO%' => esc_url( $d['video'] ),
+		'%NOME%'  => esc_html( $d['nome'] ),
+		'%FORZA%' => $d['forza'] ? 'true' : 'false',
+	) );
+}
 
 /* ------------------------------------------------------------------
  * 13. Aggiornamento automatico (dalla 1.6.0)
