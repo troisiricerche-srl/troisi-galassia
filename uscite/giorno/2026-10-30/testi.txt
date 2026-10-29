@@ -1,0 +1,42 @@
+IL DATO DI OGGI · Venerdì 30 ottobre 2026 · 75 kg · Dibattito Pubblico
+Articolo: https://www.dibattito-pubblico.it/2026/10/30/rifiuti-urbani-discarica-italia-europa-2024/ (programmato per il 30/10 alle 00:01)
+Verifica Eurostat (env_wasmun, wst_oper DSP_L_OTH «Disposal - landfill and other (D1-D7, D12)», KG_HAB, 2024, aggiornato 15/10/2026): Italia 75 (nessun flag), UE-27 106 (flag i); Italia 12ª su 26 Paesi con dati (Romania assente) partendo dal valore più basso; Francia 93 (b), Germania 3 (i), Spagna 216 (e). Serie IT: 1995 422 → 2010 251 → 2015 130 → 2024 75 (minimo della serie 1995-2024); IT sotto la UE ogni anno dal 2016 (UE 2023 non disponibile). Rifiuti prodotti 2024: IT 500, UE 513. Incenerimento e recupero di energia (DSP_I_RCV_E): IT 93, UE 135. Riciclo (RCY): IT 262, UE 253. CONFERMATO.
+
+===== a) LINKEDIN / FACEBOOK =====
+Nel 2024 in Italia sono finiti in discarica 75 kg di rifiuti urbani per abitante, contro 106 nella media europea. Nel 1995 erano 422: in trent'anni il valore italiano si è ridotto di 347 kg.
+
+Più bassa della media UE anche la quantità avviata a incenerimento e recupero di energia: 93 kg per abitante contro 135.
+
+L'analisi completa di Dibattito Pubblico, su dati Eurostat 2024:
+https://www.dibattito-pubblico.it/2026/10/30/rifiuti-urbani-discarica-italia-europa-2024/
+
+Il dato di oggi: ogni mattina un dato ufficiale sull'Italia dai nostri osservatori. Ogni martedì «Il dato è tratto™» raccoglie la settimana.
+
+#IlDatoDiOggi #TroisiRicerche #ilDatoètratto #Rifiuti #EconomiaCircolare #DibattitoPubblico
+
+===== b) INSTAGRAM =====
+Nel 2024 in Italia sono finiti in discarica 75 kg di rifiuti urbani per abitante, contro 106 nella media europea. Nel 1995 erano 422.
+
+Fonte: Eurostat (env_wasmun), 2024 · analisi completa su dibattito-pubblico.it (link nel primo commento 👇)
+
+Ogni mattina un dato ufficiale sull'Italia: canale WhatsApp «Il dato è tratto™», link in bio.
+
+#IlDatoDiOggi #ilDatoètratto #TroisiRicerche #dati #statistica #Italia #rifiuti #discarica #economiacircolare #Eurostat
+
+===== c) WHATSAPP =====
+📊 Il dato di oggi · 75 kg
+I rifiuti urbani per abitante finiti in discarica in Italia nel 2024: meno della media UE (106 kg), erano 422 nel 1995.
+👉 https://www.dibattito-pubblico.it/2026/10/30/rifiuti-urbani-discarica-italia-europa-2024/
+
+===== d) COMMENTI =====
+Facebook e LinkedIn
+1) 💬 Iscrivetevi al canale WhatsApp «Il dato è tratto™»: ogni mattina un dato ufficiale sull'Italia, ogni martedì la settimana in numeri.
+https://whatsapp.com/channel/0029VbE9Kx9DeONGCBFx5v42
+2) 📲 Seguiteci anche su Instagram: ogni giorno il dato in 15 secondi.
+https://www.instagram.com/troisiricerche/
+
+Instagram
+📎 L'analisi completa: dibattito-pubblico.it/2026/10/30/rifiuti-urbani-discarica-italia-europa-2024/ · 💬 Canale WhatsApp «Il dato è tratto™»: whatsapp.com/channel/0029VbE9Kx9DeONGCBFx5v42
+
+===== PUNTO DEBOLE =====
+La voce Eurostat comprende la discarica e le altre operazioni di smaltimento a terra (D1-D7, D12), e la definizione di «rifiuti urbani» non è applicata in modo identico in tutti i Paesi: la media UE 2024 porta la nota di definizione (i) e per l'UE manca il 2023. Il rapporto «15% dei rifiuti prodotti» citato nell'articolo è una nostra elaborazione, non l'indicatore ufficiale dell'obiettivo 2035 (10%). Il dato nazionale non mostra le differenze tra territori, che sono il punto su cui si accende di solito il confronto sugli impianti.
