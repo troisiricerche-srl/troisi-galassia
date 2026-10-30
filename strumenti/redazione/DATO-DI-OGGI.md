@@ -67,8 +67,10 @@ Se Andrea scrive «ferma», non programmare; se chiede correzioni, rifai e riman
 
 ## 7. Commenti ai post USCITI STAMATTINA (stesso turno, prima di tutto il resto)
 Testi nella sezione d) di `dato-di-oggi/<oggi>/testi.txt`. Se nel LEGGIMI.txt di oggi risultano già «commenti aggiunti», salta.
-- Facebook: Business Suite › Contenuti › Pubblicati → apri il Reel di oggi; con resize_window 1400×940 compare il riquadro
-  «Commenta come Troisi Ricerche»: commento WhatsApp + Invio, commento Instagram + Invio; verifica che compaiano una volta sola.
+- Facebook: (Business Suite apre solo gli insight e facebook.com/reel/<content_id> dà «contenuto non disponibile»: NON usarli)
+  apri https://www.facebook.com/troisiricerche/reels/ (si apre già come Pagina), prendi gli href /reel/<id>/ e apri quello
+  con la didascalia di oggi; resize_window 1400×940 → riquadro «Commenta come Troisi Ricerche»: commento WhatsApp
+  (testo, Maiusc+Invio, link) + Invio, poi commento Instagram allo stesso modo + Invio; verifica che compaiano una volta sola.
 - Instagram: https://www.instagram.com/troisiricerche/ → primo /reel/ → https://www.instagram.com/p/<codice>/ con
   resize_window 1400×940 → «Aggiungi un commento...» → commento Instagram → «Pubblica». Poi resize_window preset desktop.
 - LinkedIn: pagina dei post pubblicati, primo [data-urn] activity col testo del dato di oggi → «Commenta come Troisi Ricerche…»
