@@ -1,0 +1,42 @@
+IL DATO DI OGGI · Domenica 1 novembre 2026 · 12,4% · Mappatura delle Competenze
+Articolo: https://www.mappaturadellecompetenze.it/2026/11/01/imprese-specialisti-ict-italia-europa-2024/ (programmato per il 01/11 alle 00:01)
+Verifica Eurostat (isoc_ske_itspen2, indic_is E_ITSP2, nace_r2 C10-S951_X_K, size_emp GE10, PC_ENT, 2024, aggiornato 15/06/2026): Italia 12,44 (nessun flag), UE-27 20,05 (nessun flag); Italia 27ª su 27 Paesi UE (Romania 13,16, Spagna 14,57); Germania 22,86, Francia 15,94; Malta 34,11 prima. Serie IT: 2012 14,10 · 2016 16,83 (massimo) · 2020 12,60 · 2022 13,36 · 2024 12,44 (minimo della serie). Per dimensione 2024 (isoc_ske_itspe) IT/UE: 10-49 addetti 7,91/14,04; 50-249 38,80/43,03; 250+ 74,55/78,44. CONFERMATO.
+
+===== a) LINKEDIN / FACEBOOK =====
+Solo il 12,4% delle imprese italiane con almeno 10 addetti ha uno specialista ICT tra i dipendenti, contro il 20,1% della media europea. Tra i 27 Paesi UE siamo ultimi, dopo Romania e Spagna.
+
+Tra le piccole imprese, con 10-49 addetti, la quota italiana è il 7,9%: poco più della metà di quella europea (14,0%).
+
+L'analisi completa di Mappatura delle Competenze, su dati Eurostat 2024:
+https://www.mappaturadellecompetenze.it/2026/11/01/imprese-specialisti-ict-italia-europa-2024/
+
+Il dato di oggi: ogni mattina un dato ufficiale sull'Italia dai nostri osservatori. Ogni martedì «Il dato è tratto™» raccoglie la settimana.
+
+#IlDatoDiOggi #TroisiRicerche #ilDatoètratto #CompetenzeDigitali #Imprese #SpecialistiICT
+
+===== b) INSTAGRAM =====
+Solo il 12,4% delle imprese italiane con almeno 10 addetti ha uno specialista ICT tra i dipendenti, contro il 20,1% della media europea. Siamo ultimi su 27 Paesi UE.
+
+Fonte: Eurostat (isoc_ske_itspen2), 2024 · analisi completa su mappaturadellecompetenze.it (link nel primo commento 👇)
+
+Ogni mattina un dato ufficiale sull'Italia: canale WhatsApp «Il dato è tratto™», link in bio.
+
+#IlDatoDiOggi #ilDatoètratto #TroisiRicerche #dati #statistica #Italia #imprese #competenzedigitali #ICT #Eurostat
+
+===== c) WHATSAPP =====
+📊 Il dato di oggi · 12,4%
+Le imprese italiane con almeno 10 addetti che impiegano specialisti ICT: in UE sono il 20,1%, l'Italia è ultima su 27.
+👉 https://www.mappaturadellecompetenze.it/2026/11/01/imprese-specialisti-ict-italia-europa-2024/
+
+===== d) COMMENTI =====
+Facebook e LinkedIn
+1) 💬 Iscrivetevi al canale WhatsApp «Il dato è tratto™»: ogni mattina un dato ufficiale sull'Italia, ogni martedì la settimana in numeri.
+https://whatsapp.com/channel/0029VbE9Kx9DeONGCBFx5v42
+2) 📲 Seguiteci anche su Instagram: ogni giorno il dato in 15 secondi.
+https://www.instagram.com/troisiricerche/
+
+Instagram
+📎 L'analisi completa: mappaturadellecompetenze.it/2026/11/01/imprese-specialisti-ict-italia-europa-2024/ · 💬 Canale WhatsApp «Il dato è tratto™»: whatsapp.com/channel/0029VbE9Kx9DeONGCBFx5v42
+
+===== PUNTO DEBOLE =====
+Il dato è del 2024: l'indagine Eurostat lo rileva ogni due anni, quindi è il più recente ma non fresco. Misura solo se l'impresa ha almeno uno specialista ICT dipendente: non conta quanti sono, né le competenze affidate a fornitori esterni, molto usate dalle piccole imprese. L'ultimo posto italiano si gioca sui decimali con la Romania (12,44 contro 13,16) e il dato nazionale risente anche del gran numero di piccole imprese (ipotesi, non verificata con i pesi). Domenica 1 novembre è festivo: la lettura mattutina potrebbe essere più bassa.
