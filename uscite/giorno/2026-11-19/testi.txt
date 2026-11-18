@@ -1,0 +1,42 @@
+IL DATO DI OGGI · Giovedì 19 novembre 2026 · 19,6% · DigitalizzazionePA
+Articolo: https://www.digitalizzazionenellapa.it/2026/11/19/connessione-gigabit-imprese-italia-europa/ (programmato per il 19/11 alle 00:01)
+Verifica Eurostat (isoc_ci_it_en2, E_ISPDF_GE1G, imprese con almeno 10 addetti GE10, C10-S951_X_K, PC_ENT, aggiornato 15/06/2026): Italia 2025 19,63 → 19,6%, nessun flag; UE-27 17,29 → 17,3%. Spagna 30,85, Germania 9,87, Danimarca 36,79. Italia 9ª su 27; 10 Paesi sopra la media UE. Serie IT 2020 9,77 → 2025 19,63. Sotto i 100 Mb/s (LT30 + 30_100): Italia 36,71, UE 25,95 (4ª quota più alta). CONFERMATO.
+
+===== a) LINKEDIN / FACEBOOK =====
+Quanto è veloce internet nelle imprese italiane? Nel 2025 il 19,6% di quelle con almeno 10 addetti ha una connessione fissa ad almeno 1 gigabit al secondo: più della media UE (17,3%) e il doppio della Germania (9,9%). L'Italia è 9ª su 27.
+
+All'altro capo, però, il 36,7% delle imprese italiane naviga ancora sotto i 100 Mb/s, contro il 26,0% della media europea: è la quarta quota più alta dell'Unione.
+
+L'analisi completa di DigitalizzazionePA, su dati Eurostat 2025:
+https://www.digitalizzazionenellapa.it/2026/11/19/connessione-gigabit-imprese-italia-europa/
+
+Il dato di oggi: ogni mattina un dato ufficiale sull'Italia dai nostri osservatori. Ogni martedì «Il dato è tratto™» raccoglie la settimana.
+
+#IlDatoDiOggi #TroisiRicerche #ilDatoètratto #BandaUltralarga #Imprese #Eurostat
+
+===== b) INSTAGRAM =====
+Quanto è veloce internet nelle imprese italiane? Nel 2025 il 19,6% ha una connessione fissa ad almeno 1 Gb/s, sopra la media UE (17,3%). Ma il 36,7% resta sotto i 100 Mb/s, contro il 26,0% in Europa.
+
+Fonte: Eurostat (isoc_ci_it_en2), 2025 · analisi completa su digitalizzazionenellapa.it (link nel primo commento 👇)
+
+Ogni mattina un dato ufficiale sull'Italia: canale WhatsApp «Il dato è tratto™», link in bio.
+
+#IlDatoDiOggi #ilDatoètratto #TroisiRicerche #dati #statistica #Italia #BandaUltralarga #Imprese #Digitale #Eurostat
+
+===== c) WHATSAPP =====
+📊 Il dato di oggi · 19,6%
+Nel 2025 il 19,6% delle imprese italiane con almeno 10 addetti ha una connessione fissa ad almeno 1 Gb/s, contro il 17,3% della media UE; il 36,7% resta sotto i 100 Mb/s.
+👉 https://www.digitalizzazionenellapa.it/2026/11/19/connessione-gigabit-imprese-italia-europa/
+
+===== d) COMMENTI =====
+Facebook e LinkedIn
+1) 💬 Iscrivetevi al canale WhatsApp «Il dato è tratto™»: ogni mattina un dato ufficiale sull'Italia, ogni martedì la settimana in numeri.
+https://whatsapp.com/channel/0029VbE9Kx9DeONGCBFx5v42
+2) 📲 Seguiteci anche su Instagram: ogni giorno il dato in 15 secondi.
+https://www.instagram.com/troisiricerche/
+
+Instagram
+📎 L'analisi completa: digitalizzazionenellapa.it/2026/11/19/connessione-gigabit-imprese-italia-europa/ · 💬 Canale WhatsApp «Il dato è tratto™»: whatsapp.com/channel/0029VbE9Kx9DeONGCBFx5v42
+
+===== PUNTO DEBOLE =====
+L'indicatore misura la velocità massima da contratto della connessione fissa più veloce, non la velocità effettiva né l'uso. Il 36,7% «sotto i 100 Mb/s» è la somma di due classi pubblicate (meno di 30 e 30-100 Mb/s). Il dato è solo per imprese con almeno 10 addetti, senza dettaglio per dimensione o per regione in questo dataset. Nel video «il doppio della Germania» non compare: le barre mostrano Spagna, Italia, UE e Germania.
