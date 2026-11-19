@@ -1,0 +1,42 @@
+IL DATO DI OGGI · Venerdì 20 novembre 2026 · 6,1% · Dibattito Pubblico
+Articolo: https://www.dibattito-pubblico.it/2026/11/20/auto-elettriche-immatricolazioni-italia-europa-2025/ (programmato per il 20/11 alle 00:01)
+Verifica Eurostat (road_eqr_carpda, unità NR, mot_nrg ELC/TOTAL, aggiornato 06/10/2026): Italia 2025 94.862 elettriche su 1.550.451 auto nuove = 6,12% → 6,1%, nessun flag su ELC e TOTAL; UE-27 1.888.016 su 10.937.447 = 17,26% → 17,3% (somma dei 27 Paesi identica all'aggregato). Germania 19,08, Francia 19,58, Spagna 8,71, Danimarca 67,75. Italia 22ª su 27. Serie IT: 2019 0,54 – 2021 4,55 – 2022 3,67 – 2023 4,16 – 2024 4,18 – 2025 6,12. Parco (road_eqs_carpda, agg. 20/10/2026): IT 362.224 su 41.795.962 = 0,87%; UE 2,88%. CONFERMATO.
+
+===== a) LINKEDIN / FACEBOOK =====
+Quante auto nuove elettriche si vendono in Italia? Nel 2025 sono state il 6,1% delle immatricolazioni: 94.862 su oltre 1,5 milioni. Nella media UE la quota è del 17,3%, quasi il triplo. L'Italia è 22ª su 27, dietro anche alla Spagna (8,7%).
+
+E sul parco circolante le auto elettriche sono ancora lo 0,9%, contro il 2,9% della media europea.
+
+L'analisi completa di Dibattito Pubblico, su dati Eurostat 2025:
+https://www.dibattito-pubblico.it/2026/11/20/auto-elettriche-immatricolazioni-italia-europa-2025/
+
+Il dato di oggi: ogni mattina un dato ufficiale sull'Italia dai nostri osservatori. Ogni martedì «Il dato è tratto™» raccoglie la settimana.
+
+#IlDatoDiOggi #TroisiRicerche #ilDatoètratto #AutoElettriche #Mobilità #Eurostat
+
+===== b) INSTAGRAM =====
+Quante auto nuove elettriche si vendono in Italia? Nel 2025 il 6,1% delle immatricolazioni, contro il 17,3% della media UE: l'Italia è 22ª su 27. Sul parco circolante le elettriche sono lo 0,9%.
+
+Fonte: Eurostat (road_eqr_carpda), 2025 · analisi completa su dibattito-pubblico.it (link nel primo commento 👇)
+
+Ogni mattina un dato ufficiale sull'Italia: canale WhatsApp «Il dato è tratto™», link in bio.
+
+#IlDatoDiOggi #ilDatoètratto #TroisiRicerche #dati #statistica #Italia #AutoElettriche #Mobilità #TransizioneEnergetica #Eurostat
+
+===== c) WHATSAPP =====
+📊 Il dato di oggi · 6,1%
+Nel 2025 il 6,1% delle auto nuove immatricolate in Italia era interamente elettrico, contro il 17,3% della media UE: 22ª posizione su 27.
+👉 https://www.dibattito-pubblico.it/2026/11/20/auto-elettriche-immatricolazioni-italia-europa-2025/
+
+===== d) COMMENTI =====
+Facebook e LinkedIn
+1) 💬 Iscrivetevi al canale WhatsApp «Il dato è tratto™»: ogni mattina un dato ufficiale sull'Italia, ogni martedì la settimana in numeri.
+https://whatsapp.com/channel/0029VbE9Kx9DeONGCBFx5v42
+2) 📲 Seguiteci anche su Instagram: ogni giorno il dato in 15 secondi.
+https://www.instagram.com/troisiricerche/
+
+Instagram
+📎 L'analisi completa: dibattito-pubblico.it/2026/11/20/auto-elettriche-immatricolazioni-italia-europa-2025/ · 💬 Canale WhatsApp «Il dato è tratto™»: whatsapp.com/channel/0029VbE9Kx9DeONGCBFx5v42
+
+===== PUNTO DEBOLE =====
+«Elettriche» sono solo le auto a batteria: le ibride plug-in (6,3% in Italia, 9,4% nell'UE) sono escluse e sono indicate a parte nell'articolo. Le quote sono calcolate da noi sui numeri di veicoli pubblicati da Eurostat (non sono una percentuale pubblicata direttamente). Per l'Italia i valori 2025 delle ibride hanno una nota Eurostat (flag «i»). Il dato non dice nulla su prezzi, incentivi o punti di ricarica.
